@@ -1,0 +1,20 @@
+﻿<Window x:Class="App001.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:App001.Views"
+        mc:Ignorable="d"
+        Title="ShellView" Height="150" Width="300">
+    <Grid Margin="20,20,20,20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Path=FirstName, Mode=OneWay}" Grid.Row="0" Grid.Column="0"></TextBlock>
+        <TextBox x:Name="FirstName" Grid.Row="0" Grid.Column="1"></TextBox>
+    </Grid>
+</Window>
