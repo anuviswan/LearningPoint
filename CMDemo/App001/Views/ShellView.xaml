@@ -5,16 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App001.Views"
         mc:Ignorable="d"
-        Title="ShellView" Height="150" Width="300">
+        Title="ShellView" Height="300" Width="300">
     <Grid Margin="20,20,20,20">
+        <!--Grid Definition Starts here -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding Path=FirstName, Mode=OneWay}" Grid.Row="0" Grid.Column="0"></TextBlock>
-        <TextBox x:Name="FirstName" Grid.Row="0" Grid.Column="1"></TextBox>
+        <!--Grid Definition Ends here -->
+
+        <!--Row 1 Starts here -->
+        <Label Grid.Column="0" Grid.Row="0">Full Name</Label>
+        <TextBlock Text="{Binding Path=FullName, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"></TextBlock>
+        <!--Row 1 Ends here -->
+
+        <!--Row 2 Starts here -->
+        <Label Grid.Column="0" Grid.Row="1">First Name</Label>
+        <TextBox x:Name="FirstName" Grid.Row="1" Grid.Column="1"></TextBox>
+        <!--Row 2 Ends here -->
+
+        <!--Row 3 Starts here -->
+        <Label Grid.Column="0" Grid.Row="2">Last Name</Label>
+        <TextBox x:Name="LastName" Grid.Row="2" Grid.Column="1"></TextBox>
+        <!--Row 3 Ends here -->
+
+        <!--Row 4 Starts here -->
+        <Label Grid.Column="0" Grid.Row="3">Department</Label>
+        <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding DepartmentCollection}" DisplayMemberPath="DepartmentName"
+                 SelectedItem="{Binding SelectedDepartment,Mode=OneWayToSource}" ></ComboBox>
+                <!--Row 4 Ends here -->
+
+        <!--Row 5 Starts here -->
+        <Label Grid.Column="0" Grid.Row="4">Supervisor</Label>
+        <TextBlock Grid.Column="1" Grid.Row="4" x:Name="SelectedDepartment_Supervisor"></TextBlock>
+        <!--Row 5 Ends here -->
+
+        <!--Row 6 Starts here -->
+        <Button Grid.Column="0" Grid.Row="5" x:Name="ClearTextMethod">Clear</Button>
+        <!--Row 6 Ends here -->
     </Grid>
 </Window>
