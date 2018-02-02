@@ -8,6 +8,6 @@
         xmlns:wpfdesign="clr-namespace:Stimulsoft.Report.WpfDesign;assembly=Stimulsoft.Report.WpfDesign"
         Title="ShellView" Height="300" Width="300">
     <Grid>
-        <wpfdesign:StiWpfDesignerControl></wpfdesign:StiWpfDesignerControl>
+        <wpfdesign:StiWpfDesignerControl Name="ReportDesigner"></wpfdesign:StiWpfDesignerControl>
     </Grid>
 </Window>

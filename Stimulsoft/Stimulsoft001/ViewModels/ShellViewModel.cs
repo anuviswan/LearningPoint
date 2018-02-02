@@ -44,5 +44,13 @@ namespace Stimulsoft001.ViewModels
             }
         }
 
+        #region Override
+        protected override void OnViewAttached(object view, object context)
+        {
+            base.OnViewAttached(view, context);
+            (view as ISupervisingController).UpdateReportControl(ActiveReport);
+        } 
+        #endregion
+
     }
 }
