@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Stimulsoft001
+namespace Stimulsoft001.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ShellView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ShellView : Window
     {
-        public MainWindow()
+        public ShellView()
         {
             InitializeComponent();
         }
