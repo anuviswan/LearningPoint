@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace App002.Views
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for ShellView.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class ShellView : Window
     {
-        public MainView()
+        public ShellView()
         {
             InitializeComponent();
         }

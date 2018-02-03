@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:App002"
-             
              >
     <Application.Resources>
         <ResourceDictionary>
@@ -11,38 +10,7 @@
                     <local:Bootstrapper x:Key="Bootstrapper"></local:Bootstrapper>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type Button}">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Height" Value="35"/>
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Margin" Value="10,5,10,5"/>
-                <Setter Property="Foreground" Value="White"></Setter>
-            </Style>
-            <Style x:Key="Flat">
-                <Setter Property="Control.Background" Value="{x:Null}" />
-                <Setter Property="Control.BorderBrush" Value="{x:Null}" />
-                <Style.Triggers>
-                    <Trigger Property="Control.IsMouseOver" Value="True">
-                        <Setter Property="Control.Background" Value="{x:Null}" />
-                        <Setter Property="Control.BorderBrush" Value="{x:Null}" />
-                        <Setter Property="Control.FontWeight" Value="Bold" />
-                    </Trigger>
-                    <Trigger Property="Control.IsFocused" Value="True">
-                        <Setter Property="Control.FontWeight" Value="Bold" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
-            <Style x:Key="MainLabels" TargetType="{x:Type Label}">
-                <Setter Property="Foreground" Value="White"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Right"></Setter>
-            </Style>
-
-            <Style x:Key="MainControls" >
-                <Setter Property="Control.Foreground" Value="White"></Setter>
-                <Setter Property="Control.Background" Value="Transparent"></Setter>
-                <Setter Property="Control.VerticalAlignment" Value="Center"></Setter>
-            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
