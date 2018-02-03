@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Stimulsoft002.Views"
+        xmlns:local1="clr-namespace:Stimulsoft002.Behaviors"
         mc:Ignorable="d"
                 xmlns:wpfdesign="clr-namespace:Stimulsoft.Report.WpfDesign;assembly=Stimulsoft.Report.WpfDesign"
         Title="ShellView" Height="300" Width="300">
     <Grid>
-        <wpfdesign:StiWpfDesignerControl Name="ReportDesigner"></wpfdesign:StiWpfDesignerControl>
+        <wpfdesign:StiWpfDesignerControl local1:ReportBehavior.ReportSource="{Binding Path=ActiveReport}" x:Name="DesignerControl"  ></wpfdesign:StiWpfDesignerControl>
     </Grid>
 </Window>

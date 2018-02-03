@@ -140,8 +140,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviors\ReportBehavior.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Contracts\IShellViewModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -291,9 +293,7 @@
   <ItemGroup>
     <Resource Include="Localization\ar.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Behaviors\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
