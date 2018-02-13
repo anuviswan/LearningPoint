@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter", "Adapter\Adapter\Adapter.csproj", "{119018B4-4061-4B95-871B-27E44B3F0D2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoR", "CoR\CoR\CoR.csproj", "{67F152DB-7DB3-4292-A6F4-AD3B993F2135}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fascade", "Fascade\Fascade\Fascade.csproj", "{F857BFA8-2E7A-42A8-B3A1-C0571DDDA54D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{119018B4-4061-4B95-871B-27E44B3F0D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{119018B4-4061-4B95-871B-27E44B3F0D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{119018B4-4061-4B95-871B-27E44B3F0D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{119018B4-4061-4B95-871B-27E44B3F0D2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67F152DB-7DB3-4292-A6F4-AD3B993F2135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F152DB-7DB3-4292-A6F4-AD3B993F2135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F152DB-7DB3-4292-A6F4-AD3B993F2135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F152DB-7DB3-4292-A6F4-AD3B993F2135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F857BFA8-2E7A-42A8-B3A1-C0571DDDA54D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F857BFA8-2E7A-42A8-B3A1-C0571DDDA54D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F857BFA8-2E7A-42A8-B3A1-C0571DDDA54D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F857BFA8-2E7A-42A8-B3A1-C0571DDDA54D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22648330-40B4-4C8B-98D7-9FAA64A61E3D}
+	EndGlobalSection
+EndGlobal
