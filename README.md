@@ -4,3 +4,4 @@ This contains sample code for the tutorials in www.anuviswan.com.  This includes
 
 * Design Patterns
 * Caliburn.Micro (WPF)
+* Stimulsoft Reports
