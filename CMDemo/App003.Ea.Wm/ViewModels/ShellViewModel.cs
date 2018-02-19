@@ -29,14 +29,12 @@ namespace App003.Ea.Wm.ViewModels
 
         public override void CanClose(Action<bool> callback)
         {
-
             callback(false);
-            //base.CanClose(callback);
         }
 
         private string _userName  = default;
-        private IWindowManager _windowManager;
-        private ILogin _loginWindow;
+        private readonly IWindowManager _windowManager;
+        private readonly ILogin _loginWindow;
 
         public string UserName
         {
