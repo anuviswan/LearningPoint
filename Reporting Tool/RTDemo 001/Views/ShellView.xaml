@@ -1,0 +1,186 @@
+﻿<Window x:Class="RTDemo_001.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RTDemo_001.Views"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:local1="clr-namespace:RTDemo_001.Behaviors"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None"
+        Title="ShellView">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Row 1 -->
+        <DockPanel Grid.Row="0" Grid.Column="0" Style="{StaticResource MSPrimary}">
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="1" Style="{StaticResource MSSecondary}" Grid.ColumnSpan="2">
+        </DockPanel>
+
+        <!--Row 2 -->
+        <DockPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource MSSecondary}">
+            <Label Style="{StaticResource MSTitle}">SS DEMO</Label>
+        </DockPanel>
+
+        <!--Row 3 -->
+        <DockPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource MSPrimary}" Grid.RowSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"  >
+                    <Button Style="{StaticResource PrimaryButton}" Content="Generate Mock Data" cal:Message.Attach="[Event Click]=[Action CreateMockData]"></Button>
+                    <Button Style="{StaticResource PrimaryButton}" Content="View Mock Data" cal:Message.Attach="[Event Click]=[Action ViewMockData]"></Button>
+
+                    <Button Style="{StaticResource PrimaryButton}">
+                        <i:Interaction.Behaviors>
+                            <local1:DropDownButtonBehavior/>
+                        </i:Interaction.Behaviors>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Stimulsoft Report"/>
+                                <Path Margin="2" VerticalAlignment="Center"  Width="6" Fill="#FF527DB5" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+                            </StackPanel>
+                        </Button.Content>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Load Report" cal:Message.Attach="[Event Click]=[Action ViewReport('StimulsoftReports','False')]"/>
+                                <MenuItem Header="Load Report (Modal)" cal:Message.Attach="[Event Click]=[Action ViewReport('StimulsoftReports','True')]"/>
+                                <MenuItem Header="Open Designer" cal:Message.Attach="[Event Click]=[Action ShowDesigner('StimulsoftReports','False')]"/>
+                                <MenuItem Header="Open Designer (Modal)" cal:Message.Attach="[Event Click]=[Action ShowDesigner('StimulsoftReports','True')]"/>
+                                <Separator/>
+                                <MenuItem Header="Property"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+
+
+                    <Button Style="{StaticResource PrimaryButton}">
+                        <i:Interaction.Behaviors>
+                            <local1:DropDownButtonBehavior/>
+                        </i:Interaction.Behaviors>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Fast Report"/>
+                                <Path Margin="2" VerticalAlignment="Center"  Width="6" Fill="#FF527DB5" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+                            </StackPanel>
+                        </Button.Content>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Load Report" cal:Message.Attach="[Event Click]=[Action ViewReport('FastReport','False')]"/>
+                                <MenuItem Header="Load Report (Modal)" cal:Message.Attach="[Event Click]=[Action ViewReport('FastReport','True')]"/>
+                                <MenuItem Header="Open Designer" cal:Message.Attach="[Event Click]=[Action ShowDesigner('FastReport','False')]"/>
+                                <MenuItem Header="Open Designer (Modal)" cal:Message.Attach="[Event Click]=[Action ShowDesigner('FastReport','True')]"/>
+                                <Separator/>
+                                <MenuItem Header="Property"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+
+
+                    <Button Style="{StaticResource PrimaryButton}">
+                        <i:Interaction.Behaviors>
+                            <local1:DropDownButtonBehavior/>
+                        </i:Interaction.Behaviors>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="RDLC"/>
+                                <Path Margin="2" VerticalAlignment="Center"  Width="6" Fill="#FF527DB5" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+                            </StackPanel>
+                        </Button.Content>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Load Report" cal:Message.Attach="[Event Click]=[Action ViewReport('RDLC','False')]"/>
+                                <MenuItem Header="Load Report (Modal)" cal:Message.Attach="[Event Click]=[Action ViewReport('RDLC','True')]"/>
+                                <MenuItem Header="Open Designer" cal:Message.Attach="[Event Click]=[Action ShowDesigner('RDLC','False')]"/>
+                                <MenuItem Header="Open Designer (Modal)" cal:Message.Attach="[Event Click]=[Action ShowDesigner('RDLC','True')]"/>
+                                <Separator/>
+                                <MenuItem Header="Property"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+
+
+                    <Button Style="{StaticResource PrimaryButton}">
+                        <i:Interaction.Behaviors>
+                            <local1:DropDownButtonBehavior/>
+                        </i:Interaction.Behaviors>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Crystal Report"/>
+                                <Path Margin="2" VerticalAlignment="Center"  Width="6" Fill="#FF527DB5" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+                            </StackPanel>
+                        </Button.Content>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Load Report" cal:Message.Attach="[Event Click]=[Action ViewReport('CrystalReport','False')]"/>
+                                <MenuItem Header="Load Report (Modal)" cal:Message.Attach="[Event Click]=[Action ViewReport('CrystalReport','True')]"/>
+                                <MenuItem Header="Open Designer" cal:Message.Attach="[Event Click]=[Action ShowDesigner('CrystalReport','False')]"/>
+                                <MenuItem Header="Open Designer (Modal)" cal:Message.Attach="[Event Click]=[Action ShowDesigner('CrystalReport','True')]"  />
+                                <Separator/>
+                                <MenuItem Header="Property"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+
+                    <Button Style="{StaticResource PrimaryButton}">
+                        <i:Interaction.Behaviors>
+                            <local1:DropDownButtonBehavior/>
+                        </i:Interaction.Behaviors>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Combit ListLabel"/>
+                                <Path Margin="2" VerticalAlignment="Center"  Width="6" Fill="#FF527DB5" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+                            </StackPanel>
+                        </Button.Content>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Load Report" cal:Message.Attach="[Event Click]=[Action ViewReport('ListAndLabel','False')]"/>
+                                <MenuItem Header="Load Report (Modal)" cal:Message.Attach="[Event Click]=[Action ViewReport('ListAndLabel','True')]"/>
+                                <MenuItem Header="Open Designer" cal:Message.Attach="[Event Click]=[Action ShowDesigner('ListAndLabel','False')]"/>
+                                <MenuItem Header="Open Designer (Modal)" cal:Message.Attach="[Event Click]=[Action ShowDesigner('ListAndLabel','True')]"  />
+                                <Separator/>
+                                <MenuItem Header="Property"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+
+
+                </StackPanel>
+
+
+            </Grid>
+        </DockPanel>
+
+        <ContentControl Grid.Column="1" Grid.Row="2" x:Name="ActiveItem"></ContentControl>
+
+        <!--Row 4-->
+        <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource PowerButton}"
+               cal:Message.Attach="[Event Click] = [Action CloseApplication]" >
+            <StackPanel>
+                <Image Source="..\Images\power.png" Width="30" Height="30"></Image>
+            </StackPanel>
+        </Button>
+
+
+    </Grid>
+</Window>
