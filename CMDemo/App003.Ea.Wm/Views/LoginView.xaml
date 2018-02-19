@@ -1,0 +1,31 @@
+﻿<Window x:Class="App003.Ea.Wm.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:App003.Ea.Wm.Views"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="LoginView" Height="130" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Lavender">
+            <Label>User Login</Label>
+        </StackPanel>
+        <TextBox Margin="5,5,5,5" Grid.Row="1" Name="UserName">UserName</TextBox>
+        <TextBox Margin="5,5,5,5" Grid.Row="2" Name="Password">Password</TextBox>
+        <Button Grid.Row="3" Margin="5,5,5,5" cal:Message.Attach="[Event Click]=[Action Validate(UserName,Password)]">Login</Button>
+    </Grid>
+</Window>
