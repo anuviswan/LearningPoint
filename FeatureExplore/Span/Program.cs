@@ -11,6 +11,7 @@ namespace Span
     {
         static void Main()
         {
+            // Execute the Benchmark 
             BenchmarkRunner.Run<BenchmarkDemo>();
         }
     }
