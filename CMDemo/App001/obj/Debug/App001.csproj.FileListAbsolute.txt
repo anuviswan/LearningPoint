@@ -46,3 +46,27 @@ D:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.cspro
 D:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csproj.CoreCompileInputs.cache
 D:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.exe
 D:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.pdb
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\App001.exe.config
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\App001.exe
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\App001.pdb
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.dll
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.Platform.Core.dll
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.Platform.dll
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\System.Windows.Interactivity.dll
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.xml
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.Platform.xml
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.Platform.Core.xml
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csprojResolveAssemblyReference.cache
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\Views\ShellView.g.cs
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App.g.cs
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001_MarkupCompile.cache
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001_MarkupCompile.lref
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App.baml
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\Views\ShellView.baml
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.g.resources
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.Properties.Resources.resources
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csproj.GenerateResource.Cache
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csproj.CoreCompileInputs.cache
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.exe
+D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.pdb
