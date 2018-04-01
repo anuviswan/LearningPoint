@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Demo code for Decorator Design Pattern
 namespace Decorator
 {
     class Program
