@@ -13,11 +13,11 @@ namespace Decorator
         static void Main(string[] args)
         {
             IPizza vegPizza = new MargheritaPizza();
-            var vegPizzacheezeCrust = new CheeseCrust(vegPizza);
+            var vegPizzacheezeCrust = new CheeseCrust(vegPizza); // Added Decorator
 
             IPizza nonVegPizza = new ChickenTikkaPizza();
-            var chickenPizzacheezeCrust = new CheeseCrust(nonVegPizza);
-            var chickenPizzacheezeCrustAndExtraGoldenCoren = new ExtraGoldenCorn(chickenPizzacheezeCrust);
+            var chickenPizzacheezeCrust = new CheeseCrust(nonVegPizza); // Added Decorator
+            var chickenPizzacheezeCrustAndExtraGoldenCoren = new ExtraGoldenCorn(chickenPizzacheezeCrust); // Added Decorator
 
             Console.WriteLine($"{vegPizzacheezeCrust.Description}, Price  : {vegPizzacheezeCrust.CalculatePrice()}");
             Console.WriteLine($"{chickenPizzacheezeCrustAndExtraGoldenCoren.Description}, Price  : {chickenPizzacheezeCrustAndExtraGoldenCoren.CalculatePrice()}");
