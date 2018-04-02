@@ -10,6 +10,5 @@ namespace Decorator
     {
         public string Description => "Margherita Pizza";
         public int CalculatePrice() => 100;
-
     }
 }
