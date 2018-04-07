@@ -11,10 +11,7 @@ namespace Prototype
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
-
-        public object Clone()
-        {
-            return MemberwiseClone();
-        }
+        public object Clone() => MemberwiseClone();
     }
+
 }
