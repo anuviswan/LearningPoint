@@ -29,6 +29,8 @@ namespace MementoDP
             Console.WriteLine($"FName = {instance.FName}, LName = {instance.LName}");
             instance.RestoreState(memoryCollection.First());
             Console.WriteLine($"FName = {instance.FName}, LName = {instance.LName}");
+            instance.RestoreState(memoryCollection.First(x=>x.FName == "Jia"));
+            Console.WriteLine($"FName = {instance.FName}, LName = {instance.LName}");
         }
     }
 }

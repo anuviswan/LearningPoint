@@ -16,24 +16,14 @@ namespace MementoDP
             _stateMemory = new List<Memento>();
         }
 
-        public void Add(Memento instance)
-        {
-            _stateMemory.Add(instance);
-        }
+        public void Add(Memento instance) => _stateMemory.Add(instance);
 
-        public Memento GoBack(int level)
-        {
-            return _stateMemory.Reverse().Skip(level-1).First();
-        }
+        public Memento GoBack(int level) =>  _stateMemory.Reverse().Skip(level-1).First();
 
-        public Memento First()
-        {
-            return _stateMemory.First();
-        }
+        public Memento First() => _stateMemory.First();
+        public Memento First(Predicate<Memento> predicate) => _stateMemory.First(x=>predicate(x));
 
-        public Memento Last()
-        {
-            return _stateMemory.Last();
-        }
+        public Memento Last() => _stateMemory.Last();
+        public Memento Last(Predicate<Memento> predicate) => _stateMemory.Last(x => predicate(x));
     }
 }
