@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype", "Prototype\Prot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge", "Bridge\Bridge.csproj", "{AA87568E-DE39-48DD-BAD4-D3673E7071C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memento", "Memento\Memento.csproj", "{38535E22-9038-4C18-B51C-BA96977C00D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{AA87568E-DE39-48DD-BAD4-D3673E7071C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA87568E-DE39-48DD-BAD4-D3673E7071C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA87568E-DE39-48DD-BAD4-D3673E7071C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38535E22-9038-4C18-B51C-BA96977C00D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38535E22-9038-4C18-B51C-BA96977C00D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38535E22-9038-4C18-B51C-BA96977C00D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38535E22-9038-4C18-B51C-BA96977C00D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
