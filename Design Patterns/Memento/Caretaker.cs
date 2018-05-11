@@ -21,9 +21,19 @@ namespace MementoDP
             _stateMemory.Add(instance);
         }
 
-        public IQueryable<Memento> Instances()
+        public Memento GoBack(int level)
         {
-            return _stateMemory.AsQueryable();
+            return _stateMemory.Reverse().Skip(level-1).First();
+        }
+
+        public Memento First()
+        {
+            return _stateMemory.First();
+        }
+
+        public Memento Last()
+        {
+            return _stateMemory.Last();
         }
     }
 }

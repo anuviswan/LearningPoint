@@ -25,9 +25,9 @@ namespace MementoDP
             instance.LName = "Viswan";
 
             Console.WriteLine($"FName = {instance.FName}, LName = {instance.LName}");
-            instance.RestoreState(memoryCollection.Instances().First());
+            instance.RestoreState(memoryCollection.GoBack(1));
             Console.WriteLine($"FName = {instance.FName}, LName = {instance.LName}");
-            instance.RestoreState(memoryCollection.Instances().Last());
+            instance.RestoreState(memoryCollection.First());
             Console.WriteLine($"FName = {instance.FName}, LName = {instance.LName}");
         }
     }
