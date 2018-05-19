@@ -12,10 +12,13 @@ namespace WCF002_ConsoleHost
         static void Main(string[] args)
         {
             using (var host = new ServiceHost(typeof(WCF001_HelloWorld.HelloWorldService)))
+            {
                 host.Open();
+                Console.WriteLine("Host Started");
+                Console.ReadLine();
+            }
 
-            Console.WriteLine("Host Started");
-            Console.ReadLine();
+            
         }
     }
 }
