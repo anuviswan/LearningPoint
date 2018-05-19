@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF001_HelloWorld", "WCF001
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService", "DataService\DataService.csproj", "{C5315991-B225-4C67-8268-2B68E92D8A2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF002_ConsoleHost", "WCF002_ConsoleHost\WCF002_ConsoleHost.csproj", "{43C7F917-2F5F-4481-927B-8A36E7AD7966}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C5315991-B225-4C67-8268-2B68E92D8A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5315991-B225-4C67-8268-2B68E92D8A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5315991-B225-4C67-8268-2B68E92D8A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43C7F917-2F5F-4481-927B-8A36E7AD7966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43C7F917-2F5F-4481-927B-8A36E7AD7966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43C7F917-2F5F-4481-927B-8A36E7AD7966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43C7F917-2F5F-4481-927B-8A36E7AD7966}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
