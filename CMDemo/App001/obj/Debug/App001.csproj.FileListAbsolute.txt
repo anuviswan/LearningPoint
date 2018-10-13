@@ -70,3 +70,28 @@ D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csproj.Generate
 D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csproj.CoreCompileInputs.cache
 D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.exe
 D:\Source\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.pdb
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\App001.exe.config
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\App001.exe
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\App001.pdb
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.dll
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.Platform.Core.dll
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.Platform.dll
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\System.Windows.Interactivity.dll
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.xml
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.Platform.xml
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\bin\Debug\Caliburn.Micro.Platform.Core.xml
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csprojAssemblyReference.cache
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\Views\ShellView.g.cs
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App.g.cs
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001_MarkupCompile.cache
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001_MarkupCompile.lref
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App.baml
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\Views\ShellView.baml
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.g.resources
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.Properties.Resources.resources
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csproj.GenerateResource.cache
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csproj.CoreCompileInputs.cache
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.csproj.CopyComplete
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.exe
+E:\App Store\GitHub\anuviswan\LearningPoint\CMDemo\App001\obj\Debug\App001.pdb
