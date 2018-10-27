@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Span
 {
     public class TypeCast
     {
         public void TypeCastPrimitiveTypes()
         {
+            
             long originalPrimitiveType = long.MaxValue;
             Span<byte> byteSpan = BitConverter.GetBytes(originalPrimitiveType);
-            Span<int> intSpan = byteSpan.NonPortableCast<byte, int>();
+            Span<int> intSpan = MemoryMarshal.Cast<byte, int>(byteSpan);
             int castPrimitiveType = intSpan[0];
             Console.WriteLine($"Primitive Test : OriginalValue (long) = {originalPrimitiveType}, Cast Value (int) = {castPrimitiveType}");
 
             var structInstance = new ValueStruct(25, 01);
             byteSpan = BitConverter.GetBytes(structInstance.Property1);
-            intSpan = byteSpan.NonPortableCast<byte, int>();
+            intSpan = MemoryMarshal.Cast<byte, int>(byteSpan);
             int castStructType = intSpan[0];
             Console.WriteLine($"Struct Test : OriginalValue (long) = {structInstance.Property1}, Cast Value (int) = {castStructType}");
 
