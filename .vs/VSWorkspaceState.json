@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CMDemo\\App003.MultiProject.Demo.Library",
+    "\\Sockets"
   ],
+  "SelectedNode": "\\Sockets",
   "PreviewInSolutionExplorer": false
 }
