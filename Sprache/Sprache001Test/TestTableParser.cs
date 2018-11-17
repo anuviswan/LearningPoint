@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sprache;
 using Sprache001;
@@ -15,10 +16,12 @@ wt      D       FV      FD
 ";
  
         [TestMethod]
-        public void TestMethod1()
+        public void EnsureHeadersAreParsed()
         {
+            var inputHeaders = new List<string>(new []{ "wt", "D", "FV", "FD" });
             var headers = TableParser.Headers.Parse(_content);
             Assert.AreEqual(4, headers.Count);
+            CollectionAssert.AreEqual(inputHeaders, headers);
         }
     }
 }
