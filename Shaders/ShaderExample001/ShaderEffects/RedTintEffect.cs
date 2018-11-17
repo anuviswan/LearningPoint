@@ -24,7 +24,6 @@ namespace ShaderExample001.ShaderEffects
             PixelShader = pixelShader;
             UpdateShaderValue(InputProperty);
 
-
         }
     }
 }
