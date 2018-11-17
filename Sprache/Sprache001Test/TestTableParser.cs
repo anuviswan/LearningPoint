@@ -21,27 +21,9 @@ wt      D2       F1V      FD
 24.4   32.11    23    2.11
 ";
 
-        [TestMethod]
-        public void EnsureStringHeadersAreParsed()
-        {
-            var inputHeaders = new List<string>(new []{ "wt", "D", "FV", "FD" });
-            var headers = TableParser.HeaderListParser.Parse(_contentWithStringHeaders);
-            Assert.AreEqual(4, headers.Count);
-            CollectionAssert.AreEqual(inputHeaders, headers);
-        }
-
 
         [TestMethod]
-        public void EnsureAlphaNumericHeadersAreParsed()
-        {
-            var inputHeaders = new List<string>(new[] { "wt", "D2", "F1V", "FD" });
-            var headers = TableParser.HeaderListParser.Parse(_contentWithAlphanumericHeaders);
-            Assert.AreEqual(4, headers.Count);
-            CollectionAssert.AreEqual(inputHeaders, headers);
-        }
-
-        [TestMethod]
-        public void EnsureStringIsParsed()
+        public void WhenStringWithWhiteSpace_ReturnString()
         {
             var inputString = " abc ";
             var result = TableParser.AlphaNumericParser.Parse(inputString);
@@ -49,7 +31,7 @@ wt      D2       F1V      FD
         }
 
         [TestMethod]
-        public void EnsureSingleCharIsParsed()
+        public void WhenSingleCharacterWithWhiteSpaceIsParsed_ReturnChar()
         {
             var inputString = " a ";
             var result = TableParser.AlphaNumericParser.Parse(inputString);
@@ -57,7 +39,7 @@ wt      D2       F1V      FD
         }
 
         [TestMethod]
-        public void EnsureAlphaNumericStringIsParsed()
+        public void WhenAlphaNumericStringWithWhiteSpaceIsParsed_ReturnAlphaNumeric()
         {
             var inputString = " a1 ";
             var result = TableParser.AlphaNumericParser.Parse(inputString);
@@ -65,7 +47,31 @@ wt      D2       F1V      FD
         }
 
         [TestMethod]
-        public void EnsureIntegerIsParsed()
+        public void WhenStringOnlyHeadersSeparatedByWhiteSpaces_ReturnListOfHeaders()
+        {
+            var intputString = "wt      D      FV      FD";
+            var inputHeaders = new List<string>(new []{ "wt", "D", "FV", "FD" });
+            var headers = TableParser.HeaderListParser.Parse(intputString);
+
+            Assert.AreEqual(4, headers.Count);
+            CollectionAssert.AreEqual(inputHeaders, headers);
+        }
+
+
+        [TestMethod]
+        public void WhenAlphanumericHeadersSeparatedByWhiteSpaces_ReturnListOfHeaders()
+        {
+            var intputString = "wt      D2      F1V      FD";
+            var inputHeaders = new List<string>(new[] { "wt", "D2", "F1V", "FD" });
+            var headers = TableParser.HeaderListParser.Parse(intputString);
+
+            Assert.AreEqual(4, headers.Count);
+            CollectionAssert.AreEqual(inputHeaders, headers);
+        }
+
+
+        [TestMethod]
+        public void WhenIntegerIsParsed_ReturnInteger()
         {
             var input = " 3 ";
             var result = TableParser.DecimalValueParser.Parse(input);
@@ -73,7 +79,7 @@ wt      D2       F1V      FD
         }
 
         [TestMethod]
-        public void EnsureDecimalIsParsed()
+        public void WhenDecimalIsParsed_ReturnDecimal()
         {
             var input = " 3.2 ";
             var result = TableParser.DecimalValueParser.Parse(input);
@@ -81,7 +87,7 @@ wt      D2       F1V      FD
         }
 
         [TestMethod]
-        public void SingleLineValueList()
+        public void WhenDecimalsDelimitedByUnknownWhiteSpaceIsParsed_ReturnListOfDecimals()
         {
             var input = "3.2  4.5 6 8.9";
             var result = TableParser.ValueList.Parse(input);
@@ -90,7 +96,7 @@ wt      D2       F1V      FD
         }
 
         [TestMethod]
-        public void MultiLineValueList()
+        public void WhenMultiLineDecimalsDelimitedByUnknownWhiteSpaceIsParsed_ReturnListOfDecimals()
         {
             var input = @"3.2  4.5 6 8.9
 4.5 6 78.9 8";
