@@ -10,7 +10,7 @@ namespace Sprache001Test
     public class TestTableParser
     {
         private string _contentWithStringHeaders = @"
-wt      D       FV      FD
+wt      D      FV      FD
 34.4   34.11    23.1    0.11
 24.4   32.11    23    2.11
 ";
@@ -39,5 +39,31 @@ wt      D2       F1V      FD
             Assert.AreEqual(4, headers.Count);
             CollectionAssert.AreEqual(inputHeaders, headers);
         }
+
+        [TestMethod]
+        public void EnsureStringIsParsed()
+        {
+            var inputString = " abc ";
+            var result = TableParser.AlphanumbericString.Parse(inputString);
+            Assert.AreEqual("abc", result);
+        }
+
+        [TestMethod]
+        public void EnsureSingleCharIsParsed()
+        {
+            var inputString = " a ";
+            var result = TableParser.AlphanumbericString.Parse(inputString);
+            Assert.AreEqual("a", result);
+        }
+
+        [TestMethod]
+        public void EnsureAlphaNumericStringIsParsed()
+        {
+            var inputString = " a1 ";
+            var result = TableParser.AlphanumbericString.Parse(inputString);
+            Assert.AreEqual("a1", result);
+        }
+
+
     }
 }
