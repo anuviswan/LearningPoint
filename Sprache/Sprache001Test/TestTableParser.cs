@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sprache;
 using Sprache001;
@@ -22,6 +23,7 @@ wt      D2       F1V      FD
 ";
 
 
+        #region String Parser
         [TestMethod]
         public void WhenStringWithWhiteSpace_ReturnString()
         {
@@ -45,12 +47,14 @@ wt      D2       F1V      FD
             var result = TableParser.AlphaNumericParser.Parse(inputString);
             Assert.AreEqual("a1", result);
         }
+        #endregion
 
+        #region Header List Parser
         [TestMethod]
         public void WhenStringOnlyHeadersSeparatedByWhiteSpaces_ReturnListOfHeaders()
         {
             var intputString = "wt      D      FV      FD";
-            var inputHeaders = new List<string>(new []{ "wt", "D", "FV", "FD" });
+            var inputHeaders = new List<string>(new[] { "wt", "D", "FV", "FD" });
             var headers = TableParser.HeaderListParser.Parse(intputString);
 
             Assert.AreEqual(4, headers.Count);
@@ -68,8 +72,9 @@ wt      D2       F1V      FD
             Assert.AreEqual(4, headers.Count);
             CollectionAssert.AreEqual(inputHeaders, headers);
         }
-
-
+        #endregion
+        
+        #region Decimal Parser
         [TestMethod]
         public void WhenIntegerIsParsed_ReturnInteger()
         {
@@ -85,14 +90,16 @@ wt      D2       F1V      FD
             var result = TableParser.DecimalValueParser.Parse(input);
             Assert.AreEqual(3.2d, result);
         }
+        #endregion
 
+        #region Decimal List Parser
         [TestMethod]
         public void WhenDecimalsDelimitedByUnknownWhiteSpaceIsParsed_ReturnListOfDecimals()
         {
             var input = "3.2  4.5 6 8.9";
-            var result = TableParser.ValueList.Parse(input);
-            Assert.AreEqual(result.Count, 4);
-            CollectionAssert.AreEqual(new[] { 3.2, 4.5, 6, 8.9 }, result);
+            var result = TableParser.LineOfValueList.Parse(input).ToList();
+            Assert.AreEqual(4, result.Count());
+            CollectionAssert.AreEqual(new[] { 3.2, 4.5, 6, 8.9 }, result.ToArray());
         }
 
         [TestMethod]
@@ -100,11 +107,39 @@ wt      D2       F1V      FD
         {
             var input = @"3.2  4.5 6 8.9
 4.5 6 78.9 8";
-            var result = TableParser.ValueList.Parse(input);
-            Assert.AreEqual(result.Count, 8);
-            CollectionAssert.AreEqual(new[] { 3.2, 4.5, 6, 8.9, 4.5,6,78.9,8}, result);
+            var result = TableParser.LineOfValueList.Parse(input).ToList();
+            Assert.AreEqual(8, result.Count);
+            CollectionAssert.AreEqual(new[] { 3.2, 4.5, 6, 8.9, 4.5, 6, 78.9, 8 }, result.ToArray());
         }
+        #endregion
 
+        #region Parse Table With Header and Values 
+        [TestMethod]
+        public void WhenTableWithHeadersAndDecimalValueIsParsed_ReturnTableStructure()
+        {
+            var mockedResult = new List<Dictionary<string, double>>();
+            mockedResult.Add(new Dictionary<string, double>
+            {
+                ["wt"] = 34.4,
+                ["D2"] = 34.11,
+                ["F1V"] = 23.1,
+                ["FD"] = 0.11,
+            });
+            mockedResult.Add(new Dictionary<string, double>
+            {
+                ["wt"] = 24.4,
+                ["D2"] = 32.11,
+                ["F1V"] = 23,
+                ["FD"] = 2.11,
+            });
+
+            var result = TableParser.Table.Parse(_contentWithAlphanumericHeaders);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.ValueList.Count, 2);
+            
+        }
+        #endregion
 
     }
+
 }
