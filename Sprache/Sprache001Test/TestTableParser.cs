@@ -25,7 +25,7 @@ wt      D2       F1V      FD
         public void EnsureStringHeadersAreParsed()
         {
             var inputHeaders = new List<string>(new []{ "wt", "D", "FV", "FD" });
-            var headers = TableParser.Headers.Parse(_contentWithStringHeaders);
+            var headers = TableParser.HeaderListParser.Parse(_contentWithStringHeaders);
             Assert.AreEqual(4, headers.Count);
             CollectionAssert.AreEqual(inputHeaders, headers);
         }
@@ -35,7 +35,7 @@ wt      D2       F1V      FD
         public void EnsureAlphaNumericHeadersAreParsed()
         {
             var inputHeaders = new List<string>(new[] { "wt", "D2", "F1V", "FD" });
-            var headers = TableParser.Headers.Parse(_contentWithAlphanumericHeaders);
+            var headers = TableParser.HeaderListParser.Parse(_contentWithAlphanumericHeaders);
             Assert.AreEqual(4, headers.Count);
             CollectionAssert.AreEqual(inputHeaders, headers);
         }
@@ -44,7 +44,7 @@ wt      D2       F1V      FD
         public void EnsureStringIsParsed()
         {
             var inputString = " abc ";
-            var result = TableParser.AlphanumbericString.Parse(inputString);
+            var result = TableParser.AlphaNumericParser.Parse(inputString);
             Assert.AreEqual("abc", result);
         }
 
@@ -52,7 +52,7 @@ wt      D2       F1V      FD
         public void EnsureSingleCharIsParsed()
         {
             var inputString = " a ";
-            var result = TableParser.AlphanumbericString.Parse(inputString);
+            var result = TableParser.AlphaNumericParser.Parse(inputString);
             Assert.AreEqual("a", result);
         }
 
@@ -60,10 +60,26 @@ wt      D2       F1V      FD
         public void EnsureAlphaNumericStringIsParsed()
         {
             var inputString = " a1 ";
-            var result = TableParser.AlphanumbericString.Parse(inputString);
+            var result = TableParser.AlphaNumericParser.Parse(inputString);
             Assert.AreEqual("a1", result);
         }
 
+        [TestMethod]
+        public void EnsureIntegerIsParsed()
+        {
+            var input = " 3 ";
+            var result = TableParser.DecimalValueParser.Parse(input);
+            Assert.AreEqual(3d, result);
+        }
+
+        [TestMethod]
+
+        public void EnsureDecimalIsParsed()
+        {
+            var input = " 3.2 ";
+            var result = TableParser.DecimalValueParser.Parse(input);
+            Assert.AreEqual(3.2d, result);
+        }
 
     }
 }
