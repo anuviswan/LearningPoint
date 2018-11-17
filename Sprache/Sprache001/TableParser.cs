@@ -13,13 +13,14 @@ namespace Sprache001
                                                        from first in Parse.Letter.Once()
                                                        from rest in Parse.LetterOrDigit.Many()
                                                        select new string(first.Concat(rest).ToArray());
+
         public static readonly Parser<List<string>> HeaderListParser = from header in AlphaNumericParser.AtLeastOnce().Token() select header.ToList();
 
-        public static readonly Parser<double> DecimalValueParser = from leadingSpace in Parse.WhiteSpace.Many()
-                                                      from value in Parse.Digit.Many().Text()
-                                                      from point in Parse.Char('.').Optional()
-                                                      from decimalValue in Parse.Digit.Many().Text().Optional()
-                                                      select Double.Parse($"{value}.{decimalValue.GetOrDefault()}");
+        public static readonly Parser<double> DecimalValueParser = from value in Parse.Decimal.Token()
+                                                      select Double.Parse(value);
+
+        public static readonly Parser<List<double>> ValueList = from value in DecimalValueParser.Many().Token()
+                                                                select value.ToList();
     }
 
     public class Table

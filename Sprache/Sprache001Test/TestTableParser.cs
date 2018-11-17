@@ -73,13 +73,32 @@ wt      D2       F1V      FD
         }
 
         [TestMethod]
-
         public void EnsureDecimalIsParsed()
         {
             var input = " 3.2 ";
             var result = TableParser.DecimalValueParser.Parse(input);
             Assert.AreEqual(3.2d, result);
         }
+
+        [TestMethod]
+        public void SingleLineValueList()
+        {
+            var input = "3.2  4.5 6 8.9";
+            var result = TableParser.ValueList.Parse(input);
+            Assert.AreEqual(result.Count, 4);
+            CollectionAssert.AreEqual(new[] { 3.2, 4.5, 6, 8.9 }, result);
+        }
+
+        [TestMethod]
+        public void MultiLineValueList()
+        {
+            var input = @"3.2  4.5 6 8.9
+4.5 6 78.9 8";
+            var result = TableParser.ValueList.Parse(input);
+            Assert.AreEqual(result.Count, 8);
+            CollectionAssert.AreEqual(new[] { 3.2, 4.5, 6, 8.9, 4.5,6,78.9,8}, result);
+        }
+
 
     }
 }
