@@ -136,7 +136,7 @@ wt      D2       F1V      FD
             var result = TableParser.Table.Parse(_contentWithAlphanumericHeaders);
             Assert.IsNotNull(result);
             Assert.AreEqual(result.ValueList.Count, 2);
-            
+            Assert.AreEqual(4, result.Headers.Count);
         }
         #endregion
 

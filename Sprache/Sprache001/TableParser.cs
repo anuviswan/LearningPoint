@@ -1,9 +1,6 @@
 ﻿using Sprache;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sprache001
 {
@@ -32,12 +29,13 @@ namespace Sprache001
 
     public class Table
     {
-        public Table(List<string> Headers,List<double> Values)
+        public Table(List<string> headers,List<double> Values)
         {
-            var groupedList = Values.ChunkBy(Headers.Count);
+            Headers = headers;
+            var groupedList = Values.ChunkBy(headers.Count);
             foreach (var item in groupedList)
             {
-                ValueList.Add(Headers.Zip(item, (x, y) => new { Key = x, Value = y }).ToDictionary(x => x.Key, y => y.Value));
+                ValueList.Add(headers.Zip(item, (x, y) => new { Key = x, Value = y }).ToDictionary(x => x.Key, y => y.Value));
             }
         }
         public List<string> Headers { get; set; } = new List<string>();
