@@ -18,7 +18,10 @@
     
         <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding InputString}" AcceptsReturn="True" TextWrapping="Wrap"/>
 
-        <DataGrid Grid.Column="1" Grid.Row="0" ItemsSource="{Binding ParsedTable}"/>
+        <StackPanel Grid.Column="1" Grid.Row="0" >
+        <TextBlock Text="{Binding ParsedInformation}"/>
+        <DataGrid ItemsSource="{Binding ParsedTable}"/>
+        </StackPanel>
 
         <Button Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Convert" x:Name="Convert"/>
     </Grid>
