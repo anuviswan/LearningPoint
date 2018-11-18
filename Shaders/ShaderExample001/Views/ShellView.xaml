@@ -22,9 +22,10 @@
 
 
         <Label Grid.Column="1" Grid.Row="0" Content="Button with Shader" HorizontalAlignment="Center"/>
-        <Button Grid.Column="1" Grid.Row="1" Content="Click Me">
+        <Button Grid.Column="1" Grid.Row="1" Content="Click Me" Background="White">
             <Button.Effect>
-                <shadereffects:RedTintEffect/>
+                <!--<shadereffects:RedTintEffect/>-->
+                <shadereffects:ReplaceColorEffect OldColor="White" NewColor="Blue"/>
             </Button.Effect>
         </Button>
 
