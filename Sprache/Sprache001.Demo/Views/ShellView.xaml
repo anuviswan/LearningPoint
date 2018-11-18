@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sprache001.Demo.Views"
         mc:Ignorable="d"
-        Title="Sprache Parser" Height="450" Width="800">
-    <Grid>
+        Title="Sprache Parser Demo" Height="450" Width="800">
+    <Grid Margin="10,10,10,10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -15,7 +15,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-
+    
         <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding InputString}" AcceptsReturn="True" TextWrapping="Wrap"/>
 
         <DataGrid Grid.Column="1" Grid.Row="0" ItemsSource="{Binding ParsedTable}"/>

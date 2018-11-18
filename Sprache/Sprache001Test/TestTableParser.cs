@@ -28,7 +28,7 @@ wt      D2       F1V      FD
         public void WhenStringWithWhiteSpace_ReturnString()
         {
             var inputString = " abc ";
-            var result = TableParser.AlphaNumericParser.Parse(inputString);
+            var result = TableParser.Alphanumeric.Parse(inputString);
             Assert.AreEqual("abc", result);
         }
 
@@ -36,7 +36,7 @@ wt      D2       F1V      FD
         public void WhenSingleCharacterWithWhiteSpaceIsParsed_ReturnChar()
         {
             var inputString = " a ";
-            var result = TableParser.AlphaNumericParser.Parse(inputString);
+            var result = TableParser.Alphanumeric.Parse(inputString);
             Assert.AreEqual("a", result);
         }
 
@@ -44,7 +44,7 @@ wt      D2       F1V      FD
         public void WhenAlphaNumericStringWithWhiteSpaceIsParsed_ReturnAlphaNumeric()
         {
             var inputString = " a1 ";
-            var result = TableParser.AlphaNumericParser.Parse(inputString);
+            var result = TableParser.Alphanumeric.Parse(inputString);
             Assert.AreEqual("a1", result);
         }
         #endregion
@@ -55,7 +55,7 @@ wt      D2       F1V      FD
         {
             var intputString = "wt      D      FV      FD";
             var inputHeaders = new List<string>(new[] { "wt", "D", "FV", "FD" });
-            var headers = TableParser.HeaderListParser.Parse(intputString);
+            var headers = TableParser.HeaderCollection.Parse(intputString);
 
             Assert.AreEqual(4, headers.Count);
             CollectionAssert.AreEqual(inputHeaders, headers);
@@ -67,7 +67,7 @@ wt      D2       F1V      FD
         {
             var intputString = "wt      D2      F1V      FD";
             var inputHeaders = new List<string>(new[] { "wt", "D2", "F1V", "FD" });
-            var headers = TableParser.HeaderListParser.Parse(intputString);
+            var headers = TableParser.HeaderCollection.Parse(intputString);
 
             Assert.AreEqual(4, headers.Count);
             CollectionAssert.AreEqual(inputHeaders, headers);
@@ -79,7 +79,7 @@ wt      D2       F1V      FD
         public void WhenIntegerIsParsed_ReturnInteger()
         {
             var input = " 3 ";
-            var result = TableParser.DecimalValueParser.Parse(input);
+            var result = TableParser.DecimalValue.Parse(input);
             Assert.AreEqual(3d, result);
         }
 
@@ -87,7 +87,7 @@ wt      D2       F1V      FD
         public void WhenDecimalIsParsed_ReturnDecimal()
         {
             var input = " 3.2 ";
-            var result = TableParser.DecimalValueParser.Parse(input);
+            var result = TableParser.DecimalValue.Parse(input);
             Assert.AreEqual(3.2d, result);
         }
         #endregion
@@ -97,7 +97,7 @@ wt      D2       F1V      FD
         public void WhenDecimalsDelimitedByUnknownWhiteSpaceIsParsed_ReturnListOfDecimals()
         {
             var input = "3.2  4.5 6 8.9";
-            var result = TableParser.LineOfValueList.Parse(input).ToList();
+            var result = TableParser.ValueCollection.Parse(input).ToList();
             Assert.AreEqual(4, result.Count());
             CollectionAssert.AreEqual(new[] { 3.2, 4.5, 6, 8.9 }, result.ToArray());
         }
@@ -107,9 +107,30 @@ wt      D2       F1V      FD
         {
             var input = @"3.2  4.5 6 8.9
 4.5 6 78.9 8";
-            var result = TableParser.LineOfValueList.Parse(input).ToList();
+            var result = TableParser.ValueCollection.Parse(input).ToList();
             Assert.AreEqual(8, result.Count);
             CollectionAssert.AreEqual(new[] { 3.2, 4.5, 6, 8.9, 4.5, 6, 78.9, 8 }, result.ToArray());
+        }
+        #endregion
+
+        #region Date Time Parser
+        [TestMethod]
+        public void WhenDateTimeStringIsParsed_ReturnDateTime()
+        {
+            var input = "18/11/2018 08:23:18";
+            var expected = new DateTime(2018, 11, 18, 8, 23, 18);
+            var result = TableParser.DateTime.Parse(input);
+            Assert.AreEqual(expected, result);
+        }
+
+
+        [TestMethod]
+        public void WhenDateTimeStringWithWhiteSpaceIsParsed_ReturnDateTime()
+        {
+            var input = "   18/11/2018 08:23:18   ";
+            var expected = new DateTime(2018, 11, 18, 8, 23, 18);
+            var result = TableParser.DateTime.Parse(input);
+            Assert.AreEqual(expected, result);
         }
         #endregion
 

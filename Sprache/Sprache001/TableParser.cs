@@ -1,4 +1,5 @@
 ﻿using Sprache;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,23 +7,37 @@ namespace Sprache001
 {
     public class TableParser
     {
-        public static readonly Parser<string> AlphaNumericParser = from leadingspaces in Parse.WhiteSpace.Many()
+        public static readonly Parser<string> Alphanumeric = from leadingspaces in Parse.WhiteSpace.Many()
                                                        from first in Parse.Letter.Once()
                                                        from rest in Parse.LetterOrDigit.Many()
                                                        select new string(first.Concat(rest).ToArray());
 
-        public static readonly Parser<List<string>> HeaderListParser = from header in AlphaNumericParser.AtLeastOnce().Token() select header.ToList();
+        public static readonly Parser<string> Header = Alphanumeric;
 
-        public static readonly Parser<double> DecimalValueParser = from value in Parse.Decimal.Token()
+        public static readonly Parser<List<string>> HeaderCollection = from header in Header.AtLeastOnce().Token() select header.ToList();
+
+        public static readonly Parser<double> DecimalValue = from value in Parse.Decimal.Token()
                                                       select double.Parse(value);
 
-        public static readonly Parser<IEnumerable<double>> LineOfValueList = from value in DecimalValueParser.Many().Except(Parse.LineEnd).Token()
+        public static readonly Parser<IEnumerable<double>> ValueCollection = from value in DecimalValue.Many().Except(Parse.LineEnd).Token()
                                                                             select value.ToList();
 
 
+        public static readonly Parser<DateTime> DateTime = from day in Parse.Number.Token()
+                                                           from separator1 in Parse.Char('/')
+                                                           from month in Parse.Number
+                                                           from separator2 in Parse.Char('/')
+                                                           from year in Parse.Number
+                                                           from whitespace in Parse.WhiteSpace.Many()
+                                                           from hour in Parse.Number
+                                                           from separator3 in Parse.Char(':')
+                                                           from minute in Parse.Number
+                                                           from separator4 in Parse.Char(':')
+                                                           from seconds in Parse.Number.Token()
+                                                           select new DateTime(int.Parse(year), int.Parse(month), int.Parse(day),int.Parse(hour),int.Parse(minute),int.Parse(seconds));
 
-        public static readonly Parser<Table> Table = from headers in HeaderListParser
-                                                     from valuelist in LineOfValueList
+        public static readonly Parser<Table> Table = from headers in HeaderCollection
+                                                     from valuelist in ValueCollection
                                                      select new Table(headers, valuelist.ToList());
 
     }
