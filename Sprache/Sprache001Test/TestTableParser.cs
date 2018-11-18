@@ -22,6 +22,13 @@ wt      D2       F1V      FD
 24.4   32.11    23    2.11
 ";
 
+        private string _contentWithTimeStampAndData = @"
+   18/11/2018 09:42:18 
+wt      D      FV      FD
+34.4   34.11    23.1    0.11
+24.4   32.11    23    2.11
+";
+
 
         #region String Parser
         [TestMethod]
@@ -158,6 +165,34 @@ wt      D2       F1V      FD
             Assert.IsNotNull(result);
             Assert.AreEqual(result.ValueList.Count, 2);
             Assert.AreEqual(4, result.Headers.Count);
+        }
+        #endregion
+
+        #region Parse Data with Table and TimeStamp
+        [TestMethod]
+        public void WhenTimeStampAndTableIsParsed_ReturnDataStructure()
+        {
+            var mockedResult = new List<Dictionary<string, double>>();
+            mockedResult.Add(new Dictionary<string, double>
+            {
+                ["wt"] = 34.4,
+                ["D"] = 34.11,
+                ["FV"] = 23.1,
+                ["FD"] = 0.11,
+            });
+            mockedResult.Add(new Dictionary<string, double>
+            {
+                ["wt"] = 24.4,
+                ["D"] = 32.11,
+                ["FV"] = 23,
+                ["FD"] = 2.11,
+            });
+
+            var result = TableParser.Data.Parse(_contentWithTimeStampAndData);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.Table.ValueList.Count, 2);
+            Assert.AreEqual(4, result.Table.Headers.Count);
+            Assert.AreEqual(new DateTime(2018,11,18,9,42,18), result.TimeStamp);
         }
         #endregion
 

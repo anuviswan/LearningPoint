@@ -40,6 +40,17 @@ namespace Sprache001
                                                      from valuelist in ValueCollection
                                                      select new Table(headers, valuelist.ToList());
 
+        public static readonly Parser<Data> Data = from timeStamp in DateTime
+                                                   from table in Table
+                                                   select new Data { Table = table, TimeStamp = timeStamp };
+
+    }
+
+
+    public class Data
+    {
+        public Table Table { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 
     public class Table
