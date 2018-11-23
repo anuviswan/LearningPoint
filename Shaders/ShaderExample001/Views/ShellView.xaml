@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:ShaderExample001.Views"
         xmlns:shadereffects="clr-namespace:ShaderExample001.ShaderEffects"
         mc:Ignorable="d"
-        Title="Shader Example" Height="200" Width="400">
-    <Grid Margin="10,10,10,10">
+        Title="Shader Example" Height="800" Width="400">
+    <StackPanel>
+        <Label Content="Demo for Red Tint Shader"/>
+        <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
@@ -31,4 +33,64 @@
 
 
     </Grid>
+
+        <Label Content="Demo for Replace Shader (Replace Red With Green)"/>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel>
+                <Label Content="Without Shader"/>
+                <Grid Margin="10,10,10,10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="0" Background="Blue"/>
+                <Button Grid.Column="0" Grid.Row="1" Background="Blue"/>
+                <Button Grid.Column="0" Grid.Row="2" Background="Blue"/>
+                <Button Grid.Column="1" Grid.Row="0" Background="Blue"/>
+                <Button Grid.Column="1" Grid.Row="1" Background="Red"/>
+                <Button Grid.Column="1" Grid.Row="2" Background="Blue"/>
+                <Button Grid.Column="2" Grid.Row="0" Background="Blue"/>
+                <Button Grid.Column="2" Grid.Row="1" Background="Blue"/>
+                <Button Grid.Column="2" Grid.Row="2" Background="Blue"/>
+            </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="With Shader"/>
+            <Grid Margin="10,10,10,10">
+                <Grid.Effect>
+                    <shadereffects:ReplaceColorEffect OldColor="Red" NewColor="Green"/>
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="0" Background="Blue"/>
+                <Button Grid.Column="0" Grid.Row="1" Background="Blue"/>
+                <Button Grid.Column="0" Grid.Row="2" Background="Blue"/>
+                <Button Grid.Column="1" Grid.Row="0" Background="Blue"/>
+                <Button Grid.Column="1" Grid.Row="1" Background="Red"/>
+                <Button Grid.Column="1" Grid.Row="2" Background="Blue"/>
+                <Button Grid.Column="2" Grid.Row="0" Background="Blue"/>
+                <Button Grid.Column="2" Grid.Row="1" Background="Blue"/>
+                <Button Grid.Column="2" Grid.Row="2" Background="Blue"/>
+            </Grid>
+            </StackPanel>
+        </StackPanel>
+
+    </StackPanel>
 </Window>
