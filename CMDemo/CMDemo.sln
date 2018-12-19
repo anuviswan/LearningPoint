@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App003.MultiProject.Demo", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App003.MultiProject.Demo.Library", "App003.MultiProject.Demo.Library\App003.MultiProject.Demo.Library.csproj", "{66577A96-07D0-4E23-BE54-53F0893F6A2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App004.CustomTrigger", "App004.CustomTrigger\App004.CustomTrigger.csproj", "{4974A3CD-090A-4C92-937D-900169209FD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{66577A96-07D0-4E23-BE54-53F0893F6A2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66577A96-07D0-4E23-BE54-53F0893F6A2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66577A96-07D0-4E23-BE54-53F0893F6A2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4974A3CD-090A-4C92-937D-900169209FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4974A3CD-090A-4C92-937D-900169209FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4974A3CD-090A-4C92-937D-900169209FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4974A3CD-090A-4C92-937D-900169209FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

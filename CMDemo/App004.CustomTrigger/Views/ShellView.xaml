@@ -1,0 +1,15 @@
+﻿<Window x:Class="App004.CustomTrigger.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:App004.CustomTrigger.Views"
+        mc:Ignorable="d"
+        Title="Demo Application - Gesture Recognition" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" Text="Press F12 to Increase Count : " FontSize="20" FontStyle="Normal" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Center"  Text="{Binding Count}" FontSize="72" FontStyle="Normal" FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
+</Window>
