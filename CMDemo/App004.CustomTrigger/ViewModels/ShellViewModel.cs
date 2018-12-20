@@ -11,5 +11,13 @@ namespace App004.CustomTrigger.ViewModels
     {
         public ShellViewModel() => Count = 0;
         public int Count { get; set; }
+
+        public void Increment()
+        {
+            Count++;
+            NotifyOfPropertyChange(nameof(Count));
+        }
     }
+
+    
 }
