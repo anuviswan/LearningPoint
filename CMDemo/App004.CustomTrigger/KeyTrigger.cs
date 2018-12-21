@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
@@ -16,8 +11,8 @@ namespace App004.CustomTrigger
 
         public Key Key
         {
-            get { return (Key)GetValue(KeyProperty); }
-            set { SetValue(KeyProperty, value); }
+            get => (Key)GetValue(KeyProperty);
+            set => SetValue(KeyProperty, value);
         }
 
         protected override void OnAttached()
@@ -39,6 +34,5 @@ namespace App004.CustomTrigger
                 InvokeActions(e);
             }
         }
-
     }
 }
