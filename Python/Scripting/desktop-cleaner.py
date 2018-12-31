@@ -2,6 +2,7 @@
 # Aids in frequent cleaning of Desktop, could be run in Windows Startup
 import os
 import datetime
+import shutil
 
 # Get all files from directory, along with Last Accessed TimeStamp
 def GetListOfFilesFromDirectory(dirpath):
@@ -28,13 +29,25 @@ def FilterRecords(files):
 def PrintList(files):
     for file in files:
         print(file)
+
+def CreateArchiveDirectoryAndMoveFiles(archiveDirectory,files):
+        if not os.path.exists(archiveDirectory):
+                os.makedirs(archiveDirectory)
+        
+        for file in files:
+                _fileName = os.path.basename(file)
+                shutil.move(file,os.path.join(archiveDirectory,_fileName))
+        
+
+
     
 # Archive Desktop
 def ArchiveDesktop():
     _desktopPath = os.path.expanduser("~\\Desktop")
+    _archiveDirectoryPath = os.path.expanduser("~\\Desktop\\Archive")
     files = GetListOfFilesFromDirectory(_desktopPath)
     filterfiles = FilterRecords(files)
     PrintList(filterfiles)
-
+    CreateArchiveDirectoryAndMoveFiles(_archiveDirectoryPath,filterfiles)
 
 ArchiveDesktop()
