@@ -37,10 +37,7 @@ def CreateArchiveDirectoryAndMoveFiles(archiveDirectory,files):
         for file in files:
                 _fileName = os.path.basename(file)
                 shutil.move(file,os.path.join(archiveDirectory,_fileName))
-        
 
-
-    
 # Archive Desktop
 def ArchiveDesktop():
     _desktopPath = os.path.expanduser("~\\Desktop")
