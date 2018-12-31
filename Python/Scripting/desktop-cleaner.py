@@ -1,3 +1,5 @@
+# The script intends to archive unused (not acccessed in last 7 days) Desktop files to Archive Folder
+# Aids in frequent cleaning of Desktop, could be run in Windows Startup
 import os
 import datetime
 
