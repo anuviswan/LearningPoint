@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Oxyplot.TrackerWithGrid.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,8 @@ namespace Oxyplot.TrackerWithGrid
             _Container.Singleton<IEventAggregator, EventAggregator>();
 
             // Hook up your ViewModel and Contract here
-            // _Container.PerRequest<IShell, ShellViewModel>();
+            _Container.PerRequest<MainViewModel, MainViewModel>();
+            _Container.PerRequest<FruitFactory, FruitFactory>();
         }
         protected override object GetInstance(Type service, string key)
         {
@@ -47,7 +49,7 @@ namespace Oxyplot.TrackerWithGrid
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            // DisplayRootViewFor<IShell>();
+            DisplayRootViewFor<MainViewModel>();
         }
         #endregion
     }

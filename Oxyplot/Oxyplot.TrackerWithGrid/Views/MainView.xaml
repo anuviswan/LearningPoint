@@ -7,7 +7,7 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
         Title="MainView" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*"/>
             <ColumnDefinition/>
@@ -22,11 +22,8 @@
 
         <oxy:PlotView Grid.Row="1" Grid.Column="0" Model="{Binding DataPlotModel}"/>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="3">
+            <DataGrid ItemsSource="{Binding Fruits}" AutoGenerateColumns="True"/>
         </Grid>
     </Grid>
 </Window>
