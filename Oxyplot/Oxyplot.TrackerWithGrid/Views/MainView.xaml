@@ -23,7 +23,13 @@
         <oxy:PlotView Grid.Row="1" Grid.Column="0" Model="{Binding DataPlotModel}"/>
 
         <Grid Grid.Row="3">
-            <DataGrid ItemsSource="{Binding Fruits}" AutoGenerateColumns="True"/>
+            <DataGrid ItemsSource="{Binding Fruits}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Date}" Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding Name}"  Width="3*"/>
+                    <DataGridTextColumn Binding="{Binding ItemsSold}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </Window>
