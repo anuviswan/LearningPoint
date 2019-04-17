@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Oxyplot.TrackerWithGrid;
 using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
 
 namespace Oxyplot.TrackerWithGrid.ViewModels
 {
@@ -16,16 +18,48 @@ namespace Oxyplot.TrackerWithGrid.ViewModels
 
         public MainViewModel()
         {
-            GenerateFruitCollection();
+            var fruitCollection = GenerateFruitCollection();
+            Fruits = new BindableCollection<Fruit>(fruitCollection);
             NotifyOfPropertyChange(nameof(Fruits));
+            CreatePlotModel(Fruits);
         }
 
-        public PlotModel DataPlotModel { get; set; }
+        public PlotModel DataPlotModel { get; set; } = new PlotModel();
 
-        private void GenerateFruitCollection()
+        private IEnumerable<Fruit> GenerateFruitCollection()
         {
             var fruitFactory = IoC.Get<FruitFactory>();
-            Fruits = new BindableCollection<Fruit>(fruitFactory.Generate());
+            return fruitFactory.Generate();
+            
+        }
+
+        private void CreatePlotModel(IEnumerable<Fruit> totalSalesDetails)
+        {
+            var salesGrouping = totalSalesDetails.GroupBy(x => x.Date);
+            var yAxis = new LinearAxis
+            {
+                Position = AxisPosition.Left
+            };
+            var xAxis = new DateTimeAxis
+            {
+                Position = AxisPosition.Bottom,
+                Minimum = DateTimeAxis.ToDouble(salesGrouping.Min(x => x.Key)),
+                Maximum = DateTimeAxis.ToDouble(salesGrouping.Max(x => x.Key)),
+            };
+
+
+            DataPlotModel.Axes.Add(yAxis);
+            DataPlotModel.Axes.Add(xAxis);
+
+            var lineSeries = new LineSeries
+            {
+                MarkerFill = OxyColors.Blue,
+                MarkerType = MarkerType.Circle,
+
+            };
+            lineSeries.Points.AddRange(salesGrouping.Select(x => new DataPoint(DateTimeAxis.ToDouble(x.Key), x.Sum(c => c.ItemsSold))));
+            DataPlotModel.Series.Add(lineSeries);
         }
     }
 }
+
