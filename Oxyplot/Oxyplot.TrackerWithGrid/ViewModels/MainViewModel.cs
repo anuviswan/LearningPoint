@@ -38,13 +38,15 @@ namespace Oxyplot.TrackerWithGrid.ViewModels
             var salesGrouping = totalSalesDetails.GroupBy(x => x.Date);
             var yAxis = new LinearAxis
             {
-                Position = AxisPosition.Left
+                Position = AxisPosition.Left,
+                Title = "Items Sold"
             };
             var xAxis = new DateTimeAxis
             {
                 Position = AxisPosition.Bottom,
                 Minimum = DateTimeAxis.ToDouble(salesGrouping.Min(x => x.Key)),
                 Maximum = DateTimeAxis.ToDouble(salesGrouping.Max(x => x.Key)),
+                Title = "Date"
             };
 
 
@@ -55,9 +57,9 @@ namespace Oxyplot.TrackerWithGrid.ViewModels
             {
                 MarkerFill = OxyColors.Blue,
                 MarkerType = MarkerType.Circle,
-
+                TrackerFormatString = "{0}\n{1}: {2:dd.MM.yy}\n{3}: {4:0.###}"
             };
-            lineSeries.Points.AddRange(salesGrouping.Select(x => new DataPoint(DateTimeAxis.ToDouble(x.Key), x.Sum(c => c.ItemsSold))));
+            lineSeries.Points.AddRange(salesGrouping.Select(x => new DataPoint(DateTimeAxis.ToDouble(x.Key.Date), x.Sum(c => c.ItemsSold))));
             DataPlotModel.Series.Add(lineSeries);
         }
     }

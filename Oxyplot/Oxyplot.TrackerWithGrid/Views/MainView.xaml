@@ -20,16 +20,18 @@
         <TextBlock Text="Grid in Tracker Demo" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
 
         <Border Grid.Row="1" BorderThickness="1">
-            <oxy:PlotView Model="{Binding DataPlotModel}"/>
+            <oxy:PlotView Model="{Binding DataPlotModel}">
+                
+            </oxy:PlotView>
         </Border>
 
         <Border Grid.Row="3" BorderThickness="1">
             <Grid>
-                <DataGrid ItemsSource="{Binding Fruits}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid ItemsSource="{Binding Fruits}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="All">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Date}" Width="Auto"/>
-                        <DataGridTextColumn Binding="{Binding Name}"  Width="3*"/>
-                        <DataGridTextColumn Binding="{Binding ItemsSold}" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding Date}" Header="Date" Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Fruit"  Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding ItemsSold}" Header="Items Sold" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
