@@ -9,6 +9,8 @@ using Oxyplot.TrackerWithGrid;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using Newtonsoft.Json;
+using Oxyplot.TrackerWithGrid.OxyplotExtensions;
 
 namespace Oxyplot.TrackerWithGrid.ViewModels
 {
@@ -57,9 +59,13 @@ namespace Oxyplot.TrackerWithGrid.ViewModels
             {
                 MarkerFill = OxyColors.Blue,
                 MarkerType = MarkerType.Circle,
-                TrackerFormatString = "{0}\n{1}: {2:dd.MM.yy}\n{3}: {4:0.###}"
             };
-            lineSeries.Points.AddRange(salesGrouping.Select(x => new DataPoint(DateTimeAxis.ToDouble(x.Key.Date), x.Sum(c => c.ItemsSold))));
+
+            lineSeries.ItemsSource = salesGrouping.Select(x => new ExtendedDataPoint
+            {
+                Date = x.Key.Date,
+                ItemsSold = x.ToList()
+            });
             DataPlotModel.Series.Add(lineSeries);
         }
     }

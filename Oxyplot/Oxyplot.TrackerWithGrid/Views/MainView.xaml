@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Oxyplot.TrackerWithGrid.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:convertor="clr-namespace:Oxyplot.TrackerWithGrid.Convertor"
         mc:Ignorable="d"
         Title="MainView" Height="450" Width="800">
+    <Window.Resources>
+        <convertor:JsonConvertor x:Key="JsonConvertor"/>
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="AliceBlue" />
+        </Style>
+
+        <Style TargetType="{x:Type DataGridRow}">
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -21,7 +39,19 @@
 
         <Border Grid.Row="1" BorderThickness="1">
             <oxy:PlotView Model="{Binding DataPlotModel}">
-                
+                <oxy:PlotView.DefaultTrackerTemplate>
+                    <ControlTemplate>
+                        <oxy:TrackerControl Position="{Binding Position}" Background="Transparent" BorderBrush="Transparent">
+                            <DataGrid HeadersVisibility="None" ItemsSource="{Binding Converter={StaticResource JsonConvertor}}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Date,StringFormat=d}" Header="Date" />
+                                    <DataGridTextColumn Binding="{Binding Name}" Header="Fruit"/>
+                                    <DataGridTextColumn Binding="{Binding ItemsSold}" Header="Items Sold" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </oxy:TrackerControl>
+                    </ControlTemplate>
+                </oxy:PlotView.DefaultTrackerTemplate>
             </oxy:PlotView>
         </Border>
 
