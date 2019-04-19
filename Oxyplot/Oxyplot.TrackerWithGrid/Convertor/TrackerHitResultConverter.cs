@@ -10,7 +10,7 @@ using System.Windows.Data;
 
 namespace Oxyplot.TrackerWithGrid.Convertor
 {
-    public class JsonConvertor : IValueConverter
+    public class TrackerHitResultConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

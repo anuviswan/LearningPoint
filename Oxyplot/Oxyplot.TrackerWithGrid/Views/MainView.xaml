@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="MainView" Height="450" Width="800">
     <Window.Resources>
-        <convertor:JsonConvertor x:Key="JsonConvertor"/>
+        <convertor:TrackerHitResultConverter x:Key="TrackerHitResultConverter"/>
         <Style TargetType="{x:Type DataGrid}">
             <Setter Property="Background" Value="AliceBlue" />
         </Style>
@@ -42,7 +42,7 @@
                 <oxy:PlotView.DefaultTrackerTemplate>
                     <ControlTemplate>
                         <oxy:TrackerControl Position="{Binding Position}" Background="Transparent" BorderBrush="Transparent">
-                            <DataGrid HeadersVisibility="None" ItemsSource="{Binding Converter={StaticResource JsonConvertor}}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                            <DataGrid HeadersVisibility="None" ItemsSource="{Binding Converter={StaticResource TrackerHitResultConverter}}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Binding="{Binding Date,StringFormat=d}" Header="Date" />
                                     <DataGridTextColumn Binding="{Binding Name}" Header="Fruit"/>

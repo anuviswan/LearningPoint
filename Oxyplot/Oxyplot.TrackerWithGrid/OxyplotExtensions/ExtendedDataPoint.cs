@@ -15,8 +15,6 @@ namespace Oxyplot.TrackerWithGrid.OxyplotExtensions
         public DateTime Date { get; set; }
         public IEnumerable<Fruit> ItemsSold { get; set; }
 
-        public string SalesDetails => JsonConvert.SerializeObject(ItemsSold);
-
         public DataPoint GetDataPoint()
         {
             return new DataPoint(DateTimeAxis.ToDouble(Date), ItemsSold.Sum(x=>x.ItemsSold));

@@ -79,7 +79,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Convertor\JsonConvertor.cs" />
+    <Compile Include="Convertor\TrackerHitResultConverter.cs" />
     <Compile Include="FruitFactory.cs" />
     <Compile Include="Models\Fruit.cs" />
     <Compile Include="OxyplotExtensions\ExtendedDataPoint.cs" />
