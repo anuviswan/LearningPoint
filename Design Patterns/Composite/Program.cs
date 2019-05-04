@@ -2,7 +2,7 @@
 
 namespace Composite
 {
-    class PrintSize
+    class Client
     {
         static void Main(string[] args)
         {
