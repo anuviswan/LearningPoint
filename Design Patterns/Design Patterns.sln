@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMemento", "GenericMe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composite", "Composite\Composite.csproj", "{2F14B6D0-72DE-4D8A-B230-CAA38FCD5C41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singleton", "Singleton\Singleton.csproj", "{108C8B8A-BE05-4EFF-9FC1-D2DCD48CE805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPattern.Tests", "DesignPattern.Tests\DesignPattern.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{2F14B6D0-72DE-4D8A-B230-CAA38FCD5C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F14B6D0-72DE-4D8A-B230-CAA38FCD5C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F14B6D0-72DE-4D8A-B230-CAA38FCD5C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{108C8B8A-BE05-4EFF-9FC1-D2DCD48CE805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{108C8B8A-BE05-4EFF-9FC1-D2DCD48CE805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{108C8B8A-BE05-4EFF-9FC1-D2DCD48CE805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{108C8B8A-BE05-4EFF-9FC1-D2DCD48CE805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
