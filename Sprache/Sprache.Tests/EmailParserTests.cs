@@ -11,20 +11,15 @@ namespace Sprache.Tests
     public class EmailParserTests
     {
         [Test]
-        public IEnumerable<string> Parse(string inputString)
+        [TestCase("This is a text without email",ExpectedResult =0)]
+        [TestCase("This text has one email id ( anu.viswan@gmail.com )",ExpectedResult =1)]
+        public int Parse(string inputString)
         {
             var parser = new EmailParser();
             var result = parser.Parser(inputString);
-            return result;
+            return result.Count();
         }
 
-        public static IEnumerable TestCases
-        {
-            get
-            {
-                yield return new TestCaseData("this is a  test without email").Returns(Enumerable.Empty<string>());
-            }
-        }
 
     }
 }
