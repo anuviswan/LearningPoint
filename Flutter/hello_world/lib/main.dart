@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-  new Center(
-    child: new Text("This is a Hello World from Flutter",textDirection: TextDirection.rtl),
-  )
-    );
+// Example 1: Simple Hello World
+//void main() => runApp(
+//    new Center(
+//          child: new Text("This is a Hello World from Flutter",textDirection: TextDirection.rtl),
+//              )
+//    );
 
+
+// Example 2: Stateless Hello World
+void main()=>runApp(new myStatelessApplication());
 
 class myStatelessApplication extends StatelessWidget {
   @override
