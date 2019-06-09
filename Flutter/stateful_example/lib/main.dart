@@ -8,18 +8,22 @@ class myStatefulApplication extends StatefulWidget {
 }
 
 class _myStatefulApplicationState extends State<myStatefulApplication> {
+  int count = 0;
   String titleText = '';
 
   @override
   void initState() {
     // TODO: implement initState
     titleText = 'Press this button';
+
     super.initState();
   }
 
   void OnPressMethod(){
     setState(() {
-      titleText = 'Button has been pressed';
+      count= count + 1;
+      titleText = 'Button has been pressed  $count times';
+
     });
   }
 
