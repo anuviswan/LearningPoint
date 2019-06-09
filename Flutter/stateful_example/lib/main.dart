@@ -28,6 +28,7 @@ class _myStatefulApplicationState extends State<myStatefulApplication> {
     return MaterialApp(
       title: 'My Stateful Application',
       home: new Scaffold(
+        appBar: new AppBar(title: new Text('My Stateful Application'),),
         body: new Center(
           child: new RaisedButton(onPressed: OnPressMethod,child: new Text(titleText),),
         )
