@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 void main() => runApp(datelistapplication());
 
 class datelistapplication extends StatefulWidget {
@@ -16,7 +17,7 @@ class _datelistapplicationState extends State<datelistapplication> {
   void initState(){
     for(int i=0;i<10;i++){
       listOfDates.add(currentDateTime);
-      currentDateTime.add(Duration(days:1));
+      currentDateTime= currentDateTime.add(Duration(days:-1));
     }
 
     super.initState();
@@ -27,8 +28,17 @@ class _datelistapplicationState extends State<datelistapplication> {
     return new MaterialApp(
       title: 'Date List Example',
       home: new Scaffold(
-        appBar: new AppBar(title: new Text('Date List Application'),),
+        appBar: new AppBar(title: new Text('Last 10 Days'),),
         body: new Center(
+          child: new ListView.builder(
+            itemCount: listOfDates.length,
+              itemBuilder: (BuildContext context,int index){
+                var date = listOfDates[index];
+              return new ListTile(
+                title: new Text("${date.year.toString()}-${date.month.toString().padLeft(2,'0')}-${date.day.toString().padLeft(2,'0')}"),
+                trailing: new Icon(Icons.date_range),
+              );
+              }),
 
             ),
       ),
