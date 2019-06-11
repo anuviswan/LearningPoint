@@ -13,9 +13,7 @@ class _myStatefulApplicationState extends State<myStatefulApplication> {
 
   @override
   void initState() {
-    // TODO: implement initState
     titleText = 'Press this button';
-
     super.initState();
   }
 
