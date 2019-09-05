@@ -14,6 +14,7 @@ namespace DemoForILSpy
 
             Console.WriteLine($"Starting {nameof(Main)}");
 
+            // var worker = new Worker();
             var worker = new Worker();
             worker.DoWork();
 
@@ -28,30 +29,30 @@ namespace DemoForILSpy
         }
     }
 
-    //public class Worker
-    //{
-    //    public bool IsCompleted { get; set; }
-    //    public void DoWork()
-    //    {
-    //        IsCompleted = false;
-    //        Console.WriteLine($"Starting {nameof(DoWork)}");
-
-    //        ExecuteLongRunningTask();
-
-    //        Console.WriteLine($"Exiting {nameof(DoWork)}");
-    //        IsCompleted = true;
-    //    }
-
-    //    public void ExecuteLongRunningTask()
-    //    {
-    //        Console.WriteLine("Doing Some Work");
-    //        Thread.Sleep(1000);
-    //    }
-
-    //}
-
-
     public class Worker
+    {
+        public bool IsCompleted { get; set; }
+        public void DoWork()
+        {
+            IsCompleted = false;
+            Console.WriteLine($"Starting {nameof(DoWork)}");
+
+            ExecuteLongRunningTask();
+
+            Console.WriteLine($"Exiting {nameof(DoWork)}");
+            IsCompleted = true;
+        }
+
+        public void ExecuteLongRunningTask()
+        {
+            Console.WriteLine("Doing Some Work");
+            Thread.Sleep(1000);
+        }
+
+    }
+
+
+    public class WorkerAsync
     {
         public bool IsCompleted { get; set; }
         public async Task DoWork()
