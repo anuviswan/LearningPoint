@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LiskovSubstitution
+namespace LiskovSubstitution.PreConditions
 {
     public class School
     {
