@@ -10,8 +10,18 @@ namespace LiskovSubstitution.PostConditions
     {
         public virtual decimal CalculateLabFees(long studentId)
         {
-            return 1000;
+            var labFee = MockMethodForCalculatingLabFees(studentId);
+
+            if (labFee <= 0)
+                return 1000;
+            return labFee;
         }
+
+        private decimal MockMethodForCalculatingLabFees(long studentID)
+        {
+            return default;
+        }
+
     }
 
 

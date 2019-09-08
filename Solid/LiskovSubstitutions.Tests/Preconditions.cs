@@ -2,7 +2,7 @@
 // See documentation : https://github.com/nunit/docs/wiki/NUnit-Documentation
 using System;
 using System.Collections;
-using LiskovSubstitution;
+using LiskovSubstitution.PreConditions;
 using NUnit.Framework;
 
 namespace LiskovSubstitutions.Tests
@@ -14,7 +14,7 @@ namespace LiskovSubstitutions.Tests
         [TestCaseSource(typeof(Preconditions), nameof(TestCases))]
         public void GetStudentCount(School school,int age)
         {
-            Assert.Catch<ArgumentOutOfRangeException>(()=>school.GetStudentCount(age));
+            Assert.GreaterOrEqual(school.GetStudentCount(age), 0);
         }
 
         public static IEnumerable TestCases
