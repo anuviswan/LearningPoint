@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Invariants.cs" />
     <Compile Include="Preconditions.cs" />
     <Compile Include="Postconditions.cs" />
   </ItemGroup>

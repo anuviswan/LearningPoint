@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Invariants.cs" />
     <Compile Include="PostConditions.cs" />
     <Compile Include="Preconditions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
