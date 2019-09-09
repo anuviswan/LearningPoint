@@ -21,7 +21,6 @@ namespace LiskovSubstitution.PostConditions
         {
             return default;
         }
-
     }
 
 
