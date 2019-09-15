@@ -10,18 +10,18 @@ namespace LiskovSubstitutions.Tests
     {
         [Test]
         [TestCaseSource(typeof(Invariants), nameof(TestCases))]
-        public void TestInvariants(Type studentType,string name, int age)
+        public void TestInvariants(Student student,string name)
         {
-            var student = (Student)Activator.CreateInstance(studentType,name,age);
-            Assert.AreEqual(age, student.Age);
+            student.AssignName(name);
+            Assert.Greater(student.Name.Length, 0);
         }
 
         public static IEnumerable TestCases
         {
             get
             {
-                yield return new TestCaseData(typeof(Student),"Jia", 3);
-                yield return new TestCaseData(typeof(NurseryStudent), "Jia", 3);
+                yield return new TestCaseData(new Student(), string.Empty);
+                yield return new TestCaseData(new NurseryStudent(), string.Empty);
             }
         }
     }

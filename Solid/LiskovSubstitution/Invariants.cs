@@ -4,30 +4,27 @@ namespace LiskovSubstitution.Invariants
 {
     public class Student
     {
-        public string Name { get; set; }
-        public int Age { get; set; }
+        public string Name{ get; set; }
 
-        public Student()
+        public void CheckInvariants()
         {
-
+            if (string.IsNullOrEmpty(Name))
+                Name = "Name Not Assigned";
         }
-        public Student(string name,int age)
+        public virtual void AssignName(string name)
         {
-            if (Age < 5)
-                throw new Exception("Age should be higher than 5");
-
+            CheckInvariants();
             Name = name;
-            Age = age;
+            CheckInvariants();
         }
     }
 
     public class NurseryStudent : Student
     {
-        public NurseryStudent(string name, int age)//:base(name,age)
+        public override void AssignName(string name)
         {
-            Age = age;
             Name = name;
         }
-        
+
     }
 }
