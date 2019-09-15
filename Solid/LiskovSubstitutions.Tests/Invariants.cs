@@ -20,8 +20,8 @@ namespace LiskovSubstitutions.Tests
         {
             get
             {
-                yield return new TestCaseData(new Student(), string.Empty);
-                yield return new TestCaseData(new NurseryStudent(), string.Empty);
+                yield return new TestCaseData(new Student(), null);
+                yield return new TestCaseData(new NurseryStudent(),null);
             }
         }
     }
