@@ -19,8 +19,20 @@ namespace OxyPlot.SelectablePoint.Series
         {
             if (IsDataPointSelectable)
             {
+                var activeSeries = (sender as OxyPlot.Series.Series);
+                var nearestPoint = activeSeries.GetNearestPoint(e.Position, false);
+                var selectedSeries = new LineSeries
+                {
+                    MarkerSize = 5,
+                    MarkerFill = OxyColors.Red,
+                    MarkerType = MarkerType.Circle
+                };
 
+                selectedSeries.Points.Add(nearestPoint.DataPoint);
+                activeSeries.PlotModel.Series.Add(selectedSeries);
+                activeSeries.PlotModel.InvalidatePlot(true);
             }
         }
+
     }
 }
