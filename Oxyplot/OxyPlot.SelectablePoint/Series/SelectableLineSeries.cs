@@ -14,8 +14,12 @@ namespace OxyPlot.SelectablePoint.Series
         public DataPoint CurrentSelection { get; set; }
 
         public OxyColor SelectedDataPointColor { get; set; } = OxyColors.Red;
+
+        public double SelectedMarkerSize { get; set; }
+
         public SelectableLineSeries()
         {
+            SelectedMarkerSize = MarkerSize;
             MouseDown += SelectableLineSeries_MouseDown;
         }
 
