@@ -1,11 +1,7 @@
 ﻿using Caliburn.Micro;
 using OxyPlot.SelectablePoint.Series;
-using OxyPlot.Series;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OxyPlot.SelectablePoint.ViewModels
 {
@@ -19,7 +15,7 @@ namespace OxyPlot.SelectablePoint.ViewModels
             {
                 IsDataPointSelectable = true,
                 MarkerFill = OxyColors.Blue,
-                MarkerType = MarkerType.Circle,
+                MarkerType = MarkerType.Square,
                 LineStyle = LineStyle.Solid,
                 Color = OxyColors.Blue,
                 ItemsSource = collection,
