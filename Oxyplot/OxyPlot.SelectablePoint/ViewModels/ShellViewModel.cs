@@ -18,7 +18,7 @@ namespace OxyPlot.SelectablePoint.ViewModels
             var series = new SelectableLineSeries
             {
                 IsDataPointSelectable = true,
-                MarkerFill = OxyColors.LightBlue,
+                MarkerFill = OxyColors.Blue,
                 MarkerType = MarkerType.Circle,
                 LineStyle = LineStyle.Solid,
                 Color = OxyColors.Blue,
