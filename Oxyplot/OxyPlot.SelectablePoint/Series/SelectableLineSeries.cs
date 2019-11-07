@@ -10,6 +10,8 @@ namespace OxyPlot.SelectablePoint.Series
     public class SelectableLineSeries:LineSeries
     {
         public bool IsDataPointSelectable { get; set; }
+
+        public DataPoint CurrentSelection { get; set; }
         public SelectableLineSeries()
         {
             MouseDown += SelectableLineSeries_MouseDown;
@@ -20,18 +22,32 @@ namespace OxyPlot.SelectablePoint.Series
             if (IsDataPointSelectable)
             {
                 var activeSeries = (sender as OxyPlot.Series.Series);
+                var currentPlotModel = activeSeries.PlotModel;
                 var nearestPoint = activeSeries.GetNearestPoint(e.Position, false);
-                var selectedSeries = new LineSeries
+                CurrentSelection = nearestPoint.DataPoint;
+
+                currentPlotModel = ClearCurrentSelection(currentPlotModel);
+
+                var selectedSeries = new SelectedLineSeries
                 {
                     MarkerSize = 5,
                     MarkerFill = OxyColors.Red,
                     MarkerType = MarkerType.Circle
                 };
 
-                selectedSeries.Points.Add(nearestPoint.DataPoint);
-                activeSeries.PlotModel.Series.Add(selectedSeries);
-                activeSeries.PlotModel.InvalidatePlot(true);
+                selectedSeries.Points.Add(CurrentSelection);
+                currentPlotModel.Series.Add(selectedSeries);
+                currentPlotModel.InvalidatePlot(true);
             }
+        }
+
+        private PlotModel ClearCurrentSelection(PlotModel plotModel)
+        {
+            while(plotModel.Series.Any(x=> x is SelectedLineSeries))
+            {
+                plotModel.Series.Remove(plotModel.Series.First(x=> x is SelectedLineSeries));
+            }
+            return plotModel;
         }
 
     }
