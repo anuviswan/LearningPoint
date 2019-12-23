@@ -22,7 +22,6 @@ namespace Awaitable.ExtensionMethods
             process.Exited += (s, e) => tcs.TrySetResult(process.StandardOutput.ReadToEnd());
             
             process.Start();
-            if (process.HasExited) tcs.TrySetResult(process.StandardOutput.ReadToEnd());
             return tcs.Task.GetAwaiter();
         }
     }

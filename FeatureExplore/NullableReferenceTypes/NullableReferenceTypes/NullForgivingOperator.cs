@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NullableReferenceTypes
 {
@@ -30,5 +31,9 @@ namespace NullableReferenceTypes
     {
         public bool Cc { get; set; }
         public bool H { get; set; }
+    }
+    public interface IItemRetriever
+    {
+        public IAsyncEnumerable<string> GetItemsAsync();
     }
 }

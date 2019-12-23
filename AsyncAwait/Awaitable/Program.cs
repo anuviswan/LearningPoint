@@ -18,7 +18,7 @@ namespace Awaitable
             Console.ReadLine();
         }
 
-        static async void InvokeAsyncCall()
+        static async Task InvokeAsyncCall()
         {
             Console.WriteLine($"Starting Method {nameof(InvokeAsyncCall)}");
             var result = await "dir";
