@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OxyPlot.SelectablePoint.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
-        mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800">
-    <Grid>
+        mc:Ignorable="d" 
+        Title="ShellView" Height="600" Width="600">
+    <Grid Margin="10">
         <oxy:PlotView Height="500" Width="500" Model="{Binding GraphModel}">
             
         </oxy:PlotView>

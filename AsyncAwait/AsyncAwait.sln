@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awaitable", "Awaitable\Awaitable.csproj", "{2F51845B-6A51-4424-98A7-8B8C3B08D150}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoForILSpy", "DemoForILSpy\DemoForILSpy.csproj", "{908C2AA5-0924-4430-A27E-2907EE1FE2C7}"
 EndProject
 Global
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F51845B-6A51-4424-98A7-8B8C3B08D150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F51845B-6A51-4424-98A7-8B8C3B08D150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F51845B-6A51-4424-98A7-8B8C3B08D150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F51845B-6A51-4424-98A7-8B8C3B08D150}.Release|Any CPU.Build.0 = Release|Any CPU
 		{908C2AA5-0924-4430-A27E-2907EE1FE2C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{908C2AA5-0924-4430-A27E-2907EE1FE2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{908C2AA5-0924-4430-A27E-2907EE1FE2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
