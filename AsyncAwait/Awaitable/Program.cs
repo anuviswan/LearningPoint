@@ -5,35 +5,26 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Awaitable
 {
     class Program
     {
-        [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Console.WriteLine($"Started Method {nameof(Main)}");
+            InvokeAsyncCall();
+            Console.WriteLine($"Continuing Method {nameof(Main)}");
+            Console.ReadLine();
         }
 
-        //static void Main(string[] args)
-        //{
-        //    Console.WriteLine($"Started Method {nameof(Main)}");
-        //    InvokeAsyncCall();
-        //    Console.WriteLine($"Continuing Method {nameof(Main)}");
-        //    Console.ReadLine();
-        //}
-
-        //static async Task InvokeAsyncCall()
-        //{
-        //    Console.WriteLine($"Starting Method {nameof(InvokeAsyncCall)}");
-        //    var result = await "dir";
-        //    Console.WriteLine($"Continuing Method {nameof(InvokeAsyncCall)}");
-        //    Console.WriteLine(result);
-        //    Console.WriteLine($"Ending Method {nameof(InvokeAsyncCall)}");
-        //}
+        static async Task InvokeAsyncCall()
+        {
+            Console.WriteLine($"Starting Method {nameof(InvokeAsyncCall)}");
+            var result = await "dir";
+            Console.WriteLine($"Continuing Method {nameof(InvokeAsyncCall)}");
+            Console.WriteLine(result);
+            Console.WriteLine($"Ending Method {nameof(InvokeAsyncCall)}");
+        }
     }
 }

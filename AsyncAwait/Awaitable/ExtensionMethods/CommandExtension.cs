@@ -1,8 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Awaitable.ExtensionMethods.TaskAwaiter
+namespace Awaitable.ExtensionMethods
 {
     public static class CommandExtension
     {

@@ -39,7 +39,7 @@
 
         <Border Grid.Row="1" BorderThickness="1">
             <oxy:PlotView Model="{Binding DataPlotModel}">
-                <!--<oxy:PlotView.DefaultTrackerTemplate>
+                <oxy:PlotView.DefaultTrackerTemplate>
                     <ControlTemplate>
                         <oxy:TrackerControl Position="{Binding Position}" Background="Transparent" BorderBrush="Transparent">
                             <DataGrid HeadersVisibility="None" ItemsSource="{Binding Converter={StaticResource TrackerHitResultConverter}}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
@@ -51,7 +51,7 @@
                             </DataGrid>
                         </oxy:TrackerControl>
                     </ControlTemplate>
-                </oxy:PlotView.DefaultTrackerTemplate>-->
+                </oxy:PlotView.DefaultTrackerTemplate>
             </oxy:PlotView>
         </Border>
 
