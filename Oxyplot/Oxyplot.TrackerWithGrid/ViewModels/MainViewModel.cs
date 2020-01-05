@@ -37,36 +37,36 @@ namespace Oxyplot.TrackerWithGrid.ViewModels
 
         private void CreatePlotModel(IEnumerable<Fruit> totalSalesDetails)
         {
-            var salesGrouping = totalSalesDetails.GroupBy(x => x.Date);
-            var yAxis = new LinearAxis
-            {
-                Position = AxisPosition.Left,
-                Title = "Items Sold"
-            };
-            var xAxis = new DateTimeAxis
+            var tmp = new PlotModel { Title = "Simple example", Subtitle = "using OxyPlot" };
+
+            tmp.Axes.Add(new LinearAxis()
             {
                 Position = AxisPosition.Bottom,
-                Minimum = DateTimeAxis.ToDouble(salesGrouping.Min(x => x.Key)),
-                Maximum = DateTimeAxis.ToDouble(salesGrouping.Max(x => x.Key)),
-                Title = "Date"
-            };
-
-
-            DataPlotModel.Axes.Add(yAxis);
-            DataPlotModel.Axes.Add(xAxis);
-
-            var lineSeries = new LineSeries
-            {
-                MarkerFill = OxyColors.Blue,
-                MarkerType = MarkerType.Circle,
-            };
-
-            lineSeries.ItemsSource = salesGrouping.Select(x => new ExtendedDataPoint
-            {
-                Date = x.Key.Date,
-                ItemsSold = x.ToList()
+                IsAxisVisible = false,
+                IsPanEnabled = true,
+                IsZoomEnabled = true
             });
-            DataPlotModel.Series.Add(lineSeries);
+
+            tmp.Axes.Add(new LinearAxis()
+            {
+                Position = AxisPosition.Left,
+                IsAxisVisible = false,
+                IsPanEnabled = true,
+                IsZoomEnabled = true
+            });
+
+            var series1 = new LineSeries { Title = "Series 1", MarkerType = MarkerType.Circle };
+            series1.Points.Add(new DataPoint(0, 0));
+            series1.Points.Add(new DataPoint(10, 18));
+            series1.Points.Add(new DataPoint(20, 12));
+            series1.Points.Add(new DataPoint(30, 8));
+            series1.Points.Add(new DataPoint(40, 15));
+
+            tmp.Series.Add(series1);
+
+            DataPlotModel = tmp;
+            DataPlotModel.InvalidatePlot(true);
+            //DataPlotModel.Series.Add(lineSeries);
         }
     }
 }
