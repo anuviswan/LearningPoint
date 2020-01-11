@@ -35,11 +35,11 @@
             // 
             // btnExecuteOnDifferentThread
             // 
-            this.btnExecuteOnDifferentThread.Location = new System.Drawing.Point(665, 393);
+            this.btnExecuteOnDifferentThread.Location = new System.Drawing.Point(346, 391);
             this.btnExecuteOnDifferentThread.Name = "btnExecuteOnDifferentThread";
-            this.btnExecuteOnDifferentThread.Size = new System.Drawing.Size(123, 45);
+            this.btnExecuteOnDifferentThread.Size = new System.Drawing.Size(218, 45);
             this.btnExecuteOnDifferentThread.TabIndex = 0;
-            this.btnExecuteOnDifferentThread.Text = "Execute";
+            this.btnExecuteOnDifferentThread.Text = "Execute On Different Thread";
             this.btnExecuteOnDifferentThread.UseVisualStyleBackColor = true;
             this.btnExecuteOnDifferentThread.Click += new System.EventHandler(this.btnExecuteOnDifferentThread_Click);
             // 
@@ -53,11 +53,11 @@
             // 
             // btnExecuteOnSameThread
             // 
-            this.btnExecuteOnSameThread.Location = new System.Drawing.Point(536, 393);
+            this.btnExecuteOnSameThread.Location = new System.Drawing.Point(570, 391);
             this.btnExecuteOnSameThread.Name = "btnExecuteOnSameThread";
-            this.btnExecuteOnSameThread.Size = new System.Drawing.Size(123, 45);
+            this.btnExecuteOnSameThread.Size = new System.Drawing.Size(218, 45);
             this.btnExecuteOnSameThread.TabIndex = 2;
-            this.btnExecuteOnSameThread.Text = "Execute";
+            this.btnExecuteOnSameThread.Text = "Execute On Same Thread";
             this.btnExecuteOnSameThread.UseVisualStyleBackColor = true;
             this.btnExecuteOnSameThread.Click += new System.EventHandler(this.btnExecuteOnSameThread_Click);
             // 

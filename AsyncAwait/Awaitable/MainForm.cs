@@ -1,11 +1,6 @@
-﻿using Awaitable.ExtensionMethods;
+﻿//using Awaitable.ExtensionMethods.TaskAWaiter;
+using Awaitable.ExtensionMethods.CustomAwaiter;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,13 +16,13 @@ namespace Awaitable
         private void btnExecuteOnDifferentThread_Click(object sender, EventArgs e)
         {
             AppendToLog($"Started Method {nameof(btnExecuteOnDifferentThread_Click)}");
-            Task.Run(() => InvokeAsyncCall());
+            Task.Run(() => InvokeAsyncCall()).ConfigureAwait(false);
             AppendToLog($"Continuing Method {nameof(btnExecuteOnDifferentThread_Click)}");
         }
 
         private async Task InvokeAsyncCall()
         {
-            AppendToLog($"Starting Method {nameof(InvokeAsyncCall)}");
+            //AppendToLog($"Starting Method {nameof(InvokeAsyncCall)}");
             var result = await "dir";
             AppendToLog($"Recieved Result, Continuing Method {nameof(InvokeAsyncCall)}");
             AppendToLog(result);
@@ -41,10 +36,9 @@ namespace Awaitable
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                var errorMessage = $"Exception:{ex.Message}{Environment.NewLine}{Environment.NewLine}Message:{message}";
+                MessageBox.Show(errorMessage, "Error");
             }
-
-
         }
 
         private async void btnExecuteOnSameThread_Click(object sender, EventArgs e)
