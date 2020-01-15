@@ -35,20 +35,20 @@ namespace Awaitable.ExtensionMethods.CustomAwaiter
     {
         public static UIThreadAwaiter GetAwaiter(this string command)
         {
-            var result = string.Empty;
+            var tcs = new TaskCompletionSource<string>();
             var process = new Process();
             process.StartInfo.FileName = "cmd.exe";
             process.StartInfo.Arguments = $"/C {command}";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.EnableRaisingEvents = true;
-            process.Exited += (s, e) => result = process.StandardOutput.ReadToEnd();
-            process.ErrorDataReceived += (s, e) => result = process.StandardError.ReadToEnd();
+            process.Exited += (s, e) => tcs.TrySetResult(process.StandardOutput.ReadToEnd());
 
             process.Start();
-            return new UIThreadAwaiter(result);
+            return new UIThreadAwaiter(tcs.Task.GetAwaiter().GetResult());
         }
-        
+
+
     }
     public class UIThreadAwaiter : INotifyCompletion
     {
@@ -71,5 +71,7 @@ namespace Awaitable.ExtensionMethods.CustomAwaiter
         {
             return resultFromProcess;
         }
+
+       
     }
 }
