@@ -43,6 +43,7 @@ namespace Awaitable.ExtensionMethods.CustomAwaiter
             process.StartInfo.RedirectStandardOutput = true;
             process.EnableRaisingEvents = true;
             process.Exited += (s, e) => result = process.StandardOutput.ReadToEnd();
+            process.ErrorDataReceived += (s, e) => result = process.StandardError.ReadToEnd();
 
             process.Start();
             return new UIThreadAwaiter(result);
@@ -61,11 +62,9 @@ namespace Awaitable.ExtensionMethods.CustomAwaiter
         public bool IsCompleted => isCompleted;
         public void OnCompleted(Action continuation)
         {
-            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(() => {
-                continuation();
-                isCompleted = true;
-            }));
-            
+            if (Application.OpenForms[0].InvokeRequired)
+                Application.OpenForms[0].BeginInvoke((Delegate)continuation);
+       
         }
 
         public string GetResult()
