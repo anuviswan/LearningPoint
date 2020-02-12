@@ -15,15 +15,18 @@ namespace Awaitable.ExtensionMethods.TaskAWaiter
         public static TaskAwaiter<string> GetAwaiter(this string command)
         {
             var tcs = new TaskCompletionSource<string>();
-            var process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = $"/C {command}";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.EnableRaisingEvents = true;
-            process.Exited += (s, e) => tcs.TrySetResult(process.StandardOutput.ReadToEnd());
+            Task.Run(() =>
+            {
+                var process = new Process();
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.Arguments = $"/C {command}";
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.EnableRaisingEvents = true;
+                process.Exited += (s, e) => tcs.TrySetResult(process.StandardOutput.ReadToEnd());
 
-            process.Start();
+                process.Start();
+            });
             return tcs.Task.GetAwaiter();
         }
     }
@@ -36,15 +39,19 @@ namespace Awaitable.ExtensionMethods.CustomAwaiter
         public static UIThreadAwaiter GetAwaiter(this string command)
         {
             var tcs = new TaskCompletionSource<string>();
-            var process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = $"/C {command}";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.EnableRaisingEvents = true;
-            process.Exited += (s, e) => tcs.TrySetResult(process.StandardOutput.ReadToEnd());
+            Task.Run(() =>
+            {
+                var process = new Process();
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.Arguments = $"/C {command}";
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.EnableRaisingEvents = true;
+                process.Exited += (s, e) => tcs.TrySetResult(process.StandardOutput.ReadToEnd());
 
-            process.Start();
+                process.Start();
+            });
+
             return new UIThreadAwaiter(tcs.Task.GetAwaiter().GetResult());
         }
 

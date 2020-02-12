@@ -1,5 +1,5 @@
-﻿//using Awaitable.ExtensionMethods.TaskAWaiter;
-using Awaitable.ExtensionMethods.CustomAwaiter;
+﻿using Awaitable.ExtensionMethods.TaskAWaiter;
+//using Awaitable.ExtensionMethods.CustomAwaiter;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,10 +13,11 @@ namespace Awaitable
             InitializeComponent();
         }
 
-        private void btnExecuteOnDifferentThread_Click(object sender, EventArgs e)
+        private async void btnExecuteOnDifferentThread_Click(object sender, EventArgs e)
         {
             AppendToLog($"Started Method {nameof(btnExecuteOnDifferentThread_Click)}");
-            Task.Run(() => InvokeAsyncCall()).ConfigureAwait(false);
+            //Task.Run(() => InvokeAsyncCall()).ConfigureAwait(false);
+            await InvokeAsyncCall();
             AppendToLog($"Continuing Method {nameof(btnExecuteOnDifferentThread_Click)}");
         }
 
