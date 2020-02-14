@@ -1,5 +1,11 @@
-﻿using Awaitable.ExtensionMethods.TaskAWaiter;
-//using Awaitable.ExtensionMethods.CustomAwaiter;
+﻿#define SameThread
+
+
+#if SameThread
+using Awaitable.ExtensionMethods.TaskAWaiter;
+#else
+using Awaitable.ExtensionMethods.CustomAwaiter;
+#endif
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,18 +18,19 @@ namespace Awaitable
         {
             InitializeComponent();
         }
-
-        private async void btnExecuteOnDifferentThread_Click(object sender, EventArgs e)
+        private void btnExecuteOnDifferentThread_Click(object sender, EventArgs e)
         {
             AppendToLog($"Started Method {nameof(btnExecuteOnDifferentThread_Click)}");
-            //Task.Run(() => InvokeAsyncCall()).ConfigureAwait(false);
-            await InvokeAsyncCall();
+#if SameThread
+            InvokeAsyncCall();
+#else
+            Task.Run(() => InvokeAsyncCall()).ConfigureAwait(false);
+#endif
             AppendToLog($"Continuing Method {nameof(btnExecuteOnDifferentThread_Click)}");
         }
 
         private async Task InvokeAsyncCall()
         {
-            //AppendToLog($"Starting Method {nameof(InvokeAsyncCall)}");
             var result = await "dir";
             AppendToLog($"Recieved Result, Continuing Method {nameof(InvokeAsyncCall)}");
             AppendToLog(result);
