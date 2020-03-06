@@ -2,7 +2,7 @@ module Main exposing (main)
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing(..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick,onInput)
 
 -- Main
 
@@ -10,11 +10,18 @@ main =
     Browser.sandbox {init=init,update=update,view=view}
 
 
-type alias Model = Int
+type alias Model = 
+    {
+        counter : Int
+        ,content : String
+    }
 
 init:Model
 init = 
-    0
+    {
+        counter = 0
+        ,content = "Jia"
+    }
 
 -- Update
 type Msg = Increment
@@ -22,32 +29,36 @@ type Msg = Increment
            | Reset
            | IncrementBy10
            | DecrementBy10
+           | TextChange String
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
         Increment  ->
-            model +1
+            {model|counter = model.counter + 1}
         Decrement ->
-            model - 1
+            {model|counter = model.counter - 1}
         Reset ->
-            0
+            {model|counter = 0} 
         IncrementBy10 ->
-            model + 10
+            {model|counter = model.counter + 10} 
         DecrementBy10 ->
-            model - 10
+            {model|counter = model.counter - 10} 
+        TextChange newValue ->
+            {model|content = newValue}
 
 -- View
 view : Model -> Html Msg
 view model =
     div[class "jumbotron"]
     [
-        div[][h1[][text "Hello World"],h4[][text "From Elm"]],
-        button[onClick DecrementBy10][text "-10"],
-        button[onClick Decrement][text "-"],
-        div[][ text (String.fromInt model)],
-        button[onClick Increment][text "+"],
-        button[onClick IncrementBy10][text "+10"],
-        button[onClick Reset][text "Reset"]
+        div[][h1[][text ("Hi " ++ model.content)],h4[][text ("- From Elm (" ++ String.fromInt(String.length model.content) ++ ")")]]
+        ,button[onClick DecrementBy10][text "-10"]
+        ,button[onClick Decrement][text "-"]
+        ,div[][ text (String.fromInt model.counter)]
+        ,button[onClick Increment][text "+"]
+        ,button[onClick IncrementBy10][text "+10"]
+        ,button[onClick Reset][text "Reset"]
+        ,input[placeholder "Please enter your name",value model.content,onInput TextChange][]
     ]
 
