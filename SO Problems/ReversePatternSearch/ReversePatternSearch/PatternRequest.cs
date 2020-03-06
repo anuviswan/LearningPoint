@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ReversePatternSearch
 {
-    class Program
+    public class PatternRequest
     {
-        static void Main(string[] args)
-        {
-        }
+        public string Pattern { get; set; }
+        public Action OnMatchAction { get; set; }
     }
 }
