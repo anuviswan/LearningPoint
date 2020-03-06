@@ -70,9 +70,11 @@ viewTitle message =
 
 viewValidation : Model -> Html msg
 viewValidation model =
-    if(model.password == model.confirmpassword) then
+    if(String.length model.password < 8) then
+        div[style "color" "red"][text "Password should be more 8 characters"]
+    else if(model.password == model.confirmpassword) then
         div[style "color" "green"][text "ok"]
-    else
+    else 
         div[style "color" "red"][text "password do not match"]
 
 
