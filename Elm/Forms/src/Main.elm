@@ -54,10 +54,9 @@ view model =
         ]
         ,div[][
             viewTitle "Confirm Password"
-            ,viewInput "password" "Confirm Password" model.password ConfirmPasswordChanged
+            ,viewInput "password" "Confirm Password" model.confirmpassword ConfirmPasswordChanged
         ]
-        
-        
+        ,viewValidation model       
         
     ]
         
@@ -68,6 +67,13 @@ viewInput typ pholder val action =
 viewTitle : String -> Html msg
 viewTitle message =
     text message
+
+viewValidation : Model -> Html msg
+viewValidation model =
+    if(model.password == model.confirmpassword) then
+        div[style "color" "green"][text "ok"]
+    else
+        div[style "color" "red"][text "password do not match"]
 
 
 
