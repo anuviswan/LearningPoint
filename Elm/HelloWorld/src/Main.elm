@@ -14,6 +14,7 @@ type alias Model =
     {
         counter : Int
         ,content : String
+
     }
 
 init:Model
