@@ -58,7 +58,7 @@ namespace Automapper._9.IoC.Dynamic
                 {
                    // var sourceCollection = property.GetValue(sourceInstance, null);
                     var elementType = property.PropertyType.GetGenericArguments()[0];
-                   // CreateMap(property.PropertyType, property.PropertyType);
+                    CreateMap(elementType, elementType);
                     continue;
                 }
 

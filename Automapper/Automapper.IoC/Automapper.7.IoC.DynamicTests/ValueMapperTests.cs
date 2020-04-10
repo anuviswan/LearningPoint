@@ -48,7 +48,15 @@ namespace Automapper._9.IoC.Dynamic.Tests
             Assert.AreNotSame(source.Property3, destination.Property3);
             Assert.AreEqual(source.Property3.Property1, destination.Property3.Property1);
             Assert.AreNotEqual(source.Property3.Property2, destination.Property3.Property2);
-            Assert.AreNotSame(source.Property4, source.Property4);
+
+            CollectionAssert.AreNotEqual(source.Property4, destination.Property4);
+            Assert.AreNotSame(source.Property4, destination.Property4);
+            for (int i = 0; i < source.Property4.Count; i++)
+            {
+                Assert.AreNotSame(source.Property4[i], destination.Property4[i]);
+                Assert.AreEqual(source.Property4[i].Property1, destination.Property4[i].Property1);
+                Assert.AreNotEqual(source.Property4[i].Property2, destination.Property4[i].Property2);
+            }
         }
     }
 }
