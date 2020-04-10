@@ -21,5 +21,14 @@ namespace Models.TestModels.DataTypeWithCollections
                 Property2 = $"{nameof(UserDefinedType)}:{nameof(UserDefinedType.Property2)}"
             };
         }
+
+        public static UserDefinedType GetInstanceForIoC()
+        {
+            return new UserDefinedType
+            {
+                Property1 = $"IoC => {nameof(UserDefinedType)}:{nameof(UserDefinedType.Property1)}",
+                Property2 = $"IoC => {nameof(UserDefinedType)}:{nameof(UserDefinedType.Property2)}"
+            };
+        }
     }
 }

@@ -32,5 +32,25 @@ namespace Models.TestModels.DataTypeWithCollections
                 }).ToList()
             };
         }
+
+        public static Destination GetInstanceForIoC()
+        {
+            return new Destination
+            {
+                Property1 = $"IoC => {nameof(Destination)}.{nameof(Destination.Property1)}",
+                Property2 = $"IoC => {nameof(Destination)}.{nameof(Destination.Property2)}",
+                Property3 = new UserDefinedType
+                {
+                    Property1 = $"IoC => {nameof(Destination)}.{nameof(UserDefinedType)}.{nameof(UserDefinedType.Property1)}",
+                    Property2 = $"IoC => {nameof(Destination)}.{nameof(UserDefinedType)}.{nameof(UserDefinedType.Property2)}"
+                },
+                Property4 = Enumerable.Range(1, 5).Select(x =>
+                new UserDefinedType
+                {
+                    Property1 = $"IoC => {nameof(Destination)}.{nameof(UserDefinedType)}.{nameof(UserDefinedType.Property1)}[{x}]",
+                    Property2 = $"IoC => {nameof(Destination)}.{nameof(UserDefinedType)}.{nameof(UserDefinedType.Property2)}[{x}]"
+                }).ToList()
+            };
+        }
     }
 }

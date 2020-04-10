@@ -20,12 +20,12 @@ namespace Automapper._9.IoC.Dynamic.Tests
             {
                 if (type == typeof(Models.TestModels.DataTypeWithCollections.Destination))
                 {
-                    return Models.TestModels.DataTypeWithCollections.Destination.GetInstance();
+                    return Models.TestModels.DataTypeWithCollections.Destination.GetInstanceForIoC();
                 }
 
                 if (type == typeof(Models.TestModels.DataTypeWithCollections.UserDefinedType))
                 {
-                    return Models.TestModels.DataTypeWithCollections.UserDefinedType.GetInstance();
+                    return Models.TestModels.DataTypeWithCollections.UserDefinedType.GetInstanceForIoC();
                 }
                 return null;
             };
@@ -38,16 +38,23 @@ namespace Automapper._9.IoC.Dynamic.Tests
         [Test()]
         public void MapperDataTypeWithCollections()
         {
+            var destinationFromIoC = Models.TestModels.DataTypeWithCollections.Destination.GetInstanceForIoC();
+            var userDefinedTypeFromIoC = Models.TestModels.DataTypeWithCollections.UserDefinedType.GetInstanceForIoC();
+
             var valueMapper = new ValueMapper();
             var source = Models.TestModels.DataTypeWithCollections.Source.GetInstance();
             var destination = valueMapper.Map<Models.TestModels.DataTypeWithCollections.Source, Models.TestModels.DataTypeWithCollections.Destination>(source);
 
             Assert.AreNotSame(source, destination);
             Assert.AreEqual(source.Property1, destination.Property1);
+
             Assert.AreNotEqual(source.Property2, destination.Property2);
+            Assert.AreEqual(destinationFromIoC.Property2, destination.Property2);
+
             Assert.AreNotSame(source.Property3, destination.Property3);
             Assert.AreEqual(source.Property3.Property1, destination.Property3.Property1);
             Assert.AreNotEqual(source.Property3.Property2, destination.Property3.Property2);
+            Assert.AreEqual(userDefinedTypeFromIoC.Property2, destination.Property3.Property2);
 
             CollectionAssert.AreNotEqual(source.Property4, destination.Property4);
             Assert.AreNotSame(source.Property4, destination.Property4);
@@ -56,6 +63,7 @@ namespace Automapper._9.IoC.Dynamic.Tests
                 Assert.AreNotSame(source.Property4[i], destination.Property4[i]);
                 Assert.AreEqual(source.Property4[i].Property1, destination.Property4[i].Property1);
                 Assert.AreNotEqual(source.Property4[i].Property2, destination.Property4[i].Property2);
+                Assert.AreEqual(userDefinedTypeFromIoC.Property2, destination.Property4[i].Property2);
             }
         }
     }
