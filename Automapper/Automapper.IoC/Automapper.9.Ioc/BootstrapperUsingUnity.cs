@@ -1,7 +1,7 @@
-﻿using Automapper.UseIoc.Models;
-using Automapper.UseIoc.ViewModels;
+﻿using Automapper.UseIoc.ViewModels;
 using AutoMapper;
 using Caliburn.Micro;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +48,7 @@ namespace Automapper.UseIoc
                                      new InjectionProperty(nameof(Student.LastName), "Unknown Student LastName Name"),
                                      new InjectionProperty(nameof(Student.School), "Unknown Student School"),
                                      new InjectionProperty(nameof(Student.Age), 32));
+
 
             //View Models
             _unityContainer.RegisterType<ShellViewModel>(new InjectionConstructor(_unityContainer.Resolve<IMapper>()));

@@ -1,5 +1,5 @@
-﻿using Automapper.UseIoc.Models;
-using AutoMapper;
+﻿using AutoMapper;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ namespace Automapper.UseIoc
         public AssemblyProfile()
         {
             CreateMap<Person, Student>().ConstructUsingServiceLocator();
+            CreateMap<Address, Address>().ConstructUsingServiceLocator();
         }
     }
 }
