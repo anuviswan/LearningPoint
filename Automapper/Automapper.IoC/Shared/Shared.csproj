@@ -7,8 +7,8 @@
     <ProjectGuid>{80090A8A-8D47-4E8E-9D83-98A03E4290F6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Models</RootNamespace>
-    <AssemblyName>Models</AssemblyName>
+    <RootNamespace>Shared</RootNamespace>
+    <AssemblyName>Shared</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="IHuman.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\IHuman.cs" />
     <Compile Include="Mapper\IValueMapper.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="Student.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestModels\DataTypeWithCollections\UserDefinedType.cs" />
     <Compile Include="TestModels\DataTypeWithCollections\Destination.cs" />

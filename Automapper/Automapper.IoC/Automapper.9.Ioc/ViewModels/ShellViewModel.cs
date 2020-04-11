@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
-using Models;
+using Shared.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

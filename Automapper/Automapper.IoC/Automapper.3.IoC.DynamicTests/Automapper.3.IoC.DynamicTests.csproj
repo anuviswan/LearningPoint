@@ -77,9 +77,9 @@
       <Project>{5F9CB869-78F5-41FE-B74D-57E9E890EE23}</Project>
       <Name>Automapper.3.IoC.Dynamic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
+    <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{80090a8a-8d47-4e8e-9d83-98a03e4290f6}</Project>
-      <Name>Models</Name>
+      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

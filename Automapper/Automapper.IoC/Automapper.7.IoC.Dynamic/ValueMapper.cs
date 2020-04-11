@@ -1,4 +1,4 @@
-﻿using Models.Mapper;
+﻿using Shared.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using Caliburn.Micro;
 using AutoMapper.Configuration;
 using AutoMapper;
 using Automapper._7.IoC.Dynamic.ExtensionMethods;
-using Models.TestModels.DataTypeWithCollections;
+using Shared.TestModels.DataTypeWithCollections;
 using System.Reflection;
 using System.Collections;
 using Automapper._7IoC.Dynamic.ExtensionMethods;

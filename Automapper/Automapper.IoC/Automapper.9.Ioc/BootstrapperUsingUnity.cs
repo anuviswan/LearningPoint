@@ -1,7 +1,7 @@
 ﻿using Automapper.UseIoc.ViewModels;
 using AutoMapper;
 using Caliburn.Micro;
-using Models;
+using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

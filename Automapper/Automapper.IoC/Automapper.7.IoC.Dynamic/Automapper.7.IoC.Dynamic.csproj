@@ -115,9 +115,9 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
+    <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{80090a8a-8d47-4e8e-9d83-98a03e4290f6}</Project>
-      <Name>Models</Name>
+      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.TestModels.DataTypeWithCollections
+namespace Shared.TestModels.DataTypeWithCollections
 {
     public class UserDefinedType
     {

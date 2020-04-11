@@ -20,14 +20,14 @@ namespace Automapper._3.IoC.Tests
             _iocInstance = Caliburn.Micro.IoC.GetInstance;
             Caliburn.Micro.IoC.GetInstance = (type, _) =>
             {
-                if (type == typeof(Models.TestModels.DataTypeWithCollections.Destination))
+                if (type == typeof(Shared.TestModels.DataTypeWithCollections.Destination))
                 {
-                    return Models.TestModels.DataTypeWithCollections.Destination.GetInstanceForIoC();
+                    return Shared.TestModels.DataTypeWithCollections.Destination.GetInstanceForIoC();
                 }
 
-                if (type == typeof(Models.TestModels.DataTypeWithCollections.UserDefinedType))
+                if (type == typeof(Shared.TestModels.DataTypeWithCollections.UserDefinedType))
                 {
-                    return Models.TestModels.DataTypeWithCollections.UserDefinedType.GetInstanceForIoC();
+                    return Shared.TestModels.DataTypeWithCollections.UserDefinedType.GetInstanceForIoC();
                 }
                 return null;
             };
@@ -40,12 +40,12 @@ namespace Automapper._3.IoC.Tests
         [Test]
         public void MapperDataTypeWithCollections()
         {
-            var destinationFromIoC = Models.TestModels.DataTypeWithCollections.Destination.GetInstanceForIoC();
-            var userDefinedTypeFromIoC = Models.TestModels.DataTypeWithCollections.UserDefinedType.GetInstanceForIoC();
+            var destinationFromIoC = Shared.TestModels.DataTypeWithCollections.Destination.GetInstanceForIoC();
+            var userDefinedTypeFromIoC = Shared.TestModels.DataTypeWithCollections.UserDefinedType.GetInstanceForIoC();
 
             var valueMapper = new ValueMapper();
-            var source = Models.TestModels.DataTypeWithCollections.Source.GetInstance();
-            var destination = valueMapper.Map<Models.TestModels.DataTypeWithCollections.Source, Models.TestModels.DataTypeWithCollections.Destination>(source);
+            var source = Shared.TestModels.DataTypeWithCollections.Source.GetInstance();
+            var destination = valueMapper.Map<Shared.TestModels.DataTypeWithCollections.Source, Shared.TestModels.DataTypeWithCollections.Destination>(source);
 
             Assert.AreNotSame(source, destination);
             Assert.AreEqual(source.Property1, destination.Property1);

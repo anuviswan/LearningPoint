@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Models.Mapper;
-using Models.TestModels.DataTypeWithCollections;
+using Shared.Mapper;
+using Shared.TestModels.DataTypeWithCollections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
