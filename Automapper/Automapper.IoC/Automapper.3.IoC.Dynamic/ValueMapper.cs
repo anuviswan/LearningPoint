@@ -24,9 +24,10 @@ namespace Automapper._3.IoC
             });
             var sourceType = typeof(TSource);
             var destinationType = typeof(TDestination);
-            var destination = CreateInstance(destinationType);
-            CreateMap(sourceType, destinationType);
-            return (TDestination)Mapper.Map(source, destination);
+            // var destination = CreateInstance(destinationType);
+            Mapper.CreateMap<TSource, TDestination>().ConstructUsing(
+            (Func<ResolutionContext, TDestination>)(r => (TDestination)CreateInstance(typeof(TDestination)))).IgnoreAllPropertiesWithIgnoreDataMemberAttribute(sourceType);
+            return (TDestination)Mapper.Map<TDestination>(source);
         }
 
         public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)

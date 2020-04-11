@@ -22,6 +22,17 @@ namespace Automapper._3.IoC.ExtensionMethods
             return expression;
         }
 
+        public static IMappingExpression<TSource,TDestination> IgnoreAllPropertiesWithIgnoreDataMemberAttribute<TSource, TDestination>(
+    this IMappingExpression<TSource, TDestination> expression, Type sourceType)
+        {
+            foreach (var property in sourceType.GetProperties().Where(x => x.GetCustomAttributes<IgnoreDataMemberAttribute>().Any()))
+            {
+                expression.ForMember(property.Name, opt => opt.Ignore());
+            }
+
+            return expression;
+        }
+
         public static IMappingExpression IgnoreAllPropertiesWithNoDataMemberWhenTypeHasDataContractAttribute(
             this IMappingExpression expression, Type sourceType)
         {
