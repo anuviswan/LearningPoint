@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace Automapper._9.IoC.Dynamic.ExtensionMethods
+namespace Automapper._7.IoC.Dynamic.ExtensionMethods
 {
     public static class IMappingExpressionExtensions
     {

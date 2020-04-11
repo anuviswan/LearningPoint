@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using Caliburn.Micro;
 using AutoMapper.Configuration;
 using AutoMapper;
-using Automapper._9.IoC.Dynamic.ExtensionMethods;
+using Automapper._7.IoC.Dynamic.ExtensionMethods;
 using Models.TestModels.DataTypeWithCollections;
 using System.Reflection;
 using System.Collections;
+using Automapper._7IoC.Dynamic.ExtensionMethods;
 
 namespace Automapper._9.IoC.Dynamic
 {

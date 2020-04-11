@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace Automapper._7IoC.Dynamic.ExtensionMethods
+namespace Automapper._3.IoC.ExtensionMethods
 {
     public static class TypeExtensions
     {
         public static bool HasCustomAttribute<TAttribute>(this Type source) where TAttribute : Attribute
-    {
-        return source.GetCustomAttributes<TAttribute>().Any();
-    }
+        {
+            return source.GetCustomAttributes<TAttribute>().Any();
+        }
 
-    public static bool IsStringOrValueType(this Type source)
-    {
-        return source == typeof(string) || source.IsValueType;
+        public static bool IsStringOrValueType(this Type source)
+        {
+            return source == typeof(string) || source.IsValueType;
+        }
     }
-}
 }

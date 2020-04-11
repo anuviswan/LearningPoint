@@ -78,6 +78,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ExtensionMethods\MappingExpressionExtension.cs" />
+    <Compile Include="ExtensionMethods\TypeExtensions.cs" />
     <Compile Include="ValueMapper.cs" />
   </ItemGroup>
   <ItemGroup>
