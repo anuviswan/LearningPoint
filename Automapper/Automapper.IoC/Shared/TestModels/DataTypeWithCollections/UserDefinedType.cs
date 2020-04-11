@@ -30,5 +30,14 @@ namespace Shared.TestModels.DataTypeWithCollections
                 Property2 = $"IoC => {nameof(UserDefinedType)}:{nameof(UserDefinedType.Property2)}"
             };
         }
+
+        public static UserDefinedType GetInstanceForIoC(int index)
+        {
+            return new UserDefinedType
+            {
+                Property1 = $"IoC => {nameof(UserDefinedType)}:{nameof(UserDefinedType.Property1)}[{index}]",
+                Property2 = $"IoC => {nameof(UserDefinedType)}:{nameof(UserDefinedType.Property2)}[{index}]"
+            };
+        }
     }
 }

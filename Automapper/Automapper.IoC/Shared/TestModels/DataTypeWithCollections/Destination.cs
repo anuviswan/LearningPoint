@@ -39,17 +39,9 @@ namespace Shared.TestModels.DataTypeWithCollections
             {
                 Property1 = $"IoC => {nameof(Destination)}.{nameof(Destination.Property1)}",
                 Property2 = $"IoC => {nameof(Destination)}.{nameof(Destination.Property2)}",
-                Property3 = new UserDefinedType
-                {
-                    Property1 = $"IoC => {nameof(Destination)}.{nameof(UserDefinedType)}.{nameof(UserDefinedType.Property1)}",
-                    Property2 = $"IoC => {nameof(Destination)}.{nameof(UserDefinedType)}.{nameof(UserDefinedType.Property2)}"
-                },
+                Property3 = UserDefinedType.GetInstanceForIoC(),
                 Property4 = Enumerable.Range(1, 5).Select(x =>
-                new UserDefinedType
-                {
-                    Property1 = $"IoC => {nameof(Destination)}.{nameof(UserDefinedType)}.{nameof(UserDefinedType.Property1)}[{x}]",
-                    Property2 = $"IoC => {nameof(Destination)}.{nameof(UserDefinedType)}.{nameof(UserDefinedType.Property2)}[{x}]"
-                }).ToList()
+                UserDefinedType.GetInstanceForIoC(x)).ToList()
             };
         }
     }

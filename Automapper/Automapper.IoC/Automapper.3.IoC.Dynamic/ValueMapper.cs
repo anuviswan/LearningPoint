@@ -24,21 +24,35 @@ namespace Automapper._3.IoC
             });
             var sourceType = typeof(TSource);
             var destinationType = typeof(TDestination);
-            // var destination = CreateInstance(destinationType);
-            Mapper.CreateMap<TSource, TDestination>().ConstructUsing(
-            (Func<ResolutionContext, TDestination>)(r => (TDestination)CreateInstance(typeof(TDestination)))).IgnoreAllPropertiesWithIgnoreDataMemberAttribute(sourceType);
+            CreateMap(sourceType, destinationType);
             return (TDestination)Mapper.Map<TDestination>(source);
+        }
+
+        private void CreateMapInternal<TSource, TDestination>()
+        {
+            var sourceType = typeof(TSource);
+            var destinationType = typeof(TDestination);
+            Mapper.CreateMap<TSource, TDestination>()
+                .ConstructUsing((Func<ResolutionContext, TDestination>)(r => (TDestination)CreateInstance(destinationType)))
+                .IgnoreAllPropertiesWithIgnoreDataMemberAttribute(sourceType);
         }
 
         public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
         {
             throw new NotImplementedException();
         }
+
         private void CreateMap(Type sourceType, Type destinationType)
         {
-            Mapper.CreateMap(sourceType, destinationType)
-                                .IgnoreAllPropertiesWithIgnoreDataMemberAttribute(sourceType)
-                                .IgnoreAllPropertiesWithNoDataMemberWhenTypeHasDataContractAttribute(sourceType);
+            {
+                MethodInfo mi = this.GetType().GetMethod("CreateMapInternal",BindingFlags.NonPublic|BindingFlags.Instance);
+                MethodInfo miConstructed = mi.MakeGenericMethod(sourceType, destinationType);
+                miConstructed.Invoke(this, new object[] { });
+
+                //Mapper.CreateMap(sourceType, destinationType)
+                //                    .IgnoreAllPropertiesWithIgnoreDataMemberAttribute(sourceType)
+                //                    .IgnoreAllPropertiesWithNoDataMemberWhenTypeHasDataContractAttribute(sourceType);
+            }
 
             var sourceProperties = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var property in sourceProperties)
@@ -51,12 +65,21 @@ namespace Automapper._3.IoC
                 if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
                 {
                     // var sourceCollection = property.GetValue(sourceInstance, null);
+
                     var elementType = property.PropertyType.GetGenericArguments()[0];
-                    CreateMap(elementType, elementType);
+                    {
+                        MethodInfo mi = this.GetType().GetMethod("CreateMapInternal", BindingFlags.NonPublic | BindingFlags.Instance);
+                        MethodInfo miConstructed = mi.MakeGenericMethod(elementType, elementType);
+                        miConstructed.Invoke(this, new object[] { });
+                    }
                     continue;
                 }
-
-                CreateMap(property.PropertyType, property.PropertyType);
+                {
+                    MethodInfo mi = this.GetType().GetMethod("CreateMapInternal", BindingFlags.NonPublic | BindingFlags.Instance);
+                    MethodInfo miConstructed = mi.MakeGenericMethod(property.PropertyType, property.PropertyType);
+                    miConstructed.Invoke(this, new object[] { });
+                }
+            
             }
         }
 
