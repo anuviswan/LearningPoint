@@ -11,9 +11,7 @@ For sake of example, we would be using following Nuget Packages
 * Unity 5.11.4
 * NUnit 3.12.0
 
-
-
-## 1. Writing Test Cases ##
+## Writing Test Cases ##
 
 Let us follow *Test Driven Development* for our purpose and begin by writing our test cases.
 
@@ -128,7 +126,7 @@ public class UserDefinedType
 }
 ```
 
-## 2. Definition of ValueMapper ##
+## Definition of ValueMapper ##
 
 Let's define how our `ValueMapper` would look like first using the `IValueMapper` interface
 
@@ -248,7 +246,7 @@ private void CreateMap(Type sourceType,Type destinationType)
 
 As can be observed from the code, we are addressing only Public Instance properties for the sake of example. This could be extended for other properties if required.
 
-## 3. Complete ValueMapper Code ##
+## Complete ValueMapper Code ##
 
 Complete source code of ValueMapper is shown below.
 
@@ -323,3 +321,9 @@ public class ValueMapper : IValueMapper
     }
 }
 ```
+
+### Conclusion ###
+
+The above article uses Automapper 7.0.1 for demonstrating the requirements. The approach could differ when using an older version of Automapper. 
+
+The sample source code along with this article is a WPF Project with Test Cases using NUnit.
