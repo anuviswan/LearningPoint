@@ -42,17 +42,15 @@ namespace Automapper._3.IoC
             throw new NotImplementedException();
         }
 
+        public void InvokeCreateMapInternal(Type sourceType,Type destinationType)
+        {
+            MethodInfo mi = this.GetType().GetMethod(nameof(CreateMapInternal), BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo miConstructed = mi.MakeGenericMethod(sourceType, destinationType);
+            miConstructed.Invoke(this, new object[] { });
+        }
         private void CreateMap(Type sourceType, Type destinationType)
         {
-            {
-                MethodInfo mi = this.GetType().GetMethod("CreateMapInternal",BindingFlags.NonPublic|BindingFlags.Instance);
-                MethodInfo miConstructed = mi.MakeGenericMethod(sourceType, destinationType);
-                miConstructed.Invoke(this, new object[] { });
-
-                //Mapper.CreateMap(sourceType, destinationType)
-                //                    .IgnoreAllPropertiesWithIgnoreDataMemberAttribute(sourceType)
-                //                    .IgnoreAllPropertiesWithNoDataMemberWhenTypeHasDataContractAttribute(sourceType);
-            }
+            InvokeCreateMapInternal(sourceType, destinationType);
 
             var sourceProperties = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var property in sourceProperties)
@@ -64,22 +62,12 @@ namespace Automapper._3.IoC
 
                 if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
                 {
-                    // var sourceCollection = property.GetValue(sourceInstance, null);
-
                     var elementType = property.PropertyType.GetGenericArguments()[0];
-                    {
-                        MethodInfo mi = this.GetType().GetMethod("CreateMapInternal", BindingFlags.NonPublic | BindingFlags.Instance);
-                        MethodInfo miConstructed = mi.MakeGenericMethod(elementType, elementType);
-                        miConstructed.Invoke(this, new object[] { });
-                    }
+                    InvokeCreateMapInternal(elementType, elementType);
                     continue;
                 }
-                {
-                    MethodInfo mi = this.GetType().GetMethod("CreateMapInternal", BindingFlags.NonPublic | BindingFlags.Instance);
-                    MethodInfo miConstructed = mi.MakeGenericMethod(property.PropertyType, property.PropertyType);
-                    miConstructed.Invoke(this, new object[] { });
-                }
-            
+
+                InvokeCreateMapInternal(property.PropertyType, property.PropertyType);
             }
         }
 
@@ -93,9 +81,7 @@ namespace Automapper._3.IoC
             {
                 return Activator.CreateInstance(type);
             }
-
         }
-
       
     }
 
