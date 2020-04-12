@@ -35,7 +35,13 @@ namespace Automapper._9.IoC.Dynamic
             return _mapper.Map<TSource, TDestination>(source);
 
         }
-
+        public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
+        {
+            var sourceType = typeof(TSource);
+            var destinationType = typeof(TDestination);
+            CreateMap(sourceType, destinationType);
+            return _mapper.Map<TSource, TDestination>(source);
+        }
         private void CreateMap(Type sourceType,Type destinationType)
         {
             _mapperConfigurationExpression.ConstructServicesUsing(CreateInstance);
@@ -57,7 +63,6 @@ namespace Automapper._9.IoC.Dynamic
 
                 if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
                 {
-                   // var sourceCollection = property.GetValue(sourceInstance, null);
                     var elementType = property.PropertyType.GetGenericArguments()[0];
                     CreateMap(elementType, elementType);
                     continue;
@@ -77,12 +82,6 @@ namespace Automapper._9.IoC.Dynamic
             {
                 return Activator.CreateInstance(type);
             }
-
-        }
-
-        public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
-        {
-            throw new NotImplementedException();
         }
     }
 }
