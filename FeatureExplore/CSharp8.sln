@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndexAndRange", "IndexAndRange\IndexAndRange.csproj", "{FFDFCBA6-E6AD-41AA-8A67-90E87114121F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndexAndRange", "IndexAndRange\IndexAndRange.csproj", "{FFDFCBA6-E6AD-41AA-8A67-90E87114121F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NullableReferenceType", "NullableReferenceType", "{D0FEA2FC-21DC-4118-9EAE-8A186FF6690C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullableReferenceTypes", "NullableReferenceTypes\NullableReferenceTypes\NullableReferenceTypes.csproj", "{10C36CE3-D7E8-4DEC-91D2-1264E161317D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullableReferenceTypes.Tests", "NullableReferenceTypes\NullableReferenceTypes.Tests\NullableReferenceTypes.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +21,21 @@ Global
 		{FFDFCBA6-E6AD-41AA-8A67-90E87114121F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFDFCBA6-E6AD-41AA-8A67-90E87114121F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFDFCBA6-E6AD-41AA-8A67-90E87114121F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10C36CE3-D7E8-4DEC-91D2-1264E161317D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10C36CE3-D7E8-4DEC-91D2-1264E161317D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10C36CE3-D7E8-4DEC-91D2-1264E161317D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10C36CE3-D7E8-4DEC-91D2-1264E161317D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10C36CE3-D7E8-4DEC-91D2-1264E161317D} = {D0FEA2FC-21DC-4118-9EAE-8A186FF6690C}
+		{8EDF4429-251A-416D-BB68-93F227191BCF} = {D0FEA2FC-21DC-4118-9EAE-8A186FF6690C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A54F49A-1F4B-47D2-A3A9-F1C4CA9FE7CA}
