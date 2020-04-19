@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.X509Certificates;
 
 namespace UsingDeclaration
 {
@@ -7,91 +9,59 @@ namespace UsingDeclaration
     {
         static void Main(string[] args)
         {
-            var path = "SomePath";
-            Example1.UsingStatement(path);
-            Example1.UsingDeclaration(path);
+            var example1 = new Example();
+            example1.UsingStatement();
+            example1.UsingDeclaration();
 
-            Example2.UsingStatement(path);
-            Example2.UsingDeclaration(path);
+            Console.ReadLine();
         }
 
-        static int UsingStatement(string filePath)
+      
+    }
+
+    public class Example: IExample
+    {
+        public int UsingStatement()
         {
-            var lineCount = 0;
-            var line = string.Empty;
-            using (var fileReader = File.OpenText(filePath))
+            using (var customDisposibleObject = new CustomDisposibleObject())
             {
-                while ((line = fileReader.ReadLine()) != null)
-                {
-                    System.Console.WriteLine(line);
-                    lineCount++;
-                }
+                customDisposibleObject.Talk(nameof(IExample.UsingStatement));
+                return default;
             }
-            return lineCount;
         }
 
-
-        static int UsingDeclaration(string filePath)
+        public int UsingDeclaration()
         {
-            var lineCount = 0;
-            var line = string.Empty;
-            using var fileReader = File.OpenText(filePath);
-
-            while ((line = fileReader.ReadLine()) != null)
-            {
-                System.Console.WriteLine(line);
-                lineCount++;
-            }
-            return lineCount;
+            using var customDisposibleObject = new CustomDisposibleObject();
+            customDisposibleObject.Talk(nameof(IExample.UsingDeclaration));
+            return default;
         }
     }
 
-    public static class Example1
+    
+
+
+    public interface IExample
     {
-        public static string UsingStatement(string filePath)
-        {
-            using (var fileReader = File.OpenText(filePath))
-            {
-                return fileReader.ReadToEnd();
-            }
-        }
-
-
-        public static string UsingDeclaration(string filePath)
-        {
-            using var fileReader = File.OpenText(filePath);
-            return fileReader.ReadToEnd();
-        }
+        int UsingStatement();
+        int UsingDeclaration();
     }
 
-    public static class Example2
+    public interface ITalk
     {
-        public static int UsingStatement(string filePath)
+        void Talk(string message);
+    }
+
+    public class CustomDisposibleObject : IDisposable,ITalk
+    {
+        public void Dispose()
         {
-            var lineCount = 0;
-            var lineRead = string.Empty;
-            using (var fileReader = File.OpenText(filePath))
-            {
-                while ((lineRead = fileReader.ReadLine()) != null)
-                {
-                    lineCount++;
-                }
-            }
-            return lineCount;
+            Console.WriteLine($"Disposing {nameof(CustomDisposibleObject)}");
         }
 
-
-        public static int UsingDeclaration(string filePath)
+        public void Talk(string message)
         {
-            var lineCount = 0;
-            var lineRead = string.Empty;
-            using var fileReader = File.OpenText(filePath);
-
-            while ((lineRead = fileReader.ReadLine()) != null)
-            {
-                lineCount++;
-            }
-            return lineCount;
+            Console.WriteLine($"{nameof(CustomDisposibleObject)}-{nameof(ITalk.Talk)} : {message}");
         }
     }
 }
