@@ -4,14 +4,17 @@ class Photo extends Component {
     render() {
         const post = this.props.post;
 
+
         return <div className='photoGrid'>
             <figure className="figure">
                 <img className="photo" src={post.imageLink} alt={post.description} />
-                <figurecaption>
+                <figcaption>
                     <p>{post.description}</p>
-                </figurecaption>
+                </figcaption>
                 <div className="button-container">
-                    <button className="remove-button">Remove</button>
+                    <button className="remove-button" onClick={() => {
+                        this.props.onRemovePhoto(post)
+                    }}>Remove</button>
                 </div>
             </figure>
         </div>;
