@@ -16,12 +16,12 @@
 
         <TextBlock Text="Use Mouse to move the shape" HorizontalAlignment="Center"/>
         <TextBlock Grid.Row="1" Text="Current position" HorizontalAlignment="Center" FontStyle="Italic"/>
-        
-        <Canvas Grid.Row="2" Background="AliceBlue">
+
+        <Canvas Grid.Row="2" Background="AliceBlue"     cal:Message.Attach="[Event MouseMove]=[Action MouseMove]; [Event PreviewMouseLeftButtonUp]=[Action MouseUp];[Event PreviewMouseLeftButtonDown]=[Action MouseDown]" >
             <i:Interaction.Behaviors>
                 <behaviors:MouseMoveBehavior MouseLeft="{Binding Left,Mode=TwoWay}" MouseTop="{Binding Top,Mode=TwoWay}"/>
             </i:Interaction.Behaviors>
-            <Rectangle Height="100" Width="100" Fill="Red" Canvas.Left="{Binding Left}" Canvas.Top="{Binding Top}" />
+            <Rectangle Height="100" Width="100" Fill="Red" Canvas.Left="{Binding Left}" Canvas.Top="{Binding Top}"  />
         </Canvas>
     </Grid>
 </Window>
