@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 class Photo extends Component {
     render() {
         const post = this.props.post;
-
-
         return <div className='photoGrid'>
             <figure className="figure">
                 <img className="photo" src={post.imageLink} alt={post.description} />
