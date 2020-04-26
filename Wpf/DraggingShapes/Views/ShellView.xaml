@@ -3,12 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DraggingShapes.Views"
+        xmlns:local="clr-namespace:DraggingShapes.Views" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:behaviors="clr-namespace:DraggingShapes.Behaviors"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800">
+        xmlns:cal="http://www.caliburnproject.org"
+        Title="Draggable Shapes" Height="450" Width="800">
     <Grid>
-        <Canvas>
-            <Rectangle Height="100" Width="100" Fill="Red"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Use Mouse to move the shape" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Text="Current position" HorizontalAlignment="Center" FontStyle="Italic"/>
+        
+        <Canvas Grid.Row="2" Background="AliceBlue">
+            <i:Interaction.Behaviors>
+                <behaviors:MouseMoveBehavior MouseLeft="{Binding Left,Mode=TwoWay}" MouseTop="{Binding Top,Mode=TwoWay}"/>
+            </i:Interaction.Behaviors>
+            <Rectangle Height="100" Width="100" Fill="Red" Canvas.Left="{Binding Left}" Canvas.Top="{Binding Top}" />
         </Canvas>
     </Grid>
 </Window>
