@@ -10,7 +10,7 @@ class PhotoWall extends Component {
             <Link className="addIcon" to="/AddPhoto">.</Link>
             {/* <a className="addIcon" onClick={this.props.onNavigate} href="#AddPhoto">.</a> */}
             {/* <button className="addIcon" onClick={this.props.onNavigate} /> */}
-            <div>
+            <div className="photoGrid">
                 {this.props
                     .posts
                     .sort((x, y) => (y.id - x.id))
@@ -21,8 +21,7 @@ class PhotoWall extends Component {
 }
 
 PhotoWall.propTypes = {
-    posts: PropTypes.array.isRequired,
-    onRemovePhoto: PropTypes.func.isRequired
+    posts: PropTypes.array.isRequired
 }
 
 
