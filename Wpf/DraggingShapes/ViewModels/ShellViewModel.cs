@@ -13,6 +13,9 @@ namespace DraggingShapes.ViewModels
         public double Left { get; set; } = 10;
         public double Top { get; set; } = 10;
 
+        public double CurrentMouseX { get; set; }
+        public double CurrentMouseY { get; set; }
+
         public bool IsShapeCaptured { get; set; }
 
         public void MouseDown()
@@ -24,6 +27,8 @@ namespace DraggingShapes.ViewModels
         public void MouseMove()
         {
             if (!IsShapeCaptured) return;
+            Left = CurrentMouseX;
+            Top = CurrentMouseY;
             NotifyOfPropertyChange(nameof(Left));
             NotifyOfPropertyChange(nameof(Top));
         }
