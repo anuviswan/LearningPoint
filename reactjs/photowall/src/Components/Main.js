@@ -12,10 +12,6 @@ class Main extends Component {
 
     }
 
-    componentDidMount() {
-        this.props.removePost(1);
-    }
-
     render() {
         console.log(this.props);
         return (<div>
@@ -23,9 +19,6 @@ class Main extends Component {
                 <div>
                     <Title title={"Photo Wall"} />
                     <PhotoWall {...this.props} />
-                    {/* <PhotoWall posts={this.props.posts}
-                        onRemovePhoto={this.removePhoto}
-                        onNavigate={this.navigate} /> */}
                 </div>
             )} />
             {/* <Route path="/AddPhoto" render={({ history }) => (
