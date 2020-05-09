@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class Photo extends Component {
     render() {
         const post = this.props.post;
 
         return <div className='photoGrid'>
-            <figure className="figure">
+            <Link to={`Single/${post.id}`}>
                 <img className="photo" src={post.imageLink} alt={post.description} />
+            </Link>
+            <figure className="figure">
                 <figcaption>
                     <p>{post.description}</p>
                 </figcaption>
