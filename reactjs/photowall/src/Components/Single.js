@@ -9,10 +9,11 @@ class Single extends Component {
         const { match, posts } = this.props;
         const id = Number(match.params.id);
         const selectedPost = posts.find((post) => post.id === id)
-        console.log(selectedPost);
+        const comments = this.props.comments[id] || [];
+        const index = this.props.posts.findIndex((post) => post.id == id);
         return <div className='single-photo'>
-            <Photo post={selectedPost} />
-            <Comments post={selectedPost} />
+            <Photo post={selectedPost} {...this.props} index={index} />
+            <Comments addComment={this.props.addComment} comments={comments} id={id} />
         </div>
     }
 }
