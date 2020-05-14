@@ -38,7 +38,5 @@ namespace DraggingShapes.ViewModels
             IsShapeCaptured = false;
             NotifyOfPropertyChange(nameof(IsShapeCaptured));
         }
-
-        public void DoNothing() { }
     }
 }
