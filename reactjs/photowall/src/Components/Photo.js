@@ -19,7 +19,14 @@ class Photo extends Component {
                         this.props.removePost(this.props.index);
                         this.props.history.push('/')
                     }}>Remove</button>
+                    <Link to={`Single/${post.id}`} className="button">
+                        <div className='comment-count'>
+                            <div className='speech-bubble'></div>
+                            {this.props.comments[post.id] ? this.props.comments[post.id].length : 0}
+                        </div>
+                    </Link>
                 </div>
+
             </figure>
         </div>;
     }
