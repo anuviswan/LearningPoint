@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /CMDemo/App003_EventAggregator
 
+/reactjs/photowall/src/database/config.js
