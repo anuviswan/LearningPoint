@@ -13,6 +13,10 @@ class Main extends Component {
 
     }
 
+    componentDidMount() {
+        this.props.startLoadingPost();
+    }
+
     render() {
         return (<div>
             <h1><Link to="/">Photo Wall</Link></h1>
