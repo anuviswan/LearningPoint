@@ -81,4 +81,44 @@ So, we have our behavior in place. Now is the time to update our Xaml to use our
 
 As you can observe, we are updating the `Left` and `Top` properties by capturing them in Behavior and assigning the the values of current mouse position. This would ensure the the shape would move along the mouse pointer.
 
-But you want to 
+But you want to update the `Left` and `Top` position only when the Mouse Left Button is pressed and dragged, not when it is freely moved. To help us achieve this, we will introduce three  additional properties in our ViewModel. Let us rewrite our ViewModel. This would also explain why we are capturing the Mouse Events in the XAML, which was intensionally not explained till this point.
+
+```
+public class ShellViewModel:PropertyChangedBase
+{
+    public double Left { get; set; } = 10;
+    public double Top { get; set; } = 10;
+
+    public double CurrentMouseX { get; set; }
+    public double CurrentMouseY { get; set; }
+
+    public bool IsShapeCaptured { get; set; }
+
+    public void MouseDown()
+    {
+        IsShapeCaptured = true;
+        NotifyOfPropertyChange(nameof(IsShapeCaptured));
+    }
+
+    public void MouseMove()
+    {
+        if (!IsShapeCaptured) return;
+        Left = CurrentMouseX;
+        Top = CurrentMouseY;
+        NotifyOfPropertyChange(nameof(Left));
+        NotifyOfPropertyChange(nameof(Top));
+    }
+
+    public void MouseUp()
+    {
+        IsShapeCaptured = false;
+        NotifyOfPropertyChange(nameof(IsShapeCaptured));
+    }
+}
+```
+
+The `IsShapeCaptured` is enabled only when the Mouse Left Button is pressed. As soon as the Mouse Button is released, you are resetting the `IsShapeCaptured` flag. The `MouseMove` method ensures that the `Left` & `Top` properties (which are bound to the position of Shape) are updated only when the `IsShapeCaptured` is set.
+
+I guesss that bit of code is quite self explanatory. This is one way to achieve the drag/drop functionality, but obviously there could be others. Will provide another solution in coming days.
+
+
