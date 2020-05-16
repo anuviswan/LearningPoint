@@ -32,11 +32,14 @@ export function loadPosts(posts) {
 
 export function startAddingPost(post) {
     return (dispatch) => {
-        return database().ref('posts').update({ [post.id]: post }).then(() => {
-            dispatch(addPost(post));
-        }).catch((error) => {
-            console.log(error);
-        });
+        return database().ref('posts')
+            .update({ [post.id]: post })
+            .then(() => {
+                dispatch(addPost(post));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 }
 
@@ -52,6 +55,9 @@ export function startLoadingPost() {
 
                 dispatch(loadPosts(posts))
             })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 }
 
@@ -63,6 +69,22 @@ export function startRemovingPost(index, id) {
                 console.log(index);
                 dispatch(removePost(index))
             })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
+}
+
+export function startAddingComments(comment, postId) {
+    return (dispatch) => {
+        return database().ref(`comments/${postId}`)
+            .push(comment)
+            .then(() => {
+                dispatch(addComment(comment, postId))
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 }
