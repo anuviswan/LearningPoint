@@ -54,3 +54,15 @@ export function startLoadingPost() {
             })
     }
 }
+
+export function startRemovingPost(index, id) {
+    return (dispatch) => {
+        return database().ref(`posts/${id}`)
+            .remove()
+            .then(() => {
+                console.log(index);
+                dispatch(removePost(index))
+            })
+    }
+
+}
