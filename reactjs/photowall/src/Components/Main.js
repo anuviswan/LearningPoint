@@ -8,13 +8,18 @@ import Single from './Single'
 
 class Main extends Component {
 
+    state = {
+        loading: true
+    }
+
     constructor(props) {
         super();
-
     }
 
     componentDidMount() {
-        this.props.startLoadingPost();
+        this.props.startLoadingPost().then(() => {
+            this.setState({ loading: false })
+        });
         this.props.startLoadingComments();
     }
 
@@ -32,7 +37,7 @@ class Main extends Component {
 
             <Route path="/Single/:id" render={(params) => (
                 <div>
-                    <Single {...this.props}   {...params} />
+                    <Single loading={this.state.loading} {...this.props}   {...params} />
                 </div>
             )} />
         </div>)
