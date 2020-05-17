@@ -22,6 +22,13 @@ export function addComment(comment, postId) {
     }
 }
 
+export function loadComments(comments) {
+    return {
+        type: 'LOAD_COMMENTS',
+        comments
+    }
+}
+
 export function loadPosts(posts) {
     return {
         type: 'LOAD_POSTS',
@@ -88,3 +95,19 @@ export function startAddingComments(comment, postId) {
             });
     }
 }
+
+export function startLoadingComments() {
+    return (dispatch) => {
+        return database().ref('comments')
+            .once('value')
+            .then((snapshot) => {
+                let comments = {}
+                snapshot.forEach((child) => {
+                    comments[child.key] = Object.values(child.val())
+                })
+
+                dispatch(loadComments(comments))
+            })
+    }
+}
+

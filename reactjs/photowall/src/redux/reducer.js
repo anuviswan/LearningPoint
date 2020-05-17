@@ -28,7 +28,9 @@ function comments(state = {}, action) {
             else {
                 return { ...state, [action.postId]: [...state[action.postId], action.comment] }
             }
-
+        case 'LOAD_COMMENTS':
+            console.log(action.comments)
+            return action.comments;
         default:
             return state;
     }
