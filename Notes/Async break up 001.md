@@ -129,6 +129,10 @@ Additional, it also starts the State Machine using the Builder.Start method, pas
 
 The final step of the Stub method is of course, to return the Task object. The Task object is created by the Builder, who also ensures the Task's state is changed accordingly as the method execution progresses.
 
+```csharp
+return stateMachine.<>t__builder.Task;
+```
+
 When the Builder.Start method is invoked, it begins executing the MoveNext method (we will discuss it later) untill the method reaches an incomplete await expression. At this point, the MoveNext would return the Task, following up which, the Start method also returns. The task is then returned to the Caller method.
 
 That's it for the Stub Method, in the next section, we will look into the State Machine structure.
