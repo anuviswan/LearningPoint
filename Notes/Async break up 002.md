@@ -128,19 +128,21 @@ private sealed class <Foo>d__1 : IAsyncStateMachine
 
 - **Fields**
 
-The next thing one would notice with the generated code is the presence of certains fields in the state machine. The fields could be broadly categorized into - Current State : As discussed in [earlier post](https://bytelanguage.net/2020/05/31/asynchronous-code-behind-the-scenes-001/), this could have any of the following values
+The next thing one would notice with the generated code is the presence of certains fields in the state machine. The fields could be broadly categorized into
 
-    ```
-    -1 : Not Started
-    -2 : Completed
-    Any other Value : Paused
-    ```
+- Current State : As discussed in [earlier post](https://bytelanguage.net/2020/05/31/asynchronous-code-behind-the-scenes-001/), this could have any of the following values
 
-    - Method Builder : Communicates with the async infrastructure and returns the task
+```
+-1 : Not Started
+-2 : Completed
+Any other Value : Paused
+```
 
-    - TaskAwaiter
-    - Parameters and local variables
-    - Temporary Stack Variables
+- Method Builder : Communicates with the async infrastructure and returns the task
+
+- TaskAwaiter
+- Parameters and local variables
+- Temporary Stack Variables
 
 TaskAwaiter and parameters are used to remember the values when the State Machine resumes after a Pause. If the state machine requires a variable which it doesn't need to remember after resuming, then it remains as private variable.
 
