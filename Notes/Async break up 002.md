@@ -128,6 +128,13 @@ private sealed class <Foo>d__1 : IAsyncStateMachine
 
 - **Fields**
 
+```csharp
+public int <>1__state;
+public AsyncTaskMethodBuilder <>t__builder;
+public int delay;
+private TaskAwaiter <>u__1;
+```
+
 The next thing one would notice with the generated code is the presence of certains fields in the state machine. The fields could be broadly categorized into
 
 - Current State : As discussed in [earlier post](https://bytelanguage.net/2020/05/31/asynchronous-code-behind-the-scenes-001/), this could have any of the following values
