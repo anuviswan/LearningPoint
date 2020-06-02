@@ -156,9 +156,9 @@ The most important point to remember about the Fields and Variables is that the 
 
 If your code have multiple await that was supposed to return
 
-- 3 Task<int>
-- 2 Task<string>
-- 1 Task
+- 3 `Task<int>`
+- 2 `Task<string>`
+- 1 `Task`
 
 Then the compiler would most likely create just 3 awaiters, one each for the different types involved.
 
