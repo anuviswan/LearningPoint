@@ -127,3 +127,33 @@ private sealed class <Foo>d__1 : IAsyncStateMachine
 ```
 
 - **Fields**
+
+The next thing one would notice with the generated code is the presence of certains fields in the state machine. The fields could be broadly categorized into - Current State : As discussed in [earlier post](https://bytelanguage.net/2020/05/31/asynchronous-code-behind-the-scenes-001/), this could have any of the following values
+
+    ```
+    -1 : Not Started
+    -2 : Completed
+    Any other Value : Paused
+    ```
+
+    - Method Builder : Communicates with the async infrastructure and returns the task
+
+    - TaskAwaiter
+    - Parameters and local variables
+    - Temporary Stack Variables
+
+TaskAwaiter and parameters are used to remember the values when the State Machine resumes after a Pause. If the state machine requires a variable which it doesn't need to remember after resuming, then it remains as private variable.
+
+Temporary stack variables are used as a part of larger expression, when the compiler needs to remember intermediate results. For example,
+
+```csharp
+int result = x + y + await task;
+```
+
+The most important point to remember about the Fields and Variables is that the compiler ensures it uses minimum fields/variables as possible by reusing them.
+
+If your code have multiple await that was supposed to return - 3 Task<int> - 2 Task<string> - 1 Task
+
+Then the compiler would most likely create just 3 awaiters, one each for the different types involved.
+
+That is it about the general structure of the State Machine. We would now proceed to the most important part, which is of course the `MoveNext()` method. We will do it in the next post.
