@@ -106,6 +106,8 @@ private void MoveNext()
 
 As you can observe the entire `MoveNext()` method has a big try catch wrapping the code within. The interesting part for the moment would be the `catch` block. If any exceptions occurs in the `try` block, the `MoveNext()` method sets the state to `-2` to indicate the method has completed (_-2 indicates completion, irrespective of success or failure_). It then uses the Builder to set the exception using the `Builder.SetException` method.
 
+> Only special exceptions like the ThreadAbortException or the StackOverflowException can cause the `MoveNext()` method to end with an exception.
+
 **High Level Flow of State Machine**
 
 At a higher level, one can observe that the `MoveNext()` method returns if any of the following are true
@@ -190,4 +192,4 @@ private void MoveNext()
 }
 ```
 
-One of the first things you notice in the code above is that State is stored in a local variable. I guess this is done for optimization purposes.
+One of the first things you notice in the code above is that State is stored in a local variable. I guess this is done for optimization purposes. We could use a dedicated post later for understanding different optimizations techniques used by compiler here, for now let us stick to the task in hand.
