@@ -239,5 +239,21 @@ It then proceeds to fetch the Result using the `TaskAwaiter.GetResult()` method 
 
 Over the last few posts, we have traced through the generated source code behind the asynchronous methods. We noticed how the method gets translated to a pair of Stub/Working method and a State Machine. We also explored the State Machine in detail and understood how the MoveNext method method navigates the original method while maitaining the states.
 
-This, was a simple asynchornous method devoid of any controls methodologies like the loops. In the next part of this series, we will use the knowledge we have gained so far to understand more complex scenarios in depth. Once again, I would like to thank the wonderful Jon Skeets for his brillant book - C# in Depth. You ought to rename it to "C# Bible" Jon !!
+The whole process, starting from the moment your code hits the `await` expression could be summarized as,
+1. Get the awaiter from the awaitable expression using the `GetAwaiter()` method.
+2. Check if the awaiter has been comepleted
+    - If Yes, Go to Step 8. (Fast Path)
+    - If No, remember where you have reached using the State Field. (Slow Path)
+3. Store the awaiter in a field.
+4. Schedule a continuation with the awaiter, such that when the continuation is executed, you are back at the right place.
+5. Return from the MoveNext, either to the original caller if it is the first pause, or to whatever has scheduled the continuation.
+6. When the continuation fires, set the State to -1 to indicate running.
+7. Restore the Awaiter from the field and store it back in the Stack. Remember to reset the field so that GC could take care of it.
+8. Fetch the result using `GetResult()` method.
+9. Continue with rest of the code.
+
+
+This, was a simple asynchornous method devoid of any controls methodologies like the loops. In the next part of this series, we will use the knowledge we have gained so far to understand more complex scenarios in depth. 
+
+Once again, I would like to thank the wonderful Jon Skeets for his brillant book - C# in Depth. You ought to rename it to "C# Bible" Jon !!
 
