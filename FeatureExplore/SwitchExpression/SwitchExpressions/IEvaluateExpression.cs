@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SwitchExpressions
 {
-    public interface IEvaluate<T>
+    public interface IEvaluateExpression<T>
     {
-        string Evaluate(T criteria);
+        string EvaluateExpression(T criteria);
     }
 }
