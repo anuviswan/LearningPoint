@@ -14,6 +14,7 @@ namespace SwitchExpressions.Patterns
             Direction.Down => $"Direction : {nameof(Direction.Down)}",
             Direction.Left => $"Direction : {nameof(Direction.Left)}",
             Direction.Right => $"Direction : {nameof(Direction.Right)}",
+            _ => throw new NotImplementedException(),
         };
 
         public string EvaluateSwitchStatement(Direction criteria)

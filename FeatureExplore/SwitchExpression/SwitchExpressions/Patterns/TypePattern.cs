@@ -24,11 +24,11 @@ namespace SwitchExpressions.Patterns
         {
             switch (criteria)
             {
-                case Int32 v1 : return $"Type {nameof(Int32)}, Value = {v1}";
-                case Int64 v2: return $"Type {nameof(Int64)}, Value = {v2}";
-                case string v3: return $"Type {nameof(String)}, Value = {v3}";
-                case List<int> v4 when v4.Count < 5: return $"Type Small {nameof(List<int>)}, Value = {v4}";
-                case List<int> v5 when v5.Count == 5: return $"Type Medium {nameof(List<int>)}, Value = {v5}";
+                case Int32 value : return $"Type {nameof(Int32)}, Value = {value}";
+                case Int64 value: return $"Type {nameof(Int64)}, Value = {value}";
+                case string value: return $"Type {nameof(String)}, Value = {value}";
+                case List<int> value when value.Count < 5: return $"Type Small {nameof(List<int>)}, Value = {value}";
+                case List<int> value when value.Count == 5: return $"Type Medium {nameof(List<int>)}, Value = {value}";
                 case List<int> value: return $"Type Big {nameof(List<int>)}, Value = {value}";
                 case null: return "Null Detected";
                 default:  return $"Type Unknown";
