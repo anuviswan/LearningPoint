@@ -5,7 +5,7 @@ namespace SwitchExpressions.Tests
 {
     public class ValuePatternTests
     {
-        private IEvaluateExpression<Direction> _evaluator;
+        private ISwitchExpression<Direction> _evaluator;
         public ValuePatternTests()
         {
             _evaluator = new ValuePattern();
@@ -17,8 +17,10 @@ namespace SwitchExpressions.Tests
         [InlineData(Direction.Down,"Direction : Down")]
         public void ValuePatternEvaluate(Direction direction,string expected)
         {
-            var result = _evaluator.EvaluateExpression(direction);
-            Assert.Equal(expected, result);
+            var resultSwitchExpression = _evaluator.EvaluateSwitchExpression(direction);
+            var resultSwitchStatement = _evaluator.EvaluateSwitchExpression(direction);
+            Assert.Equal(expected, resultSwitchExpression);
+            Assert.Equal(resultSwitchStatement, resultSwitchExpression);
         }
     }
 }

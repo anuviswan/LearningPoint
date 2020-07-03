@@ -19,8 +19,10 @@ namespace SwitchExpressions.Tests
         public void TypePatternEvaluate<T>(T direction, string expected)
         {
             var _evaluator = new TypePattern<T>();
-            var result = _evaluator.EvaluateExpression(direction);
-            Assert.Equal(expected, result);
+            var resultSwitchExpression = _evaluator.EvaluateSwitchExpression(direction);
+            var resultSwitchStatement = _evaluator.EvaluateSwitchExpression(direction);
+            Assert.Equal(expected, resultSwitchExpression);
+            Assert.Equal(resultSwitchStatement, resultSwitchExpression);
         }
     }
 }

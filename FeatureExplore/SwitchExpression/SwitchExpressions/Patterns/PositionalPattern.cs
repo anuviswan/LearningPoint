@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SwitchExpressions.Patterns
 {
-    public class PositionalPattern<T> : IEvaluateExpression<T> 
+    public class PositionalPattern<T> : ISwitchExpression<T> 
     {
-        public string EvaluateExpression(T criteria) => criteria switch
+        public string EvaluateSwitchExpression(T criteria) => criteria switch
         {
             string { Length : 5 } value  => $"Type {nameof(String)}, Value = {value}",
             List<int> value when value.Count < 5 => $"Type Small {nameof(List<int>)}, Value = {value}",

@@ -1,19 +1,8 @@
 C# 7 introduced us to pattern matching and we have been falling in love with it so much that we do not realize it didn't exist prior to C#. Before we delve into the new patterns introduced in C# 8, Let us take a quick recap of the pattern introduced in C# 7.
 
-- **Type Pattern**
-
-The most common pattern used would be the Type Pattern, which extends the `is` statement to check if the expression matches a type and if so, converts it to particular type.
-
-```csharp
-if(input is double val)
-{
-    // code use val
-}
-```
-
 - **Const Pattern**
 
-Constant pattern, which follows the pattern matching features of Type Pattern, compares the expression to a constant. For example,
+Constant pattern, extends the `is` statement to compare the expression to a constant. For example,
 
 ```csharp
 if(input is 7m)
@@ -24,7 +13,7 @@ if(input is 7m)
 
 or
 
-```
+```csharp
 const decimal VALUE = 7m;
 if(input is VALUE)
 {
@@ -34,7 +23,7 @@ if(input is VALUE)
 
 The most common use case of the Constant Pattern is for checking null.
 
-```
+```csharp
 if(input is null)
 {
 
@@ -57,7 +46,7 @@ var result = inputCollection.Where(x=> x.ToList() is var list
                                 && list.Average() > 100);
 ```
 
-The var pattern is also useful inside the `switch statement`, epecially when used with a `case guard`. For example,
+The var pattern is also useful inside the `switch statement`, especially when used with a `case guard`. For example,
 
 ```csharp
 private string Evaluate(int input)
@@ -79,32 +68,62 @@ private string Evaluate(int input)
 }
 ```
 
-## C# 8: Introducing Switch Expressions
+- **Type Pattern**
 
-Before we look into other patterns, it would be a good idea introduce one of the finest features of C# 8 - the `switch expressions`.
-
-The `switch expression` introduces a switch like syntax in the context of an expression and provides a clean and concise way for writing `switch` when each each `switch arm` produces a value.
-
-Let us rewrite the `switch statement` in our example of `var pattern` using `swich expression`.
+The most common pattern used would be the Type Pattern, which checks if the expression matches a type and if so, converts it to particular type.
 
 ```csharp
-private string Evaluate(int input)
+if(input is double val)
 {
-	var inputCollection = Enumerable.Range(1,100)
-                    .Select(x=> Enumerable.Range(x,10)
-                                        .Select(c=>c*x));
-
-	return input switch
-	{
-		5 => "Five",
-		4 => "Four",
-		var v when inputCollection.Any(x=>x.Contains(v)) => "Collection Contains the value",
-		_ => "Not Found"
-	};
+    // code use val
 }
 ```
 
-As one can observe, the syntax has become more leaner. You do not have to use the repeated `return` statements or `breaks` that associated with `switch statement`.
+Type pattern could also be used within a `Switch Statement`. For example,
+
+```csharp
+public string EvaluateSwitchStatement(T criteria)
+{
+    switch (criteria)
+    {
+        case Int32 v1 : return $"Type {nameof(Int32)}, Value = {v1}";
+        case Int64 v2: return $"Type {nameof(Int64)}, Value = {v2}";
+        case string v3: return $"Type {nameof(String)}, Value = {v3}";
+        case List<int> v4 when v4.Count < 5: return $"Type Small {nameof(List<int>)}, Value = {v4}";
+        case List<int> v5 when v5.Count == 5: return $"Type Medium {nameof(List<int>)}, Value = {v5}";
+        case List<int> value: return $"Type Big {nameof(List<int>)}, Value = {value}";
+        case null: return "Null Detected";
+        default:  return $"Type Unknown";
+    }
+}
+
+```
+
+As one can observe, the patterns has made the _switch statements_ whole the more powerful. However, there is a lot of boiler plate code going around. You would wish to do away with the repeated `case` and `return`/`breaks`;
+
+## Introducing Switch Expressions
+
+Before we look into other patterns, it would be a good idea introduce one of the finest features of C# 8 - the _switch expressions_.
+
+The _switch expression_ introduces a switch like syntax in the context of an expression and provides a clean and concise way for writing `switch` when each each _switch arm_ produces a value.
+
+Let us rewrite the _switch statement_ in our example of `type pattern` using _swich expression_.
+
+```csharp
+public string EvaluateSwitchExpression(T criteria) => criteria switch
+{
+    Int32 value => $"Type {nameof(Int32)}, Value = {value}",
+    Int64 value => $"Type {nameof(Int64)}, Value = {value}",
+    string value => $"Type {nameof(String)}, Value = {value}",
+    List<int> value when  value.Count < 5 => $"Type Small {nameof(List<int>)}, Value = {value}",
+    List<int> value when value.Count == 5 =>  value => $"Type Medium {nameof(List<int>)}, Value = {value}",
+    List<int> value => $"Type Big {nameof(List<int>)}, Value = {value}",
+    null => "Null Detected",
+    _ => $"Type Unknown"
+};
+```
+
+As one can observe, the syntax has become more leaner. You do not have to use the repeated `return` statements or `breaks` that associated with _switch statement_.
 
 The syntax has changed ever so slightly. The syntax now ensures the switch arms consists of
 
@@ -113,82 +132,55 @@ The syntax has changed ever so slightly. The syntax now ensures the switch arms 
 - The `=>` token
 - Expression.
 
-The `input` in the `switch expression` is known as _Range Expression_. The noticiable change is how the `switch` keyword now succeeds the _range expression_.
+The `criteria` in the _switch expression_ is known as _Range Expression_. The noticiable change is how the `switch` keyword now succeeds the _range expression_.
 
-Now that's all only one side of the story. The following patterns which were introduced in C# 8, makes the `switch expressions` even more powerful. Let's go ahead and explore them.
+The code above also introduces the `discard pattern`. Discard pattern `-` matches all expressions and is used to matching the `default` in switch expression. And since it match all expression, it needs to be appear at the very end of the _switch expression_.
 
-## Value Pattern
+Now that's all only one side of the story. The following patterns which were introduced in C# 8, makes the _switch expressions_ even more powerful. Let's go ahead and explore them.
 
-The pattern which used in the preceeding example is known as _Value Pattern_, which compares the _range expression_ to a _value_. The _value_ needs to be a compile time constant (of course, case guard can used to evalute arbitary code).
+## Property Pattern.
 
-Let's write another example of a Value Pattern for more clarity. For the examples that follows let us use TDD to demonstrate the purpose.
+The _property pattern_ enables you to check if the given value is `null` and match the public properties on the object. For example,
 
 ```csharp
-public class ValuePatternTests
+public class Foo
 {
-    private IEvaluateExpression<Direction> _evaluator;
-    public ValuePatternTests()
-    {
-        _evaluator = new ValuePattern();
-    }
-    [Theory]
-    [InlineData(Direction.Right,"Direction : Right")]
-    [InlineData(Direction.Left,"Direction : Left")]
-    [InlineData(Direction.Up,"Direction : Up")]
-    [InlineData(Direction.Down,"Direction : Down")]
-    public void ValuePatternEvaluate(Direction direction,string expected)
-    {
-        var result = _evaluator.EvaluateExpression(direction);
-        Assert.Equal(expected, result);
-    }
+	public string FirstName {get;set;}
+	public string LastName {get;set;}
 }
 
-// Where Direction is defined as
-public enum Direction
+var foo = new Foo {FirstName = "Anu", LastName="Viswan"};
+if(foo is Foo {FirstName:"Anu",LastName:"Viswan"})
 {
-    Up,
-    Down,
-    Left,
-    Right
+   // code
 }
 ```
 
-As observed from the _xUnit_ test case above, we expect our `EvaluateExpression` method to accept an `Enum` of type `Direction` and return a `string` that represents the enum passed.
-
-Without wasting any time, let us write our desired method.
+The property pattern allows to check if `Foo.FirstName` and `Foo.LastName` matches the desired values. Compare this lean syntax against the conventional syntax which existed before the patterns were introduced.
 
 ```csharp
-public string EvaluateExpression(Direction criteria) => criteria switch
+if(foo is Foo && foo.FirstName=="Anu" && foo.LastName=="Viswan")
 {
-    Direction.Up => $"Direction : {nameof(Direction.Up)}",
-    Direction.Down => $"Direction : {nameof(Direction.Down)}",
-    Direction.Left => $"Direction : {nameof(Direction.Left)}",
-    Direction.Right => $"Direction : {nameof(Direction.Right)}",
+    // code
+}
+```
+
+As evident from the code abvoe, _property pattern_ has made the code more concise.
+
+We could use the _property pattern_ in our preceeding example of switch expression to trim down it further.
+
+```csharp
+public string EvaluateSwitchExpression(T criteria) => criteria switch
+{
+    Int32 value => $"Type {nameof(Int32)}, Value = {value}",
+    Int64 value => $"Type {nameof(Int64)}, Value = {value}",
+    string value => $"Type {nameof(String)}, Value = {value}",
+    List<int> value when  value.Count < 5 => $"Type Small {nameof(List<int>)}, Value = {value}",
+    List<int> {Count:5 }  value => $"Type Medium {nameof(List<int>)}, Value = {value}",
+    List<int> value => $"Type Big {nameof(List<int>)}, Value = {value}",
+    null => "Null Detected",
+    _ => $"Type Unknown"
 };
 ```
 
-The above code demonstrates how the `switch expression` has made the code more concise and free from boiler plate codes.
-
-## Type Pattern
-
-Type pattern has been already introduced in C# 7, and in this sub section we will see how we could use it within the `switch expression`. We will begin by writing out Test Cases.
-
-```csharp
-public class TypePatternTests
-{
-    [Theory]
-    [InlineData(1, "Type Int32, Value = 1")]
-    [InlineData(1L, "Type Int64, Value = 1")]
-    [InlineData("random string", "Type String, Value = random string")]
-    [InlineData(7F, "Type Unknown")]
-    [InlineData(null, "Null Detected")]
-    public void TypePatternEvaluate<T>(T direction, string expected)
-    {
-        var _evaluator = new TypePattern<T>();
-        var result = _evaluator.EvaluateExpression(direction);
-        Assert.Equal(expected, result);
-    }
-}
-```
-
-That could should be self-explanatory. We will proceed for writing our desired method using _Type Pattern_.
+The highlighted expression has been made more consise eliminating the _case guard_, instead using the _positional pattern_.
