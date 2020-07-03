@@ -86,11 +86,11 @@ public string EvaluateSwitchStatement(T criteria)
 {
     switch (criteria)
     {
-        case Int32 v1 : return $"Type {nameof(Int32)}, Value = {v1}";
-        case Int64 v2: return $"Type {nameof(Int64)}, Value = {v2}";
-        case string v3: return $"Type {nameof(String)}, Value = {v3}";
-        case List<int> v4 when v4.Count < 5: return $"Type Small {nameof(List<int>)}, Value = {v4}";
-        case List<int> v5 when v5.Count == 5: return $"Type Medium {nameof(List<int>)}, Value = {v5}";
+        case Int32 value : return $"Type {nameof(Int32)}, Value = {value}";
+        case Int64 value: return $"Type {nameof(Int64)}, Value = {value}";
+        case string value: return $"Type {nameof(String)}, Value = {value}";
+        case List<int> value when value.Count < 5: return $"Type Small {nameof(List<int>)}, Value = {value}";
+        case List<int> value when value.Count == 5: return $"Type Medium {nameof(List<int>)}, Value = {value}";
         case List<int> value: return $"Type Big {nameof(List<int>)}, Value = {value}";
         case null: return "Null Detected";
         default:  return $"Type Unknown";
@@ -156,7 +156,7 @@ if(foo is Foo {FirstName:"Anu",LastName:"Viswan"})
 }
 ```
 
-The property pattern allows to check if `Foo.FirstName` and `Foo.LastName` matches the desired values. Compare this lean syntax against the conventional syntax which existed before the patterns were introduced.
+The _property pattern_ allows to check if `Foo.FirstName` and `Foo.LastName` matches the desired values. Compare this lean syntax against the conventional syntax which existed before the patterns were introduced.
 
 ```csharp
 if(foo is Foo && foo.FirstName=="Anu" && foo.LastName=="Viswan")
@@ -183,4 +183,42 @@ public string EvaluateSwitchExpression(T criteria) => criteria switch
 };
 ```
 
-The highlighted expression has been made more consise eliminating the _case guard_, instead using the _positional pattern_.
+The highlighted expression has been made more consise eliminating the _case guard_, instead using the _property pattern_. Let us explore one more case of _property pattern_ where the pattern is exclusively used.
+
+```csharp
+public class Person
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public int Age { get; set; }
+}
+
+public string EvaluateSwitchExpression(Person criteria) => criteria switch
+{
+    { FirstName: "Anu", Age: 36 } => "FirstName and Age Matched",
+    { LastName: "Viswan" } person when person.Age < 40 => "LastName With Age Less than Matched",
+    { LastName: "Doe" } => "LastName Matched",
+    _ => "Not Found"
+};
+```
+
+Compare this with the conventional _switch statement_ approach.
+
+```csharp
+public string EvaluateSwitchStatement(Person criteria)
+{
+    switch (criteria)
+    {
+        case var person when person.FirstName.Equals("Anu") && person.Age == 36:
+            return "FirstName and Age Matched";
+        case var person when person.LastName.Equals("Viswan") && person.Age < 40:
+            return "LastName With Age Less than Matched";
+        case var person when person.LastName.Equals("Doe"):
+            return "LastName Matched";
+        default:
+            return "Not Found";
+    };
+}
+```
+
+Once again, the _switch expression_ has managed to beat the _switch statement_ hands down in terms of clarity and leaner code.
