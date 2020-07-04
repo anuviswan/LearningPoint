@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Cache;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SwitchExpressions.Patterns
 {
-    public class PropertyPattern : ISwitchExpression<Person> ,ISwitchStatement<Person>
+    public class PositionalPattern : ISwitchExpression<Person>, ISwitchStatement<Person>
     {
         public string EvaluateSwitchExpression(Person criteria) => criteria switch
         {
-            { FirstName: "Anu", Age: 36 } => "FirstName and Age Matched",
-            { LastName: "Viswan" } person when person.Age < 40 => "LastName With Age Less than Matched",
-            { LastName: "Doe" } => "LastName Matched",
+            ("Anu", _, 36 )=> "FirstName and Age Matched",
+            (_,"Viswan",_) person when person.Age < 40 => "LastName With Age Less than Matched",
+            (_,"Doe",_) => "LastName Matched",
             { } => "Not Found",
             null => "Input was null"
         };
@@ -23,11 +21,11 @@ namespace SwitchExpressions.Patterns
         {
             switch (criteria)
             {
-                case { FirstName:"Anu", Age:36}:
+                case ("Anu",_,36) :
                     return "FirstName and Age Matched";
-                case { LastName: "Viswan" } person when person.Age < 40:
+                case (_,"Viswan",var age) when age < 40:
                     return "LastName With Age Less than Matched";
-                case { LastName: "Doe" }:
+                case (_,"Doe",_):
                     return "LastName Matched";
                 case { }:
                     return "Not Found";

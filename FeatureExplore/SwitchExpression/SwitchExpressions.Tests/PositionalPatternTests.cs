@@ -5,16 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Extensions;
 
 namespace SwitchExpressions.Tests
 {
-    public class PropertyPatternTests
+    public class PositionalPatternTests
     {
         private ISwitchExpression<Person> _evaluator;
-        public PropertyPatternTests()
+        public PositionalPatternTests()
         {
-            _evaluator = new PropertyPattern();
+            _evaluator = new PositionalPattern();
         }
 
         [Theory]
