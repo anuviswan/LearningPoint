@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InitProperties
+namespace CSharp9.InitProperties
 {
     class Program
     {
