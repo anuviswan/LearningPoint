@@ -28,7 +28,7 @@ namespace Oxyplot.TrackerStayOpen.ViewModels
                 Color = OxyColors.Blue,
                 MarkerFill = OxyColors.Red,
                 ItemsSource = points,
-                TrackerFormatString = "X={2},\nY={4},\nAdditionalInfo={Description}",
+                TrackerFormatString = "X={2},\nY={4}",
                 MarkerType = MarkerType.Circle,
                 MarkerSize = 5
 
