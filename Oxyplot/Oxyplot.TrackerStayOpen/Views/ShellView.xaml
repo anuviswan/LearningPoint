@@ -1,0 +1,26 @@
+﻿<Window x:Class="Oxyplot.TrackerStayOpen.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Oxyplot.TrackerStayOpen.Views"
+        mc:Ignorable="d"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        Title="ShellView" Height="450" Width="800">
+    <Grid>
+        <oxy:PlotView Height="500" Width="500" Model="{Binding MyModel}" Controller="{Binding CustomPlotController}">
+            <oxy:PlotView.DefaultTrackerTemplate>
+                <ControlTemplate>
+                    <oxy:TrackerControl Position="{Binding Position}" LineExtents="{Binding PlotModel.PlotArea}">
+                        <oxy:TrackerControl.Background>
+                            <SolidColorBrush Color="LightBlue" />
+                        </oxy:TrackerControl.Background>
+                        <oxy:TrackerControl.Content>
+                            <TextBlock Text="{Binding}" Margin="7" Foreground="Red" />
+                        </oxy:TrackerControl.Content>
+                    </oxy:TrackerControl>
+                </ControlTemplate>
+            </oxy:PlotView.DefaultTrackerTemplate>
+        </oxy:PlotView>
+    </Grid>
+</Window>
