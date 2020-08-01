@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitProperties", "CSharp9\I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TopLevelPrograms", "CSharp9\TopLevelPrograms\TopLevelPrograms.csproj", "{6259B045-0DDD-43D0-9E1D-00B773A0E012}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TargetTypedNewExpressions", "CSharp9\TargetTypedNewExpressions\TargetTypedNewExpressions.csproj", "{82999FE2-3CD3-4C27-AF22-5044A7CB6CF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TargetTypedNewExpressions", "CSharp9\TargetTypedNewExpressions\TargetTypedNewExpressions.csproj", "{82999FE2-3CD3-4C27-AF22-5044A7CB6CF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Records", "CSharp9\Records\Records.csproj", "{8FC84D54-CC1A-43EE-941B-5930FD6B4B92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{82999FE2-3CD3-4C27-AF22-5044A7CB6CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82999FE2-3CD3-4C27-AF22-5044A7CB6CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82999FE2-3CD3-4C27-AF22-5044A7CB6CF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC84D54-CC1A-43EE-941B-5930FD6B4B92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC84D54-CC1A-43EE-941B-5930FD6B4B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC84D54-CC1A-43EE-941B-5930FD6B4B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC84D54-CC1A-43EE-941B-5930FD6B4B92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

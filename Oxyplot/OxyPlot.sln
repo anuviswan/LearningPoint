@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TooltipOverlayBug", "Toolti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxyplot.TrackerStayOpen", "Oxyplot.TrackerStayOpen\Oxyplot.TrackerStayOpen.csproj", "{86AB3BC2-8F9C-4276-8D3B-F4ECE57D2EC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxyplot.FourQuadrant", "Oxyplot.FourQuadrant\Oxyplot.FourQuadrant.csproj", "{4D104DE7-8FA4-472E-8BE0-E1F0D0AC625B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{86AB3BC2-8F9C-4276-8D3B-F4ECE57D2EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86AB3BC2-8F9C-4276-8D3B-F4ECE57D2EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86AB3BC2-8F9C-4276-8D3B-F4ECE57D2EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D104DE7-8FA4-472E-8BE0-E1F0D0AC625B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D104DE7-8FA4-472E-8BE0-E1F0D0AC625B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D104DE7-8FA4-472E-8BE0-E1F0D0AC625B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D104DE7-8FA4-472E-8BE0-E1F0D0AC625B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
