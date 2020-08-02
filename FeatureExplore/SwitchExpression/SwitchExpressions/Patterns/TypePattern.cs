@@ -8,13 +8,6 @@ namespace SwitchExpressions.Patterns
 {
     public class TypePattern<T> : ISwitchExpression<T>, ISwitchStatement<T>
     {
-        public string Eval(int c)=> c switch
-        {
-            5 =>"",
-            <5 => "l",
-            _=> ""
-        }
-
         public string EvaluateSwitchExpression(T criteria) => criteria switch
         {
             Int32 value => $"Type {nameof(Int32)}, Value = {value}",
