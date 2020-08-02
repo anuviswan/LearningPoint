@@ -15,9 +15,9 @@ namespace PatternMatching.Patterns
             String => $"Type {nameof(String)}, Value = {criteria}",
             List<int> value  => value.Count switch
             {
-                < 5 => $"Type Small {nameof(List<int>)}, Value = {value}",
-                > 5 => $"Type Big {nameof(List<int>)}, Value = {value}",
-                _ => $"Type Medium {nameof(List<int>)}, Value = {value}",
+                < 5 => $"Type Small {nameof(List<int>)}, Value = {value.Count}",
+                > 5 => $"Type Big {nameof(List<int>)}, Value = {value.Count}",
+                _ => $"Type Medium {nameof(List<int>)}, Value = {value.Count}",
 
             },
             null => "Null Detected",
@@ -31,9 +31,9 @@ namespace PatternMatching.Patterns
                 case Int32 value: return $"Type {nameof(Int32)}, Value = {value}";
                 case Int64 value: return $"Type {nameof(Int64)}, Value = {value}";
                 case string value: return $"Type {nameof(String)}, Value = {value}";
-                case List<int> value when value.Count < 5: return $"Type Small {nameof(List<int>)}, Value = {value}";
-                case List<int> value when value.Count == 5: return $"Type Medium {nameof(List<int>)}, Value = {value}";
-                case List<int> value: return $"Type Big {nameof(List<int>)}, Value = {value}";
+                case List<int> value when value.Count < 5: return $"Type Small {nameof(List<int>)}, Value = {value.Count}";
+                case List<int> value when value.Count == 5: return $"Type Medium {nameof(List<int>)}, Value = {value.Count}";
+                case List<int> value: return $"Type Big {nameof(List<int>)}, Value = {value.Count}";
                 case null: return "Null Detected";
                 default: return $"Type Unknown";
             }
