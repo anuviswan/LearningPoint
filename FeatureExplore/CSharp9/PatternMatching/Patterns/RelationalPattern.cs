@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 
 namespace PatternMatching.Patterns
 {
-    public class SimpleTypePattern<T> : ISwitchExpression<T>, ISwitchStatement<T>
+    public class RelationalPattern<T> : ISwitchExpression<T>, ISwitchStatement<T>
     {
         public string EvaluateSwitchExpression(T criteria) => criteria switch
         {
-            Int32  => $"Type {nameof(Int32)}, Value = {criteria}",
-            Int64  => $"Type {nameof(Int64)}, Value = {criteria}",
-            string => $"Type {nameof(String)}, Value = {criteria}",
-            List<int> value when value.Count < 5 => $"Type Small {nameof(List<int>)}, Value = {value}",
-            List<int> { Count: 5 }  => $"Type Medium {nameof(List<int>)}, Value = {criteria}",
-            List<int>  => $"Type Big {nameof(List<int>)}, Value = {criteria}",
+            Int32 => $"Type {nameof(Int32)}, Value = {criteria}",
+            Int64 => $"Type {nameof(Int64)}, Value = {criteria}",
+            String => $"Type {nameof(String)}, Value = {criteria}",
+            List<int> value  => value.Count switch
+            {
+                < 5 => $"Type Small {nameof(List<int>)}, Value = {value}",
+                > 5 => $"Type Big {nameof(List<int>)}, Value = {value}",
+                _ => $"Type Medium {nameof(List<int>)}, Value = {value}",
+
+            },
             null => "Null Detected",
             _ => $"Type Unknown"
         };
