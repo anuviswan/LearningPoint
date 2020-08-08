@@ -22,11 +22,9 @@ export default {
   },
   methods: {
     addTodo(newTodo) {
-      console.log(newTodo);
       this.todos = [...this.todos, newTodo];
     },
     deleteTodo(id) {
-      console.log(id);
       this.todos = this.todos.filter((todo) => todo.id != id);
     },
   },
