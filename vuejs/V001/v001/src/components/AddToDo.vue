@@ -31,7 +31,6 @@ export default {
         completed: false,
       };
       this.$emit("add-todo", newTodo);
-      console.log(newTodo);
     },
   },
 };
