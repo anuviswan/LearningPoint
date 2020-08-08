@@ -21,16 +21,25 @@ export default {
     };
   },
   methods: {
-    addTodo(newTodo) {
-      this.todos = [...this.todos, newTodo];
+    async addTodo(newTodo) {
+      const { title, completed } = newTodo;
+      var response = await axios.post(
+        "https://jsonplaceholder.typicode.com/todos",
+        {
+          title,
+          completed,
+        }
+      );
+      this.todos = [...this.todos, response.data];
     },
-    deleteTodo(id) {
+    async deleteTodo(id) {
+      await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
       this.todos = this.todos.filter((todo) => todo.id != id);
     },
   },
   async created() {
     const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos"
+      "https://jsonplaceholder.typicode.com/todos?_limit=5"
     );
     this.todos = response.data;
   },
