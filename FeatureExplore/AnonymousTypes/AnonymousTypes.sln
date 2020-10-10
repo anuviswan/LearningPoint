@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30524.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnonymousTypes", "AnonymousTypes\AnonymousTypes.csproj", "{B85F76BE-4725-4452-8CB2-E6C855FC8D70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnonymousTypes", "AnonymousTypes\AnonymousTypes.csproj", "{B85F76BE-4725-4452-8CB2-E6C855FC8D70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarAssembly", "BarAssembly\BarAssembly.csproj", "{EF757B13-6CEE-4D7E-9ABE-61FD4073909B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarAssembly", "BarAssembly\BarAssembly.csproj", "{AA80FB1F-7BBE-49D8-9814-8C2A765A5F2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B85F76BE-4725-4452-8CB2-E6C855FC8D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B85F76BE-4725-4452-8CB2-E6C855FC8D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B85F76BE-4725-4452-8CB2-E6C855FC8D70}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF757B13-6CEE-4D7E-9ABE-61FD4073909B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF757B13-6CEE-4D7E-9ABE-61FD4073909B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF757B13-6CEE-4D7E-9ABE-61FD4073909B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF757B13-6CEE-4D7E-9ABE-61FD4073909B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA80FB1F-7BBE-49D8-9814-8C2A765A5F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA80FB1F-7BBE-49D8-9814-8C2A765A5F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA80FB1F-7BBE-49D8-9814-8C2A765A5F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA80FB1F-7BBE-49D8-9814-8C2A765A5F2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
