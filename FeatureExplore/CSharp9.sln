@@ -13,9 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Records", "CSharp9\Records\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImprovedPatternMatching", "ImprovedPatternMatching", "{51ABA47A-5A41-4B96-973B-EFF95A8F0F43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternMatching", "CSharp9\PatternMatching\PatternMatching.csproj", "{7D74A3CA-CA75-414A-9947-7C1082B9A9D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatternMatching", "CSharp9\PatternMatching\PatternMatching.csproj", "{7D74A3CA-CA75-414A-9947-7C1082B9A9D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternMatching.Tests", "CSharp9\PatternMatching.Tests\PatternMatching.Tests.csproj", "{0A0ED15C-242A-47A6-881F-7C412DD9D15E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatternMatching.Tests", "CSharp9\PatternMatching.Tests\PatternMatching.Tests.csproj", "{0A0ED15C-242A-47A6-881F-7C412DD9D15E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImprovedNullHandling", "ImprovedNullHandling", "{6FF53D3B-CDAF-4682-9528-00D2DC5AE816}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullHandling", "CSharp9\NullHandling\NullHandling.csproj", "{BCE1CCE3-E662-4072-B599-E45A057DBE6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullHandling.Tests", "CSharp9\NullHandling.Tests\NullHandling.Tests.csproj", "{027639D0-FB40-4400-80DA-B6668AD33890}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +53,14 @@ Global
 		{0A0ED15C-242A-47A6-881F-7C412DD9D15E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A0ED15C-242A-47A6-881F-7C412DD9D15E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A0ED15C-242A-47A6-881F-7C412DD9D15E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCE1CCE3-E662-4072-B599-E45A057DBE6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCE1CCE3-E662-4072-B599-E45A057DBE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCE1CCE3-E662-4072-B599-E45A057DBE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCE1CCE3-E662-4072-B599-E45A057DBE6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027639D0-FB40-4400-80DA-B6668AD33890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027639D0-FB40-4400-80DA-B6668AD33890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027639D0-FB40-4400-80DA-B6668AD33890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027639D0-FB40-4400-80DA-B6668AD33890}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +68,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7D74A3CA-CA75-414A-9947-7C1082B9A9D0} = {51ABA47A-5A41-4B96-973B-EFF95A8F0F43}
 		{0A0ED15C-242A-47A6-881F-7C412DD9D15E} = {51ABA47A-5A41-4B96-973B-EFF95A8F0F43}
+		{BCE1CCE3-E662-4072-B599-E45A057DBE6D} = {6FF53D3B-CDAF-4682-9528-00D2DC5AE816}
+		{027639D0-FB40-4400-80DA-B6668AD33890} = {6FF53D3B-CDAF-4682-9528-00D2DC5AE816}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {53FB43A7-B0B8-4A07-8B2F-B797FAE573CC}
