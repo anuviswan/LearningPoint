@@ -20,6 +20,6 @@ namespace NullHandling
             return true;
         }
 
-        public bool DemoUsingImplicitValidation(Foo foo!!) => true;
+        //public bool DemoUsingImplicitValidation(Foo foo!!) => true;
     }
 }

@@ -4,63 +4,56 @@ using System.Reflection;
 
 namespace Records
 {
+    public record User(string UserName, int Id);
+
+    public record Customer(string UserName, int Id, string Location) : User(UserName, Id);
+
+    public record Employee(string DisplayName, int Id, string Location) : User(DisplayName, Id);
+
+    public record CustomClonedUser(string UserName, int Id)
+    {
+        public CustomClonedUser(CustomClonedUser original) => (UserName, Id) = (original.UserName, -1);
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-            var userOriginal = new User
+            var user1 = new User("Anu Viswan", 1);
+            var user2 = new User("Anu Viswan", 1);
+            var user3 = new User("Manu Viswan", 1);
+
+            // Structural Equality  
+            Console.WriteLine($"user1==user2 : {user1 == user2}");
+            Console.WriteLine($"user1==user3 : {user1 == user3}");
+
+            var user = new User("Anu Viswan", 1);
+            var (userName, id) = user;
+
+            var customer = new Customer("Anu Viswan", 1, "India");
+            var employee = new Employee("Anu Viswan", 1, "India");
+
+            Console.WriteLine(user.ToString());
+            Console.WriteLine(customer.ToString());
+            Console.WriteLine(employee.ToString());
+
+            var anotherUser = user with
             {
-                UserName = "Anuviswan",
-                Id = 1
+                UserName = "Manu Viswan"
             };
 
-            var userModified = userOriginal with { UserName = "Jia" };
-            var userRevereted = userModified with { UserName = "Anuviswan" };
+            Console.WriteLine(anotherUser.ToString());
 
-            userModified.Id = 2;
+            var customUser = new CustomClonedUser("Anu Viswan", 1);
+            var anotherCustomClonedUser = user with
+            {
+                UserName = "Manu Viswan"
+            };
 
-            
-
-            Console.WriteLine($"Original : {userOriginal.UserName},{userOriginal.Id}");
-            Console.WriteLine($"Modified : {userModified.UserName},{userModified.Id}");
-
-            Console.WriteLine(userOriginal == userModified);
-            //Console.WriteLine(userOriginal == userRevereted);
-
-            Console.WriteLine(userOriginal.Equals(userModified));
-            //Console.WriteLine(userOriginal.Equals(userRevereted));
-
-            Console.WriteLine(ReferenceEquals(userOriginal,userModified));
-            //Console.WriteLine(ReferenceEquals(userOriginal,userRevereted));
+            Console.WriteLine(customUser.ToString());
+            Console.WriteLine(anotherUser.ToString());
         }
-
-        private static bool Immutable(Type type)
-        {
-            if (type.IsPrimitive) return true;
-            if (type == typeof(string)) return true;
-            var fieldInfos = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            var isShallowImmutable = fieldInfos.All(f => f.IsInitOnly);
-            if (!isShallowImmutable) return false;
-            var isDeepImmutable = fieldInfos.All(f => Immutable(f.FieldType));
-            return isDeepImmutable;
-        }
+       
     }
-    //public record User(string UserName, int Id);
-
-    public record User
-    {
-        public string UserName { get; init; }
-        public int Id;
-    }
-
-    class User1
-    {
-        public string UserName { get; init; }
-        public int Id { get; set; }
-    }
-}
-
-namespace System.Runtime.CompilerServices
-{
-    public class IsExternalInit { }
+    
 }
