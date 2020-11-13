@@ -54,7 +54,6 @@
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
 
-                    <ContentControl Grid.Column="0" Grid.Row="0" x:Name="Navbar"/>
                     <ContentControl Grid.Column="0" Grid.Row="1" x:Name="ActiveItem" />
 
                 </Grid>
