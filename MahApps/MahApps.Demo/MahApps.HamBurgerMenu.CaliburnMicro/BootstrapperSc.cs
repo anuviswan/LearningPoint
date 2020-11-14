@@ -2,9 +2,6 @@
 using MahApps.HamBurgerMenu.CaliburnMicro.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MahApps.HamBurgerMenu.CaliburnMicro
@@ -12,17 +9,22 @@ namespace MahApps.HamBurgerMenu.CaliburnMicro
     public class BootstrapperSc : BootstrapperBase
     {
         #region Private Variable
+
         private SimpleContainer _Container = new SimpleContainer();
-        #endregion
+
+        #endregion Private Variable
 
         #region Constructor
+
         public BootstrapperSc()
         {
             Initialize();
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Overrides
+
         protected override void Configure()
         {
             _Container.Instance<IWindowManager>(new WindowManager());
@@ -31,6 +33,7 @@ namespace MahApps.HamBurgerMenu.CaliburnMicro
             // Hook up your ViewModel and Contract here
             _Container.PerRequest<ShellViewModel, ShellViewModel>();
         }
+
         protected override object GetInstance(Type service, string key)
         {
             return _Container.GetInstance(service, key);
@@ -48,8 +51,9 @@ namespace MahApps.HamBurgerMenu.CaliburnMicro
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-             DisplayRootViewFor<ShellViewModel>();
+            DisplayRootViewFor<ShellViewModel>();
         }
-        #endregion
+
+        #endregion Overrides
     }
 }

@@ -1,4 +1,4 @@
-﻿<mah:MetroWindow xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+﻿<mah:MetroWindow xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  x:Class="MahApps.HamBurgerMenu.CaliburnMicro.Views.ShellView"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,7 +9,7 @@
                  mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
     <mah:MetroWindow.Resources>
-        <converters:PageToMenuItemConverter x:Key="MenuConverter"/>
+        <converters:PageToMenuItemConverter x:Key="MenuConverter" />
 
         <DataTemplate x:Key="MenuHeaderTemplate">
             <TextBlock HorizontalAlignment="Center"
@@ -18,7 +18,7 @@
    Foreground="White"
    Text="Pictures" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="MenuItemTemplate">
             <Grid x:Name="RootGrid"
       Height="48"
@@ -40,7 +40,7 @@
         </DataTemplate>
     </mah:MetroWindow.Resources>
     <Grid>
-        <mah:HamburgerMenu DisplayMode="CompactOverlay" 
+        <mah:HamburgerMenu DisplayMode="CompactOverlay"
                    ItemsSource="{Binding MenuItems,Converter={StaticResource MenuConverter}}"
                    cal:Message.Attach="[Event ItemClick]=[Action MenuSelectionChanged($source,$eventArgs)]"
                    HamburgerMenuHeaderTemplate="{StaticResource MenuHeaderTemplate}"
@@ -49,17 +49,14 @@
             <mah:HamburgerMenu.Content>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="30" />
                     </Grid.RowDefinitions>
 
                     <ContentControl Grid.Column="0" Grid.Row="1" x:Name="ActiveItem" />
-
                 </Grid>
-
             </mah:HamburgerMenu.Content>
         </mah:HamburgerMenu>
-
     </Grid>
 </mah:MetroWindow>
