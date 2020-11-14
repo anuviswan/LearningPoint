@@ -39,7 +39,6 @@
     <Grid>
         <mah:HamburgerMenu x:Name="Menu" DisplayMode="CompactOverlay" SelectedItem="{Binding ActiveItem,Converter={StaticResource SelectedItemConverter}}"
                    ItemsSource="{Binding MenuItems,Converter={StaticResource MenuConverter}}"
-                   cal:Message.Attach="[Event ItemClick]=[Action MenuSelectionChanged($source,$eventArgs)]"
                    HamburgerMenuHeaderTemplate="{StaticResource MenuHeaderTemplate}"
                    ItemTemplate="{StaticResource MenuItemTemplate}">
             <mah:HamburgerMenu.Content>
