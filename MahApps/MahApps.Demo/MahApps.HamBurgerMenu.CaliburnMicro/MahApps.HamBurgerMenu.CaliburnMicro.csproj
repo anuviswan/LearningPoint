@@ -71,6 +71,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\PageToMenuItemConverter.cs" />
+    <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\PageViewModelBase.cs" />
     <Compile Include="ViewModels\ProfilePageViewModel.cs" />

@@ -16,11 +16,5 @@ namespace MahApps.HamBurgerMenu.CaliburnMicro.ViewModels
         }
 
         public IEnumerable<PageViewModelBase> MenuItems { get; }
-
-        public void MenuSelectionChanged(object sender, ItemClickEventArgs eventArgs)
-        {
-            if (eventArgs.ClickedItem is HamburgerMenuIconItem menuItem)
-                ActivateItem(menuItem.Tag);
-        }
     }
 }

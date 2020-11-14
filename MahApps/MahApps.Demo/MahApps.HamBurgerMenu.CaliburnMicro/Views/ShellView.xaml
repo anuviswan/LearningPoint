@@ -9,14 +9,11 @@
                  mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
     <mah:MetroWindow.Resources>
+        <converters:SelectedItemConverter x:Key="SelectedItemConverter"/>
         <converters:PageToMenuItemConverter x:Key="MenuConverter" />
 
         <DataTemplate x:Key="MenuHeaderTemplate">
-            <TextBlock HorizontalAlignment="Center"
-   VerticalAlignment="Center"
-   FontSize="16"
-   Foreground="White"
-   Text="Pictures" />
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="16"  Foreground="White"  Text="Pictures" />
         </DataTemplate>
 
         <DataTemplate x:Key="MenuItemTemplate">
@@ -31,29 +28,22 @@
                     Content="{Binding Icon}"
                     Focusable="False" />
                 <TextBlock Grid.Column="1"
-               VerticalAlignment="Center"
-               FontSize="16"
-               Text="{Binding Label}" />
+                   VerticalAlignment="Center"
+                   FontSize="16"
+                   Text="{Binding Label}" />    
             </Grid>
         </DataTemplate>
+
+       
     </mah:MetroWindow.Resources>
     <Grid>
-        <mah:HamburgerMenu DisplayMode="CompactOverlay"
+        <mah:HamburgerMenu x:Name="Menu" DisplayMode="CompactOverlay" SelectedItem="{Binding ActiveItem,Converter={StaticResource SelectedItemConverter}}"
                    ItemsSource="{Binding MenuItems,Converter={StaticResource MenuConverter}}"
                    cal:Message.Attach="[Event ItemClick]=[Action MenuSelectionChanged($source,$eventArgs)]"
                    HamburgerMenuHeaderTemplate="{StaticResource MenuHeaderTemplate}"
                    ItemTemplate="{StaticResource MenuItemTemplate}">
-
             <mah:HamburgerMenu.Content>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="30" />
-                    </Grid.RowDefinitions>
-
-                    <ContentControl Grid.Column="0" Grid.Row="1" x:Name="ActiveItem" />
-                </Grid>
+               <ContentControl Grid.Column="0" Grid.Row="1" x:Name="ActiveItem" />
             </mah:HamburgerMenu.Content>
         </mah:HamburgerMenu>
     </Grid>
