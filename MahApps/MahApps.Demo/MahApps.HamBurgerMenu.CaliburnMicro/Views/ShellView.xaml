@@ -20,9 +20,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MenuItemTemplate">
-            <Grid x:Name="RootGrid"
-      Height="48"
-      Background="Transparent">
+            <Grid x:Name="RootGrid" Height="48" Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition />
