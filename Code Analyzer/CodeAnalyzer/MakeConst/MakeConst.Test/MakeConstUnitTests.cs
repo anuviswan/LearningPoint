@@ -1,5 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VerifyCS = MakeConst.Test.CSharpCodeFixVerifier<
     MakeConst.MakeConstAnalyzer,
@@ -12,18 +14,41 @@ namespace MakeConst.Test
     {
         //No diagnostics expected to show up
         [TestMethod]
-        public async Task TestMethod1()
+        [DynamicData(nameof(GetValidData),DynamicDataSourceType.Method)]
+        public async Task TestMethod1(string source)
         {
-            var test = @"";
+            await VerifyCS.VerifyAnalyzerAsync(source);
+        }
 
-            await VerifyCS.VerifyAnalyzerAsync(test);
+        private static IEnumerable<object[]> GetValidData()
+        {
+            yield return new object[] { @"" };
         }
 
         //Diagnostic and CodeFix both triggered and checked for
         [TestMethod]
-        public async Task TestMethod2()
+        [DynamicData(nameof(GetInvalidData), DynamicDataSourceType.Method)]
+        public async Task TestMethod2(string testSource,string fixedSource)
         {
-            var test = @"
+            
+            //var expected1 = new DiagnosticResult()
+            //{
+            //    Id = MakeConstAnalyzer.DiagnosticId,
+            //    Message = new LocalizableResourceString(nameof(MakeConst.Resources.AnalyzerMessageFormat), MakeConst.Resources.ResourceManager, typeof(MakeConst.Resources)).ToString(),
+            //    Severity = DiagnosticSeverity.Warning,
+            //    Locations =
+            //new[] {
+            //        new DiagnosticResultLocation("Test0.cs", line, column)
+            //    }
+            //};
+
+            var expected = VerifyCS.Diagnostic("MakeConst").WithLocation(15,17).WithArguments("TypeName");
+            await VerifyCS.VerifyCodeFixAsync(testSource, expected, fixedSource);
+        }
+
+        private static IEnumerable<object[]> GetInvalidData()
+        {
+            var codeWithExplicitDeclaration = @"
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -62,19 +87,8 @@ namespace MakeConst.Test
             }
         }
     }";
-            //var expected1 = new DiagnosticResult()
-            //{
-            //    Id = MakeConstAnalyzer.DiagnosticId,
-            //    Message = new LocalizableResourceString(nameof(MakeConst.Resources.AnalyzerMessageFormat), MakeConst.Resources.ResourceManager, typeof(MakeConst.Resources)).ToString(),
-            //    Severity = DiagnosticSeverity.Warning,
-            //    Locations =
-            //new[] {
-            //        new DiagnosticResultLocation("Test0.cs", line, column)
-            //    }
-            //};
 
-            var expected = VerifyCS.Diagnostic("MakeConst").WithLocation(15,17).WithArguments("TypeName");
-            await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
+            yield return new object[] { codeWithExplicitDeclaration, fixtest };
         }
     }
 }
