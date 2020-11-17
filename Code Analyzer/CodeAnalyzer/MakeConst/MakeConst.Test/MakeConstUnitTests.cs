@@ -15,20 +15,41 @@ namespace MakeConst.Test
         //No diagnostics expected to show up
         [TestMethod]
         [DynamicData(nameof(GetValidData),DynamicDataSourceType.Method)]
-        public async Task TestMethod1(string source)
+        public async Task ValidCode_NoChangeExpected(string source)
         {
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
         private static IEnumerable<object[]> GetValidData()
         {
+            var codeWithImplicitDeclaration = @"
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Diagnostics;
+
+    namespace ConsoleApplication1
+    {
+        class Foo
+        {   
+            public void Bar()
+            {
+                var i = 4;
+                Console.WriteLine(i);
+            }
+        }
+    }";
+
             yield return new object[] { @"" };
+            yield return new object[] { codeWithImplicitDeclaration };
         }
 
         //Diagnostic and CodeFix both triggered and checked for
         [TestMethod]
         [DynamicData(nameof(GetInvalidData), DynamicDataSourceType.Method)]
-        public async Task TestMethod2(string testSource,string fixedSource)
+        public async Task InvalidCode_ChangeExpected(string testSource,string fixedSource)
         {
             
             //var expected1 = new DiagnosticResult()
