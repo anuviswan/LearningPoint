@@ -6,8 +6,8 @@ namespace CodeLiveTesting
     {
         static void Main(string[] args)
         {
-            const int g = 6;
-            const int jh = g;
+            int g = 6;
+            var jh = g;
             Console.WriteLine(jh);
         }
     }

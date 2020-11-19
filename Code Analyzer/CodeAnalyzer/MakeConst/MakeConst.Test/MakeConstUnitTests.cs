@@ -37,7 +37,7 @@ namespace MakeConst.Test
         {   
             public void Bar()
             {
-                int i = 4;
+                var i = 4;
                 Console.WriteLine(i);
             }
         }
