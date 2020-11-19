@@ -39,10 +39,10 @@ namespace MakeConst
         private static void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             var localDeclaration = (LocalDeclarationStatementSyntax)context.Node;
-            if (localDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword))
-            {
-                return;
-            }
+            
+            if (localDeclaration.Declaration.Type.IsVar) return;
+
+            if (localDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)) return;
 
             // Perform data flow analysis on the local declaration.
             var dataFlowAnalysis = context.SemanticModel.AnalyzeDataFlow(localDeclaration);
