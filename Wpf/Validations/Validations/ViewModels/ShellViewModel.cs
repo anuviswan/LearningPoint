@@ -1,15 +1,19 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using Caliburn.Micro;
+using System.Linq;
 
 namespace Validations.ViewModels
 {
     public  class ShellViewModel:Conductor<object>
     {
-        public void ShowDefaultValidations()
+        public List<ViewModelBase> ViewModels => this.GetType().Assembly.GetTypes()
+                                                .Where(x => x.IsSubclassOf(typeof(ViewModelBase)))
+                                                .Select(x=> (ViewModelBase)Activator.CreateInstance(x,null))
+                                                .ToList();
+        public void ShowViewModel(object item)
         {
-            ChangeActiveItem(new DefaultViewModel(),true);
+            ChangeActiveItem(item,true);
         }
     }
 }

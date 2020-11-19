@@ -5,7 +5,8 @@ using Caliburn.Micro;
 
 namespace Validations.ViewModels
 {
-    public class DefaultViewModel:Screen
+    public class DefaultViewModel:ViewModelBase
     {
+        public override string Title => "Default";
     }
 }

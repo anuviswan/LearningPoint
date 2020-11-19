@@ -7,6 +7,27 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <StackPanel>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Name"/>
+                <TextBox Grid.Column="1" x:Name="Name" />
+            </Grid>
+
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Age"/>
+                <TextBox Grid.Column="1" x:Name="Age" />
+            </Grid>
+        </StackPanel>
             
     </Grid>
 </UserControl>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Validations.Views"
         mc:Ignorable="d"
+         xmlns:cal="http://www.caliburnproject.org"
         Title="ShellView" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -13,11 +14,18 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Validation Demo"/>
+        <TextBlock Text="VALIDATION DEMO" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"/>
 
         <ContentControl x:Name="ActiveItem" Grid.Row="1"/>
         <StackPanel Grid.Row="2">
-            <Button x:Name="ShowDefaultValidations" Content="Default"/>
+            <ItemsControl ItemsSource="{Binding ViewModels}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Margin="5" Height="20" cal:Message.Attach="[Event Click]=[Action ShowViewModel($dataContext)]"  Content="{Binding Title}"/>            
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
         </StackPanel>
     </Grid>
 </Window>
