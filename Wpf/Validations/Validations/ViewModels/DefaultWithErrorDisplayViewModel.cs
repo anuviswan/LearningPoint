@@ -6,6 +6,6 @@ namespace Validations.ViewModels
 {
     public class DefaultWithErrorDisplayViewModel:ViewModelBase
     {
-        public override string Title => "Default with Error Display";
+        public override string Title => "Default with Error Provider Display";
     }
 }
