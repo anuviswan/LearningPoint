@@ -17,6 +17,7 @@ namespace AzureFunc.Crud.TableStorage
         [FunctionName("TodoAdd")]
         public static async Task<IActionResult> Add(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, 
+            [Table("todos","Key","Key",Take =1)] TodoKey keyGen,
             [Table("todos")] CloudTable todoTable,
             ILogger log)
         {
@@ -27,22 +28,44 @@ namespace AzureFunc.Crud.TableStorage
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var data = JsonConvert.DeserializeObject<TodoDto>(requestBody);
 
+            if (keyGen == null)
+            {
+                keyGen = new TodoKey
+                {
+                    Key = 1000,
+                    PartitionKey = "Key",
+                    RowKey = "Key"
+                };
+
+                var addKeyOperation = TableOperation.Insert(keyGen);
+                await todoTable.ExecuteAsync(addKeyOperation);
+            }
+
+            var rowKey = keyGen.Key;
+
             var dataToInsert = new TodoTableEntity
             {
                 Title = data.Title,
                 Description = data.Description,
                 IsCompleted = data.IsCompletd,
                 PartitionKey = data.Title[0].ToString(),
-                RowKey = "sdsd"
+                RowKey = keyGen.Key.ToString()
             };
 
-
-            var operation = TableOperation.Insert(dataToInsert);
+            keyGen.Key += 1;
+            var updateKeyOperation = TableOperation.Replace(keyGen);
+            await todoTable.ExecuteAsync(updateKeyOperation);
+            var addEntryOperation = TableOperation.Insert(dataToInsert);
             todoTable.CreateIfNotExists();
-            await todoTable.ExecuteAsync(operation);
+            await todoTable.ExecuteAsync(addEntryOperation);
 
-            return new OkObjectResult("Success");
+            return new OkObjectResult(keyGen.Key);
         }
+    }
+
+    public class TodoKey:TableEntity
+    {
+        public int Key { get; set; }
     }
 
     public class TodoDto
