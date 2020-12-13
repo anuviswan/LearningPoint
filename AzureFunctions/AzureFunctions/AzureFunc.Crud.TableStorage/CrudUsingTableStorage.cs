@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 //using Microsoft.WindowsAzure.Storage.Table;
 using Microsoft.Azure.Cosmos.Table;
+using System.Collections.Generic;
 
 namespace AzureFunc.Crud.TableStorage
 {
@@ -61,7 +62,44 @@ namespace AzureFunc.Crud.TableStorage
 
             return new OkObjectResult(keyGen.Key);
         }
+
+
+        [FunctionName("TodoGetAll")]
+        public static async Task<IActionResult> GetAll(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+            [Table("todos", "Key", "Key", Take = 1)] TodoKey keyGen,
+            [Table("todos")] CloudTable todoTable,
+            ILogger log)
+        {
+            var tableQuery = new TableQuery<TodoTableEntity>();
+            tableQuery.SelectColumns = new List<string> { nameof(TodoTableEntity.Description) };
+            tableQuery.FilterString = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.NotEqual, "Key");
+
+            var result = todoTable.ExecuteQuery(tableQuery);
+            return new OkObjectResult(result);
+        }
+
+        [FunctionName("TodoGetOne")]
+        public static async Task<IActionResult> GetOne(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+        [Table("todos", "Key", "Key", Take = 1)] TodoKey keyGen,
+        [Table("todos")] CloudTable todoTable,
+        ILogger log)
+        {
+            string id = req.Query["id"];
+
+            var tableQuery = new TableQuery<TodoTableEntity>();
+            tableQuery.SelectColumns = new List<string> { nameof(TodoTableEntity.Description) };
+
+            //tableQuery.FilterString = TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.NotEqual, "Key"), TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, id), TableOperators.And);
+            tableQuery.FilterString = TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.NotEqual, "Key"), TableOperators.And, TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, id));
+
+            var result = todoTable.ExecuteQuery(tableQuery);
+            return new OkObjectResult(result);
+        }
     }
+
+    
 
     public class TodoKey:TableEntity
     {
