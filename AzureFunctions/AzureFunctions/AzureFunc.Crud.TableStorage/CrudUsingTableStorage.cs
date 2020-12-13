@@ -17,7 +17,7 @@ namespace AzureFunc.Crud.TableStorage
     {
         [FunctionName("TodoAdd")]
         public static async Task<IActionResult> Add(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, 
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, 
             [Table("todos","Key","Key",Take =1)] TodoKey keyGen,
             [Table("todos")] CloudTable todoTable,
             ILogger log)
@@ -66,7 +66,7 @@ namespace AzureFunc.Crud.TableStorage
 
         [FunctionName("TodoGetAll")]
         public static async Task<IActionResult> GetAll(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             [Table("todos", "Key", "Key", Take = 1)] TodoKey keyGen,
             [Table("todos")] CloudTable todoTable,
             ILogger log)
@@ -81,7 +81,7 @@ namespace AzureFunc.Crud.TableStorage
 
         [FunctionName("TodoGetOne")]
         public static async Task<IActionResult> GetOne(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
         [Table("todos", "Key", "Key", Take = 1)] TodoKey keyGen,
         [Table("todos")] CloudTable todoTable,
         ILogger log)
