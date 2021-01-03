@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 //using Microsoft.WindowsAzure.Storage.Table;
 using Microsoft.Azure.Cosmos.Table;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AzureFunc.Crud.TableStorage
 {
@@ -67,13 +68,12 @@ namespace AzureFunc.Crud.TableStorage
         [FunctionName("TodoGetAll")]
         public static async Task<IActionResult> GetAll(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            [Table("todos", "Key", "Key", Take = 1)] TodoKey keyGen,
             [Table("todos")] CloudTable todoTable,
             ILogger log)
         {
             var tableQuery = new TableQuery<TodoTableEntity>();
             tableQuery.SelectColumns = new List<string> { nameof(TodoTableEntity.Description) };
-            tableQuery.FilterString = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.NotEqual, "Key");
+            tableQuery.FilterString = TableQuery.GenerateFilterCondition(nameof(TableEntity.PartitionKey), QueryComparisons.NotEqual, "Key");
 
             var result = todoTable.ExecuteQuery(tableQuery);
             return new OkObjectResult(result);
@@ -82,7 +82,6 @@ namespace AzureFunc.Crud.TableStorage
         [FunctionName("TodoGetOne")]
         public static async Task<IActionResult> GetOne(
         [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-        [Table("todos", "Key", "Key", Take = 1)] TodoKey keyGen,
         [Table("todos")] CloudTable todoTable,
         ILogger log)
         {
@@ -91,15 +90,44 @@ namespace AzureFunc.Crud.TableStorage
             var tableQuery = new TableQuery<TodoTableEntity>();
             tableQuery.SelectColumns = new List<string> { nameof(TodoTableEntity.Description) };
 
-            //tableQuery.FilterString = TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.NotEqual, "Key"), TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, id), TableOperators.And);
-            tableQuery.FilterString = TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.NotEqual, "Key"), TableOperators.And, TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, id));
+            tableQuery.FilterString = TableQuery.CombineFilters(
+                TableQuery.GenerateFilterCondition(nameof(TableEntity.PartitionKey), QueryComparisons.NotEqual, "Key"), 
+                TableOperators.And, 
+                TableQuery.GenerateFilterCondition(nameof(TableEntity.RowKey), QueryComparisons.Equal, id));
 
             var result = todoTable.ExecuteQuery(tableQuery);
             return new OkObjectResult(result);
         }
+
+
+        [FunctionName("TodoGetOneBinding")]
+        public static async Task<IActionResult> TodoGetOneBinding1(
+        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "TodoGetOneBinding/{partition}/{id}")] HttpRequest req,
+        [Table("todos", "{partition}", "{id}")] TodoTableEntity todo,
+        ILogger log)
+        {
+            return new OkObjectResult(todo);
+        }
+
+
+        private static async Task<IEnumerable<T>> GetEntitiesFromTable<T>(CloudTable table) where T : ITableEntity, new()
+        {
+            TableQuerySegment<T> querySegment = null;
+            var entities = new List<T>();
+            var query = new TableQuery<T>();
+
+            do
+            {
+                querySegment = await table.ExecuteQuerySegmentedAsync(query, querySegment?.ContinuationToken);
+                entities.AddRange(querySegment.Results);
+            } while (querySegment.ContinuationToken != null);
+
+            return entities;
+        }
     }
 
-    
+
+
 
     public class TodoKey:TableEntity
     {
