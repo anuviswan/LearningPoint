@@ -124,12 +124,96 @@ namespace AzureFunc.Crud.TableStorage
 
             return entities;
         }
+
+
+        [FunctionName("Update")]
+        public static async Task<IActionResult> Update(
+            [HttpTrigger(AuthorizationLevel.Anonymous,"post",Route = null)] HttpRequest request,
+            [Table("todos")]CloudTable todoTable,
+            ILogger log)
+        {
+            log.LogInformation("Request to update Record");
+
+            string requestBody = await new StreamReader(request.Body).ReadToEndAsync();
+            var data = JsonConvert.DeserializeObject<TodoDto>(requestBody);
+
+            var rowKeyToUpdate= request.Query[nameof(TableEntity.RowKey)];
+            var partitionKeyToUpdate= request.Query[nameof(TableEntity.PartitionKey)];
+
+            var tableEntity = new TodoTableEntity
+            {
+                RowKey = rowKeyToUpdate,
+                PartitionKey = partitionKeyToUpdate,
+                Title = data.Title,
+                Description = data.Description,
+                IsCompleted = data.IsCompletd,
+                ETag = "*"
+            };
+
+            var updateOperation = TableOperation.Replace(tableEntity);
+
+            var result = await todoTable.ExecuteAsync(updateOperation);
+            return new OkObjectResult(result);
+        }
+
+        [FunctionName("UpdateUsingBinding")]
+        public static async Task<IActionResult> UpdateUsingBinding(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "UpdateUsingBinding/{partitionKey}/{rowKey}")] HttpRequest request,
+        [Table("todos", "{partitionKey}", "{rowKey}")] TodoTableEntity tableEntity,
+        [Table("todos")] CloudTable todoTable,
+         ILogger log)
+        {
+            log.LogInformation("Request to update Record");
+
+            string requestBody = await new StreamReader(request.Body).ReadToEndAsync();
+            var data = JsonConvert.DeserializeObject<TodoDto>(requestBody);
+
+            tableEntity.Title = data.Title;
+            tableEntity.Description = data.Description;
+            tableEntity.IsCompleted = data.IsCompletd;
+
+            var updateOperation = TableOperation.Replace(tableEntity);
+            var result = await todoTable.ExecuteAsync(updateOperation);
+            return new OkObjectResult(result);
+        }
+
+
+        [FunctionName("UpdateWithRetrival")]
+        public static async Task<IActionResult> UpdateWithRetrival(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest request,
+        [Table("todos")] CloudTable todoTable,
+         ILogger log)
+        {
+            log.LogInformation("Request to update Record");
+
+            string requestBody = await new StreamReader(request.Body).ReadToEndAsync();
+            var data = JsonConvert.DeserializeObject<TodoDto>(requestBody);
+
+            var tableQuery = new TableQuery<TodoTableEntity>();
+
+            tableQuery.FilterString = TableQuery.CombineFilters(
+                TableQuery.GenerateFilterCondition(nameof(TableEntity.PartitionKey), QueryComparisons.NotEqual, "Key"),
+                TableOperators.And,
+                TableQuery.GenerateFilterCondition(nameof(TodoTableEntity.Title), QueryComparisons.Equal, data.Title));
+            var result = todoTable.ExecuteQuery(tableQuery);
+
+            var itemToUpdate = result.First();
+            itemToUpdate.Description = data.Description;
+            itemToUpdate.IsCompleted = data.IsCompletd;
+
+            var updateOperation = TableOperation.Replace(itemToUpdate);
+            var updateResponse = await todoTable.ExecuteAsync(updateOperation);
+            return new OkObjectResult(updateResponse);
+        }
+
     }
+    
 
 
 
 
-    public class TodoKey:TableEntity
+
+public class TodoKey:TableEntity
     {
         public int Key { get; set; }
     }
