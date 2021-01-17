@@ -18,26 +18,22 @@
         <div><b>Computed</b></div>
         <div>FirstName :{{ firstName }}</div>
         <div>LastName :{{ lastName }}</div>
-        <div>Computed 1:{{ ComputedFullName }}</div>
-        <div>Computed 2:{{ ComputedFullName }}</div>
-        <div>Computed Age:{{ ComputedAge }}</div>
+        <div>FullName:{{ ComputedFullName }}</div>
+        <div>Age:{{ ComputedAge }}</div>
       </div>
       <div class="col-4 border">
-        <div class="col-4 border">
-          <div><b>Watchers</b></div>
-          <div>FirstName :{{ firstName }}</div>
-          <div>LastName :{{ lastName }}</div>
-          <div>Computed 1:{{ ComputedFullName }}</div>
-          <div>Computed 2:{{ ComputedFullName }}</div>
-        </div>
+        <div><b>Watchers</b></div>
+        <div>FirstName :{{ firstName }}</div>
+        <div>LastName :{{ lastName }}</div>
+        <div>FullName:{{ fullName }}</div>
+        <div>Age:{{ ageString }}</div>
       </div>
       <div class="col-4 border">
         <div><b>Methods</b></div>
         <div>FirstName :{{ firstName }}</div>
         <div>LastName :{{ lastName }}</div>
-        <div>Computed 1:{{ GetFullName() }}</div>
-        <div>Computed 2:{{ GetFullName() }}</div>
-        <div>Computed Age:{{ GetAge() }}</div>
+        <div>FullName:{{ GetFullName() }}</div>
+        <div>Age:{{ GetAge() }}</div>
       </div>
     </div>
   </div>
@@ -51,22 +47,38 @@ export default {
       firstName: "",
       lastName: "",
       age: 0,
+      fullName: "",
+      ageString: "",
     };
   },
   computed: {
     ComputedFullName: function() {
       console.log("Calling Computed Full Method");
-      return this.firstName.concat(this.lastName);
+      return this.firstName + " " + this.lastName;
     },
     ComputedAge: function() {
       console.log("Calling Computed Age Method");
       return this.age + "Yrs";
     },
   },
+  watch: {
+    firstName: function(value) {
+      console.log("Watch FirstName : " + value);
+      this.fullName = value + " " + this.lastName;
+    },
+    lastName: function(value) {
+      console.log("Watch LastName : " + value);
+      this.fullName = this.firstName + " " + value;
+    },
+    ageString: function(value) {
+      console.log("Watch Age : " + value);
+      this.ageString = value + "Yrs";
+    },
+  },
   methods: {
     GetFullName() {
       console.log("Calling FullName Method");
-      return this.firstName.concat(this.lastName);
+      return this.firstName + " " + this.lastName;
     },
     GetAge() {
       console.log("Call Age Method");
