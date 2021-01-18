@@ -70,7 +70,7 @@ export default {
       console.log("Watch LastName : " + value);
       this.fullName = this.firstName + " " + value;
     },
-    ageString: function(value) {
+    age: function(value) {
       console.log("Watch Age : " + value);
       this.ageString = value + "Yrs";
     },
