@@ -206,6 +206,50 @@ namespace AzureFunc.Crud.TableStorage
             return new OkObjectResult(updateResponse);
         }
 
+        [FunctionName("DeleteRecord")]
+        public static async Task<IActionResult> DeleteEntity(
+            [HttpTrigger(AuthorizationLevel.Anonymous,"POST", Route = "DeleteRecord/{partitionKey}/{rowKey}")] HttpRequest request,
+            [Table("todos", "{partitionKey}", "{rowKey}")] TodoTableEntity tableEntity,
+            [Table("todos")] CloudTable todoTable,
+            ILogger log)
+        {
+            log.LogInformation("Request to delete the record");
+
+            var deleteOperation = TableOperation.Delete(tableEntity);
+            var result = await todoTable.ExecuteAsync(deleteOperation);
+            return new OkObjectResult(result);
+        }
+
+        [FunctionName("DeleteWithoutBinding")]
+        public static async Task<IActionResult> DeleteWithoutBinding(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest request,
+        [Table("todos")] CloudTable todoTable,
+         ILogger log)
+        {
+            log.LogInformation("Request to delete Record without binding");
+
+            string partitionKey = request.Query["pkey"];
+            string rowKey = request.Query["rkey"];
+
+            var tableQuery = new TableQuery<TodoTableEntity>();
+
+            var filterRowKeyAndPartitionKey = TableQuery.CombineFilters(
+                TableQuery.GenerateFilterCondition(nameof(TodoTableEntity.RowKey), QueryComparisons.Equal, rowKey),
+                TableOperators.And,
+                TableQuery.GenerateFilterCondition(nameof(TodoTableEntity.PartitionKey), QueryComparisons.Equal, partitionKey));
+
+            tableQuery.FilterString = TableQuery.CombineFilters(
+                TableQuery.GenerateFilterCondition(nameof(TableEntity.PartitionKey), QueryComparisons.NotEqual, "Key"),
+                TableOperators.And,
+                filterRowKeyAndPartitionKey);
+
+            var itemToDelete = todoTable.ExecuteQuery(tableQuery).First();
+
+            var deleteOperation = TableOperation.Delete(itemToDelete);
+            var deleteResponse = await todoTable.ExecuteAsync(deleteOperation);
+            return new OkObjectResult(deleteResponse);
+        }
+
     }
     
 
