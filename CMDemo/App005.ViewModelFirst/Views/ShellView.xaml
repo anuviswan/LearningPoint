@@ -26,7 +26,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Grid.Row="1" BorderThickness="1" BorderBrush="LightGray">
-                            <ContentControl cal:View.Model="{Binding}"/>
+                            <ContentControl cal:View.Model="{Binding}" cal:View.Context="StudentProfile"/>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
