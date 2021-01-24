@@ -1,27 +1,37 @@
 <template>
   <div class="hello">
     <h1>{{ fullMessage }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
-    </p>
+    <div>
+      <button @click="increment">Increment</button>
+      Current Value :{{ this.count }}
+    </div>
+    <div>{{ countMessage }}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
 
   private message = "Message From Props :";
+  private count = 0;
+  private countMessage = "Current Value is " + this.count;
+
+  @Watch("count")
+  countChanged(newValue: number) {
+    this.countMessage = "Current Value is " + newValue;
+  }
 
   get fullMessage(): string {
     return this.message + " " + this.msg;
+  }
+
+  public increment(): number {
+    this.count++;
+    return this.count;
   }
 }
 </script>
