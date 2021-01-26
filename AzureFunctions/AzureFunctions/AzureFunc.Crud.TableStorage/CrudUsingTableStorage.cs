@@ -258,21 +258,21 @@ namespace AzureFunc.Crud.TableStorage
 
 
 public class TodoKey:TableEntity
-    {
-        public int Key { get; set; }
-    }
+{
+    public int Key { get; set; }
+}
 
-    public class TodoDto
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public bool IsCompletd { get; set; }
-    }
+public class TodoDto
+{
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public bool IsCompletd { get; set; }
+}
 
-    public class TodoTableEntity : TableEntity
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public bool IsCompleted { get; set; }
-    }
+public class TodoTableEntity : TableEntity
+{
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public bool IsCompleted { get; set; }
+}
 }

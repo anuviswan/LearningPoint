@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunc.HelloWorld", "HelloWorld\AzureFunc.HelloWorld.csproj", "{17D502A2-2EA5-4FE3-A0CE-74BB661912C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunc.Crud.MemoryCollection", "AzureFunc.Crud.MemoryCollection\AzureFunc.Crud.MemoryCollection.csproj", "{7046A6F1-4064-437F-8BB1-680E622EFB6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunc.Crud.MemoryCollection", "AzureFunc.Crud.MemoryCollection\AzureFunc.Crud.MemoryCollection.csproj", "{7046A6F1-4064-437F-8BB1-680E622EFB6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunc.Crud.TableStorage", "AzureFunc.Crud.TableStorage\AzureFunc.Crud.TableStorage.csproj", "{4563F325-2481-47EB-B62D-0C3A675527CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunc.Crud.TableStorage", "AzureFunc.Crud.TableStorage\AzureFunc.Crud.TableStorage.csproj", "{4563F325-2481-47EB-B62D-0C3A675527CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunc.Crud.Blob", "AzureFunc.Crud.Blob\AzureFunc.Crud.Blob.csproj", "{F9269B03-EE4F-48AD-B001-6A7F44B2A720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4563F325-2481-47EB-B62D-0C3A675527CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4563F325-2481-47EB-B62D-0C3A675527CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4563F325-2481-47EB-B62D-0C3A675527CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9269B03-EE4F-48AD-B001-6A7F44B2A720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9269B03-EE4F-48AD-B001-6A7F44B2A720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9269B03-EE4F-48AD-B001-6A7F44B2A720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9269B03-EE4F-48AD-B001-6A7F44B2A720}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
