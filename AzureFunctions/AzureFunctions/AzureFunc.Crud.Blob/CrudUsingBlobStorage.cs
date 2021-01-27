@@ -7,7 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.Azure.Storage.Blob;
 
 namespace AzureFunc.Crud.Blob
 {
@@ -20,6 +20,8 @@ namespace AzureFunc.Crud.Blob
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
+
+            await blocContainer.CreateIfNotExistsAsync();
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var data = JsonConvert.DeserializeObject<TodoDto>(requestBody);
