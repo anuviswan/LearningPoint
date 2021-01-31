@@ -53,6 +53,84 @@ namespace AzureFunc.Crud.Blob
             }
             return new OkObjectResult($"Item added to blob with Id = {key}");
         }
+
+        [FunctionName("UploadFileBlockBlobBinding")]
+        public static async Task<IActionResult> UploadFileBlockBlobBinding(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "UploadFileBlockBlobBinding/{filename}")] HttpRequest req,
+            [Blob("todos/{filename}",FileAccess.Write)] Stream fileStream,
+            string filename,
+            ILogger log)
+        {
+            log.LogInformation("Request Recieved");
+            var data = req.Form.Files["file"];
+            var inputDataStream = data.OpenReadStream();
+            await inputDataStream.CopyToAsync(fileStream);
+            return new OkObjectResult($"Item added to blob with Id = {filename}");
+        }
+
+
+        [FunctionName("AddToAppendBlob")]
+        public static async Task<IActionResult> AddToAppendBlob(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+            [Blob("sample")] CloudBlobContainer blobContainer,
+            ILogger log)
+        {
+            log.LogInformation("Request Recieved");
+
+            await blobContainer.CreateIfNotExistsAsync();
+            var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var data = JsonConvert.DeserializeObject<LogMessage>(requestBody);
+
+            var blob = blobContainer.GetAppendBlobReference("applog.txt");
+
+            
+            if (!blob.Exists())
+            {
+                blob.CreateOrReplace();
+            }
+            await blob.AppendTextAsync($"User:{data.User}, Message:{data.Message}");
+           
+            return new OkObjectResult($"Item added to blob");
+        }
+
+        [FunctionName("AddToPageBlob")]
+        public static async Task<IActionResult> AddToPageBlob(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+            [Blob("sample")] CloudBlobContainer blobContainer,
+            ILogger log)
+        {
+            log.LogInformation("Request Recieved");
+
+            await blobContainer.CreateIfNotExistsAsync();
+           
+
+            var blob = blobContainer.GetPageBlobReference("image12341.jpg");
+
+
+            if (!blob.Exists())
+            {
+                await blob.CreateAsync(7168);
+            }
+
+            var data = req.Form.Files["file"];
+            var inputDataStream = data.OpenReadStream();
+            //byte[] data = new byte[512];
+
+            //Random rnd = new Random();
+
+            //rnd.NextBytes(data);
+
+
+            await blob.WritePagesAsync(inputDataStream, 0,null);
+
+            return new OkObjectResult($"Item added to blob");
+        }
+    }
+
+    public class LogMessage
+    {
+        public string Message { get; set; }
+        public string User { get; set; }
     }
 
     public class TodoDto
