@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Microsoft.Azure.Storage.Blob;
+using System.Linq;
 
 namespace AzureFunc.Crud.Blob
 {
@@ -104,27 +105,46 @@ namespace AzureFunc.Crud.Blob
             await blobContainer.CreateIfNotExistsAsync();
            
 
-            var blob = blobContainer.GetPageBlobReference("image12341.jpg");
+            var blob = blobContainer.GetPageBlobReference("final.jpg");
 
 
-            if (!blob.Exists())
-            {
-                await blob.CreateAsync(7168);
-            }
+            //if (!blob.Exists())
+            //{
+            //    await blob.CreateAsync(7168);
+            //}
 
+            await blob.CreateAsync(7168);
+           
             var data = req.Form.Files["file"];
             var inputDataStream = data.OpenReadStream();
-            //byte[] data = new byte[512];
+            byte[] buffer = GetBytes(inputDataStream);
 
             //Random rnd = new Random();
 
             //rnd.NextBytes(data);
 
 
-            await blob.WritePagesAsync(inputDataStream, 0,null);
+            await blob.UploadFromByteArrayAsync(buffer,0,buffer.Length);
 
             return new OkObjectResult($"Item added to blob");
         }
+
+
+        private static byte[] GetBytes(Stream input) 
+        {
+            byte[] buffer = new byte[7168];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
+
+
     }
 
     public class LogMessage
