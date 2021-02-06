@@ -1,20 +1,25 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <MessageBoard msg="Sample App for Learning Vuex with Typescript" />
+    <MessageBoard :msg="name" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import MessageBoard from "./components/HelloWorld.vue";
+import { namespace } from "vuex-class";
+const user = namespace("user");
 
 @Component({
   components: {
     MessageBoard,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  @user.State
+  public name!: string;
+}
 </script>
 
 <style>
