@@ -143,7 +143,53 @@ namespace AzureFunc.Crud.Blob
                 return ms.ToArray();
             }
         }
+        
 
+        [FunctionName("DownloadBlockBlob")]
+        public static async Task<IActionResult> DownloadBlockBlob(
+            [HttpTrigger(AuthorizationLevel.Anonymous,"get",Route =null)] HttpRequest req,
+            [Blob("todos")] CloudBlobContainer blobContainer,
+            ILogger log)
+        {
+            var key = req.Query["key"];
+
+            var stream = new MemoryStream();
+            var blob = await blobContainer.GetBlobReferenceFromServerAsync(key);
+            await blob.DownloadToStreamAsync(stream);
+            stream.Position = 0;
+            return new FileStreamResult(stream, "application/octet-stream") { FileDownloadName = key };
+        }
+
+
+        [FunctionName("DownloadBlockBlobUsingBinding")]
+        public static async Task<IActionResult> DownloadBlockBlobUsingBinding(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "DownloadBlockBlobUsingBinding/{fileName}")] HttpRequest req,
+    [Blob("todos/{fileName}",FileAccess.Read)] Stream blob,
+    string fileName,
+    ILogger log)
+        {
+            var memoryStream = new MemoryStream();
+            await blob.CopyToAsync(memoryStream);
+            memoryStream.Position = 0;
+            return new FileStreamResult(memoryStream, "application/octet-stream") { FileDownloadName = fileName };
+        }
+
+
+        [FunctionName("DownloadAppendBlob")]
+        public static async Task<IActionResult> DownloadAppendBlob(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
+    [Blob("sample")] CloudBlobContainer blobContainer,
+    ILogger log)
+        {
+
+            var key = req.Query["key"];
+
+            var stream = new MemoryStream();
+            var blob = blobContainer.GetAppendBlobReference(key);
+            await blob.DownloadToStreamAsync(stream);
+            stream.Position = 0;
+            return new FileStreamResult(stream, "text/plain") { FileDownloadName = key };
+        }
 
     }
 
