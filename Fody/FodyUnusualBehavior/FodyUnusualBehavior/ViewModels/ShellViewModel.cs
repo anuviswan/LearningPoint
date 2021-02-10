@@ -20,7 +20,7 @@ namespace FodyUnusualBehavior.ViewModels
             // Do something here
         }
 
-        public long RandomNumber { get; set; } = 0;
+        public long RandomNumber { get; set; }
 
         public void Randomize()
         {
