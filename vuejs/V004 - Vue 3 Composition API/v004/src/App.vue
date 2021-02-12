@@ -1,17 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <form novalidate @submit.prevent="onSubmit">
+      <InputName v-model="name" />
+      <InputEmail v-model="email" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import InputName from "./components/InputName";
+import InputEmail from "./components/InputEmail";
+import { ref } from "vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    InputName,
+    InputEmail,
+  },
+
+  setup() {
+    const name = ref("");
+    const email = ref("");
+
+    function onSubmit() {
+      console.log(name.value);
+      console.log(email);
+    }
+
+    return {
+      name,
+      email,
+      onSubmit,
+    };
+  },
+};
 </script>
 
 <style>
