@@ -1,23 +1,22 @@
 <template>
   <div id="app">
     <form novalidate @submit.prevent="onSubmit">
-      <InputName v-model="name" />
-      <InputEmail v-model="email" />
+      <InputName :value="name" />
+      <!-- <InputEmail v-model="email" /> -->
       <button type="submit">Submit</button>
+      {{ name }}
     </form>
   </div>
 </template>
 
 <script>
 import InputName from "./components/InputName";
-import InputEmail from "./components/InputEmail";
 import { ref } from "vue";
 
 export default {
   name: "App",
   components: {
     InputName,
-    InputEmail,
   },
 
   setup() {
@@ -25,8 +24,7 @@ export default {
     const email = ref("");
 
     function onSubmit() {
-      console.log(name.value);
-      console.log(email);
+      console.log("name", name.value);
     }
 
     return {

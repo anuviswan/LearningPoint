@@ -17,7 +17,7 @@ export default {
     const { input, errors } = useInputValidator(
       props.value,
       [minLength(3)],
-      (value) => emit("input", value)
+      (value) => emit("input", value.value)
     );
 
     return {
