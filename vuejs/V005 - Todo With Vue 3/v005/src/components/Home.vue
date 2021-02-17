@@ -6,11 +6,16 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "Home",
   setup() {
-    const currentTaskList = ref(["sdsd", "sdsdsd"]);
+    //const currentTaskList = ref(["sdsd", "sdsdsd"]);
+    const store = useStore();
+    const currentTaskList = computed(function() {
+      return store.getters.AllDoto;
+    });
     return { currentTaskList };
   },
 };
