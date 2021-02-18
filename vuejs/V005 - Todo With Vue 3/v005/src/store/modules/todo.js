@@ -7,7 +7,9 @@ const getters={
 }
 
 const mutations={
-    addTodo:(state,item) => [...state.todos, item]
+    addTodo(state,item) {
+        state.todos = [...state.todos, item];
+    }
 }
 
 const actions={
