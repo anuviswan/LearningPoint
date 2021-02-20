@@ -191,6 +191,38 @@ namespace AzureFunc.Crud.Blob
             return new FileStreamResult(stream, "text/plain") { FileDownloadName = key };
         }
 
+
+        [FunctionName("DeleteFileBlockBlob")]
+        public static async Task<IActionResult> DeleteFileBlockBlob(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+            [Blob("todos")] CloudBlobContainer blobContainer,
+            ILogger log
+            )
+        {
+            string key = req.Query["key"];
+
+            var blob = blobContainer.GetBlockBlobReference(key);
+            var result = await blob.DeleteIfExistsAsync();
+           
+            return new OkObjectResult($"Item Deletion {(result?"Success":"Failed")}");
+        }
+
+
+        [FunctionName("DeleteFileAppendBlob")]
+        public static async Task<IActionResult> DeleteFileAppendBlob(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+    [Blob("sample")] CloudBlobContainer blobContainer,
+    ILogger log
+    )
+        {
+            string key = req.Query["key"];
+
+            var blob = blobContainer.GetAppendBlobReference(key);
+            var result = await blob.DeleteIfExistsAsync();
+
+            return new OkObjectResult($"Item Deletion {(result ? "Success" : "Failed")}");
+        }
+
     }
 
     public class LogMessage
