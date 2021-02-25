@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Microsoft.Azure.Storage.Blob;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AzureFunc.Crud.Blob
 {
@@ -30,7 +31,7 @@ namespace AzureFunc.Crud.Blob
             {
                 data.Id = Guid.NewGuid().ToString();
             }
-            
+
             var serializedData = JsonConvert.SerializeObject(data);
 
             var blob = blobContainer.GetBlockBlobReference($"{data.Id}.json");
@@ -58,7 +59,7 @@ namespace AzureFunc.Crud.Blob
         [FunctionName("UploadFileBlockBlobBinding")]
         public static async Task<IActionResult> UploadFileBlockBlobBinding(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "UploadFileBlockBlobBinding/{filename}")] HttpRequest req,
-            [Blob("todos/{filename}",FileAccess.Write)] Stream fileStream,
+            [Blob("todos/{filename}", FileAccess.Write)] Stream fileStream,
             string filename,
             ILogger log)
         {
@@ -84,13 +85,13 @@ namespace AzureFunc.Crud.Blob
 
             var blob = blobContainer.GetAppendBlobReference("applog.txt");
 
-            
+
             if (!blob.Exists())
             {
                 blob.CreateOrReplace();
             }
             await blob.AppendTextAsync($"User:{data.User}, Message:{data.Message}");
-           
+
             return new OkObjectResult($"Item added to blob");
         }
 
@@ -103,7 +104,7 @@ namespace AzureFunc.Crud.Blob
             log.LogInformation("Request Recieved");
 
             await blobContainer.CreateIfNotExistsAsync();
-           
+
 
             var blob = blobContainer.GetPageBlobReference("final.jpg");
 
@@ -114,7 +115,7 @@ namespace AzureFunc.Crud.Blob
             //}
 
             await blob.CreateAsync(7168);
-           
+
             var data = req.Form.Files["file"];
             var inputDataStream = data.OpenReadStream();
             byte[] buffer = GetBytes(inputDataStream);
@@ -124,13 +125,13 @@ namespace AzureFunc.Crud.Blob
             //rnd.NextBytes(data);
 
 
-            await blob.UploadFromByteArrayAsync(buffer,0,buffer.Length);
+            await blob.UploadFromByteArrayAsync(buffer, 0, buffer.Length);
 
             return new OkObjectResult($"Item added to blob");
         }
 
 
-        private static byte[] GetBytes(Stream input) 
+        private static byte[] GetBytes(Stream input)
         {
             byte[] buffer = new byte[7168];
             using (MemoryStream ms = new MemoryStream())
@@ -143,11 +144,11 @@ namespace AzureFunc.Crud.Blob
                 return ms.ToArray();
             }
         }
-        
+
 
         [FunctionName("DownloadBlockBlob")]
         public static async Task<IActionResult> DownloadBlockBlob(
-            [HttpTrigger(AuthorizationLevel.Anonymous,"get",Route =null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
             [Blob("todos")] CloudBlobContainer blobContainer,
             ILogger log)
         {
@@ -164,7 +165,7 @@ namespace AzureFunc.Crud.Blob
         [FunctionName("DownloadBlockBlobUsingBinding")]
         public static async Task<IActionResult> DownloadBlockBlobUsingBinding(
     [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "DownloadBlockBlobUsingBinding/{fileName}")] HttpRequest req,
-    [Blob("todos/{fileName}",FileAccess.Read)] Stream blob,
+    [Blob("todos/{fileName}", FileAccess.Read)] Stream blob,
     string fileName,
     ILogger log)
         {
@@ -203,8 +204,8 @@ namespace AzureFunc.Crud.Blob
 
             var blob = blobContainer.GetBlockBlobReference(key);
             var result = await blob.DeleteIfExistsAsync();
-           
-            return new OkObjectResult($"Item Deletion {(result?"Success":"Failed")}");
+
+            return new OkObjectResult($"Item Deletion {(result ? "Success" : "Failed")}");
         }
 
 
@@ -223,7 +224,10 @@ namespace AzureFunc.Crud.Blob
             return new OkObjectResult($"Item Deletion {(result ? "Success" : "Failed")}");
         }
 
+
+       
     }
+
 
     public class LogMessage
     {
