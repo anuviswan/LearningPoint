@@ -1,0 +1,99 @@
+﻿<Window x:Class="CircularProgressbar.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CircularProgressbar.Views" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:local1="clr-namespace:CircularProgressbar"
+        mc:Ignorable="d"
+        Title="ShellView" Height="450" Width="800">
+    <Window.Resources>
+        <local1:AngleToPointConverter x:Key="prConverter"/>
+        <local1:AngleToIsLargeConverter x:Key="isLargeConverter"/>
+        
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Viewbox>
+            <Grid>
+                <Canvas Width="100" Height="100">
+                <Ellipse Width="100" Height="100" Stroke="LightGray"
+                                     StrokeThickness="1"/>
+                <Path Stroke="Blue" 
+                                  StrokeThickness="2">
+                    <Path.Data>
+                        <PathGeometry>
+                                <PathFigure x:Name="fig" StartPoint="50,0">
+                                <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                                                        Size="50,50"
+                                                        Point="{Binding CurrentValue, Converter={StaticResource prConverter}}"
+                                                       IsLargeArc="{Binding Path=CurrentValue, Converter={StaticResource isLargeConverter}}"
+                                                        >
+                                </ArcSegment>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                </Canvas>
+            </Grid>
+        </Viewbox>
+
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Min"/>
+                <mah:NumericUpDown Grid.Column="1" Minimum="0" HideUpDownButtons="True"
+                   Maximum="1000"
+                   Interval="1"
+                                   Value="{Binding MinValue}"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Max"/>
+                <mah:NumericUpDown Minimum="0" Grid.Column="1" HideUpDownButtons="True"
+                   Maximum="1000"
+                   Interval="1"
+                                   Value="{Binding MaxValue}"/>
+            </Grid>
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Value"/>
+                <mah:NumericUpDown Minimum="0" Grid.Column="1" HideUpDownButtons="True"
+                   Maximum="1000"
+                   Interval="1"
+                                   Value="{Binding CurrentValue}"/>
+            </Grid>
+
+            <Button x:Name="Reset" Content="Reset"/>
+        </StackPanel>
+
+        <ProgressBar  Grid.Row="1" Grid.Column="0" Height="20" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Value="{Binding CurrentValue}"/>
+
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding CurrentValue}" FontSize="24" FontWeight="Bold"/>
+    </Grid>
+</Window>
