@@ -79,13 +79,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AngleIsFullConveter.cs" />
     <Compile Include="AngleIsLargeConverter.cs" />
     <Compile Include="AngleToPointConverter.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BooleanToVisibilityConverter.cs" />
     <Compile Include="BootstrapperSc.cs" />
+    <Compile Include="ChainConverter.cs" />
+    <Compile Include="InverserBooleanConverter.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>

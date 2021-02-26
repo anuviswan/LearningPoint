@@ -9,8 +9,18 @@
     <Window.Resources>
         <local1:AngleToPointConverter x:Key="prConverter"/>
         <local1:AngleToIsLargeConverter x:Key="isLargeConverter"/>
-        
-        
+        <local1:ConverterChain x:Key="IsFullToVisibility">
+            <local1:AngleIsFullConveter/>
+            <local1:BooleanToVisibilityConverter/>
+        </local1:ConverterChain>
+        <local1:ConverterChain x:Key="InverseIsFullToVisibility">
+            <local1:AngleIsFullConveter/>
+            <local1:InverseBooleanConverter/>
+            <local1:BooleanToVisibilityConverter/>
+        </local1:ConverterChain>
+
+
+
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,30 +33,87 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
+        <Border BorderThickness="1" BorderBrush="Green">
         <Viewbox>
-            <Grid>
-                <Canvas Width="100" Height="100">
-                <Ellipse Width="100" Height="100" Stroke="LightGray"
-                                     StrokeThickness="1"/>
-                <Path Stroke="Blue" 
-                                  StrokeThickness="2">
+                <!--<Viewbox.LayoutTransform>
+                    <RotateTransform Angle="20"/>
+                </Viewbox.LayoutTransform>-->
+            <Canvas Width="100" Height="100" Background="AliceBlue">
+                <!--<Ellipse Width="100" Height="100" Stroke="LightGray"
+                                     StrokeThickness="1"/>-->
+
+
+                <Path Stroke="LightGray" 
+                                  StrokeThickness="1" >
+
                     <Path.Data>
                         <PathGeometry>
-                                <PathFigure x:Name="fig" StartPoint="50,0">
-                                <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                            <PathFigure  StartPoint="50,0">
+                                <PathFigure.Segments>
+                                    <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
                                                         Size="50,50"
-                                                        Point="{Binding CurrentValue, Converter={StaticResource prConverter}}"
-                                                       IsLargeArc="{Binding Path=CurrentValue, Converter={StaticResource isLargeConverter}}"
-                                                        >
-                                </ArcSegment>
+                                                        Point="50,100"
+                                                       IsLargeArc="False"
+                                                        />
+                                    <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                                                        Size="50,50"
+                                                        Point="50,0"
+                                                       IsLargeArc="False"
+                                                        />
+
+                                </PathFigure.Segments>
                             </PathFigure>
                         </PathGeometry>
                     </Path.Data>
                 </Path>
-                </Canvas>
-            </Grid>
-        </Viewbox>
+                
 
+
+
+                <Path Stroke="Blue" 
+                                  StrokeThickness="5" >
+
+                    <Path.Data>
+                            <PathGeometry>
+                                <PathFigure x:Name="fig" StartPoint="50,0">
+                                    <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                                                        Size="50,50"
+                                                        Point="{Binding CurrentValueInAngle, Converter={StaticResource prConverter}}"
+                                                       IsLargeArc="{Binding Path=CurrentValueInAngle, Converter={StaticResource isLargeConverter}}"
+                                                        >
+                                    </ArcSegment>
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+
+                <Path Stroke="Blue" 
+                                  StrokeThickness="5" Visibility="{Binding CurrentValueInAngle,Converter={StaticResource IsFullToVisibility}}">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure  StartPoint="50,0">
+                                <PathFigure.Segments>
+                                    <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                                                        Size="50,50"
+                                                        Point="50,100"
+                                                       IsLargeArc="False"
+                                                        />
+                                    <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                                                        Size="50,50"
+                                                        Point="50,0"
+                                                       IsLargeArc="False"
+                                                        />
+
+                                </PathFigure.Segments>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{Binding CurrentValueInAngle}" FontSize="24" FontWeight="Bold"/>
+                </Canvas>
+        </Viewbox>
+        </Border>
 
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="10">
             <Grid>
@@ -94,6 +161,6 @@
 
         <ProgressBar  Grid.Row="1" Grid.Column="0" Height="20" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Value="{Binding CurrentValue}"/>
 
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding CurrentValue}" FontSize="24" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding CurrentValueInAngle}" FontSize="24" FontWeight="Bold"/>
     </Grid>
 </Window>

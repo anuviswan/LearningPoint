@@ -13,6 +13,15 @@ namespace CircularProgressbar.ViewModels
 
         public double MinValue { get; set; } = 0;
         public double MaxValue { get; set; } = 100;
+
+        public double CurrentValueInAngle
+        {
+            get
+            {
+                var percent = (CurrentValue / (MaxValue - MinValue) * 100);
+                return (percent / 100)*360;
+            }
+        }
         public double CurrentValue
         {
             get => currentValue;
@@ -20,6 +29,7 @@ namespace CircularProgressbar.ViewModels
             {
                 currentValue = value;
                 NotifyOfPropertyChange();
+                NotifyOfPropertyChange(nameof(CurrentValueInAngle));
             }
         }
 

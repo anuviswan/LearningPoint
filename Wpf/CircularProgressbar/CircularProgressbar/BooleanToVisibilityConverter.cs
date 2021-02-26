@@ -8,29 +8,25 @@ using System.Windows.Data;
 
 namespace CircularProgressbar
 {
-    public class AngleToPointConverter : IValueConverter
+    public class BooleanToVisibilityConverter:IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            double angle = 0;
-            if(value is double d)
-            {
-                angle = d == 360 ? 359.99:d;
-                
-            }
-            double radius = 50;
-            double piang = angle * Math.PI / 180;
-
-            double px = Math.Sin(piang) * radius + radius;
-            double py = -Math.Cos(piang) * radius + radius;
-
-            return new Point(px, py);
+            bool bValue = (bool)value;
+            if (bValue)
+                return Visibility.Visible;
+            else
+                return Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotImplementedException();
+            Visibility visibility = (Visibility)value;
+
+            if (visibility == Visibility.Visible)
+                return true;
+            else
+                return false;
         }
     }
 }
