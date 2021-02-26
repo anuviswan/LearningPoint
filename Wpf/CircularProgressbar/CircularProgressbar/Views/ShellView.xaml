@@ -34,12 +34,13 @@
         </Grid.RowDefinitions>
 
         <Border BorderThickness="1" BorderBrush="Green">
-        <Viewbox>
-                <!--<Viewbox.LayoutTransform>
-                    <RotateTransform Angle="20"/>
-                </Viewbox.LayoutTransform>-->
-            <Canvas Width="100" Height="100" Background="AliceBlue">
-                <!--<Ellipse Width="100" Height="100" Stroke="LightGray"
+        <Viewbox Stretch="Uniform">
+                <!--<Viewbox.RenderTransform>
+                    <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                </Viewbox.RenderTransform>-->
+            <Grid  Background="AliceBlue">
+
+                    <!--<Ellipse Width="100" Height="100" Stroke="LightGray"
                                      StrokeThickness="1"/>-->
 
 
@@ -111,7 +112,7 @@
                 </Path>
 
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{Binding CurrentValueInAngle}" FontSize="24" FontWeight="Bold"/>
-                </Canvas>
+                </Grid>
         </Viewbox>
         </Border>
 
