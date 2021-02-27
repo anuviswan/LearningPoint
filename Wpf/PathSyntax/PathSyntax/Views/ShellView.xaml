@@ -1,0 +1,75 @@
+﻿<Window x:Class="PathSyntax.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PathSyntax.Views"
+        mc:Ignorable="d"
+        Title="ShellView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label HorizontalAlignment="Center" FontSize="36" FontWeight="Bold" Content="Path Demo"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Without using Path Syntax Language" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+            <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="1">
+            <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Background="WhiteSmoke">
+                <Path Stroke="LightGray"
+                                  StrokeThickness="1" >
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure  StartPoint="50,0" IsClosed="True">
+                                <PathFigure.Segments>
+                                    <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                                                        Size="100,100"
+                                                        Point="50,200"
+                                                       IsLargeArc="False"
+                                                        />
+                                        <LineSegment Point="50,100"/>
+
+                                        <ArcSegment RotationAngle="0" SweepDirection="Counterclockwise"
+                                                        Size="50,50"
+                                                        Point="50,200"
+                                                       IsLargeArc="False"
+                                                        />
+                                    
+                                        <LineSegment Point="100,100"/>
+                                    
+                                    </PathFigure.Segments>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+            </Border>
+
+            <Label Content="Using Path Syntax Language" FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="1"/>
+
+            <Border BorderThickness="1" BorderBrush="Black" Grid.Column="1" Grid.Row="1">
+                <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Background="WhiteSmoke">
+                    <Path Stroke="LightGray"
+                                  StrokeThickness="1" Data="M 50,0 A 100,100 0 0 1 50,200 V 100 A 50,50 0 0 0 50,200 L 100,100 Z" >
+                    </Path>
+                </Canvas>
+            </Border>
+
+        </Grid>
+        
+        
+    </Grid>
+</Window>
