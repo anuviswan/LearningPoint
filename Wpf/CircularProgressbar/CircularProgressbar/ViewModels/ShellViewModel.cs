@@ -1,42 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using Caliburn.Micro;
+using CircularProgressbar.ArcInfoCalculator;
+using CircularProgressbar.Models;
 
 namespace CircularProgressbar.ViewModels
 {
+
     public class ShellViewModel : Screen
     {
-        private double currentValue = 10;
-
-        public double MinValue { get; set; } = 0;
-        public double MaxValue { get; set; } = 100;
-
-        public double CurrentValueInAngle
+        public ShellViewModel()
         {
-            get
+            BackgroundCircle.Angle = 360;
+            BackgroundCircle.PropertyChanged += OnBackgroundCircleChanged;
+        }
+
+        private void OnBackgroundCircleChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
             {
-                var percent = (CurrentValue / (MaxValue - MinValue) * 100);
-                return (percent / 100)*360;
+                case nameof(ProgressArc.Thickness):
+                    var radius = 50 - BackgroundCircle.Thickness/2;
+                    BackgroundCircle.Radius = new Size(radius,radius);
+                    BackgroundCircle.EndPosition = (new ArcCalculatorBase()).AngleToPointConverter(radius, 360);
+                    BackgroundCircle.StartPosition = (new ArcCalculatorBase()).AngleToPointConverter(radius, 0);
+                break;
+                default:
+                    NotifyOfPropertyChange(e.PropertyName);
+                    break;
             }
         }
-        public double CurrentValue
-        {
-            get => currentValue;
-            set
-            {
-                currentValue = value;
-                NotifyOfPropertyChange();
-                NotifyOfPropertyChange(nameof(CurrentValueInAngle));
-            }
-        }
 
-        public void Reset()
-        {
-            NotifyOfPropertyChange(nameof(MinValue));
-            NotifyOfPropertyChange(nameof(MaxValue));
-        }
+        public ProgressArc BackgroundCircle { get; set; } = new ProgressArc();
+        public ProgressArc ValueCircle { get; set; } = new ProgressArc();
+        public double MinValue { get; set; }
+        public double MaxValue { get; set; }
+        public double CurrentValue { get; set; }
     }
 }
