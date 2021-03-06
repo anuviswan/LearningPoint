@@ -65,9 +65,9 @@ namespace CircularProgressbar.ViewModels
 
         public ProgressArc BackgroundCircle { get; set; } = new ProgressArc();
         public ProgressArc ValueCircle { get; set; } = new ProgressArc();
-        public double MinValue { get; set; }
-        public double MaxValue { get; set; }
-        public double CurrentValue { get; set; }
+        public double MinValue { get; set; } = 0;
+        public double MaxValue { get; set; } = 120;
+        public double CurrentValue { get; set; } = 60;
 
         public OverlayMode SelectedOverlayMode { get; set; }
     }

@@ -12,7 +12,7 @@
         d:DataContext="{d:DesignInstance Type=vm:ShellViewModel}"
         Title="ShellView" Height="450" Width="800">
     <Window.Resources>
-        <converters:AngleToPointConverter x:Key="AngleToPointConverter"/>
+        <converters:AngleToIsLargeConverter x:Key="AngleToIsLargeConverter"/>
         
         <ObjectDataProvider x:Key="AvailableOverLayModes" MethodName="GetValues"
                             ObjectType="{x:Type System:Enum}">
@@ -65,7 +65,7 @@
                                 <PathFigure.Segments>
                                         <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
                                                         Size="{Binding ValueCircle.Radius}"
-                                                        IsLargeArc="False"
+                                                        IsLargeArc="{Binding ValueCircle.Angle,Converter={StaticResource AngleToIsLargeConverter}}"
                                                     Point="{Binding ValueCircle.EndPosition}"
                                                         >
 

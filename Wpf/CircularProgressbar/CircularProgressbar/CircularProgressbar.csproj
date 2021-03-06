@@ -86,7 +86,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AngleIsFullConveter.cs" />
-    <Compile Include="AngleIsLargeConverter.cs" />
+    <Compile Include="Converters\AngleIsLargeConverter.cs" />
     <Compile Include="1AngleToPointConverter.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

@@ -95,8 +95,10 @@ namespace CircularProgressbar.ArcInfoCalculator
 
         public override void Calculate(double minValue, double maxValue, double currentValue)
         {
-            BackgroundCircleRadius = new Size(DEFAULT_RADIUS - _backgroundCircleThickness / 2, DEFAULT_RADIUS - _backgroundCircleThickness / 2);
-            ValueCircleRadius = new Size(DEFAULT_RADIUS - _valueCircleThickness / 2, DEFAULT_RADIUS - _valueCircleThickness / 2); ;
+            var maxThickness = Math.Max(_backgroundCircleThickness, _valueCircleThickness);
+
+            BackgroundCircleRadius = new Size((DEFAULT_RADIUS - maxThickness) + (_backgroundCircleThickness / 2), (DEFAULT_RADIUS - maxThickness) + (_backgroundCircleThickness / 2));
+            ValueCircleRadius = new Size((DEFAULT_RADIUS - maxThickness) + (_valueCircleThickness / 2), (DEFAULT_RADIUS - maxThickness) + (_valueCircleThickness / 2));
 
             BackgroundCircleStartPosition = AngleToPointConverter(BackgroundCircleRadius, 0);
             BackgroundCircleEndPosition = AngleToPointConverter(BackgroundCircleRadius, 360);
