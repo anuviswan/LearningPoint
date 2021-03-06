@@ -56,49 +56,26 @@
                         </PathGeometry>
                     </Path.Data>
                 </Path>
-                
 
-
-
-                <!--<Path Stroke="Blue" 
-                                  StrokeThickness="{Binding ValueCircleThickness}" >
-
-                    <Path.Data>
-                            <PathGeometry>
-                                <PathFigure x:Name="fig" StartPoint="{Binding ValueStartPoint}">
-                                    <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
-                                                        Size="{Binding ValueRadius}"
-                                                        Point="{Binding EndPoint}"
-                                                       IsLargeArc="False"
-                                                        >
-                                    </ArcSegment>
-                                </PathFigure>
-                            </PathGeometry>
-                        </Path.Data>
-                    </Path>-->
-
-                <!--<Path Stroke="Blue" 
-                                  StrokeThickness="{Binding ValueCircleThickness}" Visibility="{Binding CurrentValueInAngle,Converter={StaticResource IsFullToVisibility}}">
+                <Path Stroke="Blue" 
+                                  StrokeThickness="{Binding ValueCircle.Thickness}">
                     <Path.Data>
                         <PathGeometry>
-                            <PathFigure  StartPoint="50,0">
+                                <PathFigure  StartPoint="{Binding ValueCircle.StartPosition}">
                                 <PathFigure.Segments>
-                                    <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
-                                                        Size="50,50"
-                                                        Point="50,100"
-                                                       IsLargeArc="False"
-                                                        />
-                                    <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
-                                                        Size="50,50"
-                                                        Point="50,0"
-                                                       IsLargeArc="False"
-                                                        />
+                                        <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                                                        Size="{Binding ValueCircle.Radius}"
+                                                        IsLargeArc="False"
+                                                    Point="{Binding ValueCircle.EndPosition}"
+                                                        >
 
-                                </PathFigure.Segments>
+                                        </ArcSegment>
+
+                                    </PathFigure.Segments>
                             </PathFigure>
                         </PathGeometry>
                     </Path.Data>
-                </Path>-->
+                </Path>
 
                 </Canvas>
         </Viewbox>
@@ -112,7 +89,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Overlay Mode"/>
-                <ComboBox ItemsSource="{Binding Source={StaticResource AvailableOverLayModes}}" SelectedItem="{Binding OverLayMode}"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource AvailableOverLayModes}}" SelectedItem="{Binding SelectedOverlayMode}"/>
             </Grid>
             
             

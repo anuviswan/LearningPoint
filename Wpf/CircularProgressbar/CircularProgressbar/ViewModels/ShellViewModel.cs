@@ -11,23 +11,56 @@ namespace CircularProgressbar.ViewModels
         public ShellViewModel()
         {
             BackgroundCircle.Angle = 360;
-            BackgroundCircle.PropertyChanged += OnBackgroundCircleChanged;
+            BackgroundCircle.PropertyChanged += OnCircleChanged;
+            ValueCircle.PropertyChanged += OnCircleChanged;
+            PropertyChanged += OnPropertyChanged; ;
         }
 
-        private void OnBackgroundCircleChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(ProgressArc.Thickness):
-                    var radius = 50 - BackgroundCircle.Thickness/2;
-                    BackgroundCircle.Radius = new Size(radius,radius);
-                    BackgroundCircle.EndPosition = (new ArcCalculatorBase()).AngleToPointConverter(radius, 360);
-                    BackgroundCircle.StartPosition = (new ArcCalculatorBase()).AngleToPointConverter(radius, 0);
-                break;
-                default:
-                    NotifyOfPropertyChange(e.PropertyName);
+                case nameof(MaxValue):
+                case nameof(MinValue):
+                case nameof(CurrentValue):
+                case nameof(SelectedOverlayMode):
+                    RefreshControl();
                     break;
             }
+        }
+
+        private void OnCircleChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            RefreshControl();
+        }
+
+        private void RefreshControl()
+        {
+            ArcCalculatorBase arcCalculator;
+            switch (SelectedOverlayMode)
+            {
+                case OverlayMode.Centered:
+                    arcCalculator = new CenteredArcCalculator(BackgroundCircle.Thickness, ValueCircle.Thickness); 
+                    break;
+                case OverlayMode.Inset:
+                    arcCalculator = new InsetArcCalculator(BackgroundCircle.Thickness, ValueCircle.Thickness);
+                    break;
+                case OverlayMode.Outset:
+                    arcCalculator = new OutsetArcCalculator(BackgroundCircle.Thickness, ValueCircle.Thickness);
+                    break;
+                default:
+                    arcCalculator = new OutsetArcCalculator(BackgroundCircle.Thickness, ValueCircle.Thickness);
+                    break;
+            }
+            arcCalculator.Calculate(MinValue, MaxValue, CurrentValue);
+
+            BackgroundCircle.Radius = arcCalculator.BackgroundCircleRadius;
+            BackgroundCircle.StartPosition = arcCalculator.BackgroundCircleStartPosition;
+            BackgroundCircle.EndPosition = arcCalculator.BackgroundCircleEndPosition;
+
+            ValueCircle.Radius = arcCalculator.ValueCircleRadius;
+            ValueCircle.StartPosition = arcCalculator.ValueCircleStartPosition;
+            ValueCircle.EndPosition = arcCalculator.ValueCircleEndPosition;
         }
 
         public ProgressArc BackgroundCircle { get; set; } = new ProgressArc();
@@ -35,5 +68,7 @@ namespace CircularProgressbar.ViewModels
         public double MinValue { get; set; }
         public double MaxValue { get; set; }
         public double CurrentValue { get; set; }
+
+        public OverlayMode SelectedOverlayMode { get; set; }
     }
 }
