@@ -42,10 +42,10 @@ namespace CircularProgressbar.ViewModels
                 case OverlayMode.Centered:
                     arcCalculator = new CenteredArcCalculator(BackgroundCircle.Thickness, ValueCircle.Thickness); 
                     break;
-                case OverlayMode.Inset:
+                case OverlayMode.InnerCircle:
                     arcCalculator = new InsetArcCalculator(BackgroundCircle.Thickness, ValueCircle.Thickness);
                     break;
-                case OverlayMode.Outset:
+                case OverlayMode.OuterCircle:
                     arcCalculator = new OutsetArcCalculator(BackgroundCircle.Thickness, ValueCircle.Thickness);
                     break;
                 default:
@@ -65,7 +65,7 @@ namespace CircularProgressbar.ViewModels
 
         public ProgressArc BackgroundCircle { get; set; } = new ProgressArc();
         public ProgressArc ValueCircle { get; set; } = new ProgressArc();
-        public double MinValue { get; set; } = 0;
+        public double MinValue { get; set; } = 10;
         public double MaxValue { get; set; } = 120;
         public double CurrentValue { get; set; } = 60;
 

@@ -28,10 +28,10 @@ namespace CircularProgressbar.ArcInfoCalculator
         {
             var radius = radiusInSize.Height;
             angle = angle == 360 ? 359.99 : angle;
-            double piang = angle * Math.PI / 180;
+            double angleInRadians = angle * Math.PI / 180;
 
-            double px = DEFAULT_RADIUS + (Math.Sin(piang) * radius);
-            double py = DEFAULT_RADIUS + (-Math.Cos(piang) * radius);
+            double px = DEFAULT_RADIUS + (Math.Sin(angleInRadians) * radius);
+            double py = DEFAULT_RADIUS + (-Math.Cos(angleInRadians) * radius);
 
             return new Point(px, py);
         }

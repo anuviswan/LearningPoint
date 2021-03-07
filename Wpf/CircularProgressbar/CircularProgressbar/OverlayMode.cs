@@ -8,8 +8,8 @@ namespace CircularProgressbar
 {
     public enum OverlayMode
     {
-        Inset,
-        Outset,
+        InnerCircle,
+        OuterCircle,
         Centered
     }
 }
