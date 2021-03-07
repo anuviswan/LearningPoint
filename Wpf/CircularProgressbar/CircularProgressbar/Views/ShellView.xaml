@@ -35,8 +35,8 @@
         </Grid.RowDefinitions>
 
         <Border BorderThickness="1" BorderBrush="Green">
-        <Viewbox Stretch="Uniform">
-            <Canvas Height="100" Width="100"  Background="AliceBlue">
+        <Viewbox Stretch="Uniform" Margin="10">
+            <Canvas Height="100" Width="100" >
                 <Path Stroke="LightGray" 
                                   StrokeThickness="{Binding BackgroundCircle.Thickness}" >
                     <Path.Data>

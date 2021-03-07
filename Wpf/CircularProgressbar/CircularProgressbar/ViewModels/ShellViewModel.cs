@@ -34,6 +34,11 @@ namespace CircularProgressbar.ViewModels
             RefreshControl();
         }
 
+        protected override void OnViewAttached(object view, object context)
+        {
+            base.OnViewAttached(view, context);
+            RefreshControl();
+        }
         private void RefreshControl()
         {
             ArcCalculatorBase arcCalculator;
