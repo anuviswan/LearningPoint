@@ -13,7 +13,7 @@
         Title="ShellView" Height="450" Width="800">
     <Window.Resources>
         <converters:AngleToIsLargeConverter x:Key="AngleToIsLargeConverter"/>
-        
+
         <ObjectDataProvider x:Key="AvailableOverLayModes" MethodName="GetValues"
                             ObjectType="{x:Type System:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -35,48 +35,48 @@
         </Grid.RowDefinitions>
 
         <Border BorderThickness="1" BorderBrush="Green">
-        <Viewbox Stretch="Uniform" Margin="10">
+            <Viewbox Stretch="Uniform" Margin="10">
                 <Grid>
-            <Canvas Height="100" Width="100" >
-                <Path Stroke="LightGray" StrokeThickness="{Binding BackgroundCircle.Thickness}" >
-                    <Path.Data>
-                        <PathGeometry>
-                            <PathFigure  StartPoint="{Binding BackgroundCircle.StartPosition}">
-                                <PathFigure.Segments>
-                                        <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                    <Canvas Height="100" Width="100" >
+                        <Path Stroke="LightGray" StrokeThickness="{Binding BackgroundCircle.Thickness}" >
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure  StartPoint="{Binding BackgroundCircle.StartPosition}">
+                                        <PathFigure.Segments>
+                                            <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
                                                         Size="{Binding BackgroundCircle.Radius}"
                                                         IsLargeArc="True"
                                                     Point="{Binding BackgroundCircle.EndPosition}"
                                                         >
-                                           
-                                        </ArcSegment>
 
-                                    </PathFigure.Segments>
-                            </PathFigure>
-                        </PathGeometry>
-                    </Path.Data>
-                </Path>
+                                            </ArcSegment>
 
-                <Path Stroke="Blue" StrokeThickness="{Binding ValueCircle.Thickness}" StrokeEndLineCap="Round">
-                    <Path.Data>
-                        <PathGeometry>
-                                <PathFigure  StartPoint="{Binding ValueCircle.StartPosition}">
-                                <PathFigure.Segments>
-                                        <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
+                                        </PathFigure.Segments>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+
+                        <Path Stroke="Blue" StrokeThickness="{Binding ValueCircle.Thickness}" StrokeEndLineCap="Round">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure  StartPoint="{Binding ValueCircle.StartPosition}">
+                                        <PathFigure.Segments>
+                                            <ArcSegment RotationAngle="0" SweepDirection="Clockwise"
                                                         Size="{Binding ValueCircle.Radius}"
                                                         IsLargeArc="{Binding ValueCircle.Angle,Converter={StaticResource AngleToIsLargeConverter}}"
                                                     Point="{Binding ValueCircle.EndPosition}"
                                                         >
 
-                                        </ArcSegment>
+                                            </ArcSegment>
 
-                                    </PathFigure.Segments>
-                            </PathFigure>
-                        </PathGeometry>
-                    </Path.Data>
-                </Path>
-                    
-                </Canvas>
+                                        </PathFigure.Segments>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+
+                    </Canvas>
                     <TextBlock Text="{Binding CurrentValue}" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Grid>
             </Viewbox>
@@ -92,8 +92,8 @@
                 <Label Content="Overlay Mode"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource AvailableOverLayModes}}" SelectedItem="{Binding SelectedOverlayMode}"/>
             </Grid>
-            
-            
+
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
