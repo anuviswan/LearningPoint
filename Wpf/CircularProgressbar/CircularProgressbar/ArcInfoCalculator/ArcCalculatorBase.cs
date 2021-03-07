@@ -5,7 +5,7 @@ namespace CircularProgressbar.ArcInfoCalculator
 {
     public abstract class ArcCalculatorBase
     {
-        protected const double DEFAULT_RADIUS = 50;
+        protected const double ORIGIN = 50;
         protected double _backgroundCircleThickness;
         protected double _valueCircleThickness;
         public ArcCalculatorBase(double backgroundCircleThickness, double valueCircleThickness)
@@ -38,8 +38,8 @@ namespace CircularProgressbar.ArcInfoCalculator
             angle = angle == 360 ? 359.99 : angle;
             double angleInRadians = angle * Math.PI / 180;
 
-            double px = DEFAULT_RADIUS + (Math.Sin(angleInRadians) * radius);
-            double py = DEFAULT_RADIUS + (-Math.Cos(angleInRadians) * radius);
+            double px = ORIGIN + (Math.Sin(angleInRadians) * radius);
+            double py = ORIGIN + (-Math.Cos(angleInRadians) * radius);
 
             return new Point(px, py);
         }
@@ -54,8 +54,8 @@ namespace CircularProgressbar.ArcInfoCalculator
 
         public override void Calculate(double minValue,double maxValue,double currentValue)
         {
-            BackgroundCircleRadius =  new Size(DEFAULT_RADIUS - _backgroundCircleThickness / 2, DEFAULT_RADIUS - _backgroundCircleThickness / 2);
-            ValueCircleRadius = new Size(DEFAULT_RADIUS - _valueCircleThickness / 2, DEFAULT_RADIUS - _valueCircleThickness / 2); ;
+            BackgroundCircleRadius =  new Size(ORIGIN - _backgroundCircleThickness / 2, ORIGIN - _backgroundCircleThickness / 2);
+            ValueCircleRadius = new Size(ORIGIN - _valueCircleThickness / 2, ORIGIN - _valueCircleThickness / 2); ;
 
             BackgroundCircleStartPosition = GetPointForAngle(BackgroundCircleRadius, 0);
             BackgroundCircleEndPosition = GetPointForAngle(BackgroundCircleRadius, 360);
@@ -78,8 +78,8 @@ namespace CircularProgressbar.ArcInfoCalculator
         {
             var maxThickness = Math.Max(_backgroundCircleThickness, _valueCircleThickness);
             
-            BackgroundCircleRadius = new Size(DEFAULT_RADIUS - maxThickness / 2, DEFAULT_RADIUS - maxThickness / 2);
-            ValueCircleRadius = new Size(DEFAULT_RADIUS - maxThickness / 2, DEFAULT_RADIUS - maxThickness / 2); ;
+            BackgroundCircleRadius = new Size(ORIGIN - maxThickness / 2, ORIGIN - maxThickness / 2);
+            ValueCircleRadius = new Size(ORIGIN - maxThickness / 2, ORIGIN - maxThickness / 2); ;
 
             BackgroundCircleStartPosition = GetPointForAngle(BackgroundCircleRadius, 0);
             BackgroundCircleEndPosition = GetPointForAngle(BackgroundCircleRadius, 360);
@@ -102,8 +102,8 @@ namespace CircularProgressbar.ArcInfoCalculator
         {
             var maxThickness = Math.Max(_backgroundCircleThickness, _valueCircleThickness);
 
-            BackgroundCircleRadius = new Size((DEFAULT_RADIUS - maxThickness) + (_backgroundCircleThickness / 2), (DEFAULT_RADIUS - maxThickness) + (_backgroundCircleThickness / 2));
-            ValueCircleRadius = new Size((DEFAULT_RADIUS - maxThickness) + (_valueCircleThickness / 2), (DEFAULT_RADIUS - maxThickness) + (_valueCircleThickness / 2));
+            BackgroundCircleRadius = new Size((ORIGIN - maxThickness) + (_backgroundCircleThickness / 2), (ORIGIN - maxThickness) + (_backgroundCircleThickness / 2));
+            ValueCircleRadius = new Size((ORIGIN - maxThickness) + (_valueCircleThickness / 2), (ORIGIN - maxThickness) + (_valueCircleThickness / 2));
 
             BackgroundCircleStartPosition = GetPointForAngle(BackgroundCircleRadius, 0);
             BackgroundCircleEndPosition = GetPointForAngle(BackgroundCircleRadius, 360);
