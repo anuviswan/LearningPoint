@@ -66,6 +66,7 @@ namespace CircularProgressbar.ViewModels
             ValueCircle.Radius = arcCalculator.ValueCircleRadius;
             ValueCircle.StartPosition = arcCalculator.ValueCircleStartPosition;
             ValueCircle.EndPosition = arcCalculator.ValueCircleEndPosition;
+            ValueCircle.Angle = arcCalculator.ValueAngle;
         }
 
         public ProgressArc BackgroundCircle { get; set; } = new ProgressArc();

@@ -36,9 +36,9 @@
 
         <Border BorderThickness="1" BorderBrush="Green">
         <Viewbox Stretch="Uniform" Margin="10">
+                <Grid>
             <Canvas Height="100" Width="100" >
-                <Path Stroke="LightGray" 
-                                  StrokeThickness="{Binding BackgroundCircle.Thickness}" >
+                <Path Stroke="LightGray" StrokeThickness="{Binding BackgroundCircle.Thickness}" >
                     <Path.Data>
                         <PathGeometry>
                             <PathFigure  StartPoint="{Binding BackgroundCircle.StartPosition}">
@@ -57,8 +57,7 @@
                     </Path.Data>
                 </Path>
 
-                <Path Stroke="Blue" 
-                                  StrokeThickness="{Binding ValueCircle.Thickness}">
+                <Path Stroke="Blue" StrokeThickness="{Binding ValueCircle.Thickness}" StrokeEndLineCap="Round">
                     <Path.Data>
                         <PathGeometry>
                                 <PathFigure  StartPoint="{Binding ValueCircle.StartPosition}">
@@ -76,9 +75,11 @@
                         </PathGeometry>
                     </Path.Data>
                 </Path>
-
+                    
                 </Canvas>
-        </Viewbox>
+                    <TextBlock Text="{Binding CurrentValue}" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
+            </Viewbox>
         </Border>
 
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="10">

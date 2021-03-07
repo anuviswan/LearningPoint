@@ -23,6 +23,8 @@ namespace CircularProgressbar.ArcInfoCalculator
         public Point ValueCircleStartPosition { get; protected set; }
         public Point ValueCircleEndPosition { get; protected set; }
 
+        public double ValueAngle { get; set; }
+
         protected double GetAngleForValue(double minValue, double maxValue, double currentValue)
         {
             var percent = (currentValue - minValue) * 100 / (maxValue - minValue);
@@ -58,10 +60,10 @@ namespace CircularProgressbar.ArcInfoCalculator
             BackgroundCircleStartPosition = GetPointForAngle(BackgroundCircleRadius, 0);
             BackgroundCircleEndPosition = GetPointForAngle(BackgroundCircleRadius, 360);
 
-            var valueInAngle = GetAngleForValue(minValue, maxValue, currentValue);
+            ValueAngle = GetAngleForValue(minValue, maxValue, currentValue);
 
             ValueCircleStartPosition = GetPointForAngle(ValueCircleRadius, 0);
-            ValueCircleEndPosition = GetPointForAngle(ValueCircleRadius, valueInAngle);
+            ValueCircleEndPosition = GetPointForAngle(ValueCircleRadius, ValueAngle);
         }
     }
 
@@ -82,10 +84,10 @@ namespace CircularProgressbar.ArcInfoCalculator
             BackgroundCircleStartPosition = GetPointForAngle(BackgroundCircleRadius, 0);
             BackgroundCircleEndPosition = GetPointForAngle(BackgroundCircleRadius, 360);
 
-            var valueInAngle = GetAngleForValue(minValue, maxValue, currentValue);
+            ValueAngle = GetAngleForValue(minValue, maxValue, currentValue);
 
             ValueCircleStartPosition = GetPointForAngle(ValueCircleRadius, 0);
-            ValueCircleEndPosition = GetPointForAngle(ValueCircleRadius, valueInAngle);
+            ValueCircleEndPosition = GetPointForAngle(ValueCircleRadius, ValueAngle);
         }
     }
 
@@ -106,10 +108,10 @@ namespace CircularProgressbar.ArcInfoCalculator
             BackgroundCircleStartPosition = GetPointForAngle(BackgroundCircleRadius, 0);
             BackgroundCircleEndPosition = GetPointForAngle(BackgroundCircleRadius, 360);
 
-            var valueInAngle = GetAngleForValue(minValue, maxValue, currentValue);
+            ValueAngle = GetAngleForValue(minValue, maxValue, currentValue);
 
             ValueCircleStartPosition = GetPointForAngle(ValueCircleRadius, 0);
-            ValueCircleEndPosition = GetPointForAngle(ValueCircleRadius, valueInAngle);
+            ValueCircleEndPosition = GetPointForAngle(ValueCircleRadius, ValueAngle);
         }
     }
 }
