@@ -19,9 +19,13 @@ namespace ValueCoercion.Views
     /// </summary>
     public partial class ShellView : Window
     {
+
+
         public ShellView()
         {
             InitializeComponent();
         }
+
+       
     }
 }

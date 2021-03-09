@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ValueCoercion.Views"
+        xmlns:local="clr-namespace:ValueCoercion.Views" xmlns:controls="clr-namespace:ValueCoercion.Controls"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <controls:Configuration MinimumValue="{Binding MinValue}"  MaximumValue="{Binding MaxValue}" />
+    </StackPanel>
 </Window>

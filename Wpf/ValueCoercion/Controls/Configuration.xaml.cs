@@ -33,7 +33,18 @@ namespace ValueCoercion.Controls
             set { SetValue(MinimumValueProperty, value); }
         }
 
-        public static readonly DependencyProperty MinimumValueProperty = DependencyProperty.Register(nameof(MinimumValue), typeof(int), typeof(Configuration), new PropertyMetadata(0, null, new CoerceValueCallback(OnMinimumValueCoerce)));
+        public static readonly DependencyProperty MinimumValueProperty = 
+            DependencyProperty.Register(nameof(MinimumValue), typeof(int), typeof(Configuration), new PropertyMetadata(0, new PropertyChangedCallback(MinValueChanged), new CoerceValueCallback(OnMinimumValueCoerce)));
+
+        private static void MinValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if(d is Configuration config)
+            {
+                config.CoerceValue(MaximumValueProperty);
+                config.CoerceValue(MinimumValueProperty);
+                
+            }
+        }
 
         private static object OnMinimumValueCoerce(DependencyObject d, object baseValue)
         {
@@ -52,7 +63,6 @@ namespace ValueCoercion.Controls
             set { SetValue(MaximumValueProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for MaximumValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaximumValueProperty =
             DependencyProperty.Register(nameof(MaximumValue), typeof(int), typeof(Configuration), new PropertyMetadata(0,null,new CoerceValueCallback(OnMaximumCoerce)));
 
