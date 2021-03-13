@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resImages\SplashScreen.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="resImages\SplashScreen.jpg" />
   </ItemGroup>
 
 </Project>

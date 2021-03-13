@@ -25,8 +25,6 @@ namespace ValueCoercion.Controls
             InitializeComponent();
         }
 
-
-
         public int MinimumValue
         {
             get { return (int)GetValue(MinimumValueProperty); }
@@ -34,27 +32,14 @@ namespace ValueCoercion.Controls
         }
 
         public static readonly DependencyProperty MinimumValueProperty = 
-            DependencyProperty.Register(nameof(MinimumValue), typeof(int), typeof(Configuration), new PropertyMetadata(0, new PropertyChangedCallback(MinValueChanged), new CoerceValueCallback(OnMinimumValueCoerce)));
+            DependencyProperty.Register(nameof(MinimumValue), typeof(int), typeof(Configuration), new PropertyMetadata(0, new PropertyChangedCallback(OnMinimumValueChanged)));
 
-        private static void MinValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnMinimumValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if(d is Configuration config)
             {
                 config.CoerceValue(MaximumValueProperty);
-                config.CoerceValue(MinimumValueProperty);
-                
             }
-        }
-
-        private static object OnMinimumValueCoerce(DependencyObject d, object baseValue)
-        {
-            if(d is Configuration config && baseValue is int newValue)
-            {
-                var maxValue = config.MaximumValue;
-                var oldValue = config.MinimumValue;
-                return maxValue > newValue ? newValue : oldValue;
-            }
-            return baseValue;
         }
 
         public int MaximumValue
@@ -71,8 +56,7 @@ namespace ValueCoercion.Controls
             if(d is Configuration config && baseValue is int newValue)
             {
                 var minValue = config.MinimumValue;
-                var oldValue = config.MaximumValue;
-                return newValue > minValue ? newValue : oldValue;
+                return newValue > minValue ? newValue : minValue;
             }
             return baseValue;
         }
