@@ -55,14 +55,14 @@ namespace AzureFunc.Crud.Queue
         }
 
 
-        //[FunctionName("AddOnQueueTrigger")]
-        //public static async Task AddOnQueueTrigger(
-        //  [QueueTrigger("SampleQueue")] string message,
-        //  [Queue("BackupQueue")] CloudQueue cloudQueue)
-        //{
-        //    var queueMessage = new CloudQueueMessage(message);
-        //    await cloudQueue.AddMessageAsync(queueMessage);
-        //}
+        [FunctionName("AddOnQueueTrigger")]
+        public static async Task AddOnQueueTrigger(
+          [QueueTrigger("SampleQueue")] string message,
+          [Queue("BackupQueue")] CloudQueue cloudQueue)
+        {
+            var queueMessage = new CloudQueueMessage(message);
+            await cloudQueue.AddMessageAsync(queueMessage);
+        }
 
 
         [FunctionName("GetItemFromQueue")]
