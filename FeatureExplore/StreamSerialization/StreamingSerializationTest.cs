@@ -21,7 +21,6 @@ namespace StreamSerialization
                     Id = i,
                     Value = random.Next().ToString()
                 };
-                //await Task.Delay(1000);
             }
         }
 
