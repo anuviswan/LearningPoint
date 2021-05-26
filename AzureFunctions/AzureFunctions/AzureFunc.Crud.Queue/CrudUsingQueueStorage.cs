@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Azure.Storage.Queue;
 using Newtonsoft.Json;
 using System.Text;
+using System;
 
 namespace AzureFunc.Crud.Queue
 {
@@ -23,6 +24,17 @@ namespace AzureFunc.Crud.Queue
             var queueMessage = new CloudQueueMessage(message);
             await cloudQueue.AddMessageAsync(queueMessage);
             return new OkObjectResult($"Message :(`{message}`) added to tbe queue");
+        }
+
+        [FunctionName("PopMessageFromQueue")]
+        public static async Task<IActionResult> PopMessageFromQueue(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest request,
+        [Queue("SampleQueue")] CloudQueue cloudQueue)
+        {
+            var message = await cloudQueue.PeekMessageAsync();
+            await cloudQueue.DeleteIfExistsAsync();
+
+            return new OkObjectResult(message == null ? "No Message found to be removed":$"Message :(`{message.AsString}`) has been removed");
         }
 
         [FunctionName("NumberOfItemsInQueue")]
@@ -55,14 +67,14 @@ namespace AzureFunc.Crud.Queue
         }
 
 
-        [FunctionName("AddOnQueueTrigger")]
-        public static async Task AddOnQueueTrigger(
-          [QueueTrigger("SampleQueue")] string message,
-          [Queue("BackupQueue")] CloudQueue cloudQueue)
-        {
-            var queueMessage = new CloudQueueMessage(message);
-            await cloudQueue.AddMessageAsync(queueMessage);
-        }
+        //[FunctionName("AddOnQueueTrigger")]
+        //public static async Task AddOnQueueTrigger(
+        //  [QueueTrigger("SampleQueue")] string message,
+        //  [Queue("BackupQueue")] CloudQueue cloudQueue)
+        //{
+        //    var queueMessage = new CloudQueueMessage(message);
+        //    await cloudQueue.AddMessageAsync(queueMessage);
+        //}
 
 
         [FunctionName("GetItemFromQueue")]
@@ -82,7 +94,7 @@ namespace AzureFunc.Crud.Queue
                 return new OkObjectResult("No item in the queue");
 
             var resultBuilder = new StringBuilder();
-            resultBuilder.AppendLine($"Message : `({message.AsString})`");
+            resultBuilder.AppendLine($"Message : `{message.AsString}`");
             resultBuilder.AppendLine($"Pop Reciept : {message.PopReceipt}");
             resultBuilder.AppendLine($"Dequeue Count : {message.DequeueCount}");
             resultBuilder.AppendLine($"Insertion Time: {message.InsertionTime}");
