@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define LargeData
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace StreamSerialization
     public class Benchmarking
     {
         private const int DATA_COUNT = 10000;
-        private const int DATA_TO_CONSUME_LOWER = 1000;
-        private const int DATA_TO_CONSUME_HIGHER = 8000;
+#if LargeData
+        private const int DATA_TO_COMSUME = 8000;
+#else
+        private const int DATA_TO_COMSUME = 2000;
+#endif
         private string serializedString;
-        private readonly Consumer consumer = new Consumer();
         [GlobalSetup]
         public void Setup()
         {
@@ -32,23 +35,13 @@ namespace StreamSerialization
         }
 
         [Benchmark]
-        public void TestDeseriliazeWithoutStreaming_Lower()
+        public void TestDeseriliaze()
         {
-            foreach(var item in DeserializeWithoutStreaming().TakeWhile(x => x.Id < DATA_TO_CONSUME_LOWER))
+            foreach(var item in DeserializeWithoutStreaming().TakeWhile(x => x.Id < DATA_TO_COMSUME))
             {
-
+                // DoSomeWork
             }
         }
-
-        [Benchmark]
-        public void TestDeseriliazeWithoutStreaming_Higher()
-        {
-            foreach (var item in DeserializeWithoutStreaming().TakeWhile(x => x.Id < DATA_TO_CONSUME_HIGHER))
-            {
-
-            }
-        }
-
 
         public IEnumerable<Data> DeserializeWithoutStreaming()
         {
@@ -57,22 +50,14 @@ namespace StreamSerialization
         }
 
         [Benchmark]
-        public async Task TestDeseriliazeAsync_Lower()
+        public async Task TestDeseriliazeAsync()
         {
-            foreach (var item in (await DeserializeAsync()).TakeWhile(x => x.Id < DATA_TO_CONSUME_LOWER))
+            foreach (var item in (await DeserializeAsync()).TakeWhile(x => x.Id < DATA_TO_COMSUME))
             {
-
+                // DoSomeWork
             }
         }
 
-        [Benchmark]
-        public async Task TestDeseriliazeAsync_Higher()
-        {
-            foreach (var item in (await DeserializeAsync()).TakeWhile(x => x.Id < DATA_TO_CONSUME_HIGHER))
-            {
-
-            }
-        }
         public async Task<IEnumerable<Data>> DeserializeAsync()
         {
             var memStream = new MemoryStream(Encoding.UTF8.GetBytes(serializedString));
@@ -83,28 +68,21 @@ namespace StreamSerialization
 
 
         [Benchmark]
-        public async Task TestDeseriliazeWithStreaming_Lower()
+        public async Task TestDeserializeAsyncEnumerable()
         {
-            await foreach (var item in DeserializeWithStreaming().TakeWhile(x => x.Id < DATA_TO_CONSUME_LOWER))
+            await foreach (var item in DeserializeWithStreaming().TakeWhile(x => x.Id < DATA_TO_COMSUME))
             {
-
+                // DoSomeWork
             }
         }
 
-        [Benchmark]
-        public async Task TestDeseriliazeWithStreaming_Higher()
+        public async IAsyncEnumerable<Data> DeserializeWithStreaming()
         {
-            await foreach (var item in DeserializeWithStreaming().TakeWhile(x => x.Id < DATA_TO_CONSUME_HIGHER))
+            using var memStream = new MemoryStream(Encoding.UTF8.GetBytes(serializedString));
+            await foreach(var item in  JsonSerializer.DeserializeAsyncEnumerable<Data>(memStream))
             {
-
+                yield return item;
             }
-        }
-
-        public IAsyncEnumerable<Data> DeserializeWithStreaming()
-        {
-            var memStream = new MemoryStream(Encoding.UTF8.GetBytes(serializedString));
-            var deserializedData = JsonSerializer.DeserializeAsyncEnumerable<Data>(memStream);
-            return deserializedData;
         }
     }
 }
