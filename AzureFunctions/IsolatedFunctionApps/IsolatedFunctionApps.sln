@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsolatedFunctionApps", "IsolatedFunctionApps.csproj", "{6B760E74-90C1-439E-B525-5FEB0F16BCDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B760E74-90C1-439E-B525-5FEB0F16BCDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B760E74-90C1-439E-B525-5FEB0F16BCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B760E74-90C1-439E-B525-5FEB0F16BCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B760E74-90C1-439E-B525-5FEB0F16BCDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F8036B3-F5EC-4533-8684-27D959D80326}
+	EndGlobalSection
+EndGlobal
