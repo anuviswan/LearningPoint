@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using IsolatedFunctionApps.Dtos;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
@@ -21,7 +22,7 @@ namespace IsolatedFunctionApps.FunctionApps
             FunctionContext executionContext)
         {
             // Use the FunctionContext.GetLogger to fetch instance of ILogger
-            var logger = executionContext.GetLogger("Info");
+            var logger = executionContext.GetLogger(nameof(StaticFunctions));
             logger.LogInformation("Started execution of function");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
