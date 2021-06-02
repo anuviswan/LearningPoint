@@ -4,7 +4,7 @@ namespace IsolatedFunctionApps.Dtos
 {
     public class UserDto
     {
-        [JsonPropertyName("name")]
+       // [JsonPropertyName("name")]
         public string Name { get; set; }
     }
 }
