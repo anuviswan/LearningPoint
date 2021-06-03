@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using IsolatedFunctionApps.Dtos;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace IsolatedFunctionApps.FunctionApps
@@ -16,9 +17,11 @@ namespace IsolatedFunctionApps.FunctionApps
     public class InstanceFunctions
     {
         private readonly JsonSerializerOptions _jsonSerializerOptions;
-        public InstanceFunctions(JsonSerializerOptions jsonSerializerOptions)
+        private readonly IConfiguration _config;
+        public InstanceFunctions(JsonSerializerOptions jsonSerializerOptions,IConfiguration config)
         {
             _jsonSerializerOptions = jsonSerializerOptions;
+            _config = config;
         }
 
         [Function("SayHelloInstance")]
