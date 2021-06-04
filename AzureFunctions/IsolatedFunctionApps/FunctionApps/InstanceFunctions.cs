@@ -10,6 +10,7 @@ using IsolatedFunctionApps.Dtos;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace IsolatedFunctionApps.FunctionApps
@@ -18,10 +19,9 @@ namespace IsolatedFunctionApps.FunctionApps
     {
         private readonly JsonSerializerOptions _jsonSerializerOptions;
         private readonly IConfiguration _config;
-        public InstanceFunctions(JsonSerializerOptions jsonSerializerOptions,IConfiguration config)
+        public InstanceFunctions(JsonSerializerOptions jsonSerializerOptions)
         {
             _jsonSerializerOptions = jsonSerializerOptions;
-            _config = config;
         }
 
         [Function("SayHelloInstance")]
@@ -30,6 +30,7 @@ namespace IsolatedFunctionApps.FunctionApps
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
             FunctionContext executionContext)
         {
+
             // Use the FunctionContext.GetLogger to fetch instance of ILogger
             var logger = executionContext.GetLogger(nameof(StaticFunctions));
             logger.LogInformation("Started execution of function");
@@ -39,8 +40,6 @@ namespace IsolatedFunctionApps.FunctionApps
 
             // Should use HttpResponseData as response
             var response = req.CreateResponse(HttpStatusCode.OK);
-            //response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-            /// response.WriteString($"Hello {data.Name}");
             await response.WriteAsJsonAsync<UserDto>(data);
 
             return response;
