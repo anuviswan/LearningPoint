@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using IsolatedFunctionApps.Dtos;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace IsolatedFunctionApps.FunctionApps
@@ -18,7 +12,6 @@ namespace IsolatedFunctionApps.FunctionApps
     public class InstanceFunctions
     {
         private readonly JsonSerializerOptions _jsonSerializerOptions;
-        private readonly IConfiguration _config;
         public InstanceFunctions(JsonSerializerOptions jsonSerializerOptions)
         {
             _jsonSerializerOptions = jsonSerializerOptions;
