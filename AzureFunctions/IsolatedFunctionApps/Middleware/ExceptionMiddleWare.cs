@@ -4,15 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker.Middleware;
 
 namespace IsolatedFunctionApps.Middleware
 {
     public class ExceptionMiddleWare : IFunctionsWorkerMiddleware
     {
-        public Task Invoke(FunctionContext context, FunctionExecutionDelegate next)
+        public async Task Invoke(FunctionContext context, FunctionExecutionDelegate next)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await next(context);                
+            }
+            catch(Exception ex)
+            {
+                v/*ar g = context.FunctionDefinition.Parameters.First(x => x.Type == typeof(HttpRequestData));*/
+            }
         }
+
     }
 }

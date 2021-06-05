@@ -18,7 +18,7 @@ namespace IsolatedFunctionApps.FunctionApps
         }
 
         [Function("SayHelloInstance")]
-        public async Task<HttpResponseData> Run(
+        public async Task<HttpResponseData> SayHello(
             // When using HttpTrigger, use HttpRequestData wrapper for reading input Http Request
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
             FunctionContext executionContext)
@@ -36,6 +36,14 @@ namespace IsolatedFunctionApps.FunctionApps
             await response.WriteAsJsonAsync<UserDto>(data);
 
             return response;
+        }
+
+        [Function("InvalidOperation")]
+        public Task<HttpResponseData> InvalidOperation( // When using HttpTrigger, use HttpRequestData wrapper for reading input Http Request
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
+            FunctionContext executionContext)
+        {
+            throw new System.Exception("Mock Exception");
         }
     }
 }

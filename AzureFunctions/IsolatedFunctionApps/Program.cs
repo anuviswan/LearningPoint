@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Threading.Tasks;
+using IsolatedFunctionApps.Middleware;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Configuration;
 using Microsoft.Extensions.Configuration;
@@ -13,33 +14,36 @@ namespace IsolatedFunctionApps
         public static void Main()
         {
             var host = new HostBuilder()
-                .ConfigureFunctionsWorkerDefaults(c=>c.ConfigureJsonSerializer())
+                .ConfigureFunctionsWorkerDefaults(c=>ConfigureServicesAndMiddleware(c))
                 .Build();
 
             host.Run();
         }
 
+        private static IFunctionsWorkerApplicationBuilder ConfigureServicesAndMiddleware(IFunctionsWorkerApplicationBuilder builder)
+        {
+            ConfigureJsonSerializer(builder);
+            ConfigureMiddleware(builder);
+            return builder;
+        }
 
-    }
-
-    internal static class WorkerConfigurationExtensions
-    {
-        public static IFunctionsWorkerApplicationBuilder ConfigureJsonSerializer(this IFunctionsWorkerApplicationBuilder builder)
+        private static IFunctionsWorkerApplicationBuilder ConfigureJsonSerializer(IFunctionsWorkerApplicationBuilder builder)
         {
             builder.Services.AddSingleton<JsonSerializerOptions>(new JsonSerializerOptions
             {
                 AllowTrailingCommas = true,
                 PropertyNameCaseInsensitive = true
             });
-            //builder.Services.Configure<JsonSerializerOptions>(jsonSerializerOptions =>
-            //{
-            //    // override the default value
-            //    jsonSerializerOptions.PropertyNameCaseInsensitive = true;
-            //});
-
             return builder;
         }
 
-       
+
+        private static IFunctionsWorkerApplicationBuilder ConfigureMiddleware(IFunctionsWorkerApplicationBuilder builder)
+        {
+            builder.UseMiddleware<ExceptionMiddleWare>();
+            return builder;
+        }
     }
+
+       
 }
