@@ -16,24 +16,20 @@ namespace IsolatedFunctionApps.FunctionApps
     public static class StaticFunctions
     {
         [Function("SayHello")]
-        public static async Task<HttpResponseData> Run(
-            // When using HttpTrigger, use HttpRequestData wrapper for reading input Http Request
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
+        public static async Task<HttpResponseData> SayHello(
+            [HttpTrigger(AuthorizationLevel.Anonymous,"post")] HttpRequestData req,
             FunctionContext executionContext)
         {
             // Use the FunctionContext.GetLogger to fetch instance of ILogger
             var logger = executionContext.GetLogger(nameof(StaticFunctions));
             logger.LogInformation("Started execution of function");
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var data = JsonSerializer.Deserialize<UserDto>(requestBody);
+            var data = await req.ReadFromJsonAsync<UserDto>();
 
             // Should use HttpResponseData as response
             var response = req.CreateResponse(HttpStatusCode.OK);
-            //response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-           /// response.WriteString($"Hello {data.Name}");
-            await response.WriteAsJsonAsync<UserDto>(data);
 
+            await response.WriteStringAsync($"Hello {data.Name}, Welcome to Isolated functions demo.");
             return response;
         }
     }

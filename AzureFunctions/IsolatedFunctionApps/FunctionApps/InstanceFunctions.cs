@@ -3,6 +3,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using IsolatedFunctionApps.Dtos;
+using IsolatedFunctionApps.Services;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
@@ -11,25 +12,25 @@ namespace IsolatedFunctionApps.FunctionApps
 {
     public class InstanceFunctions
     {
-        private readonly JsonSerializerOptions _jsonSerializerOptions;
-        public InstanceFunctions(JsonSerializerOptions jsonSerializerOptions)
+        private readonly IMockDataService _mockDataService;
+        public InstanceFunctions(IMockDataService mockDataService)
         {
-            _jsonSerializerOptions = jsonSerializerOptions;
+            _mockDataService = mockDataService;
         }
 
-        [Function("FunctionSaysHello")]
-        public async Task<HttpResponseData> SayHello(
-            // When using HttpTrigger, use HttpRequestData wrapper for reading input Http Request
+        [Function("CreateUser")]
+        public async Task<HttpResponseData> CreateUser(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
             FunctionContext executionContext)
         {
+            var queryStrings = System.Web.HttpUtility.ParseQueryString(req.Url.PathAndQuery);
+            var userName = queryStrings["user"];
 
             // Use the FunctionContext.GetLogger to fetch instance of ILogger
             var logger = executionContext.GetLogger(nameof(StaticFunctions));
             logger.LogInformation("Started execution of function");
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var data = JsonSerializer.Deserialize<UserDto>(requestBody, _jsonSerializerOptions);
+            var data = _mockDataService.CreateUser(userName);
 
             // Should use HttpResponseData as response
             var response = req.CreateResponse(HttpStatusCode.OK);
