@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker.Middleware;
+using Microsoft.Extensions.Logging;
 
 namespace IsolatedFunctionApps.Middleware
 {
@@ -19,7 +20,8 @@ namespace IsolatedFunctionApps.Middleware
             }
             catch(Exception ex)
             {
-                v/*ar g = context.FunctionDefinition.Parameters.First(x => x.Type == typeof(HttpRequestData));*/
+                var logger = context.GetLogger(context.FunctionDefinition.Name);
+                logger.LogError("Unexpected Error in {0}: {1}",context.FunctionDefinition.Name,ex.Message);
             }
         }
 

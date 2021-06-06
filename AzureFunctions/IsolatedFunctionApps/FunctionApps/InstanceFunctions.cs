@@ -17,7 +17,7 @@ namespace IsolatedFunctionApps.FunctionApps
             _jsonSerializerOptions = jsonSerializerOptions;
         }
 
-        [Function("SayHelloInstance")]
+        [Function("FunctionSaysHello")]
         public async Task<HttpResponseData> SayHello(
             // When using HttpTrigger, use HttpRequestData wrapper for reading input Http Request
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
@@ -38,7 +38,7 @@ namespace IsolatedFunctionApps.FunctionApps
             return response;
         }
 
-        [Function("InvalidOperation")]
+        [Function("FunctionThrowsException")]
         public Task<HttpResponseData> InvalidOperation( // When using HttpTrigger, use HttpRequestData wrapper for reading input Http Request
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
             FunctionContext executionContext)
