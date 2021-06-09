@@ -18,9 +18,9 @@ namespace IsolatedFunctionApps.FunctionApps
             _mockDataService = mockDataService;
         }
 
-        [Function("CreateUser")]
+        [Function(nameof(CreateUser))]
         public async Task<HttpResponseData> CreateUser(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req,
             FunctionContext executionContext)
         {
             var queryStrings = System.Web.HttpUtility.ParseQueryString(req.Url.PathAndQuery);
@@ -39,9 +39,9 @@ namespace IsolatedFunctionApps.FunctionApps
             return response;
         }
 
-        [Function("FunctionThrowsException")]
-        public Task<HttpResponseData> InvalidOperation( // When using HttpTrigger, use HttpRequestData wrapper for reading input Http Request
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
+        [Function(nameof(InvalidOperation))]
+        public Task<HttpResponseData> InvalidOperation( 
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req,
             FunctionContext executionContext)
         {
             throw new System.Exception("Mock Exception");

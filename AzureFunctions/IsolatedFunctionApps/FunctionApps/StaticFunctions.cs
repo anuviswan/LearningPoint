@@ -15,7 +15,7 @@ namespace IsolatedFunctionApps.FunctionApps
 {
     public static class StaticFunctions
     {
-        [Function("SayHello")]
+        [Function(nameof(SayHello))]
         public static async Task<HttpResponseData> SayHello(
             [HttpTrigger(AuthorizationLevel.Anonymous,"post")] HttpRequestData req,
             FunctionContext executionContext)
