@@ -123,6 +123,16 @@ namespace AzureFunc.Crud.Queue
             resultBuilder.AppendLine($"Next Visible Time: {message.NextVisibleTime}");
             return new OkObjectResult($"Data Retrivied :{resultBuilder.ToString()}");
         }
+
+
+        [FunctionName("MultioutputSample")]
+        public static IActionResult MultiOutputDemo([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+            ILogger log,[Queue("SampleQueue")]out string queueOutput)
+        {
+
+            queueOutput = "New Activity detected";
+            return new OkObjectResult($"Hello, Welcome to Isolated functions demo.");
+        }
     }
 }
 
