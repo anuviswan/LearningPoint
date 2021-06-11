@@ -46,7 +46,7 @@ namespace IsolatedFunctionApps.FunctionApps
             return new CustomOutputType
             {
                 UserResponse = response,
-                UserTask = "Jia And Niana have logged in"
+                UserTask = $"{data.Name} have logged in"
             };
         }
 
