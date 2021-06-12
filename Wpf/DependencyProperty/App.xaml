@@ -9,13 +9,14 @@
                     <local:BootstrapperSC x:Key="bootstrapper" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="Button">
-                <Setter Property="Content" Value="Value From Application Style"/>
+            <Style TargetType="Button" x:Key="ButtonStyle">
+                <Setter Property="Content" Value="Value From Button Style"/>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="Padding" Value="5"/>
-                <Setter Property="MinHeight" Value="20"/>
+                <Setter Property="MinHeight" Value="40"/>
                 <Setter Property="Background" Value="LightBlue"/>
             </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

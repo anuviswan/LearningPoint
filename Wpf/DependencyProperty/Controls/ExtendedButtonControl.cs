@@ -17,7 +17,21 @@ namespace DependencyPropertyDemo.Controls
         }
         // Using a DependencyProperty as the backing store for CustomValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CustomValueProperty =
-            DependencyProperty.Register("CustomValue", typeof(string), typeof(ExtendedButtonControl), new PropertyMetadata("Default Value",new PropertyChangedCallback(CustomValueChanged)));
+            DependencyProperty.Register("CustomValue", typeof(string), typeof(ExtendedButtonControl), new PropertyMetadata("Default Value",new PropertyChangedCallback(CustomValueChanged),new CoerceValueCallback(CoerceCustomValue)));
+
+        private static object CoerceCustomValue(DependencyObject d, object baseValue)
+        {
+            if (d is ExtendedButtonControl buttonControl && baseValue is string currentValue)
+            {
+                // This won't work as .Clear() will not trigger CoerceValue
+                if (string.Equals("Value From ExtendedButton Style", currentValue))
+                {
+                    currentValue = "Corrected Value";
+                    return currentValue;
+                }
+            }
+            return baseValue;
+        }
 
         private static void CustomValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

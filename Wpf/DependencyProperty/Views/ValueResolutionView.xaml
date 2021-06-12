@@ -8,6 +8,12 @@
              xmlns:controls="clr-namespace:DependencyPropertyDemo.Controls" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="controls:ExtendedButtonControl" x:Key="ExtendedButtonStyle" BasedOn="{StaticResource ButtonStyle}">
+            <Setter Property="CustomValue" Value="Value From ExtendedButton Style"/>
+            <Setter Property="Content" Value="Value From ExtendedButton Style"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -16,7 +22,7 @@
 
         <StackPanel  Margin="10">
 
-            <controls:ExtendedButtonControl x:Name="DemoControl"  CustomValue="{Binding CurrentValue}" Height="20"/>
+            <controls:ExtendedButtonControl x:Name="DemoControl" Style="{StaticResource ExtendedButtonStyle}"  CustomValue="{Binding CurrentValue}" Height="20"/>
 
         </StackPanel>
 
