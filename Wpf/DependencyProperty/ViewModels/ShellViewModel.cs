@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 
-namespace DependencyProperty.ViewModels
+namespace DependencyPropertyDemo.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {

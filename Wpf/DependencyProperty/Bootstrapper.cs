@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 
-namespace DependencyProperty
+namespace DependencyPropertyDemo
 {
     public class Bootstrapper : BootstrapperBase
     {

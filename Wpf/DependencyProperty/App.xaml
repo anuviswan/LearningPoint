@@ -1,7 +1,7 @@
-﻿<Application x:Class="DependencyProperty.App"
+﻿<Application x:Class="DependencyPropertyDemo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DependencyProperty">
+             xmlns:local="clr-namespace:DependencyPropertyDemo">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -9,6 +9,13 @@
                     <local:BootstrapperSC x:Key="bootstrapper" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Button">
+                <Setter Property="Content" Value="Value From Application Style"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="MinHeight" Value="20"/>
+                <Setter Property="Background" Value="LightBlue"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

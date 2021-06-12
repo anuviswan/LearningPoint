@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using Caliburn.Micro;
 
-namespace DependencyProperty.ViewModels
+namespace DependencyPropertyDemo.ViewModels
 {
     public class ValueResolutionViewModel:Screen
     {
-        public string _buttonValue;
-        public string ButtonValue
+        public string _currentValue;
+        public string CurrentValue
         {
-            get => _buttonValue;
+            get => _currentValue;
             set
             {
-                _buttonValue = value;
-                NotifyOfPropertyChange(nameof(ButtonValue));
+                _currentValue = value;
+                NotifyOfPropertyChange(nameof(CurrentValue));
             }
         }
 

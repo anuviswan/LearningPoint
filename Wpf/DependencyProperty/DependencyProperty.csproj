@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{775EFF05-6064-42B4-9D77-9FE6CBDC049C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DependencyProperty</RootNamespace>
+    <RootNamespace>DependencyPropertyDemo</RootNamespace>
     <AssemblyName>DependencyProperty</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -74,6 +74,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\ExtendedButtonControl.cs" />
+    <Compile Include="Controls\MyCustomControl.xaml.cs">
+      <DependentUpon>MyCustomControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ValueResolutionViewModel.cs" />
   </ItemGroup>
@@ -110,6 +114,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\MyCustomControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
-using DependencyProperty.ViewModels;
+using DependencyPropertyDemo.ViewModels;
 
-namespace DependencyProperty
+namespace DependencyPropertyDemo
 {
     public class BootstrapperSC : BootstrapperBase
     {
