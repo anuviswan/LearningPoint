@@ -8,10 +8,10 @@ namespace DynamicMappingPattern.ResolverFactories
     // the only implementation of type in the assembly.
     // Another resolution algorithm might have to deal with multiple implementation of statergy and need to pick one
     // based on some other criteria
-    public class DynamicMappingResolverAlpha : DynamicResolverFactory
+    public class DynamicMappingResolverAlpha : DynamicResolverFactory<IProduct>
     {
         
-        public override IStatergy<TProduct> ResolveFor<TProduct>(TProduct product)
+        public override IStatergy<IProduct> ResolveFor(IProduct product)
         {
             var availableTypes = this.GetType().Assembly.GetTypes();
             var statergies = availableTypes.Where(x=>x.GetTypeInfo()
