@@ -27,8 +27,11 @@ namespace DynamicMappingPattern
 
         static void ClientCode(IProduct product)
         {
+            Console.WriteLine($"Resolving statergy for type {product.GetType()}");
             var resolver = new DynamicMappingResolverAlpha();
+            
             resolver.DoOperation(product);
+            Console.WriteLine();
         }
     }
 }
