@@ -11,13 +11,13 @@ namespace DynamicMappingPattern.ResolverFactories
     public class DynamicMappingResolverAlpha : DynamicResolverFactory<IProduct>
     {
         
-        public override IStatergy<IProduct> ResolveFor(IProduct product)
+        public override IStrategy<IProduct> ResolveFor(IProduct product)
         {
             var availableTypes = this.GetType().Assembly.GetTypes();
             var statergies = availableTypes.Where(x=>x.GetTypeInfo()
                                                      .ImplementedInterfaces
                                                      .Any(x => x.GetTypeInfo().IsGenericType 
-                                                        && x.GetGenericTypeDefinition() == typeof(IStatergy<>)
+                                                        && x.GetGenericTypeDefinition() == typeof(IStrategy<>)
                                                         && x.GetGenericArguments().First() == product.GetType()));
 
             
