@@ -27,7 +27,7 @@ namespace DynamicMappingPattern
 
         static void ClientCode(IProduct product)
         {
-            var resolver = new DynamicMappingResolverA();
+            var resolver = new DynamicMappingResolverAlpha();
             resolver.DoOperation(product);
         }
     }

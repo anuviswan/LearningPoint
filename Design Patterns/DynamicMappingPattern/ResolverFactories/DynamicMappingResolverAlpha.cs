@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace DynamicMappingPattern.ResolverFactories
 {
-    public class DynamicMappingResolverA : DynamicMappingResolver
+    public class DynamicMappingResolverAlpha : DynamicMappingResolver
     {
         public override IStatergy<TProduct> ResolveFor<TProduct>(TProduct product)
         {
