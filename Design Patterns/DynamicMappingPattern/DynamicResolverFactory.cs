@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DynamicMappingPattern
 {
-    public abstract class DynamicMappingResolver
+    public abstract class DynamicResolverFactory
     {
         public abstract IStatergy<TProduct> ResolveFor<TProduct>(TProduct product) where TProduct:IProduct;
 
