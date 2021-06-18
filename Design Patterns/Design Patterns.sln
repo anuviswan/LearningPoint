@@ -31,7 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singleton", "Singleton\Sing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPattern.Tests", "DesignPattern.Tests\DesignPattern.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryMethod", "FactoryMethod\FactoryMethod.csproj", "{6F000249-FB9A-44D8-BA77-F82BCE037F12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryMethod", "FactoryMethod\FactoryMethod.csproj", "{6F000249-FB9A-44D8-BA77-F82BCE037F12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicMappingPattern", "DynamicMappingPattern\DynamicMappingPattern.csproj", "{D4BC44A2-0343-4F34-AF73-46731EEC38AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,10 @@ Global
 		{6F000249-FB9A-44D8-BA77-F82BCE037F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F000249-FB9A-44D8-BA77-F82BCE037F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F000249-FB9A-44D8-BA77-F82BCE037F12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4BC44A2-0343-4F34-AF73-46731EEC38AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4BC44A2-0343-4F34-AF73-46731EEC38AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4BC44A2-0343-4F34-AF73-46731EEC38AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4BC44A2-0343-4F34-AF73-46731EEC38AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
