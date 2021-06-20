@@ -21,7 +21,7 @@ namespace DynamicMappingPattern.ResolverFactories
                                                         && x.GetGenericArguments().First() == product.GetType()));
 
             
-            return (dynamic) Activator.CreateInstance(statergies.Single());
+            return (IStrategy<IProduct>) Activator.CreateInstance(statergies.Single());
             
         }
     }
