@@ -24,18 +24,33 @@ namespace LinqEnhancements
             WriteLine();
 
             WriteLine("Support for Default in FirstOrDefault/LastOrDefault/SingleOrDefault");
-            WriteLine("Enumerable.FirstOrDefault(defaultValue) {0}:", demoCollection.FirstOrDefault(x => x.id > 50, new User(-1,"DefaultUser")));
-            WriteLine("Enumerable.LastOrDefault(defaultValue) : {0}", demoCollection.LastOrDefault(x => x.id > 50, new User(-1, "DefaultUser")));
-            WriteLine("Enumerable.SingleOrDefault(defaultValue) : {0}", demoCollection.SingleOrDefault(x => x.id > 50, new User(-1, "DefaultUser")));
+            WriteLine("Enumerable.FirstOrDefault(defaultValue) {0}:", demoCollection.FirstOrDefault(x => x.Id > 50, new User(-1,"DefaultUser")));
+            WriteLine("Enumerable.LastOrDefault(defaultValue) : {0}", demoCollection.LastOrDefault(x => x.Id > 50, new User(-1, "DefaultUser")));
+            WriteLine("Enumerable.SingleOrDefault(defaultValue) : {0}", demoCollection.SingleOrDefault(x => x.Id > 50, new User(-1, "DefaultUser")));
+            WriteLine();
 
-            WriteLine("Support for Key Selector in DistinctBy");
-            WriteLine("Enumerable.DistinctBy(User.UserName) {0}", demoCollection.DistinctBy(x => x.Name).ToPrintString());
+            WriteLine("Support for Zip with 3 IEnumerables");
+            foreach(var (first,second,third) in demoCollection.Take(..5).Zip(demoCollection.Take(5..10), demoCollection.Take(10..15)))
+            {
+                WriteLine($"First: {first.Id}, Second: {second.Id}, Third: {third.Id}");
+            }
+
+            WriteLine();
+            WriteLine("Support for Chunk");
+            foreach(var chunk in demoCollection.Chunk(5))
+            {
+                WriteLine("Chunk : {0}", chunk.Select(x=>x.Id).ToPrintString());
+            }
+            WriteLine();
 
             var secondCollection = GetData(10);
-            //WriteLine("Enumerable.ExceptBy(User.UserName) {0}", demoCollection.ExceptBy(secondCollection,user=>user.Name).ToPrintString());
+            WriteLine("Support for Key Selector in ExceptBy/IntersectBy/DistinctBy/UnionBy/MaxBy/MinBy");
+            WriteLine("Enumerable.ExceptBy(User.UserName) {0}", demoCollection.ExceptBy(secondCollection.Select(x=>x.Name),user=>user.Name).ToPrintString());
+            WriteLine("Enumerable.ExceptBy(User.UserName) {0}", demoCollection.IntersectBy(secondCollection.Select(x => x.Name), user => user.Name).ToPrintString());
+            WriteLine("Enumerable.ExceptBy(User.UserName) {0}", demoCollection.DistinctBy(user=>user.Name).ToPrintString());
             WriteLine("Enumerable.ExceptBy(User.UserName) {0}", demoCollection.UnionBy(secondCollection,user=>user.Name).ToPrintString());
-
-
+            WriteLine("Enumerable.ExceptBy(User.UserName) {0}", demoCollection.MaxBy(user=>user.Id));
+            WriteLine("Enumerable.ExceptBy(User.UserName) {0}", demoCollection.MinBy(user=>user.Id));
             ReadLine();
        }
 
@@ -45,15 +60,11 @@ namespace LinqEnhancements
             for (int i = 0; i < maxCount; i++)
                 yield return new User(i, $"User{random.Next(1,5)}");
         }
-
-
-        
-        
     }
-    public record User(int id, string Name);
+    public record User(int Id, string Name);
     public static class EnumerableExtensions
     {
-        public static string ToPrintString(this IEnumerable<User> source) => string.Join(",", source);
+        public static string ToPrintString<T>(this IEnumerable<T> source) => string.Join(",", source);
     }
 
 }
