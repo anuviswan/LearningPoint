@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31410.414
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter", "Adapter\Adapter\Adapter.csproj", "{119018B4-4061-4B95-871B-27E44B3F0D2D}"
 EndProject
@@ -33,7 +33,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPattern.Tests", "Desi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryMethod", "FactoryMethod\FactoryMethod.csproj", "{6F000249-FB9A-44D8-BA77-F82BCE037F12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicMappingPattern", "DynamicMappingPattern\DynamicMappingPattern.csproj", "{D4BC44A2-0343-4F34-AF73-46731EEC38AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicMappingPattern", "DynamicMappingPattern\DynamicMappingPattern.csproj", "{D4BC44A2-0343-4F34-AF73-46731EEC38AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategy", "Strategy\Strategy.csproj", "{1D37EC36-C311-46A7-8436-4452D6E9D408}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{D4BC44A2-0343-4F34-AF73-46731EEC38AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4BC44A2-0343-4F34-AF73-46731EEC38AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4BC44A2-0343-4F34-AF73-46731EEC38AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D37EC36-C311-46A7-8436-4452D6E9D408}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D37EC36-C311-46A7-8436-4452D6E9D408}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D37EC36-C311-46A7-8436-4452D6E9D408}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D37EC36-C311-46A7-8436-4452D6E9D408}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
