@@ -21,7 +21,5 @@ namespace Strategy
         {
             Console.WriteLine("Displaying Data");
         }
-
-        
     }
 }

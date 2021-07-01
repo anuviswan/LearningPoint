@@ -9,6 +9,5 @@ namespace Strategy
         void Display(IEnumerable<T> data);
         IEnumerable<T> Read(string fileName);
         IEnumerable<T> Sort(IEnumerable<T> data);
-
     }
 }
