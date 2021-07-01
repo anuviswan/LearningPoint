@@ -5,12 +5,14 @@ namespace Observer.Subscribers
 {
     public class AlphaSubscriber : SubscriberBase
     {
-        public AlphaSubscriber(INewsPublisher publisher):base(publisher)
+        public Guid Id { get; set; }
+        public AlphaSubscriber(Guid id, INewsPublisher publisher):base(publisher)
         {
+            Id = id;
         }
         public override void Update(string message)
         {
-            Console.WriteLine(message);
+            Console.WriteLine($"{nameof(AlphaSubscriber)}-{Id} has recieved the message {message}");
         }
     }
 }

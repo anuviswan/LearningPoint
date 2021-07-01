@@ -10,16 +10,15 @@ namespace Observer.Subscribers
         public SubscriberBase(INewsPublisher publisher)
         {
             _newsPublisher = publisher;
-            Subscribe();
         }
         public abstract void Update(string message);
 
-        protected void Subscribe()
+        public void Subscribe()
         {
-            _newsPublisher.Register(this);
+            _weakReference= _newsPublisher.Register(this);
         }
 
-        protected void Unsubscribe()
+        public void Unsubscribe()
         {
             _newsPublisher.Unregister(_weakReference);
         }
