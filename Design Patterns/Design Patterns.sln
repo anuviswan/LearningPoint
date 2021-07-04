@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicMappingPattern", "Dy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strategy", "Strategy\Strategy.csproj", "{1D37EC36-C311-46A7-8436-4452D6E9D408}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Observer", "Observer\Observer.csproj", "{B475828F-DA2A-4ED4-AC43-86614A1469EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Observer", "Observer\Observer.csproj", "{B475828F-DA2A-4ED4-AC43-86614A1469EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator.Simple", "EventAggregator.Simple\EventAggregator.Simple.csproj", "{562A8185-60A1-4D53-83A6-A0F13297867D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,10 @@ Global
 		{B475828F-DA2A-4ED4-AC43-86614A1469EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B475828F-DA2A-4ED4-AC43-86614A1469EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B475828F-DA2A-4ED4-AC43-86614A1469EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{562A8185-60A1-4D53-83A6-A0F13297867D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562A8185-60A1-4D53-83A6-A0F13297867D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562A8185-60A1-4D53-83A6-A0F13297867D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562A8185-60A1-4D53-83A6-A0F13297867D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
