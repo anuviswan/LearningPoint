@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strategy", "Strategy\Strate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Observer", "Observer\Observer.csproj", "{B475828F-DA2A-4ED4-AC43-86614A1469EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator.Simple", "EventAggregator.Simple\EventAggregator.Simple.csproj", "{562A8185-60A1-4D53-83A6-A0F13297867D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventAggregator.Simple", "EventAggregator.Simple\EventAggregator.Simple.csproj", "{562A8185-60A1-4D53-83A6-A0F13297867D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator", "EventAggregator\EventAggregator.csproj", "{45006EDA-5AFE-4A4D-8D6B-B3CFA63C01D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,10 @@ Global
 		{562A8185-60A1-4D53-83A6-A0F13297867D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{562A8185-60A1-4D53-83A6-A0F13297867D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{562A8185-60A1-4D53-83A6-A0F13297867D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45006EDA-5AFE-4A4D-8D6B-B3CFA63C01D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45006EDA-5AFE-4A4D-8D6B-B3CFA63C01D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45006EDA-5AFE-4A4D-8D6B-B3CFA63C01D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45006EDA-5AFE-4A4D-8D6B-B3CFA63C01D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

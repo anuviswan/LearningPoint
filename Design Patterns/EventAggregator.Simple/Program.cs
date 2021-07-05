@@ -6,7 +6,10 @@ namespace EventAggregator.Simple
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var eventAggregator = new EventAggregator();
+            var subscriber = new SubscriberAlpha();
+
+            //eventAggregator.Subscribe(subscriber, subscriber.Invoke());
         }
     }
 }

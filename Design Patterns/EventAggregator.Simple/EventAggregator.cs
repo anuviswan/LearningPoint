@@ -24,27 +24,27 @@ namespace EventAggregator.Simple
         }
 
 
-        public void Subscribe<TSubscriber, TMessage>(TSubscriber subscriber,Action<TMessage> action) where TMessage : MessageBase
+        public void Subscribe<TSubscriber, TMessage>(TSubscriber subscriber,Action<TSubscriber,TMessage> action) where TMessage : MessageBase
         {
             var messageType = typeof(TMessage);
 
             if (SubscriberCollection.ContainsKey(messageType))
             {
                 var currentList = SubscriberCollection[messageType];
-                if(!currentList.Any(x=> (x.Target as Subscriber<TMessage>).Instance == (object)subscriber))
+                if(!currentList.Any(x=> (x.Target as Subscriber<TSubscriber, TMessage>).Instance == (object)subscriber))
                 {
-                    SubscriberCollection[typeof(TMessage)].Add(new WeakReference(new Subscriber<TMessage>(subscriber, action)));
+                    SubscriberCollection[typeof(TMessage)].Add(new WeakReference(new Subscriber<TSubscriber, TMessage>(subscriber, action)));
                 }
             }
            
         }
 
-        private class Subscriber<TMessage> where TMessage : MessageBase
+        private class Subscriber<TSubscriber, TMessage> where TMessage : MessageBase
         {
-            public Action<TMessage> Action { get; set; }
+            public Action<TSubscriber, TMessage> Action { get; set; }
             public object Instance { get; set; }
 
-            public Subscriber(object subscriberInstance, Action<TMessage> action) => (Instance, Action) = (subscriberInstance, action);
+            public Subscriber(object subscriberInstance, Action<TSubscriber, TMessage> action) => (Instance, Action) = (subscriberInstance, action);
         }
 
     }

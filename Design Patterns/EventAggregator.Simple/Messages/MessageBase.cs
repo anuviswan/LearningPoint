@@ -8,6 +8,7 @@ namespace EventAggregator.Simple.Messages
 {
     public class MessageBase
     {
+        public MessageBase(object sender) => Sender = sender;
         public object Sender { get; set; }
     }
 }
