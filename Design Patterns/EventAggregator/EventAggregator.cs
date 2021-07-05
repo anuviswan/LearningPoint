@@ -51,7 +51,7 @@ namespace EventAggregator
         {
             lock (_handlers)
             {
-                var handlersToNotify = new List<Handler>();
+                WeakReference<Handler> toRemove = null;
                 lock (_handlers)
                 {
 
@@ -59,26 +59,16 @@ namespace EventAggregator
                     {
                         if (handler.TryGetTarget(out var target))
                         {
-                            if(target == subscriber)
-                                _handlers.Remove(handler);
+                            if (target.Subscriber == subscriber)
+                                toRemove = handler;
                         }
                     }
+
+                    if(toRemove != null)
+                    {
+                        _handlers.Remove(toRemove);
+                    }
                 }
-
-                //var found = handlersToNotify.FirstOrDefault(x => x == subscriber);
-                //if (found != null)
-                //{
-                //    handlersToNotify.Remove(found);
-                //}
-
-                //_handlers = 
-
-                //foreach (var handler in handlersToNotify)
-                //{
-                //    handler.Handle(message.GetType(), message);
-                //}
-
-                
             }
         }
 
@@ -105,6 +95,7 @@ namespace EventAggregator
 
             }
 
+            public object Subscriber => _subscriber;
             public void Handle(Type messageType, object message)
             {
                 if (!_handlers.ContainsKey(messageType))

@@ -13,6 +13,12 @@ namespace EventAggregator
             var publisher = new PublisherAlpha(eventAggregator);
 
             publisher.PublishMessage("John says hello");
+
+            eventAggregator.Unsubscribe(subscriber);
+
+            publisher.PublishMessage("John says hello");
+
+
             Console.ReadLine();
         }
     }

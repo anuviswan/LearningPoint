@@ -16,5 +16,6 @@ namespace EventAggregator.Subscribers
             Console.WriteLine($"Message : {message.Message}");
             return Task.CompletedTask;
         }
+
     }
 }
