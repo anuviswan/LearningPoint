@@ -23,6 +23,7 @@ namespace MyFirstApp.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Log message in the Index() method");
             return View();
         }
 
