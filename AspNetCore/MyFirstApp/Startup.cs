@@ -3,12 +3,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using MyFirstApp.Middlewares;
+using MyFirstApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstApp
+namespace MyFirstApp
 {
     public class Startup
     {
@@ -22,11 +26,12 @@ namespace FirstApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddControllersWithViews();
+            services.AddSingleton<ILog, ConsoleLogger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -34,8 +39,10 @@ namespace FirstApp
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Home/Error");
             }
+
+            loggerFactory.AddFile("Logs/mylog-{Date}.txt");
 
             app.UseStaticFiles();
 
@@ -43,9 +50,20 @@ namespace FirstApp
 
             app.UseAuthorization();
 
+            app.UseWelcomePage();
+            app.UseMyMiddleware();
+
+            app.Use(async (context,next) =>
+            {
+                await context.Response.BodyWriter.WriteAsync(Encoding.UTF8.GetBytes("Hello"));
+                await next();
+            });
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
