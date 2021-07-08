@@ -7,6 +7,7 @@ namespace EventAggregator.Simple
 {
     public class EventAggregator
     { 
+        // Don't make collection weakreference, make individual item weakreference
         private Dictionary<Type,List<WeakReference<ISubscriber<MessageBase>>>> SubscriberCollection = new Dictionary<Type, List<WeakReference<ISubscriber<MessageBase>>>>();
 
         public void Publish(MessageBase messageBase)
