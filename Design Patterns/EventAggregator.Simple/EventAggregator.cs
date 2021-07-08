@@ -7,11 +7,19 @@ namespace EventAggregator.Simple
 {
     public class EventAggregator
     { 
-        private Dictionary<Type,List<WeakReference>> SubscriberCollection = new Dictionary<Type, List<WeakReference>>();
+        private Dictionary<Type,List<WeakReference<ISubscriber<MessageBase>>>> SubscriberCollection = new Dictionary<Type, List<WeakReference<ISubscriber<MessageBase>>>>();
 
         public void Publish(MessageBase messageBase)
         {
-
+            var invocationList = SubscriberCollection[messageBase.GetType()];
+            foreach(var reference in invocationList)
+            {
+                if(reference.TryGetTarget(out var subscriber))
+                {
+                    var handler = subscriber.GetHandler();
+                    handler.Invoke(subscriber.GetSubscriber(), new[] { messageBase });
+                }
+            }
         }
 
         public int SubscriptionCount<TMessageType>()
@@ -24,27 +32,18 @@ namespace EventAggregator.Simple
         }
 
 
-        public void Subscribe<TSubscriber, TMessage>(TSubscriber subscriber,Action<TSubscriber,TMessage> action) where TMessage : MessageBase
+        public void Subscribe<TMessage>(object subscriber,Action<TMessage> action) where TMessage : MessageBase
         {
             var messageType = typeof(TMessage);
 
-            if (SubscriberCollection.ContainsKey(messageType))
+            if (!SubscriberCollection.ContainsKey(messageType))
+                SubscriberCollection.Add(typeof(TMessage), new List<WeakReference<ISubscriber<MessageBase>>>());
+
+            var currentList = SubscriberCollection[messageType];
+            if (!currentList.Any(x => x.TryGetTarget(out var sub) && sub.GetSubscriber() == subscriber))
             {
-                var currentList = SubscriberCollection[messageType];
-                if(!currentList.Any(x=> (x.Target as Subscriber<TSubscriber, TMessage>).Instance == (object)subscriber))
-                {
-                    SubscriberCollection[typeof(TMessage)].Add(new WeakReference(new Subscriber<TSubscriber, TMessage>(subscriber, action)));
-                }
+                SubscriberCollection[typeof(TMessage)].Add(new WeakReference<ISubscriber<MessageBase>>(new Subscriber<TMessage>(subscriber, action)));
             }
-           
-        }
-
-        private class Subscriber<TSubscriber, TMessage> where TMessage : MessageBase
-        {
-            public Action<TSubscriber, TMessage> Action { get; set; }
-            public object Instance { get; set; }
-
-            public Subscriber(object subscriberInstance, Action<TSubscriber, TMessage> action) => (Instance, Action) = (subscriberInstance, action);
         }
 
     }

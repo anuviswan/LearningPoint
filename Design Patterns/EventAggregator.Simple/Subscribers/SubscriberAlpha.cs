@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace EventAggregator.Simple.Subscribers
 {
-    public class SubscribersAlpha
+    public interface ISubscriberAlpha
+    {
+        void Invoke(UserLoggedInMessage message);
+    }
+    public class SubscriberAlpha:ISubscriberAlpha
     {
         public void Invoke(UserLoggedInMessage message)
         {
-            Console.WriteLine("Recieved Message");
+            Console.WriteLine($"Recieved Message in {nameof(SubscriberAlpha)}");
         }
     }
 }
