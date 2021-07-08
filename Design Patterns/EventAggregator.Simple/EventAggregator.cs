@@ -28,7 +28,7 @@ namespace EventAggregator.Simple
             {
                 return SubscriberCollection[typeof(TMessageType)].Count;
             }
-            return -1;
+            return 0;
         }
 
 
@@ -44,6 +44,22 @@ namespace EventAggregator.Simple
             {
                 SubscriberCollection[typeof(TMessage)].Add(new WeakReference<ISubscriber<MessageBase>>(new Subscriber<TMessage>(subscriber, action)));
             }
+        }
+
+        public void Unsubscribe<TMessage>(object subscriber) where TMessage : MessageBase
+        {
+            var messageType = typeof(TMessage);
+
+            if (SubscriberCollection.ContainsKey(messageType))
+            {
+                var currentList = SubscriberCollection[messageType];
+                SubscriberCollection[messageType] = currentList.Where(x => x.TryGetTarget(out var sub) && sub.GetSubscriber() != subscriber).ToList();
+            }
+        }
+
+        public void Unsubscribe(object subscriber)
+        {
+            
         }
 
     }
