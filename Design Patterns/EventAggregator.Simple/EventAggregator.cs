@@ -8,18 +8,15 @@ namespace EventAggregator.Simple
     public class EventAggregator
     { 
         // Don't make collection weakreference, make individual item weakreference
-        private Dictionary<Type,List<WeakReference<ISubscriber<MessageBase>>>> SubscriberCollection = new Dictionary<Type, List<WeakReference<ISubscriber<MessageBase>>>>();
+        private Dictionary<Type,List<ISubscriber<MessageBase>>> SubscriberCollection = new Dictionary<Type, List<ISubscriber<MessageBase>>>();
 
         public void Publish(MessageBase messageBase)
         {
             var invocationList = SubscriberCollection[messageBase.GetType()];
-            foreach(var reference in invocationList)
+            foreach(var subscriber in invocationList)
             {
-                if(reference.TryGetTarget(out var subscriber))
-                {
-                    var handler = subscriber.GetHandler();
-                    handler.Invoke(subscriber.GetSubscriber(), new[] { messageBase });
-                }
+                var handler = subscriber.GetHandler();
+                handler?.Invoke(subscriber.GetSubscriber(), new[] { messageBase });
             }
         }
 
@@ -38,13 +35,15 @@ namespace EventAggregator.Simple
             var messageType = typeof(TMessage);
 
             if (!SubscriberCollection.ContainsKey(messageType))
-                SubscriberCollection.Add(typeof(TMessage), new List<WeakReference<ISubscriber<MessageBase>>>());
+                SubscriberCollection.Add(typeof(TMessage), new List<ISubscriber<MessageBase>>());
 
             var currentList = SubscriberCollection[messageType];
-            if (!currentList.Any(x => x.TryGetTarget(out var sub) && sub.GetSubscriber() == subscriber))
+
+            if (currentList.Any(x => x.GetSubscriber() == subscriber))
             {
-                SubscriberCollection[typeof(TMessage)].Add(new WeakReference<ISubscriber<MessageBase>>(new Subscriber<TMessage>(subscriber, action)));
+                return;
             }
+            SubscriberCollection[typeof(TMessage)].Add(new Subscriber<TMessage>(subscriber, action));
         }
 
         public void Unsubscribe<TMessage>(object subscriber) where TMessage : MessageBase
@@ -54,15 +53,20 @@ namespace EventAggregator.Simple
             if (SubscriberCollection.ContainsKey(messageType))
             {
                 var currentList = SubscriberCollection[messageType];
-                SubscriberCollection[messageType] = currentList.Where(x => x.TryGetTarget(out var sub) && sub.GetSubscriber() != subscriber).ToList();
+                SubscriberCollection[messageType] = currentList.Where(x => x.GetSubscriber() != subscriber).ToList();
             }
         }
 
         public void Unsubscribe(object subscriber)
         {
-            
+            foreach (var messageTypePair in SubscriberCollection)
+            {
+                if (messageTypePair.Value.Any(x => x.GetSubscriber() == subscriber))
+                {
+                    SubscriberCollection[messageTypePair.Key] = SubscriberCollection[messageTypePair.Key].Where(x => x.GetSubscriber() != subscriber).ToList();
+                }
+            }
         }
 
     }
-
 }
