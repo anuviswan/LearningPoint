@@ -41,12 +41,17 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventAggregatorSimple.cs" />
     <Compile Include="SingletonTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EventAggregator.Simple\EventAggregator.Simple.csproj">
+      <Project>{562a8185-60a1-4d53-83a6-a0f13297867d}</Project>
+      <Name>EventAggregator.Simple</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Singleton\Singleton.csproj">
       <Project>{108c8b8a-be05-4eff-9fc1-d2dcd48ce805}</Project>
       <Name>Singleton</Name>
