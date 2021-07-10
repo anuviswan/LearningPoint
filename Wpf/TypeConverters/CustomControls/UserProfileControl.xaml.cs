@@ -16,8 +16,8 @@ namespace TypeConverters.CustomControls
 
         public UserInfo CurrentUser
         {
-            get { return (UserInfo)GetValue(UserProperty); }
-            set { SetValue(UserProperty, value); }
+            get => (UserInfo)GetValue(UserProperty);
+            set => SetValue(UserProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for User.  This enables animation, styling, binding, etc...

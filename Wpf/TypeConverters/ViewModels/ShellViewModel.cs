@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-
-namespace TypeConverters.ViewModels
+﻿namespace TypeConverters.ViewModels
 {
     public class ShellViewModel
     {
