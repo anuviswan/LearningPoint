@@ -2,7 +2,12 @@
 
 namespace JwtExample.Models
 {
-    public record UserModel([property:Required]string UserName,[property:Required]string Password)
+    public record UserModel
     {
+        [Required]
+        public string UserName { get; set; }
+        
+        [Required]
+        public string Password { get; set; }
     }
 }
