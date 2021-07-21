@@ -2,6 +2,7 @@
 using JwtExample.Models;
 using JwtExample.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -56,7 +57,6 @@ namespace JwtExample.Controllers
         [Authorize]
         [Route("Secret")]
         [HttpPost]
-        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public ActionResult SecretFunction()
         {
             return Ok("Alright, you are authorized user");
