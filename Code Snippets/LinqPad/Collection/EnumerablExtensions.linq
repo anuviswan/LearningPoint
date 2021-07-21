@@ -1,6 +1,6 @@
 <Query Kind="Program">
   <Reference>&lt;ProgramFilesX64&gt;\Microsoft SDKs\Azure\.NET SDK\v2.9\bin\plugins\Diagnostics\Newtonsoft.Json.dll</Reference>
-  <Reference>E:\App Store\GitHub\anuviswan\MockCollection\Randomize\bin\Debug\Randomize.Net.dll</Reference>
+  <Reference Relative="..\..\..\..\MockCollection\Randomize\bin\Debug\Randomize.Net.dll">E:\App Store\GitHub\anuviswan\MockCollection\Randomize\bin\Debug\Randomize.Net.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.ComponentModel.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Globalization.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Linq.Expressions.dll</Reference>
@@ -15,44 +15,32 @@
   <Namespace>System.ComponentModel</Namespace>
   <Namespace>System.Dynamic</Namespace>
   <Namespace>System.Globalization</Namespace>
+  <Namespace>System.Linq.Expressions</Namespace>
   <Namespace>System.Management</Namespace>
   <Namespace>System.Threading.Tasks</Namespace>
   <Namespace>System.Xml.Serialization</Namespace>
 </Query>
 
-public static class EnumerableExtensions
+void Main()
 {
-    public static IEnumerable<T> Append<T>(this IEnumerable<T> source,T item)
-	{
-		foreach(var currentItem in source)
-		{
-			yield return currentItem;
-		}
-		
-		yield return item;
-	}
-	public static IEnumerable<T> Insert<T>(this IEnumerable<T> source,int position,T item)
-	{
-		var currentPosition = -1;
-		
-		using(var iterator = source.GetEnumerator())
-		{
-			while(++currentPosition < position && iterator.MoveNext())
-			{
-				yield return iterator.Current;
-			}
-			
-			if(currentPosition < position)
-			{
-				throw new ArgumentOutOfRangeException("Invalid Position");
-			}
-			
-			yield return item;
-			
-			while(iterator.MoveNext())
-				yield return iterator.Current;
-			
-		}
-		
-	}
+	var strList = new[]
+				{
+				 "Get_USER_By_ID",
+				 "Get_Product_By_Name",
+				 "Get_Product_By_ID",
+				 "Get_Location_By_Name"
+				 };
+
+	var result = strList.OrderBy(x=>x,new CustomStringComparer());
+}
+
+public class CustomStringComparer : IComparer<string>
+{
+    private Regex _regex = new Regex(@"By_(?<Tag>[\S]*)",RegexOptions.Compiled);
+    public int Compare(string first, string second)
+    {
+        var firstSubString = _regex.Match(first).Groups["Tag"].Value;
+        var secondSubString = _regex.Match(second).Groups["Tag"].Value;
+        return firstSubString.CompareTo(secondSubString);
+    }
 }
