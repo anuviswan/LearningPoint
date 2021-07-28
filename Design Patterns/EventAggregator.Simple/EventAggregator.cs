@@ -5,15 +5,14 @@ using System.Linq;
 
 namespace EventAggregator.Simple
 {
-    public class EventAggregator
-    { 
-        // Don't make collection weakreference, make individual item weakreference
-        private Dictionary<Type,List<ISubscriber<MessageBase>>> SubscriberCollection = new Dictionary<Type, List<ISubscriber<MessageBase>>>();
+    public class EventAggregator : IEventAggregator
+    {
+        private Dictionary<Type, List<ISubscriber<MessageBase>>> SubscriberCollection = new Dictionary<Type, List<ISubscriber<MessageBase>>>();
 
         public void Publish(MessageBase messageBase)
         {
             var invocationList = SubscriberCollection[messageBase.GetType()];
-            foreach(var subscriber in invocationList)
+            foreach (var subscriber in invocationList)
             {
                 var handler = subscriber.GetHandler();
                 handler?.Invoke(subscriber.GetSubscriber(), new[] { messageBase });
@@ -30,7 +29,7 @@ namespace EventAggregator.Simple
         }
 
 
-        public void Subscribe<TMessage>(object subscriber,Action<TMessage> action) where TMessage : MessageBase
+        public void Subscribe<TMessage>(object subscriber, Expression<Action<TMessage>> action) where TMessage : MessageBase
         {
             var messageType = typeof(TMessage);
 

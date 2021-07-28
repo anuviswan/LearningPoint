@@ -9,7 +9,7 @@ namespace EventAggregator.Simple
             var eventAggregator = new EventAggregator();
             var subscriber = new SubscriberAlpha();
 
-            //eventAggregator.Subscribe(subscriber, subscriber.Invoke());
+            eventAggregator.Subscribe<Messages.UserLoggedInMessage>(subscriber, subscriber.Invoke);
         }
     }
 }

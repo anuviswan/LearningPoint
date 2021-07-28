@@ -16,7 +16,6 @@ namespace JwtExample.Controllers
     [Route("[controller]")]
     public class HomeController:ControllerBase 
     {
-        private string generatedToken = null;
         private readonly ITokenService _tokenService;
         private readonly IUserRepositoryService _userRepositoryService;
         private readonly IConfiguration _configuration; 
@@ -42,7 +41,7 @@ namespace JwtExample.Controllers
 
             if(user != null)
             {
-                generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), user);
+                var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), user);
                 return Ok(new
                 {
                     token = generatedToken,
