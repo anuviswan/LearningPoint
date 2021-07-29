@@ -1,5 +1,4 @@
 
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ITokenService>(new TokenService());
 builder.Services.AddSingleton<IUserRepositoryService>(new UserRepositoryService());
