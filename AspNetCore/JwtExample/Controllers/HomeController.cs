@@ -37,7 +37,7 @@ namespace JwtExample.Controllers
             }
 
             IActionResult response = Unauthorized();
-            var user = GetUser(userModel);
+            var user = _userRepositoryService.GetUser(userModel);
 
             if(user != null)
             {
@@ -61,10 +61,5 @@ namespace JwtExample.Controllers
             return Ok("Alright, you are authorized user");
         }
 
-        private UserDto GetUser(UserModel userModel)
-        {
-            return new UserDto("Jia", "admin", "admin");
-           
-        }
     }
 }
