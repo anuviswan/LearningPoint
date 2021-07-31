@@ -48,14 +48,7 @@ await app.RunAsync();
 
 public record UserDto(string UserName,string Password);
 
-public record UserModel
-{
-    [Required]
-    public string UserName { get; set; }
-
-    [Required]
-    public string Password { get; set; }
-}
+public record UserModel([Required] string UserName,[Required] string Password);
 
 public interface IUserRepositoryService
 {
