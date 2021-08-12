@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "CodeGen": {
+      "commandName": "DebugRoslynComponent"
+    }
+  }
+}

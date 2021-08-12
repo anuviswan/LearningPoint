@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedDemo;
+using System;
 
 namespace Client
 {
@@ -9,5 +10,11 @@ namespace Client
             Hello.World.Hi();
             Console.WriteLine("Hello World!");
         }
+    }
+
+    [AutoToString]
+    public partial class Foo
+    {
+        private int _sm;
     }
 }
