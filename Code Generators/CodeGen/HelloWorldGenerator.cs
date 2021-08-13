@@ -27,7 +27,7 @@ namespace CodeGen
 
         public void Initialize(GeneratorInitializationContext context)
         {
-            
+
         }
     }
 }

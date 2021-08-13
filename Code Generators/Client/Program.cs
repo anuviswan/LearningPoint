@@ -7,14 +7,10 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            Hello.World.Hi();
-            Console.WriteLine("Hello World!");
+            var g = new Foo();
+
+            Console.WriteLine(g.ToSqlString());
         }
     }
 
-    [AutoToString]
-    public partial class Foo
-    {
-        private int _sm;
-    }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using SharedDemo;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,17 +25,16 @@ namespace CodeGen
                 return;
             }
 
-            var code = @"
-                        using System;
-                        namespace Hello {
-                            public static class World1 
-                            {
-                                public const string Name = ""Anu"";
-                                public static void Hi() => Console.WriteLine($""Hi, {Name}!"");
-                            }
-                        }";
+
+            var code = $@"
+                        namespace Client {{
+                            public partial class {userClass.Identifier.Text}
+                            {{
+                                public string ToSqlString()=>""test"";
+                            }}
+                        }}";
             context.AddSource(
-                "hello.world.generator",
+                $"{userClass.Identifier.Text}.generated",
                 SourceText.From(code, Encoding.UTF8)
             );
         }
@@ -49,16 +49,14 @@ namespace CodeGen
             public ClassDeclarationSyntax ClassToAugment { get; private set; }
             public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
             {
-#if DEBUG
-                if (!Debugger.IsAttached)
-                {
-                    Debugger.Launch();
-                }
-#endif 
-
                 if (syntaxNode is ClassDeclarationSyntax classDecl && classDecl.DescendantNodes().OfType<AttributeSyntax>().Any())
                 {
                     var attributes = classDecl.DescendantNodes().OfType<AttributeSyntax>();
+                    var found = attributes.First(); //attributes.FirstOrDefault(x => x.DescendantTokens()?.OfType<IdentifierNameSyntax>().FirstOrDefault()?.Identifier.Text == "AutoToString");
+                    if (found != null)
+                    {
+                        ClassToAugment = classDecl;
+                    }
                 }
             }
         }
