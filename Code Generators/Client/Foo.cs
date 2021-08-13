@@ -11,7 +11,10 @@ namespace Client
     [AutoToString]
     public partial class Foo
     {
-        private int _sm;
+        public int Property1 { get; set; } = 1;
+        public int Property2 { get; set; } = 2;
+        public int Property3 { get; set; } = 3;
+        public int Property4 { get; set; } = 4;
         public Foo()
         {
         }

@@ -9,7 +9,7 @@ namespace Client
         {
             var g = new Foo();
 
-            Console.WriteLine(g.ToSqlString());
+            Console.WriteLine(g.ToString());
         }
     }
 
