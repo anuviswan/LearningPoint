@@ -1,27 +1,13 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using SharedDemo;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace CodeGen
 {
-    class g : ISourceGenerator
-    {
-        public void Execute(GeneratorExecutionContext context)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Initialize(GeneratorInitializationContext context)
-        {
-            throw new NotImplementedException();
-        }
-    }
     [Generator]
     public class AutoToStringGenerator : ISourceGenerator
     {
@@ -29,11 +15,9 @@ namespace CodeGen
         {
             AutoToStringSyntaxReciever syntaxReceiver = (AutoToStringSyntaxReciever)context.SyntaxReceiver;
 
-            // get the recorded user class
             ClassDeclarationSyntax userClass = syntaxReceiver.IdentifiedClass;
             if (userClass is null)
             {
-                // if we didn't find the user class, there is nothing to do
                 return;
             }
 
@@ -76,8 +60,7 @@ namespace CodeGen
                     if (attributes.Any())
                     {
                         var autoToStringAttribute = attributes.FirstOrDefault(x => ExtractName(x.Name) == "AutoToString");
-                        if (autoToStringAttribute != null)
-                            IdentifiedClass = classDeclaration;
+                        if (autoToStringAttribute != null) IdentifiedClass = classDeclaration;
                     }
                 }
             }
