@@ -13,9 +13,9 @@ namespace CodeGen
     {
         public void Execute(GeneratorExecutionContext context)
         {
-            AutoToStringSyntaxReciever syntaxReceiver = (AutoToStringSyntaxReciever)context.SyntaxReceiver;
+            var syntaxReceiver = (AutoToStringSyntaxReciever)context.SyntaxReceiver;
 
-            ClassDeclarationSyntax userClass = syntaxReceiver.IdentifiedClass;
+            var userClass = syntaxReceiver.IdentifiedClass;
             if (userClass is null)
             {
                 return;
