@@ -2,6 +2,9 @@
   "profiles": {
     "CodeGen": {
       "commandName": "DebugRoslynComponent"
+    },
+    "Profile 1": {
+      "commandName": "Executable"
     }
   }
 }
