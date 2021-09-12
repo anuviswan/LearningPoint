@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoilerPlate.Services
 {
@@ -78,9 +76,7 @@ namespace BoilerPlate.Services
             public void Handle(Type messageType, object message)
             {
                 if (!_handlers.ContainsKey(messageType))
-                {
-                    throw new Exception($"Message type {message} not registered");
-                }
+                    return;
 
                 var method = _handlers[messageType];
                 method.Invoke(_subscriber, new[] { message });

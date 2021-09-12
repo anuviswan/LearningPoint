@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Unity;
 
 namespace BoilerPlate.Bootstrap
@@ -15,7 +11,7 @@ namespace BoilerPlate.Bootstrap
 
         }
 
-        protected object GetInstance(Type type)
+        public object GetInstance(Type type)
         {
             return _container.Resolve(type);
         }
