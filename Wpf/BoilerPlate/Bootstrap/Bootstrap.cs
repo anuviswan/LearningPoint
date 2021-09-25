@@ -8,7 +8,18 @@ namespace BoilerPlate.Bootstrap
         IUnityContainer _container = new UnityContainer();
         public void Initialize()
         {
+            PrepareApplication();
+        }
 
+        private void PrepareApplication()
+        {
+            IoC.GetInstance = GetInstance;
+
+            RegisterServices();
+        }
+
+        private void RegisterServices()
+        {
         }
 
         public object GetInstance(Type type)
