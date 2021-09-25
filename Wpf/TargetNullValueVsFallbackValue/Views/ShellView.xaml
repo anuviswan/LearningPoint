@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <Label Content="UserName"/>
-        <TextBox Grid.Column="1" Text="{Binding UserName,TargetNullValue='John Doe'}"/>
+        <TextBox Grid.Column="1" Text="{Binding UserName,TargetNullValue='Please enter name'}"/>
 
         <Label Grid.Row ="2"  Content="Date Of Birth"/>
         <DatePicker Grid.Row="2" Grid.Column="1"  SelectedDate="{Binding DateOfBirth, TargetNullValue={x:Static sys:DateTime.Now}}"/>
