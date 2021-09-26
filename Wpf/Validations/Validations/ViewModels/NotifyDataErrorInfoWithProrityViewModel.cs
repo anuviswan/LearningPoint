@@ -44,7 +44,7 @@ namespace Validations.ViewModels
                 {
                     errorList.Add(new ErrorInfo
                     {
-                        Message = "IserName already exists",
+                        Message = "UserName already exists",
                         Priority = Prority.High
                     });
                 }
