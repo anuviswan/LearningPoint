@@ -6,9 +6,14 @@ namespace RxDemo001
     {
         static void Main(string[] args)
         {
-            var observer = new HelloWorldObserver();
-            var helloWorldObservable = new HelloWorldObservable();
-            helloWorldObservable.Subscribe(observer);
+            ObservableDemo.Run();
+            SubjectDemo.Run();
+            SubjectWithDelayedSubscribeDemo.Run();
+            ReplaySubjectWithDelayedSubscribeDemo.Run();
+            ReplaySubjectWithRestrictedCacheDemo.Run();
+            ReplaySubjectWithTimeRestrictedCacheDemo.Run();
+            BehaviorSubjectWithDelayedSubscribeDemo.Run();
+            BehaviorSubjectWithNoCacheDemo.Run();
             Console.ReadLine();
 
         }
