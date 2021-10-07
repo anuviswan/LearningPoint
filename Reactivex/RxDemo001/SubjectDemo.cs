@@ -128,4 +128,41 @@ namespace RxDemo001
             Console.WriteLine();
         }
     }
+
+
+    public static class BehaviorSubjectSubscribeToCompleted
+    {
+        public static void Run()
+        {
+            Console.WriteLine($"{nameof(BehaviorSubjectSubscribeToCompleted)} Demo");
+
+            var subject = new BehaviorSubject<int>(0);
+            
+            subject.OnNext(1);
+            subject.OnNext(2);
+            subject.OnNext(3);
+            subject.OnNext(4);
+            subject.OnCompleted();
+            subject.Subscribe(Console.Write);
+            Console.WriteLine();
+        }
+    }
+
+    public static class ReplaySubjectSubscribeToCompleted
+    {
+        public static void Run()
+        {
+            Console.WriteLine($"{nameof(ReplaySubjectSubscribeToCompleted)} Demo");
+
+            var subject = new ReplaySubject<int>(1);
+
+            subject.OnNext(1);
+            subject.OnNext(2);
+            subject.OnNext(3);
+            subject.OnNext(4);
+            subject.OnCompleted();
+            subject.Subscribe(Console.Write);
+            Console.WriteLine();
+        }
+    }
 }

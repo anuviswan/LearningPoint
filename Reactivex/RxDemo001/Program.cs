@@ -14,6 +14,8 @@ namespace RxDemo001
             ReplaySubjectWithTimeRestrictedCacheDemo.Run();
             BehaviorSubjectWithDelayedSubscribeDemo.Run();
             BehaviorSubjectWithNoCacheDemo.Run();
+            BehaviorSubjectSubscribeToCompleted.Run();
+            ReplaySubjectSubscribeToCompleted.Run();
             Console.ReadLine();
 
         }
