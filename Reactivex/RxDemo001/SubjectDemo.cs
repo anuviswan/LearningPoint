@@ -137,7 +137,6 @@ namespace RxDemo001
             Console.WriteLine($"{nameof(BehaviorSubjectSubscribeToCompleted)} Demo");
 
             var subject = new BehaviorSubject<int>(0);
-            
             subject.OnNext(1);
             subject.OnNext(2);
             subject.OnNext(3);
@@ -155,7 +154,6 @@ namespace RxDemo001
             Console.WriteLine($"{nameof(ReplaySubjectSubscribeToCompleted)} Demo");
 
             var subject = new ReplaySubject<int>(1);
-
             subject.OnNext(1);
             subject.OnNext(2);
             subject.OnNext(3);
