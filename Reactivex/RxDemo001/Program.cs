@@ -16,6 +16,8 @@ namespace RxDemo001
             BehaviorSubjectWithNoCacheDemo.Run();
             BehaviorSubjectSubscribeToCompleted.Run();
             ReplaySubjectSubscribeToCompleted.Run();
+            AsyncSubjectSubscribeWithoutCompletion.Run();
+            AsyncSubjectSubscribeWithCompletion.Run();
             Console.ReadLine();
 
         }

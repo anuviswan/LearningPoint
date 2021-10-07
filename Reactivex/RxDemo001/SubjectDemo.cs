@@ -163,4 +163,38 @@ namespace RxDemo001
             Console.WriteLine();
         }
     }
+
+
+    public static class AsyncSubjectSubscribeWithoutCompletion
+    {
+        public static void Run()
+        {
+            Console.WriteLine($"{nameof(AsyncSubjectSubscribeWithoutCompletion)} Demo");
+
+            var subject = new AsyncSubject<int>();
+            subject.Subscribe(Console.Write);
+            subject.OnNext(1);
+            subject.OnNext(2);
+            subject.OnNext(3);
+            subject.OnNext(4);
+            Console.WriteLine();
+        }
+    }
+
+    public static class AsyncSubjectSubscribeWithCompletion
+    {
+        public static void Run()
+        {
+            Console.WriteLine($"{nameof(AsyncSubjectSubscribeWithCompletion)} Demo");
+
+            var subject = new AsyncSubject<int>();
+            subject.Subscribe(Console.Write);
+            subject.OnNext(1);
+            subject.OnNext(2);
+            subject.OnNext(3);
+            subject.OnNext(4);
+            subject.OnCompleted();
+            Console.WriteLine();
+        }
+    }
 }
