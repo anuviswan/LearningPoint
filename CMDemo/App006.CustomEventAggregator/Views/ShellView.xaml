@@ -4,9 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App006.CustomEventAggregator.Views"
+        xmlns:viewmodels="clr-namespace:App006.CustomEventAggregator.ViewModels"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:UserProfileViewModel}">
+            <local:UserProfileView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:UserListViewModel}">
+            <local:UserListView />
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
         
+        <ContentControl Content="{Binding UserListVM}"/>
+        <ContentControl Grid.Column="1" Content="{Binding UserProfileVM}"/>
     </Grid>
 </Window>

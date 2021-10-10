@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using App006.CustomEventAggregator.ViewModels;
+using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,13 @@ namespace App006.CustomEventAggregator
         protected override void Configure()
         {
             _unityContainer = new UnityContainer();
+            IoC.GetInstance = GetInstance;
             _unityContainer.RegisterInstance<IWindowManager>(new WindowManager());
             _unityContainer.RegisterInstance<IEventAggregator>(new EventAggregator(), new ContainerControlledLifetimeManager());
 
             //View Models
-            // _unityContainer.RegisterInstance<IShellViewModel>(new ShellViewModel());
+             _unityContainer.RegisterInstance<ShellViewModel>(new ShellViewModel());
+            
         }
 
         protected override void BuildUp(object instance)
@@ -49,7 +52,7 @@ namespace App006.CustomEventAggregator
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            // DisplayRootViewFor<IShellViewModel>();
+            DisplayRootViewFor<ShellViewModel>();
         }
         #endregion
     }
