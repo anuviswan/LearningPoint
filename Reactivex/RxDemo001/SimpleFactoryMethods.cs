@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RxDemo001
+{
+    public static class SimpleFactoryMethods
+    {
+        public static void Run()
+        {
+            Console.WriteLine("Executing Simple Factory");
+            Execute(nameof(Observable.Return), ()=>ExecuteReturn());
+            Execute(nameof(Observable.Create), ()=> ExecuteReturnWithObservableCreate());
+        }
+
+        public static void Execute(string message,Action action)
+        {
+            Console.WriteLine(message);
+            action();
+        }
+
+        private static void ExecuteReturn()
+        {
+            Observable.Return("Anu").Subscribe(Console.WriteLine);
+        }
+
+        private static void ExecuteReturnWithObservableCreate()
+        {
+            Observable.Create<string>(o =>
+            {
+                o.OnNext("Anu");
+                o.OnCompleted();
+                return Disposable.Empty;
+            }).Subscribe(Console.WriteLine);
+        }
+
+    }
+}

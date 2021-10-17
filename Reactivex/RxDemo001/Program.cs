@@ -18,6 +18,9 @@ namespace RxDemo001
             ReplaySubjectSubscribeToCompleted.Run();
             AsyncSubjectSubscribeWithoutCompletion.Run();
             AsyncSubjectSubscribeWithCompletion.Run();
+
+
+            SimpleFactoryMethods.Run();
             Console.ReadLine();
 
         }

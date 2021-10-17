@@ -9,14 +9,17 @@ namespace App006.CustomEventAggregator.ViewModels
     {
         public UserProfileViewModel(IEventAggregator eventAggregator)
         {
-            eventAggregator.SubscribeOnUIThread(this);
+            eventAggregator.Subscribe(this);
         }
         public string UserName { get; set; }
-        public Task HandleAsync(UserSelectionChangedMessage message, CancellationToken cancellationToken)
+
+        public Task HandleAsync(UserSelectionChangedMessage message)
         {
             UserName = message.UserName;
             NotifyOfPropertyChange(nameof(UserName));
             return Task.CompletedTask;
         }
+
+       
     }
 }

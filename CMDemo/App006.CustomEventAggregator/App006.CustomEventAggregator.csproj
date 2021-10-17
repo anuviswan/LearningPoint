@@ -84,6 +84,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Messages\UserSelectionChangedMessage.cs" />
+    <Compile Include="Models\IHandleWithTask.cs" />
+    <Compile Include="Services\ExtendedEventAggregator.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\UserListViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
@@ -126,9 +128,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>

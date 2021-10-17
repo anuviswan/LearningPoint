@@ -11,7 +11,7 @@ namespace App006.CustomEventAggregator.ViewModels
         public UserListViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            _eventAggregator.SubscribeOnUIThread(this);
+            _eventAggregator.Subscribe(this);
             UserCollection = Enumerable.Range(1, 10).Select(x => $"User {x}").ToList();
             NotifyOfPropertyChange(nameof(UserCollection));
 
