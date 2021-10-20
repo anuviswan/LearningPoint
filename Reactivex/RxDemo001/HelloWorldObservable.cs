@@ -1,54 +1,51 @@
 ﻿using System;
 using System.Reactive.Disposables;
-
-namespace RxDemo001
+namespace RxDemo001;
+public class HelloWorldObservable : IObservable<string>
 {
-    public class HelloWorldObservable : IObservable<string>
+    public IDisposable Subscribe(IObserver<string> observer)
     {
-        public IDisposable Subscribe(IObserver<string> observer)
-        {
             
-            observer.OnNext("Hello");
-            observer.OnNext("World!");
-            observer.OnNext("This");
-            observer.OnNext("is");
-            observer.OnNext("a");
-            observer.OnNext("Demo");
-            observer.OnCompleted();
+        observer.OnNext("Hello");
+        observer.OnNext("World!");
+        observer.OnNext("This");
+        observer.OnNext("is");
+        observer.OnNext("a");
+        observer.OnNext("Demo");
+        observer.OnCompleted();
 
-            return Disposable.Empty;
-        }
+        return Disposable.Empty;
+    }
+}
+
+public class HelloWorldObserver : IObserver<string>
+{
+    public void OnCompleted()
+    {
+        Console.WriteLine("Completed");
     }
 
-    public class HelloWorldObserver : IObserver<string>
+    public void OnError(Exception error)
     {
-        public void OnCompleted()
-        {
-            Console.WriteLine("Completed");
-        }
-
-        public void OnError(Exception error)
-        {
-            Console.WriteLine($"Error : {error.Message}");
-        }
-
-        public void OnNext(string value)
-        {
-            Console.Write($"{value} ");
-        }
+        Console.WriteLine($"Error : {error.Message}");
     }
 
-    public static class ObservableDemo
+    public void OnNext(string value)
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(ObservableDemo)} Demo");
+        Console.Write($"{value} ");
+    }
+}
 
-            var observer = new HelloWorldObserver();
-            var helloWorldObservable = new HelloWorldObservable();
-            helloWorldObservable.Subscribe(observer);
+public static class ObservableDemo
+{
+    public static void Run()
+    {
+        Console.WriteLine($"{nameof(ObservableDemo)} Demo");
 
-            Console.WriteLine();
-        }
+        var observer = new HelloWorldObserver();
+        var helloWorldObservable = new HelloWorldObservable();
+        helloWorldObservable.Subscribe(observer);
+
+        Console.WriteLine();
     }
 }

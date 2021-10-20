@@ -64,6 +64,20 @@ namespace BenchmarkingAsync
             }
         }
 
+
+        [Benchmark]
+        public async Task TestAsyncPForEachAwait()
+        {
+            var taskList = new List<Task<Person>>();
+            var cancellationSrc = new CancellationTokenSource();
+            var token = cancellationSrc.Token;
+            await Parallel.ForEachAsync(PersonReferences, async (item, token) => 
+            {
+                var person = await MockApi(item);
+                ProcessedCollection.Add(person);
+            });
+        }
+
         public async Task<Person> MockApi(string person)
         {
             await Task.Delay(300);

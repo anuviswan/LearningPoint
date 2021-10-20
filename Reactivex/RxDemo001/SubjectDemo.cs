@@ -2,199 +2,197 @@
 using System.Reactive.Subjects;
 using System.Threading;
 
-namespace RxDemo001
+namespace RxDemo001;
+public class SubjectDemo : IExecute
 {
-    public static class SubjectDemo
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(SubjectDemo)} Demo");
+        Console.WriteLine($"{nameof(SubjectDemo)} Demo");
 
-            var subject = new Subject<int>();
-            subject.Subscribe(Console.Write);
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.OnNext(3);
-            subject.OnNext(4);
+        var subject = new Subject<int>();
+        subject.Subscribe(Console.Write);
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.OnNext(3);
+        subject.OnNext(4);
 
-            Console.WriteLine();
-        }
+        Console.WriteLine();
     }
+}
 
-    public static class SubjectWithDelayedSubscribeDemo
+public class SubjectWithDelayedSubscribeDemo:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(SubjectWithDelayedSubscribeDemo)} Demo");
+        Console.WriteLine($"{nameof(SubjectWithDelayedSubscribeDemo)} Demo");
 
-            var subject = new Subject<int>();
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.Subscribe(Console.Write);
-            subject.OnNext(3);
-            subject.OnNext(4);
+        var subject = new Subject<int>();
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.Subscribe(Console.Write);
+        subject.OnNext(3);
+        subject.OnNext(4);
 
-            Console.WriteLine();
-        }
+        Console.WriteLine();
     }
+}
 
-    public static class ReplaySubjectWithDelayedSubscribeDemo
+public class ReplaySubjectWithDelayedSubscribeDemo:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(ReplaySubjectWithDelayedSubscribeDemo)} Demo");
+        Console.WriteLine($"{nameof(ReplaySubjectWithDelayedSubscribeDemo)} Demo");
 
-            var subject = new ReplaySubject<int>();
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.Subscribe(Console.Write);
-            subject.OnNext(3);
-            subject.OnNext(4);
+        var subject = new ReplaySubject<int>();
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.Subscribe(Console.Write);
+        subject.OnNext(3);
+        subject.OnNext(4);
 
-            Console.WriteLine();
-        }
+        Console.WriteLine();
     }
+}
 
 
-    public static class ReplaySubjectWithRestrictedCacheDemo
+public class ReplaySubjectWithRestrictedCacheDemo:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(ReplaySubjectWithRestrictedCacheDemo)} Demo");
+        Console.WriteLine($"{nameof(ReplaySubjectWithRestrictedCacheDemo)} Demo");
 
-            var subject = new ReplaySubject<int>(1);
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.Subscribe(Console.Write);
-            subject.OnNext(3);
-            subject.OnNext(4);
+        var subject = new ReplaySubject<int>(1);
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.Subscribe(Console.Write);
+        subject.OnNext(3);
+        subject.OnNext(4);
 
-            Console.WriteLine();
-        }
+        Console.WriteLine();
     }
+}
 
-    public static class ReplaySubjectWithTimeRestrictedCacheDemo
+public class ReplaySubjectWithTimeRestrictedCacheDemo:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(ReplaySubjectWithTimeRestrictedCacheDemo)} Demo");
+        Console.WriteLine($"{nameof(ReplaySubjectWithTimeRestrictedCacheDemo)} Demo");
 
-            var subject = new ReplaySubject<int>(TimeSpan.FromMilliseconds(1000));
-            subject.OnNext(1);
-            Thread.Sleep(500);
-            subject.OnNext(2);
-            Thread.Sleep(200);
-            subject.OnNext(3);
-            Thread.Sleep(500);
-            subject.Subscribe(Console.Write);
-            subject.OnNext(4);
-            Thread.Sleep(500);
+        var subject = new ReplaySubject<int>(TimeSpan.FromMilliseconds(1000));
+        subject.OnNext(1);
+        Thread.Sleep(500);
+        subject.OnNext(2);
+        Thread.Sleep(200);
+        subject.OnNext(3);
+        Thread.Sleep(500);
+        subject.Subscribe(Console.Write);
+        subject.OnNext(4);
+        Thread.Sleep(500);
 
-            Console.WriteLine();
-        }
+        Console.WriteLine();
     }
+}
 
 
-    public static class BehaviorSubjectWithDelayedSubscribeDemo
+public class BehaviorSubjectWithDelayedSubscribeDemo:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(BehaviorSubjectWithDelayedSubscribeDemo)} Demo");
+        Console.WriteLine($"{nameof(BehaviorSubjectWithDelayedSubscribeDemo)} Demo");
 
-            var subject = new BehaviorSubject<int>(0);
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.Subscribe(Console.Write);
-            subject.OnNext(3);
-            subject.OnNext(4);
+        var subject = new BehaviorSubject<int>(0);
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.Subscribe(Console.Write);
+        subject.OnNext(3);
+        subject.OnNext(4);
 
-            Console.WriteLine();
-        }
+        Console.WriteLine();
     }
+}
 
-    public static class BehaviorSubjectWithNoCacheDemo
+public class BehaviorSubjectWithNoCacheDemo:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(BehaviorSubjectWithNoCacheDemo)} Demo");
+        Console.WriteLine($"{nameof(BehaviorSubjectWithNoCacheDemo)} Demo");
 
-            var subject = new BehaviorSubject<int>(0);
-            subject.Subscribe(Console.Write);
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.OnNext(3);
-            subject.OnNext(4);
+        var subject = new BehaviorSubject<int>(0);
+        subject.Subscribe(Console.Write);
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.OnNext(3);
+        subject.OnNext(4);
 
-            Console.WriteLine();
-        }
+        Console.WriteLine();
     }
+}
 
 
-    public static class BehaviorSubjectSubscribeToCompleted
+public class BehaviorSubjectSubscribeToCompleted:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(BehaviorSubjectSubscribeToCompleted)} Demo");
+        Console.WriteLine($"{nameof(BehaviorSubjectSubscribeToCompleted)} Demo");
 
-            var subject = new BehaviorSubject<int>(0);
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.OnNext(3);
-            subject.OnNext(4);
-            subject.OnCompleted();
-            subject.Subscribe(Console.Write);
-            Console.WriteLine();
-        }
+        var subject = new BehaviorSubject<int>(0);
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.OnNext(3);
+        subject.OnNext(4);
+        subject.OnCompleted();
+        subject.Subscribe(Console.Write);
+        Console.WriteLine();
     }
+}
 
-    public static class ReplaySubjectSubscribeToCompleted
+public class ReplaySubjectSubscribeToCompleted:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(ReplaySubjectSubscribeToCompleted)} Demo");
+        Console.WriteLine($"{nameof(ReplaySubjectSubscribeToCompleted)} Demo");
 
-            var subject = new ReplaySubject<int>(1);
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.OnNext(3);
-            subject.OnNext(4);
-            subject.OnCompleted();
-            subject.Subscribe(Console.Write);
-            Console.WriteLine();
-        }
+        var subject = new ReplaySubject<int>(1);
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.OnNext(3);
+        subject.OnNext(4);
+        subject.OnCompleted();
+        subject.Subscribe(Console.Write);
+        Console.WriteLine();
     }
+}
 
 
-    public static class AsyncSubjectSubscribeWithoutCompletion
+public class AsyncSubjectSubscribeWithoutCompletion:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(AsyncSubjectSubscribeWithoutCompletion)} Demo");
+        Console.WriteLine($"{nameof(AsyncSubjectSubscribeWithoutCompletion)} Demo");
 
-            var subject = new AsyncSubject<int>();
-            subject.Subscribe(Console.Write);
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.OnNext(3);
-            subject.OnNext(4);
-            Console.WriteLine();
-        }
+        var subject = new AsyncSubject<int>();
+        subject.Subscribe(Console.Write);
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.OnNext(3);
+        subject.OnNext(4);
+        Console.WriteLine();
     }
+}
 
-    public static class AsyncSubjectSubscribeWithCompletion
+public class AsyncSubjectSubscribeWithCompletion:IExecute
+{
+    public static void Run()
     {
-        public static void Run()
-        {
-            Console.WriteLine($"{nameof(AsyncSubjectSubscribeWithCompletion)} Demo");
+        Console.WriteLine($"{nameof(AsyncSubjectSubscribeWithCompletion)} Demo");
 
-            var subject = new AsyncSubject<int>();
-            subject.Subscribe(Console.Write);
-            subject.OnNext(1);
-            subject.OnNext(2);
-            subject.OnNext(3);
-            subject.OnNext(4);
-            subject.OnCompleted();
-            Console.WriteLine();
-        }
+        var subject = new AsyncSubject<int>();
+        subject.Subscribe(Console.Write);
+        subject.OnNext(1);
+        subject.OnNext(2);
+        subject.OnNext(3);
+        subject.OnNext(4);
+        subject.OnCompleted();
+        Console.WriteLine();
     }
 }
