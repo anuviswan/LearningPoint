@@ -10,7 +10,7 @@ public class PropertyNotifyDemo : IExecute
     {
         Console.WriteLine("Executing Property Notify Demo");
         var foo = new Foo();
-        Observable.FromEventPattern<PropertyChangedEventHandler, PropertyChangedEventArgs>(h=>h.Invoke, h => foo.PropertyChanged += h, h => foo.PropertyChanged -= h)
+        Observable.FromEventPattern<PropertyChangedEventHandler, PropertyChangedEventArgs>(h => foo.PropertyChanged += h, h => foo.PropertyChanged -= h)
             .Subscribe((e) => Console.WriteLine($"Subscribe:Changed {e.EventArgs.PropertyName}"));
 
         foo.Name = "Anu";
