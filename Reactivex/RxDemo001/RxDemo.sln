@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxDemo001", "RxDemo001.csproj", "{F68ECF0A-6B1F-4670-8635-0C0EBB346052}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RxDemo001", "RxDemo001.csproj", "{F68ECF0A-6B1F-4670-8635-0C0EBB346052}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxUiDemo", "..\RxUiDemi\RxUiDemo.csproj", "{211F74C7-D56A-45E6-B0B6-B73185CC62E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F68ECF0A-6B1F-4670-8635-0C0EBB346052}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F68ECF0A-6B1F-4670-8635-0C0EBB346052}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F68ECF0A-6B1F-4670-8635-0C0EBB346052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{211F74C7-D56A-45E6-B0B6-B73185CC62E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{211F74C7-D56A-45E6-B0B6-B73185CC62E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{211F74C7-D56A-45E6-B0B6-B73185CC62E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{211F74C7-D56A-45E6-B0B6-B73185CC62E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
