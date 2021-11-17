@@ -7,14 +7,14 @@ Console.WriteLine("Starting Hello World Consumer...");
 
 var factory = new ConnectionFactory
 {
-    HostName = "my-rabbit-host"
+    HostName = "localhost"
 };
 
 using (var connection = factory.CreateConnection())
 {
     using (var channel = connection.CreateModel())
     {
-        channel.QueueDeclare(queue: "Asgard",
+        channel.QueueDeclare(queue: "asgard",
             durable: false,
             exclusive: false,
             autoDelete: false,
@@ -29,7 +29,7 @@ using (var connection = factory.CreateConnection())
             Console.WriteLine($"Recieved message from Earth : {message}");
         };
 
-        channel.BasicConsume("Asgard",true,consumer);
+        channel.BasicConsume("asgard",true,consumer);
     }
 }
 
