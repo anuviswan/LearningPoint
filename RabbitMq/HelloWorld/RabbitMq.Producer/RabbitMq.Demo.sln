@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkerQueue", "WorkerQueue"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerQueue.Producer", "..\..\WorkerQueues\WorkerQueue.Producer\WorkerQueue.Producer.csproj", "{F1983611-7048-426C-B6D4-FA4966410626}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerQueue.Consumer", "..\..\WorkerQueues\WorkerQueue.Consumer\WorkerQueue.Consumer.csproj", "{26450AFB-F194-439D-BA57-1D22D9C87BE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{F1983611-7048-426C-B6D4-FA4966410626}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1983611-7048-426C-B6D4-FA4966410626}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1983611-7048-426C-B6D4-FA4966410626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26450AFB-F194-439D-BA57-1D22D9C87BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26450AFB-F194-439D-BA57-1D22D9C87BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26450AFB-F194-439D-BA57-1D22D9C87BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26450AFB-F194-439D-BA57-1D22D9C87BE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{EE220A3D-72C1-4974-9417-1CDB866F2D1C} = {C6F18C26-789C-4A61-9B6E-CE4FBAF9F4D4}
 		{4D46E724-D2CF-4BD0-A914-55E2A11A6766} = {C6F18C26-789C-4A61-9B6E-CE4FBAF9F4D4}
 		{F1983611-7048-426C-B6D4-FA4966410626} = {34770723-8928-4C04-BBF3-5A866299D685}
+		{26450AFB-F194-439D-BA57-1D22D9C87BE2} = {34770723-8928-4C04-BBF3-5A866299D685}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {129C0F11-B6EC-401D-8041-C1D1F389BAFD}
