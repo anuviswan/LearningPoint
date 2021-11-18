@@ -20,11 +20,20 @@ channel.QueueDeclare(queue: "AsgardWorkerQueue",
 
 var consumer = new EventingBasicConsumer(channel);
 
-consumer.Received += async (sender, args) =>
+var autoAck = (args.Any() && args.Any().Equals("/autoack"));
+
+
+
+consumer.Received += async (sender, eventArgs) =>
 {
+    if (autoAck)
+    {
+        channel.BasicAck(deliveryTag: eventArgs.DeliveryTag, multiple: false);
+    }
+
     Console.WriteLine("Reciding message from Asgard....");
 
-    var body = args.Body;
+    var body = eventArgs.Body;
     var message = Encoding.UTF8.GetString(body.ToArray());
 
     var delayTime = message.Where(x => x == '.').Count();
@@ -34,6 +43,10 @@ consumer.Received += async (sender, args) =>
     Console.WriteLine($"Task Completed, Message {message}");
 };
 
-channel.BasicConsume("AsgardWorkerQueue", true, consumer);
+
+
+channel.BasicConsume(queue: "AsgardWorkerQueue", 
+                    autoAck: autoAck, 
+                    consumer: consumer);
 Console.ReadLine();
 
