@@ -13,25 +13,29 @@ using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 
 channel.QueueDeclare(queue: "AsgardWorkerQueue",
-            durable: false,
+            durable: true,
             exclusive: false,
             autoDelete: false,
             arguments: null);
 
 var consumer = new EventingBasicConsumer(channel);
 
-var autoAck = (args.Any() && args.Any().Equals("/autoack"));
+var autoAck = args.Any(x=>x =="/autoack");
 
+var useFairDespatch = args.Any(x => x == @"\e");
 
-
+if (useFairDespatch)
+{
+    channel.BasicQos(0, 1, false);
+}
 consumer.Received += async (sender, eventArgs) =>
 {
-    if (autoAck)
+    if (!autoAck)
     {
         channel.BasicAck(deliveryTag: eventArgs.DeliveryTag, multiple: false);
     }
 
-    Console.WriteLine("Reciding message from Asgard....");
+    Console.WriteLine("Recieving message from Asgard....");
 
     var body = eventArgs.Body;
     var message = Encoding.UTF8.GetString(body.ToArray());

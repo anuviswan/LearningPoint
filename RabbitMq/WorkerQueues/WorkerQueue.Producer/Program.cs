@@ -9,14 +9,19 @@ var connectionFactory = new ConnectionFactory()
 };
 
 
+
+
+
 using var connection = connectionFactory.CreateConnection();
 using var channel = connection.CreateModel();
 
 channel.QueueDeclare(queue:"AsgardWorkerQueue", 
-            durable: false,
+            durable: true,
             exclusive: false,
             autoDelete: false,
             arguments: null);
+
+
 
 if (args.Any())
 {
