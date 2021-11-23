@@ -46,10 +46,12 @@ consumer.Received += (s, ea) =>
     finally
     {
         var responseBody = Encoding.UTF8.GetBytes(response);
+        Console.WriteLine($"Sending response to client : {response}");
         channel.BasicPublish(exchange: "", 
                             routingKey: replyProps.ReplyTo, 
                             basicProperties: replyProps, 
                             body: responseBody);
+        Console.WriteLine("Sending acknowledgement");
         channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
     }
 };
