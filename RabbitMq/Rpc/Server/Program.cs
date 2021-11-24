@@ -21,6 +21,8 @@ channel.BasicQos(0,1,false);
 
 var consumer = new EventingBasicConsumer(channel);
 
+channel.BasicConsume(queue: "RpcQueue", autoAck: false, consumer: consumer);
+
 consumer.Received += (s, ea) =>
 {
     string response = default;
@@ -30,6 +32,9 @@ consumer.Received += (s, ea) =>
 
     var replyProps = channel.CreateBasicProperties();
     replyProps.CorrelationId = ea.BasicProperties.CorrelationId;
+    replyProps.ReplyTo = ea.BasicProperties.ReplyTo;
+
+    
 
     try
     {
@@ -45,8 +50,9 @@ consumer.Received += (s, ea) =>
     }
     finally
     {
-        var responseBody = Encoding.UTF8.GetBytes(response);
-        Console.WriteLine($"Sending response to client : {response}");
+        var responseBody = Encoding.UTF8.GetBytes(response??String.Empty);
+        Console.WriteLine($"Sending response to client : `{response}` with routing Key {replyProps.ReplyTo}");
+
         channel.BasicPublish(exchange: "", 
                             routingKey: replyProps.ReplyTo, 
                             basicProperties: replyProps, 
@@ -56,7 +62,7 @@ consumer.Received += (s, ea) =>
     }
 };
 
-channel.BasicConsume(queue:"RpcQueue",autoAck:false,consumer:consumer);
+
 
 Console.ReadLine();
 

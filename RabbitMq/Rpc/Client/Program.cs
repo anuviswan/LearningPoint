@@ -17,12 +17,12 @@ var factory = new ConnectionFactory
 using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 
-var queueName = channel.QueueDeclare().QueueName;
+var replyQueueName = channel.QueueDeclare().QueueName;
 
 var consumer = new EventingBasicConsumer(channel);
 
 var props = channel.CreateBasicProperties();
-props.ReplyTo = queueName;
+props.ReplyTo = replyQueueName;
 props.CorrelationId = Guid.NewGuid().ToString();
 
 consumer.Received += (sender, args) =>
@@ -34,10 +34,11 @@ consumer.Received += (sender, args) =>
     resultCollection.Add(message);
 };
 
-channel.BasicConsume(queue:queueName,consumer:consumer);
+channel.BasicConsume(queue:replyQueueName,consumer:consumer,autoAck:true);
 
 
 var messageToSend = Encoding.UTF8.GetBytes(args[0]);
+Console.WriteLine($"Sending message with Reply Queue Name as {replyQueueName}");
 channel.BasicPublish(exchange:"",routingKey: "RpcQueue",basicProperties:props,body:messageToSend);
 var result = resultCollection.Take();
 
