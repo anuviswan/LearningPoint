@@ -16,6 +16,8 @@ namespace UserDisplay
     {
         private BlockingCollection<IEnumerable<string>> _resultCollection = new BlockingCollection<IEnumerable<string>>();
         private IConnection _connection;
+        private string _replyQueueName;
+        private IBasicProperties _basicProperties;
         private IModel _channel;
         public IEnumerable<string> UserNames { get; set; }
         public int Count { get; set; } = 15;
@@ -31,16 +33,12 @@ namespace UserDisplay
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-        }
+            _replyQueueName = _channel.QueueDeclare().QueueName;
 
-
-        public void ExecuteFetchCommand()
-        {
-            var replyQueueName = _channel.QueueDeclare().QueueName;
             var consumer = new EventingBasicConsumer(_channel);
-            var props = _channel.CreateBasicProperties();
-            props.ReplyTo = replyQueueName;
-            props.CorrelationId = Guid.NewGuid().ToString();
+            _basicProperties = _channel.CreateBasicProperties();
+            _basicProperties.ReplyTo = _replyQueueName;
+            _basicProperties.CorrelationId = Guid.NewGuid().ToString();
 
             consumer.Received += (sender, args) =>
             {
@@ -51,10 +49,14 @@ namespace UserDisplay
                 _resultCollection.Add(userList);
             };
 
-            _channel.BasicConsume(queue: replyQueueName, consumer: consumer, autoAck: true);
+            _channel.BasicConsume(queue: _replyQueueName, consumer: consumer, autoAck: true);
+        }
 
+
+        public void ExecuteFetchCommand()
+        {
             var messageToSend = Encoding.UTF8.GetBytes(Count.ToString());
-            _channel.BasicPublish(exchange: "", routingKey: "RpcQueue", basicProperties: props, body: messageToSend);
+            _channel.BasicPublish(exchange: "", routingKey: "RpcQueue", basicProperties: _basicProperties, body: messageToSend);
             var result = _resultCollection.Take();
         }
 
