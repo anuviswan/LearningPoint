@@ -31,7 +31,7 @@
                 <TextBox Text="{Binding Count}"/>
             </StackPanel>
 
-            <Button Grid.Column="2" Width="100" Content="Fetch" Margin="5"/>
+            <Button Grid.Column="2" Width="100" Content="Fetch" Margin="5" Command="{Binding FetchCommand}"/>
         </Grid>
         
         
