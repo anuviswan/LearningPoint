@@ -1,0 +1,39 @@
+﻿<Window x:Class="UserDisplay.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserDisplay"
+        mc:Ignorable="d"
+        Title="RabbitMq Demo : User Display" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="UserNames"/>
+        <ListBox Grid.Row="1" ItemsSource="{Binding UserNames}"/>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="5">
+                <TextBlock Text="Count : "/>
+                <TextBox Text="{Binding Count}"/>
+            </StackPanel>
+
+            <Button Grid.Column="2" Width="100" Content="Fetch" Margin="5"/>
+        </Grid>
+        
+        
+    </Grid>
+</Window>
