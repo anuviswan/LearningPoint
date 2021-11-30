@@ -3,10 +3,13 @@ using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
+using System.Windows;
 using System.Windows.Input;
 using UserDisplay.Commands;
 
@@ -14,7 +17,7 @@ namespace UserDisplay
 {
     internal class MainWindowViewModel:INotifyPropertyChanged
     {
-        private BlockingCollection<IEnumerable<string>> _resultCollection = new BlockingCollection<IEnumerable<string>>();
+        private ObservableCollection<string> _resultCollection = new ObservableCollection<string>();
         private IConnection _connection;
         private string _replyQueueName;
         private IBasicProperties _basicProperties;
@@ -44,20 +47,28 @@ namespace UserDisplay
             {
                 var body = args.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                var userList = JsonSerializer.Deserialize<IEnumerable<string>>(message);
+                
 
-                _resultCollection.Add(userList);
+                UpdateLogOnUIThread(message);
             };
 
             _channel.BasicConsume(queue: _replyQueueName, consumer: consumer, autoAck: true);
         }
 
+        private void UpdateLogOnUIThread(string message)
+        {
+            Application.Current.Dispatcher.Invoke(() => _resultCollection.Add(message));
+        }
 
         public void ExecuteFetchCommand()
         {
             var messageToSend = Encoding.UTF8.GetBytes(Count.ToString());
             _channel.BasicPublish(exchange: "", routingKey: "RpcQueue", basicProperties: _basicProperties, body: messageToSend);
-            var result = _resultCollection.Take();
+            var result = _resultCollection.First();
+            var userList = JsonSerializer.Deserialize<IEnumerable<string>>(result);
+
+            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

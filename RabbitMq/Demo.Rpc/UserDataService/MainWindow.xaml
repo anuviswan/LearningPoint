@@ -10,6 +10,6 @@
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-
+        <ListBox ItemsSource="{Binding LogMessages,Mode=TwoWay}" Height="500" />
     </Grid>
 </Window>

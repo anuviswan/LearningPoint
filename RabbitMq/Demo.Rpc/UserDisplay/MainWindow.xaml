@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserDisplay"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="RabbitMq Demo : User Display" Height="450" Width="800">
     <Window.DataContext>
@@ -31,7 +32,13 @@
                 <TextBox Text="{Binding Count}"/>
             </StackPanel>
 
-            <Button Grid.Column="2" Width="100" Content="Fetch" Margin="5" Command="{Binding FetchCommand}"/>
+            <Button Grid.Column="2" Width="100" Content="Fetch" Margin="5" Command="{Binding FetchCommand}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding InvokeProblemStatement}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </Grid>
         
         
