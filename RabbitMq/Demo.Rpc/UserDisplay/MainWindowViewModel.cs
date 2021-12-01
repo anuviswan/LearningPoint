@@ -63,12 +63,9 @@ namespace UserDisplay
         public void ExecuteFetchCommand()
         {
             var messageToSend = Encoding.UTF8.GetBytes(Count.ToString());
-            _channel.BasicPublish(exchange: "", routingKey: "RpcQueue", basicProperties: _basicProperties, body: messageToSend);
-            var result = _resultCollection.First();
-            var userList = JsonSerializer.Deserialize<IEnumerable<string>>(result);
-
-            
-
+            _channel.BasicPublish(exchange: "", routingKey: "UserRpcQueue", basicProperties: _basicProperties, body: messageToSend);
+           // var result = _resultCollection.First();
+            //var userList = JsonSerializer.Deserialize<IEnumerable<string>>(result);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
