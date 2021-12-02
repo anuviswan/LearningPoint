@@ -1,14 +1,12 @@
 ﻿using BenchmarkDotNet.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace BenchmarkForEach
 {
     public class LoopTest
     {
+        private const int MaxCount = 1_000_000;
+
         [Benchmark]
         [ArgumentsSource(nameof(IEnumerableCollection))]
         public void ForEachIEnumerable(IEnumerable<int> collection)
@@ -39,23 +37,21 @@ namespace BenchmarkForEach
             }
         }
 
-        public void DoSomething(int num)
-        {
-
-        }
-
 
         public IEnumerable<IEnumerable<int>> IEnumerableCollection()
         {
-            yield return Enumerable.Range(1, 99999); 
+            yield return Enumerable.Range(1, MaxCount); 
         }
         public IEnumerable<IList<int>> IListCollection ()
         {
-            yield return Enumerable.Range(1, 99999).ToList();
+            yield return Enumerable.Range(1, MaxCount).ToList();
         }
         public IEnumerable<List<int>> ListCollection()
         {
-            yield return Enumerable.Range(1, 99999).ToList();
+            yield return Enumerable.Range(1, MaxCount).ToList();
         }
+
+        public void DoSomething(int num) => Expression.Empty();
+        
     }
 }

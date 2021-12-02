@@ -47,8 +47,8 @@ namespace UserDisplay
             var messageId = Guid.NewGuid().ToString();
             basicProperties.CorrelationId = messageId;
 
-
-
+            var messageToSend = Encoding.UTF8.GetBytes(message);
+            _channel.BasicPublish(exchange: "", routingKey: "UserRpcQueue", basicProperties: basicProperties, body: messageToSend);
         }
     }
 }
