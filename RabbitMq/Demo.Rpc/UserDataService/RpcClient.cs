@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace UserDataService
 {
-    internal class RpcClient
+    internal class RpcClient:IDisposable
     {
         private const string QueueName = "UserRpcQueue";
         private IConnection _connection;
         private IModel _channel;
+        private bool _isDisposed;
 
         public void InitializeAndRun()
         {
@@ -80,8 +81,34 @@ namespace UserDataService
             return Enumerable.Range(1, count).Select(x => $"UserName {x}");
         }
 
+        
+
         public delegate void LogMessageHandler(string message);
 
         public event LogMessageHandler LogMessage;
+
+        private void Dispose(bool disposing)
+        {
+            if (_isDisposed) return;
+
+            if (disposing)
+            {
+                _channel.Close();
+            }
+
+
+            _isDisposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~RpcClient()
+        {
+            Dispose(false);
+        }
     }
 }
