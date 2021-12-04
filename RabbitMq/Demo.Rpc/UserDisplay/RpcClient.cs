@@ -26,20 +26,21 @@ internal class RpcClient:IDisposable
         _responseQueueName = _channel.QueueDeclare().QueueName;
 
         var consumer = new EventingBasicConsumer(_channel);
-            
-        consumer.Received += (sender, args) =>
-        {
-            var body = args.Body.ToArray();
-            var message = Encoding.UTF8.GetString(body);
 
-            if(_activeTaskQueue.TryRemove(args.BasicProperties.CorrelationId,out var taskCompletionSource))
-            {
-                taskCompletionSource.SetResult(message);
-            }
-        };
+        consumer.Received += Consumer_Received;
         _channel.BasicConsume(queue: _responseQueueName, consumer: consumer, autoAck: true);
     }
 
+    private void Consumer_Received(object? sender, BasicDeliverEventArgs args)
+    {
+        var body = args.Body.ToArray();
+        var message = Encoding.UTF8.GetString(body);
+
+        if (_activeTaskQueue.TryRemove(args.BasicProperties.CorrelationId, out var taskCompletionSource))
+        {
+            taskCompletionSource.SetResult(message);
+        }
+    }
 
     public Task<string> SendAsync(string message)
     {
