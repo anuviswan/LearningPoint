@@ -8,7 +8,15 @@ This contains sample code for the tutorials in www.bytelanguage.net.  This inclu
 - [Jwt Authentication Minimal Web Api](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/MinimalWebAPi): Code demo for JWT Authentication using Minimalist Web API.
 - [Google OAuth](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/WebAppOAuthDemo) : Authentication using Google OAuth
 
-
+**Azure Functions**
+- [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/HelloWorld) : Customary Hello World
+- [Crud With Azure Queue](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/AzureFunc.Crud.Queue) : CRUD Operations with Azure Queue
+- [Crud With In Memory Collection](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/AzureFunc.Crud.MemoryCollection): CRUD with In memory collections
+- [Crud With Azure Table Storage](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/AzureFunc.Crud.TableStorage): CRUD Operations with Azure Table Storage
+- [Crud With Azure Blob Storage](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/AzureFunc.Crud.Blob): CRUD Operations with Azure Blob Storage
+- [Google OAuth & Azure Functions](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/GoogleAuthentication) : Using Google OAuth in Azure Function
+- [Isolated Azure Functions](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/IsolatedFunctionApps) : Demo code for Isolated Azure Functions (out-of-process, using .Net 5)
+- 
 **RabbitMq**
 
 - [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/RabbitMq/HelloWorld) : Hello World Demo, Introduction to RabbitMq
