@@ -30,6 +30,7 @@ public class QueueConsumerService:BackgroundService
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
         var consumer = new EventingBasicConsumer(_channel);
+        
         consumer.Received += (s, a) =>
         {
             var replyQueueName = a.BasicProperties.ReplyTo;
