@@ -2,6 +2,13 @@
 
 This contains sample code for the tutorials in www.bytelanguage.net.  This includes Code Samples on
 
+**Asp.Net Core**
+- [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/MyFirstApp) : A hello world illustrating controllers, middlewares and other services.
+- [Jwt Authentication](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/JwtExample) : Code illustrating how to use Jwt Authentication in .Net Core Web Api
+- [Jwt Authentication Minimal Web Api](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/MinimalWebAPi): Code demo for JWT Authentication using Minimalist Web API.
+- [Google OAuth](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/WebAppOAuthDemo) : Authentication using Google OAuth
+
+
 **RabbitMq**
 
 - [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/RabbitMq/HelloWorld) : Hello World Demo, Introduction to RabbitMq
