@@ -16,7 +16,16 @@ This contains sample code for the tutorials in www.bytelanguage.net.  This inclu
 - [Crud With Azure Blob Storage](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/AzureFunc.Crud.Blob): CRUD Operations with Azure Blob Storage
 - [Google OAuth & Azure Functions](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/GoogleAuthentication) : Using Google OAuth in Azure Function
 - [Isolated Azure Functions](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/IsolatedFunctionApps) : Demo code for Isolated Azure Functions (out-of-process, using .Net 5)
-- 
+
+**Caliburn Micro**
+ - [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App001) - A customary hello world with bindings and other functionalities of Caliburn Micro
+ - [Bootstrapper With SimpleContainer](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App002) - Understanding Bootstrapper 
+ - [EventAggregator and WindowManager](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App003.Ea.Wm) - Demo code for illustrating EventAggregator and WindowManager
+ - [Multi Project Scenario](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App003.MultiProject.Demo) - Illustrates when ViewModels and Views are spread across multiple projects
+ - [Gesture Recongnition using Short Hand Syntax](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App004.CustomTrigger) - Gesture Recongnition using Short Hand Syntax
+ - [ViewModel First Approach](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App005.ViewModelFirst) - Illustrates View Model Approach
+ - [Custom EventAggregator](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App006.CustomEventAggregator) - Demo code with a Custom Event Aggregator
+ 
 **RabbitMq**
 
 - [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/RabbitMq/HelloWorld) : Hello World Demo, Introduction to RabbitMq
