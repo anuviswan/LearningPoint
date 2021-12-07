@@ -16,7 +16,36 @@ This contains sample code for the tutorials in www.bytelanguage.net.  This inclu
 - [Crud With Azure Blob Storage](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/AzureFunc.Crud.Blob): CRUD Operations with Azure Blob Storage
 - [Google OAuth & Azure Functions](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/GoogleAuthentication) : Using Google OAuth in Azure Function
 - [Isolated Azure Functions](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/IsolatedFunctionApps) : Demo code for Isolated Azure Functions (out-of-process, using .Net 5)
-- 
+
+**Caliburn Micro**
+ - [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App001) - A customary hello world with bindings and other functionalities of Caliburn Micro
+ - [Bootstrapper With SimpleContainer](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App002) - Understanding Bootstrapper 
+ - [EventAggregator and WindowManager](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App003.Ea.Wm) - Demo code for illustrating EventAggregator and WindowManager
+ - [Multi Project Scenario](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App003.MultiProject.Demo) - Illustrates when ViewModels and Views are spread across multiple projects
+ - [Gesture Recongnition using Short Hand Syntax](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App004.CustomTrigger) - Gesture Recongnition using Short Hand Syntax
+ - [ViewModel First Approach](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App005.ViewModelFirst) - Illustrates View Model Approach
+ - [Custom EventAggregator](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App006.CustomEventAggregator) - Demo code with a Custom Event Aggregator
+
+**Design Patterns**
+- [Adapter](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Adapter)
+- [Bridge](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Bridge)
+- [Chain Of Responsibility](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/CoR/CoR)
+- [Composite](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Composite)
+- [Decorator](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Decorator)
+- [EventAggregator](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/EventAggregator.Simple)
+- [Factory Method](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/FactoryMethod)
+- [Fascade](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Fascade)
+- [Memento](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Memento)
+- [Generic Memento](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/GenericMemento)
+- [Null Object](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/NullObject)
+- [Observer](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Observer)
+- [Prototype](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Prototype)
+- [Singleton](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Singleton)
+- [State](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/State)
+- [Strategy](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Strategy)
+- [Template Method](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Template)
+
+ 
 **RabbitMq**
 
 - [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/RabbitMq/HelloWorld) : Hello World Demo, Introduction to RabbitMq
