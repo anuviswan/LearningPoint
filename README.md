@@ -25,6 +25,26 @@ This contains sample code for the tutorials in www.bytelanguage.net.  This inclu
  - [Gesture Recongnition using Short Hand Syntax](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App004.CustomTrigger) - Gesture Recongnition using Short Hand Syntax
  - [ViewModel First Approach](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App005.ViewModelFirst) - Illustrates View Model Approach
  - [Custom EventAggregator](https://github.com/anuviswan/LearningPoint/tree/master/CMDemo/App006.CustomEventAggregator) - Demo code with a Custom Event Aggregator
+
+**Design Patterns**
+- [Adapter](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Adapter)
+- [Bridge](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Bridge)
+- [Chain Of Responsibility](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/CoR/CoR)
+- [Composite](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Composite)
+- [Decorator](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Decorator)
+- [EventAggregator](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/EventAggregator.Simple)
+- [Factory Method](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/FactoryMethod)
+- [Fascade](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Fascade)
+- [Memento](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Memento)
+- [Generic Memento](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/GenericMemento)
+- [Null Object](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/NullObject)
+- [Observer](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Observer)
+- [Prototype](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Prototype)
+- [Singleton](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Singleton)
+- [State](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/State)
+- [Strategy](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Strategy)
+- [Template Method](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Template)
+
  
 **RabbitMq**
 
