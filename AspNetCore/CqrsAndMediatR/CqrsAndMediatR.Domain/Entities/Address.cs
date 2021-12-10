@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CqrsAndMediatR.Data.Models
+namespace CqrsAndMediatR.Domain.Entities
 {
     public class Address
     {

@@ -1,4 +1,5 @@
 ﻿using CqrsAndMediatR.Data.Models;
+using CqrsAndMediatR.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

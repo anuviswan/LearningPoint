@@ -1,4 +1,4 @@
-﻿namespace CqrsAndMediatR.Data.Models
+﻿namespace CqrsAndMediatR.Domain.Entities
 {
     public class Customer
     {
