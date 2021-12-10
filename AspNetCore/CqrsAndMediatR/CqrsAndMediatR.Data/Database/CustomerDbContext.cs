@@ -1,11 +1,5 @@
-﻿using CqrsAndMediatR.Data.Models;
-using CqrsAndMediatR.Domain.Entities;
+﻿using CqrsAndMediatR.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CqrsAndMediatR.Data.Database
 {
