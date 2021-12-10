@@ -9,12 +9,14 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CqrsAndMediatR.Data\CqrsAndMediatR.Data.csproj" />
+    <ProjectReference Include="..\CqrsAndMediatR.Service\CqrsAndMediatR.Service.csproj" />
   </ItemGroup>
 
 </Project>

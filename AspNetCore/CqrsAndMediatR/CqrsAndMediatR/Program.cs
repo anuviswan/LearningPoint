@@ -1,4 +1,7 @@
 using CqrsAndMediatR.Data.Database;
+using CqrsAndMediatR.Data.Repository;
+using CqrsAndMediatR.Service.Query;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CustomerDbContext>(o=>o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
-
+builder.Services.AddMediatR(typeof(GetCustomersQuery).Assembly);
+builder.Services.AddTransient(typeof(IRepository<>), typeof(GenericRepository<>));
+builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
