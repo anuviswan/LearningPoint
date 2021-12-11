@@ -41,7 +41,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventAggregator.Simple", "E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventAggregator", "EventAggregator\EventAggregator.csproj", "{45006EDA-5AFE-4A4D-8D6B-B3CFA63C01D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatterns.Test", "DesignPatterns.Test\DesignPatterns.Test.csproj", "{850DC5E5-9EE1-4971-9F1D-87F9841F3442}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns.Test", "DesignPatterns.Test\DesignPatterns.Test.csproj", "{850DC5E5-9EE1-4971-9F1D-87F9841F3442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mediator", "Mediator\Mediator.csproj", "{EB383C6F-6A49-4DA0-9E10-F440FE8765DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +131,10 @@ Global
 		{850DC5E5-9EE1-4971-9F1D-87F9841F3442}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{850DC5E5-9EE1-4971-9F1D-87F9841F3442}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{850DC5E5-9EE1-4971-9F1D-87F9841F3442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB383C6F-6A49-4DA0-9E10-F440FE8765DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB383C6F-6A49-4DA0-9E10-F440FE8765DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB383C6F-6A49-4DA0-9E10-F440FE8765DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB383C6F-6A49-4DA0-9E10-F440FE8765DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
