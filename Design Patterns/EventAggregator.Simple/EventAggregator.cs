@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace EventAggregator.Simple
 {
@@ -42,7 +43,7 @@ namespace EventAggregator.Simple
             {
                 return;
             }
-            SubscriberCollection[typeof(TMessage)].Add(new Subscriber<TMessage>(subscriber, action));
+            SubscriberCollection[typeof(TMessage)].Add(new Subscriber<TMessage>(subscriber, action.Compile()));
         }
 
         public void Unsubscribe<TMessage>(object subscriber) where TMessage : MessageBase

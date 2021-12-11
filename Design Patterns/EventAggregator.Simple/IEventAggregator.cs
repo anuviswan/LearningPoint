@@ -1,5 +1,6 @@
 ﻿using EventAggregator.Simple.Messages;
 using System;
+using System.Linq.Expressions;
 
 namespace EventAggregator.Simple
 {
