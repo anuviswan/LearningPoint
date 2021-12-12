@@ -1,10 +1,5 @@
-﻿using CqrsAndMediatR.Domain.Entities;
-using MediatR;
-
-namespace CqrsAndMediatR.Service.Command
+﻿namespace CqrsAndMediatR.Service.Command;
+public class CreateCustomerCommand : IRequest<Customer>
 {
-    public class CreateCustomerCommand:IRequest<Customer>
-    {
-        public Customer Customer { get; set; }
-    }
+    public Customer Customer { get; set; }
 }

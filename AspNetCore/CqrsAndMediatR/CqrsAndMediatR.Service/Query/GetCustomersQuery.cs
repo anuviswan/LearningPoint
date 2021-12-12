@@ -1,9 +1,4 @@
-﻿using CqrsAndMediatR.Domain.Entities;
-using MediatR;
-
-namespace CqrsAndMediatR.Service.Query
+﻿namespace CqrsAndMediatR.Service.Query;
+public class GetCustomersQuery : IRequest<List<Customer>>
 {
-    public class GetCustomersQuery:IRequest<List<Customer>>
-    {
-    }
 }

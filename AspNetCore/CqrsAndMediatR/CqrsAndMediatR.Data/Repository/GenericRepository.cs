@@ -5,61 +5,36 @@ public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : c
 {
     protected readonly CustomerDbContext CustomerDbContext;
 
-    public GenericRepository(CustomerDbContext customDbContext)
-    {
-        CustomerDbContext = customDbContext;
-    }
+    public GenericRepository(CustomerDbContext customDbContext) => CustomerDbContext = customDbContext;
 
-
-    public IEnumerable<TEntity> GetAll()
-    {
-        try
-        {
-            return CustomerDbContext.Set<TEntity>();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Couldn't retrieve entities: {ex.Message}");
-        }
-    }
+    public IEnumerable<TEntity> GetAll() => CustomerDbContext.Set<TEntity>();
+    
 
     public async Task<TEntity> AddAsync(TEntity entity)
     {
-        if (entity == null)
-        {
-            throw new ArgumentNullException($"{nameof(AddAsync)} entity must not be null");
-        }
+        ArgumentNullException.ThrowIfNull(entity);
 
-        try
-        {
-            await CustomerDbContext.AddAsync(entity);
-            await CustomerDbContext.SaveChangesAsync();
+        await CustomerDbContext.AddAsync(entity);
+        await CustomerDbContext.SaveChangesAsync();
 
-            return entity;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"{nameof(entity)} could not be saved: {ex.Message}");
-        }
+        return entity;
     }
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
-        if (entity == null)
-        {
-            throw new ArgumentNullException($"{nameof(UpdateAsync)} entity must not be null");
-        }
+        ArgumentNullException.ThrowIfNull(entity);
 
-        try
-        {
-            CustomerDbContext.Update(entity);
-            await CustomerDbContext.SaveChangesAsync();
+        CustomerDbContext.Update(entity);
+        await CustomerDbContext.SaveChangesAsync();
 
-            return entity;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"{nameof(entity)} could not be updated {ex.Message}");
-        }
+        return entity;
+    }
+
+    public async Task DeleteAsync(TEntity entity)
+    {
+        ArgumentNullException.ThrowIfNull(entity);
+
+        CustomerDbContext.Remove(entity);
+        await CustomerDbContext.SaveChangesAsync();
     }
 }
