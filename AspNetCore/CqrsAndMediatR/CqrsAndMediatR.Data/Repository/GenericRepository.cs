@@ -37,10 +37,10 @@ public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : c
     public async Task<TEntity> DeleteAsync(TEntity entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
-        var itemToRemove = CustomerDbContext.Set<TEntity>().FindAsync(entity.Id);
+        var itemToRemove = await CustomerDbContext.Set<TEntity>().FindAsync(entity.Id);
         CustomerDbContext.Remove(itemToRemove);
         await CustomerDbContext.SaveChangesAsync();
-        return entity;
+        return itemToRemove;
     }
 
    

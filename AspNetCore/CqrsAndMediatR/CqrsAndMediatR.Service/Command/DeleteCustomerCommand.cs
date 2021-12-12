@@ -1,7 +1,5 @@
-﻿namespace CqrsAndMediatR.Service.Command
+﻿namespace CqrsAndMediatR.Service.Command;
+public class DeleteCustomerCommand : IRequest<Customer>
 {
-    public class DeleteCustomerCommand:IRequest<Customer>
-    {
-        public Customer Customer { get; set; }
-    }
+    public Customer Customer { get; set; }
 }

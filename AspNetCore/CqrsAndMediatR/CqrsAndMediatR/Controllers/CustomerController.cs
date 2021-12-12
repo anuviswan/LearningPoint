@@ -41,19 +41,44 @@ public class CustomerController : Controller
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Route("CreateCustomer")]
-    public async Task<ActionResult<Customer>> Create(CreateCustomerRequest createCustomerModel)
+    public async Task<ActionResult<CreateCustomerResponse>> Create(CreateCustomerRequest createCustomerModel)
     {
         try
         {
             var customer = _mapper.Map<Customer>(createCustomerModel);
-            return await _mediator.Send(new CreateCustomerCommand
+            var response = await _mediator.Send(new CreateCustomerCommand
             {
                 Customer = customer
             });
+
+            return _mapper.Map<CreateCustomerResponse>(response);
         }
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Route("DeleteCustomer")]
+    public async Task<ActionResult<DeleteCustomerResponse>> Delete(DeleteCustomerRequest deleteCustomerRequest)
+    {
+        try
+        {
+            var customer = _mapper.Map<Customer>(deleteCustomerRequest);
+            var response = await _mediator.Send(new DeleteCustomerCommand
+            {
+                Customer = customer
+            });
+
+            return _mapper.Map<DeleteCustomerResponse>(response);
+        }
+        catch (Exception)
+        {
+
+            throw;
         }
     }
 
