@@ -5,4 +5,5 @@ public class Customer:IEntity
     public string FirstName { get; set; }
     public string LastName { get; set;}
     public IEnumerable<Address> AddressList { get; set; }
+    public bool IsDeleted { get; set; }
 }
