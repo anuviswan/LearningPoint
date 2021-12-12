@@ -1,5 +1,5 @@
 ﻿namespace CqrsAndMediatR.Domain.Entities;
-public class Address
+public class Address:IEntity
 {
     public long Id { get; set; }
     public string HouseName { get; set; }

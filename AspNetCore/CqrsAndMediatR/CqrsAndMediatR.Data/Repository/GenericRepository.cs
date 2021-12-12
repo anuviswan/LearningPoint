@@ -1,14 +1,18 @@
 ﻿using CqrsAndMediatR.Data.Database;
 
 namespace CqrsAndMediatR.Data.Repository;
-public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class, new()
+public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class,IEntity,new()
 {
     protected readonly CustomerDbContext CustomerDbContext;
 
     public GenericRepository(CustomerDbContext customDbContext) => CustomerDbContext = customDbContext;
 
     public IEnumerable<TEntity> GetAll() => CustomerDbContext.Set<TEntity>();
-    
+
+    public async Task<TEntity> GetByIdAsync(int id)
+    {
+        return await CustomerDbContext.Set<TEntity>().FindAsync(id);
+    }
 
     public async Task<TEntity> AddAsync(TEntity entity)
     {
@@ -33,8 +37,10 @@ public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : c
     public async Task DeleteAsync(TEntity entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
-
-        CustomerDbContext.Remove(entity);
+        var itemToRemove = CustomerDbContext.Set<TEntity>().FindAsync(entity.Id);
+        CustomerDbContext.Remove(itemToRemove);
         await CustomerDbContext.SaveChangesAsync();
     }
+
+   
 }

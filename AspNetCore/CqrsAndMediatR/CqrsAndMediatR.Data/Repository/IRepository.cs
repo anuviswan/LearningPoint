@@ -1,7 +1,8 @@
 ﻿namespace CqrsAndMediatR.Data.Repository;
-public interface IRepository<TEntity> where TEntity : class, new()
+public interface IRepository<TEntity> where TEntity : class, IEntity, new()
 {
     IEnumerable<TEntity> GetAll();
+    Task<TEntity> GetByIdAsync(int id);
     Task<TEntity> AddAsync(TEntity entity);
     Task<TEntity> UpdateAsync(TEntity entity);
     Task DeleteAsync(TEntity entity);

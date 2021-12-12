@@ -1,3 +1,4 @@
+using CqrsAndMediatR.Api.Controllers;
 using CqrsAndMediatR.Data.Database;
 using CqrsAndMediatR.Data.Repository;
 using CqrsAndMediatR.Service.Query;
@@ -12,7 +13,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<CustomerDbContext>(o=>o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+builder.Services.AddAutoMapper(typeof(CustomerController));
+builder.Services.AddDbContext<CustomerDbContext>(o=>o.UseInMemoryDatabase(Guid.NewGuid().ToString()),ServiceLifetime.Singleton);
 builder.Services.AddMediatR(typeof(GetCustomersQuery).Assembly);
 builder.Services.AddTransient(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
