@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(CustomerController));
 builder.Services.AddDbContext<CustomerDbContext>(o=>o.UseInMemoryDatabase(Guid.NewGuid().ToString()),ServiceLifetime.Singleton);
-builder.Services.AddMediatR(typeof(GetCustomersQuery).Assembly);
+builder.Services.AddMediatR(typeof(GetAllCustomersQuery).Assembly);
 builder.Services.AddTransient(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 var app = builder.Build();

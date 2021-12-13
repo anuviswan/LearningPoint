@@ -1,5 +1,5 @@
 ﻿namespace CqrsAndMediatR.Api.Models.Customer;
-public record CreateCustomerResponse
+public record GetAllCustomersResponseDto
 {
     public string FirstName { get; init; }
     public string LastName { get; init; }

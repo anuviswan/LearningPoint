@@ -1,5 +1,5 @@
 ﻿namespace CqrsAndMediatR.Api.Models.Customer;
-public class DeleteCustomerResponse
+public record FindCustomerResponseDto
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

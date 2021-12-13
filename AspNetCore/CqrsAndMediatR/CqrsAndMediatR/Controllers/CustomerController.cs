@@ -23,12 +23,12 @@ public class CustomerController : Controller
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Route("GetAll")]
-    public async Task<ActionResult<List<GetAllCustomersResponse>>> GetAll()
+    public async Task<ActionResult<List<GetAllCustomersResponseDto>>> GetAll()
     {
         try
         {
-            var response = await _mediator.Send(new GetCustomersQuery());
-            return _mapper.Map<List<GetAllCustomersResponse>>(response);
+            var response = await _mediator.Send(new GetAllCustomersQuery());
+            return _mapper.Map<List<GetAllCustomersResponseDto>>(response);
         }
         catch (Exception ex)
         {
@@ -41,7 +41,7 @@ public class CustomerController : Controller
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Route("CreateCustomer")]
-    public async Task<ActionResult<CreateCustomerResponse>> Create(CreateCustomerRequest createCustomerModel)
+    public async Task<ActionResult<CreateCustomerResponseDto>> Create(CreateCustomerRequestDto createCustomerModel)
     {
         try
         {
@@ -51,7 +51,7 @@ public class CustomerController : Controller
                 Customer = customer
             });
 
-            return _mapper.Map<CreateCustomerResponse>(response);
+            return _mapper.Map<CreateCustomerResponseDto>(response);
         }
         catch (Exception ex)
         {
@@ -63,7 +63,7 @@ public class CustomerController : Controller
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Route("DeleteCustomer")]
-    public async Task<ActionResult<DeleteCustomerResponse>> Delete(DeleteCustomerRequest deleteCustomerRequest)
+    public async Task<ActionResult<DeleteCustomerResponseDto>> Delete(DeleteCustomerRequestDto deleteCustomerRequest)
     {
         try
         {
@@ -73,14 +73,35 @@ public class CustomerController : Controller
                 Customer = customer
             });
 
-            return _mapper.Map<DeleteCustomerResponse>(response);
+            return _mapper.Map<DeleteCustomerResponseDto>(response);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
 
-            throw;
+            return BadRequest(ex.Message);
         }
     }
 
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Route("FindCustomer")]
+    public async Task<ActionResult<FindCustomerResponseDto>> Find([FromQuery(Name ="id")]long customerId)
+    {
+        try
+        {
+            var response = await _mediator.Send(new FindCustomerQuery
+            {
+                CustomerId = customerId
+            });
+
+            return _mapper.Map<FindCustomerResponseDto>(response);
+        }
+        catch (Exception ex)
+        {
+
+            return BadRequest(ex.Message);
+        }
+    }
 
 }

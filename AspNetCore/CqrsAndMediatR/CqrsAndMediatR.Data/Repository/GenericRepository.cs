@@ -9,7 +9,7 @@ public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : c
 
     public IEnumerable<TEntity> GetAll() => CustomerDbContext.Set<TEntity>();
 
-    public async Task<TEntity> GetByIdAsync(int id)
+    public async Task<TEntity> GetByIdAsync(long id)
     {
         return await CustomerDbContext.Set<TEntity>().FindAsync(id);
     }
