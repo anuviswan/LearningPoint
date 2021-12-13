@@ -42,6 +42,4 @@ public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : c
         await CustomerDbContext.SaveChangesAsync();
         return itemToRemove;
     }
-
-   
 }
