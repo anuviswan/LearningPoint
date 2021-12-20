@@ -5,5 +5,4 @@ using BenchmarkMappers.Poco;
 
 Console.WriteLine("Hello, World!");
 
-
-BenchmarkRunner.Run<SingleEntityCompare>();
+BenchmarkRunner.Run(typeof(SimpleObjectSource).Assembly);

@@ -8,56 +8,69 @@ namespace BenchmarkMappers
     public class SingleEntityCompare
     {
         private IMapper _autoMapper;
-        private SimpleObjectSource _source;
-        private List<SimpleObjectSource> _sourceCollection;
+        private SimpleObjectSource _simpleSource;
+        private ComplexObjectSource _complexSource;
         public SingleEntityCompare()
         {
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<SimpleObjectSource, SimpleObjectDestination>();
+                cfg.CreateMap<ComplexObjectSource, ComplexObjectDestination>();
             });
 
             _autoMapper = config.CreateMapper();
 
-            _source = new SimpleObjectSource
+            _simpleSource = new SimpleObjectSource
             {
-                Id= 1,
+                Id = 1,
                 Department = "Department",
                 FirstName = "FirstName",
                 LastName = "LastName"
             };
 
-            _sourceCollection = Enumerable.Range(1, 9999).Select(x => new SimpleObjectSource
+            _complexSource = new ComplexObjectSource
             {
-                Id = x,
-                Department = $"Department {x}",
-                FirstName = $"FirstName {x}",
-                LastName =  $"LastName {x}"
-            }).ToList();
+                Id = 1,
+                Values = Enumerable.Range(10, 100),
+                ComplexCollection = Enumerable.Range(1, 10).Select(x => new ComplexObjectSource
+                {
+                    Id = 2,
+                    Values = Enumerable.Range(1, 100),
+                    ComplexCollection = Enumerable.Range(1, 10).Select(x => new ComplexObjectSource
+                    {
+                        Id = 3,
+                        Values = Enumerable.Range(1, 100),
+                        ComplexCollection = Enumerable.Empty<ComplexObjectSource>().ToList()
+                    }).ToList()
+                }).ToList()
+            };
+
         }
 
         [Benchmark]
-        public void SingleEntityUsingAutomapper()
+        public void SingleEntitySimpleObjectUsingAutomapper()
         {
-            var result = _autoMapper.Map<SimpleObjectDestination>(_source);
+            var result = _autoMapper.Map<SimpleObjectDestination>(_simpleSource);
         }
 
         [Benchmark]
-        public void SingleEntityUsingMapster()
+        public void SingleEntitySimpleObjectUsingMapster()
         {
-            var result = _source.Adapt<SimpleObjectDestination>();
+            var result = _simpleSource.Adapt<SimpleObjectDestination>();
         }
 
         [Benchmark]
-        public void CollectionUsingAutomapper()
+        public void SingleEntityComplexObjectUsingAutomapper()
         {
-            var result = _autoMapper.Map<List<SimpleObjectDestination>>(_sourceCollection);
+            var result = _autoMapper.Map<ComplexObjectDestination>(_complexSource);
         }
 
         [Benchmark]
-        public void CollectionUsingMapster()
+        public void SingleEntityComplexObjectUsingMapster()
         {
-            var result = _sourceCollection.Adapt<List<SimpleObjectDestination>>();
+            var result = _complexSource.Adapt<ComplexObjectDestination>();
         }
+
+
     }
 
 }
