@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BenchmarkMappers.Poco
 {
+
     public class ComplexObjectSource
     {
         public int Id { get; set; }

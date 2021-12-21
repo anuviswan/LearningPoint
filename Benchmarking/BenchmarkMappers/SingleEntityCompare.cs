@@ -5,6 +5,7 @@ using Mapster;
 
 namespace BenchmarkMappers
 {
+    [RPlotExporter,MarkdownExporter,CsvExporter]
     public class SingleEntityCompare
     {
         private IMapper _autoMapper;

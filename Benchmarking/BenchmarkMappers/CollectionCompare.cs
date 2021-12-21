@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace BenchmarkMappers
 {
+    [RPlotExporter]
     public class CollectionCompare
     {
         private IMapper _autoMapper;
