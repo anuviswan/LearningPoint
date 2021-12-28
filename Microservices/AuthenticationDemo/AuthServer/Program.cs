@@ -1,10 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,44 +7,48 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ITokenService>(new TokenService());
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer("GatewayAuthenticationKey", option =>
+    .AddJwtBearer(option =>
     {
         option.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Aud3"], 
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
-    });
+});
+
+
 builder.Services.AddAuthorization();
 
-var app = builder.Build();
+await using var app = builder.Build();
 
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 
-app.MapPost("/validate", [AllowAnonymous] (UserValidationRequestModel request,HttpContext http,ITokenService tokenService) =>
+app.MapPost("/validate", [AllowAnonymous] (UserValidationRequestModel request, HttpContext http, ITokenService tokenService) =>
 {
     if (request is UserValidationRequestModel { UserName: "john.doe", Password: "123456" })
     {
-        var token = tokenService.BuildToken(builder.Configuration["Jwt:Key"], 
+        var token = tokenService.BuildToken(builder.Configuration["Jwt:Key"],
                                             builder.Configuration["Jwt:Issuer"],
-                                            new[] 
-                                            { 
-                                                builder.Configuration["Jwt:Aud1"], 
-                                                builder.Configuration["Jwt:Aud2"],
-                                                builder.Configuration["Jwt:Aud3"],
-                                            },
+                                            new[]
+                                            {
+                                                        builder.Configuration["Jwt:Aud1"],
+                                                        builder.Configuration["Jwt:Aud2"]
+                                                    },
                                             request.UserName);
         return new
         {
@@ -67,18 +64,17 @@ app.MapPost("/validate", [AllowAnonymous] (UserValidationRequestModel request,Ht
 })
 .WithName("Validate");
 
-app.UseAuthentication();
-app.UseAuthorization();
-app.Run();
+
+await app.RunAsync();
 
 
-internal record UserValidationRequestModel(string UserName,string Password);
+internal record UserValidationRequestModel(string UserName, string Password);
 
-public interface ITokenService
+internal interface ITokenService
 {
     string BuildToken(string key, string issuer, IEnumerable<string> audience, string userName);
 }
-public class TokenService : ITokenService
+internal class TokenService : ITokenService
 {
     private TimeSpan ExpiryDuration = new TimeSpan(0, 30, 0);
     public string BuildToken(string key, string issuer, IEnumerable<string> audience, string userName)

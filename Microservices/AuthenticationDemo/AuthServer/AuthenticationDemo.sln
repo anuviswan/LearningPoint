@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer", "AuthServer.csproj", "{BA50F187-609D-4017-AF36-A7233646C1DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "..\UserService\UserService.csproj", "{02C106A3-B6F7-42AD-9D82-4143E4E56C39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "..\UserService\UserService.csproj", "{02C106A3-B6F7-42AD-9D82-4143E4E56C39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "..\ApiGateway\ApiGateway.csproj", "{78B60AAC-FC91-4011-B031-B4FC465576F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{02C106A3-B6F7-42AD-9D82-4143E4E56C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02C106A3-B6F7-42AD-9D82-4143E4E56C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02C106A3-B6F7-42AD-9D82-4143E4E56C39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B60AAC-FC91-4011-B031-B4FC465576F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B60AAC-FC91-4011-B031-B4FC465576F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B60AAC-FC91-4011-B031-B4FC465576F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B60AAC-FC91-4011-B031-B4FC465576F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
