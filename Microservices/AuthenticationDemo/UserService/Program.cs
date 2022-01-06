@@ -50,7 +50,7 @@ app.MapGet("/RandomFail", () =>
     var randomValue = new Random().Next(0,2);
     if(randomValue == 1)
     {
-        throw new Exception("Random Failure");
+        throw new HttpRequestException("Random Failure");
     }
 
     return "SomeData";
