@@ -45,6 +45,28 @@ app.MapGet("/GetUsers", [Authorize]() =>
     };
 }).WithName("GetUsers");
 
+app.MapGet("/RandomFail", () =>
+{
+    var randomValue = new Random().Next(0,2);
+    if(randomValue == 1)
+    {
+        throw new Exception("Random Failure");
+    }
+
+    return "SomeData";
+}).WithName("RandomFail");
+
+app.MapGet("/RandomTimeout", async () =>
+{
+    var randomValue = new Random().Next(0, 2);
+    if (randomValue == 1)
+    {
+        await Task.Delay(10000);
+    }
+
+    return "SomeData";
+}).WithName("RandomTimeout");
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.Run();

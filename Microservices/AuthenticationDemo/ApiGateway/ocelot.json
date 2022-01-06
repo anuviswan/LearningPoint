@@ -33,8 +33,47 @@
       "UpstreamPathTemplate": "/user/validate",
       "UpstreamHttpMethod": [ "Post" ]
 
+    },
+    {
+      "DownstreamPathTemplate": "/RandomFail",
+      "DownstreamSchema": "https",
+      "DownstreamHttpMethod": "GET",
+      "RouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7163"
+        }
+      ],
+      "UpstreamPathTemplate": "/fail/random/exception",
+      "UpstreamHttpMethod": [ "Get" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 10000,
+        "TimeoutValue": 2000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/RandomTimeout",
+      "DownstreamSchema": "https",
+      "DownstreamHttpMethod": "GET",
+      "RouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7163"
+        }
+      ],
+      "UpstreamPathTemplate": "/fail/random/timeout",
+      "UpstreamHttpMethod": [ "Get" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 10000,
+        "TimeoutValue": 2000
+      }
+
     }
-    
+
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:7254"
