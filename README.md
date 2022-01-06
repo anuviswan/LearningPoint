@@ -45,6 +45,8 @@ This contains sample code for the tutorials in www.bytelanguage.net.  This inclu
 - [Strategy](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Strategy)
 - [Template Method](https://github.com/anuviswan/LearningPoint/tree/master/Design%20Patterns/Template)
 
+**Microservices**
+-[JWT Authentication](https://github.com/anuviswan/LearningPoint/tree/master/Microservices/AuthenticationDemo) : Code Illustrating Jwt Authentication in Microservices. The demo code uses [Ocelot](https://github.com/ThreeMammals/Ocelot) for building the Api Gateway and [Polly](https://github.com/App-vNext/Polly) for resilience features
  
 **RabbitMq**
 
