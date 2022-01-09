@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclicReferenceSerialization", "CyclicReferenceSerialization.csproj", "{6050D9D7-6D1E-4AC3-8AC0-2D9559EFA30F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclicReferenceSerialization.Tests", "..\CyclicReferenceSerialization.Tests\CyclicReferenceSerialization.Tests.csproj", "{9D92214E-07EE-48B5-B2D1-4D4E0AD213C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6050D9D7-6D1E-4AC3-8AC0-2D9559EFA30F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6050D9D7-6D1E-4AC3-8AC0-2D9559EFA30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6050D9D7-6D1E-4AC3-8AC0-2D9559EFA30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6050D9D7-6D1E-4AC3-8AC0-2D9559EFA30F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D92214E-07EE-48B5-B2D1-4D4E0AD213C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D92214E-07EE-48B5-B2D1-4D4E0AD213C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D92214E-07EE-48B5-B2D1-4D4E0AD213C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D92214E-07EE-48B5-B2D1-4D4E0AD213C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E0B6D0E-2BEA-4DEE-AFF7-D9818E9640D4}
+	EndGlobalSection
+EndGlobal

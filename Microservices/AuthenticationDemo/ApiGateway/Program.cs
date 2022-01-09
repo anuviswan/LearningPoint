@@ -3,6 +3,8 @@ using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Polly;
+using Polly;
+using Polly.Extensions.Http;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +30,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 builder.Configuration.AddJsonFile("ocelot.json");
-builder.Services.AddOcelot(builder.Configuration).AddPolly();
+builder.Services.AddOcelot().AddPolly();
+
+//builder.Services.AddHttpClient("UserService", client =>
+//{
+//    client.BaseAddress = new Uri("https://localhost:7173/");
+//}).AddPolicyHandler(GetCircuitBreakerPolicy()); 
 
 var app = builder.Build();
 
@@ -52,3 +59,10 @@ app.UseOcelot().Wait();
 app.MapRazorPages();
 
 app.Run();
+
+static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy()
+{
+    return HttpPolicyExtensions
+        .HandleTransientHttpError()
+        .CircuitBreakerAsync(2, TimeSpan.FromSeconds(30));
+}
