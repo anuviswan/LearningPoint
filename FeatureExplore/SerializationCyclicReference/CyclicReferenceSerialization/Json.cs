@@ -1,29 +1,29 @@
 ﻿using Newtonsoft.Json;
 
-namespace CyclicReferenceSerialization
+namespace CyclicReferenceSerialization;
+public static class Json
 {
-    public static class Json
+    public static string Serialize<T>(T item)
     {
-        public static string Serialize<T>(T item)
+        return JsonConvert.SerializeObject(item, Formatting.Indented, new JsonSerializerSettings
         {
-            return JsonConvert.SerializeObject(item, Formatting.Indented, new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.All,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                TypeNameHandling = TypeNameHandling.Auto
-            });
-        }
+            PreserveReferencesHandling = PreserveReferencesHandling.All,
+            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            TypeNameHandling = TypeNameHandling.Auto
+        });
+    }
 
-        public static T Deserialize<T>(string serializedData)
+    public static T Deserialize<T>(string serializedData)
+    {
+        ArgumentNullException.ThrowIfNull(serializedData);
+
+#pragma warning disable CS8603 // Possible null reference return.
+        return JsonConvert.DeserializeObject<T>(serializedData, new JsonSerializerSettings
         {
-            ArgumentNullException.ThrowIfNull(serializedData);
-
-            return JsonConvert.DeserializeObject<T>(serializedData, new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.All,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                TypeNameHandling = TypeNameHandling.Auto
-            });
-        }
+            PreserveReferencesHandling = PreserveReferencesHandling.All,
+            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            TypeNameHandling = TypeNameHandling.Auto
+        });
+#pragma warning restore CS8603 // Possible null reference return.
     }
 }
