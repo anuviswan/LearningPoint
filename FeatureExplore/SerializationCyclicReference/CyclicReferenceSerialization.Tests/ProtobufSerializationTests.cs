@@ -1,17 +1,20 @@
 ﻿using CyclicReferenceSerialization.Dto;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace CyclicReferenceSerialization.Tests;
-public class XmlSerializationTests
+public class ProtobufSerializationTests
 {
     [Theory]
     [ClassData(typeof(TestData))]
     public void SerializeAndReadbackTests(FolderSerialized folder)
     {
-        var serializedData = Xml.Serialize(folder);
-        var deserializedData = Xml.Deserialize<FolderSerialized>(serializedData);
+        var serializedData = Protobuf.Serialize(folder);
+        var deserializedData = Protobuf.Deserialize<FolderSerialized>(serializedData);
 
         _(folder.Root, deserializedData.Root);
 
