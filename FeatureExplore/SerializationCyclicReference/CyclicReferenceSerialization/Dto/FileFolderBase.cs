@@ -6,7 +6,7 @@ namespace CyclicReferenceSerialization.Dto;
 [DataContract(IsReference = true)]
 [ProtoContract]
 [ProtoInclude(100, typeof(Folder))]
-[ProtoInclude(200,typeof(File))]
+[ProtoInclude(200, typeof(File))]
 public abstract class FileFolderBase
 {
     [ProtoMember(1)]
@@ -34,4 +34,5 @@ public abstract class FileFolderBase
             Parent.Id = value;
         } 
     }
+
 }

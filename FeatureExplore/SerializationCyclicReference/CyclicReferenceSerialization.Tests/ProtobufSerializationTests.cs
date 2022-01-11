@@ -20,32 +20,55 @@ public class ProtobufSerializationTests
 
         void _(FileFolderBase expected, FileFolderBase actual)
         {
-            (actual switch
-            {
-                Folder actualFolder => (Action)(() =>
-                {
-                    if (expected is Folder expectedFolder)
-                    {
-                        Assert.Equal(expectedFolder.Name, actualFolder.Name);
-                        Assert.Equal(expectedFolder.Id, actualFolder.Id);
-                        Assert.Equal(expectedFolder.Children.Count(), actualFolder.Children.Count());
+            //(actual switch
+            //{
+            //    Folder actualFolder => (Action)(() =>
+            //    {
+            //        if (expected is Folder expectedFolder)
+            //        {
+            //            Assert.Equal(expectedFolder.Name, actualFolder.Name);
+            //            Assert.Equal(expectedFolder.Id, actualFolder.Id);
+            //            Assert.Equal(expectedFolder.Parent?.Id, actualFolder.Parent?.Id);
+            //            Assert.Equal(expectedFolder.Children.Count(), actualFolder.Children.Count());
 
-                        foreach (var childItem in actualFolder.Children)
-                        {
-                            _(expectedFolder.Children.Single(x => x.Id == childItem.Id), childItem);
-                        }
-                    }
-                }),
-                File actualFile => (Action)(() =>
+            //            foreach (var childItem in actualFolder.Children)
+            //            {
+            //                _(expectedFolder.Children.Single(x => x.Id == childItem.Id), childItem);
+            //            }
+            //        }
+            //    }),
+            //    File actualFile => (Action)(() =>
+            //    {
+            //        if (expected is File expectedFile)
+            //        {
+            //            Assert.Equal(expectedFile.Parent?.Id, actualFile.Parent?.Id);
+            //            Assert.Equal(expectedFile.Name, actualFile.Name);
+            //            Assert.Equal(expectedFile.Id, actualFile.Id);
+            //        }
+            //    }),
+            //    _ => () => throw new System.NotImplementedException()
+            //})();
+
+
+            if(actual is Folder actualFolder && expected is Folder expectedFolder)
+            {
+                Assert.Equal(expectedFolder.Name, actualFolder.Name);
+                Assert.Equal(expectedFolder.Id, actualFolder.Id);
+                Assert.Equal(expectedFolder.Parent?.Id, actualFolder.Parent?.Id);
+                Assert.Equal(expectedFolder.Children.Count(), actualFolder.Children.Count());
+
+                foreach (var childItem in actualFolder.Children)
                 {
-                    if (expected is File expectedFile)
-                    {
-                        Assert.Equal(expectedFile.Name, actualFile.Name);
-                        Assert.Equal(expectedFile.Id, actualFile.Id);
-                    }
-                }),
-                _ => () => throw new System.NotImplementedException()
-            })();
+                    _(expectedFolder.Children.Single(x => x.Id == childItem.Id), childItem);
+                }
+            }
+
+            if(actual is File actualFile && expected is File expectedFile)
+            {
+                Assert.Equal(expectedFile.Parent?.Id, actualFile.Parent?.Id);
+                Assert.Equal(expectedFile.Name, actualFile.Name);
+                Assert.Equal(expectedFile.Id, actualFile.Id);
+            }
         };
     }
 }
