@@ -7,21 +7,10 @@ namespace CyclicReferenceSerialization.Dto;
 [KnownType(typeof(File))]
 [KnownType(typeof(Folder))]
 [ProtoContract]
-public class Folder:IFileFolderBase
+public class Folder:FileFolderBase
 {
-    [DataMember]
-    [ProtoMember(1)]
-    public string Name { get; set; }
-
-    [DataMember]
-    [ProtoMember(2)]
-    public Guid Id { get; set; }
-
-    [DataMember]
-    [ProtoMember(3)]
-    public Folder Parent { get; set; }
 
     [DataMember]
     [ProtoMember(4)]
-    public IEnumerable<IFileFolderBase> Children { get; set; }
+    public IEnumerable<FileFolderBase> Children { get; set; }
 }

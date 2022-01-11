@@ -5,17 +5,6 @@ namespace CyclicReferenceSerialization.Dto;
 
 [DataContract(IsReference = true)]
 [ProtoContract]
-public class File : IFileFolderBase
+public class File : FileFolderBase
 {
-    [DataMember]
-    [ProtoMember(1)]
-    public Guid Id { get; set; }
-    
-    [DataMember]
-    [ProtoMember(2)]
-    public string Name { get; set; }
-
-    [DataMember]
-    [ProtoMember(3)]
-    public Folder Parent { get; set; }
 }

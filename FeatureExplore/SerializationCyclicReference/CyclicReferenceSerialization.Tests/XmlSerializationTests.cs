@@ -15,7 +15,7 @@ public class XmlSerializationTests
 
         _(folder.Root, deserializedData.Root);
 
-        void _(IFileFolderBase expected, IFileFolderBase actual)
+        void _(FileFolderBase expected, FileFolderBase actual)
         {
             (actual switch
             {

@@ -26,20 +26,20 @@ public class TestData : IEnumerable<object[]>
 
     private object GetSingleLevelData()
     {
-        IFileFolderBase root = new Folder
+        FileFolderBase root = new Folder
         {
-            Id = System.Guid.Empty,
+            Id = Guid.Parse("00000000-0000-0000-0000-000000000000"),
             Name = "root",
             Parent = null,
         };
-        IFileFolderBase leafAtRoot = new File
+        FileFolderBase leafAtRoot = new File
         {
-            Id = System.Guid.Empty,
+            Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
             Name = "ChildAtRoot",
             Parent = (Folder)root,
         };
 
-        ((Folder)root).Children = new List<IFileFolderBase> { leafAtRoot };
+        ((Folder)root).Children = new List<FileFolderBase> { leafAtRoot };
         return new FolderSerialized
         {
             Root = (Folder)root,
@@ -47,37 +47,37 @@ public class TestData : IEnumerable<object[]>
     }
     private object GetTwoLevelData()
     {
-        IFileFolderBase root = new Folder
+        FileFolderBase root = new Folder
         {
             Id = Guid.Parse("00000000-0000-0000-0000-000000000000"),
             Name = "root",
             Parent = null,
         };
 
-        IFileFolderBase leafAtRoot = new File
+        FileFolderBase leafAtRoot = new File
         {
             Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
             Name = "ChildAtRoot",
             Parent = (Folder)root
         };
 
-        IFileFolderBase folderAtRoot = new Folder
+        FileFolderBase folderAtRoot = new Folder
         {
             Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),
             Name = "folderAtRoot",
             Parent = (Folder)root,
         };
 
-        IFileFolderBase leafAtSubFolder = new File
+        FileFolderBase leafAtSubFolder = new File
         {
             Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
             Name = "ChildAtSubFolder",
             Parent = (Folder)folderAtRoot
         };
 
-        ((Folder)folderAtRoot).Children = new List<IFileFolderBase> { leafAtSubFolder };
+        ((Folder)folderAtRoot).Children = new List<FileFolderBase> { leafAtSubFolder };
 
-        ((Folder)root).Children = new List<IFileFolderBase> {leafAtRoot, folderAtRoot};
+        ((Folder)root).Children = new List<FileFolderBase> {leafAtRoot, folderAtRoot};
 
         return new FolderSerialized
         {
