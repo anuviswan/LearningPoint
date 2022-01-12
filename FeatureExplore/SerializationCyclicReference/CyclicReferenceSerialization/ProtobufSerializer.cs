@@ -1,15 +1,15 @@
 ﻿using ProtoBuf;
 namespace CyclicReferenceSerialization;
-public static class Protobuf
+public class ProtobufSerializer:ISerializer<byte[]>
 {
-    public static byte[] Serialize<T>(T item)
+    public byte[] Serialize<T>(T item)
     {
         using var stream = new MemoryStream();
         Serializer.Serialize(stream, item);
         return stream.ToArray();
     }
 
-    public static T Deserialize<T>(byte[] data)
+    public T Deserialize<T>(byte[] data)
     {
         using var stream = new MemoryStream(data);
         return Serializer.Deserialize<T>(stream);

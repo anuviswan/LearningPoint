@@ -2,9 +2,9 @@
 using System.Text;
 
 namespace CyclicReferenceSerialization;
-public static class Xml
+public class XmlDataSerializer:ISerializer<string>
 {
-    public static string Serialize<T>(T item)
+    public string Serialize<T>(T item)
     {
         var serializer = new DataContractSerializer(typeof(T));
         using var output = new StringWriter();
@@ -14,7 +14,7 @@ public static class Xml
         return output.GetStringBuilder().ToString();
     }
 
-    public static T Deserialize<T>(string serializedData)
+    public T Deserialize<T>(string serializedData)
     {
         var serializer = new DataContractSerializer(typeof(T));
         using MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(serializedData));

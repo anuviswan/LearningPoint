@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 
 namespace CyclicReferenceSerialization;
-public static class Json
+public class JsonSerializer:ISerializer<string>
 {
-    public static string Serialize<T>(T item)
+    public string Serialize<T>(T item)
     {
         return JsonConvert.SerializeObject(item, Formatting.Indented, new JsonSerializerSettings
         {
@@ -13,7 +13,7 @@ public static class Json
         });
     }
 
-    public static T Deserialize<T>(string serializedData)
+    public T Deserialize<T>(string serializedData)
     {
         ArgumentNullException.ThrowIfNull(serializedData);
 

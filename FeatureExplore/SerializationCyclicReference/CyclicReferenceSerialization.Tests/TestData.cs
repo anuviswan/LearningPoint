@@ -10,11 +10,37 @@ public class TestData : IEnumerable<object[]>
     {
         yield return new object[]
         {
+            new JsonSerializer(),
             GetTwoLevelData()
         };
 
         yield return new object[]
         {
+            new JsonSerializer(),
+            GetSingleLevelData()
+        };
+
+        yield return new object[]
+        {
+            new XmlDataSerializer(),
+            GetTwoLevelData()
+        };
+
+        yield return new object[]
+        {
+            new XmlDataSerializer(),
+            GetSingleLevelData()
+        };
+
+        yield return new object[]
+        {
+            new ProtobufSerializer(),
+            GetTwoLevelData()
+        };
+
+        yield return new object[]
+        {
+            new ProtobufSerializer(),
             GetSingleLevelData()
         };
     }

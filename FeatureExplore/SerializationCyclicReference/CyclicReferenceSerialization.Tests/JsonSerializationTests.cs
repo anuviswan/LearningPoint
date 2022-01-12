@@ -8,10 +8,10 @@ public class JsonSerializationTests
 {
     [Theory]
     [ClassData(typeof(TestData))]
-    public void SerializeAndReadbackTests(FolderSerialized folder)
+    public void SerializeAndReadbackTests(ISerializer<dynamic> serializer, FolderSerialized folder)
     {
-        var serializedData = Json.Serialize(folder);
-        var deserializedData = Json.Deserialize<FolderSerialized>(serializedData);
+        var serializedData = serializer.Serialize(folder);
+        var deserializedData = serializer.Deserialize<FolderSerialized>(serializedData);
 
         _(folder.Root, deserializedData.Root);
 
@@ -41,7 +41,7 @@ public class JsonSerializationTests
                         Assert.Equal(expectedFile.Id, actualFile.Id);
                     }
                 }),
-                _ => () => throw new System.NotImplementedException()
+                _ => () => throw new NotImplementedException()
             })();
         };
     }

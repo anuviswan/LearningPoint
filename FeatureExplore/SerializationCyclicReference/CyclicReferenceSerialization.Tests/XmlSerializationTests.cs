@@ -8,10 +8,10 @@ public class XmlSerializationTests
 {
     [Theory]
     [ClassData(typeof(TestData))]
-    public void SerializeAndReadbackTests(FolderSerialized folder)
+    public void SerializeAndReadbackTests(ISerializer<dynamic> serializer, FolderSerialized folder)
     {
-        var serializedData = Xml.Serialize(folder);
-        var deserializedData = Xml.Deserialize<FolderSerialized>(serializedData);
+        var serializedData = serializer.Serialize(folder);
+        var deserializedData = serializer.Deserialize<FolderSerialized>(serializedData);
 
         _(folder.Root, deserializedData.Root);
 

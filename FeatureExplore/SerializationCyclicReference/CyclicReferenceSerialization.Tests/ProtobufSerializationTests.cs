@@ -11,10 +11,10 @@ public class ProtobufSerializationTests
 {
     [Theory]
     [ClassData(typeof(TestData))]
-    public void SerializeAndReadbackTests(FolderSerialized folder)
+    public void SerializeAndReadbackTests(ISerializer<dynamic> serializer, FolderSerialized folder)
     {
-        var serializedData = Protobuf.Serialize(folder);
-        var deserializedData = Protobuf.Deserialize<FolderSerialized>(serializedData);
+        var serializedData = serializer.Serialize(folder);
+        var deserializedData = serializer.Deserialize<FolderSerialized>(serializedData);
 
         _(folder.Root, deserializedData.Root);
 
