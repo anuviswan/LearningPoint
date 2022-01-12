@@ -7,8 +7,6 @@ public class JsonSerializer:ISerializer<string>
     {
         return JsonConvert.SerializeObject(item, Formatting.Indented, new JsonSerializerSettings
         {
-            PreserveReferencesHandling = PreserveReferencesHandling.All,
-            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
             TypeNameHandling = TypeNameHandling.Auto
         });
     }
@@ -20,8 +18,6 @@ public class JsonSerializer:ISerializer<string>
 #pragma warning disable CS8603 // Possible null reference return.
         return JsonConvert.DeserializeObject<T>(serializedData, new JsonSerializerSettings
         {
-            PreserveReferencesHandling = PreserveReferencesHandling.All,
-            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
             TypeNameHandling = TypeNameHandling.Auto
         });
 #pragma warning restore CS8603 // Possible null reference return.

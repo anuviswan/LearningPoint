@@ -4,11 +4,11 @@ using Xunit;
 using System.Linq;
 
 namespace CyclicReferenceSerialization.Tests;
-public class JsonSerializationTests
+public class SerializationTests
 {
     [Theory]
     [ClassData(typeof(TestData))]
-    public void SerializeAndReadbackTests(ISerializer<dynamic> serializer, FolderSerialized folder)
+    public void SerializeAndReadbackTests<T>(ISerializer<T> serializer, FolderSerialized folder)
     {
         var serializedData = serializer.Serialize(folder);
         var deserializedData = serializer.Deserialize<FolderSerialized>(serializedData);
