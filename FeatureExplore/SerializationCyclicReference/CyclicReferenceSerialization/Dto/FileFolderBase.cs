@@ -4,6 +4,9 @@ using System.Runtime.Serialization;
 namespace CyclicReferenceSerialization.Dto;
 
 [DataContract(IsReference = true)]
+[KnownType(typeof(File))]
+[KnownType(typeof(Folder))]
+
 [ProtoContract]
 [ProtoInclude(100, typeof(Folder))]
 [ProtoInclude(200, typeof(File))]

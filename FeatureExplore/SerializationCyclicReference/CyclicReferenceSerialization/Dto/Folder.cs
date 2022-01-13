@@ -4,8 +4,7 @@ using System.Runtime.Serialization;
 namespace CyclicReferenceSerialization.Dto;
 
 [DataContract(IsReference = true)]
-[KnownType(typeof(File))]
-[KnownType(typeof(Folder))]
+
 [ProtoContract]
 public class Folder:FileFolderBase
 {
