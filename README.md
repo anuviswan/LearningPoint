@@ -49,7 +49,7 @@ This contains sample code for the tutorials in www.bytelanguage.net.  This inclu
 - [Serialize Cyclic Reference](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/SerializationCyclicReference) - Serializing Cyclic reference (Json, Xml , Protobuf)
 - [Csharp 9 Features](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/CSharp9) - Explore C# 9 Features including `init`, NullHandling, Pattern Matching, `record`, Target Typed `new` Expressions, Top Level Programs
 - [Asyncrhonous Streams](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/AsynchronousStreams) - Asyncrhonous Streams
-- [Index And Ranges] (https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/IndexAndRange) - Explore Index and Range in C#
+- [Index And Ranges](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/IndexAndRange) - Explore Index and Range in C#
 - [Span](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/Span) - Explore `Span<T>` in c#
 - [Switch Expression](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/SwitchExpression) - Explore Switch Expressions
 - [Stream Serialization](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/StreamSerialization) - Explore and Benchmark the performance benefits of Streaming Serialiazation 
