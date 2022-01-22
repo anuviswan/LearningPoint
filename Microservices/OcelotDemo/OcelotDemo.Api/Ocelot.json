@@ -12,7 +12,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/circuitbreaker/raiseexception",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 10000,
+        "TimeoutValue": 2000
+      }
     }
   ],
   "GlobalConfiguration": {
