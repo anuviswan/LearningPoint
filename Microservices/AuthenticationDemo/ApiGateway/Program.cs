@@ -1,10 +1,16 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Ocelot.Configuration;
 using Ocelot.DependencyInjection;
+using Ocelot.Errors;
+using Ocelot.Logging;
 using Ocelot.Middleware;
 using Ocelot.Provider.Polly;
+using Ocelot.Requester;
 using Polly;
+using Polly.CircuitBreaker;
 using Polly.Extensions.Http;
+using Polly.Timeout;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +36,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 builder.Configuration.AddJsonFile("ocelot.json");
-builder.Services.AddOcelot().AddPolly();
+builder.Services.AddOcelot().AddPollyExtended();
+//builder.Services.AddOcelot().AddPolly();
 
 //builder.Services.AddHttpClient("UserService", client =>
 //{
@@ -60,9 +67,55 @@ app.MapRazorPages();
 
 app.Run();
 
-static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy()
+
+public class ExtendedPollyCircuitBreakingDelegatingHandler : PollyCircuitBreakingDelegatingHandler
 {
-    return HttpPolicyExtensions
-        .HandleTransientHttpError()
-        .CircuitBreakerAsync(2, TimeSpan.FromSeconds(30));
+    private IOcelotLogger _logger;
+    public ExtendedPollyCircuitBreakingDelegatingHandler(PollyQoSProvider qoSProvider, IOcelotLoggerFactory loggerFactory) : base(qoSProvider, loggerFactory)
+    {
+        _logger =  loggerFactory.CreateLogger<ExtendedPollyCircuitBreakingDelegatingHandler>(); ;
+    }
+
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var policy = Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
+                                            .CircuitBreakerAsync(2, TimeSpan.FromSeconds(60));
+
+            var response = await policy.ExecuteAsync(() => base.SendAsync(request, cancellationToken));
+            Console.WriteLine($"Error Code {response.StatusCode}");
+            return response;
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+        
+    }
+}
+
+
+public static class OcelotBuilderExtensions
+{
+    public static IOcelotBuilder AddPollyExtended(this IOcelotBuilder builder)
+    {
+        //builder.AddPolly();
+        var errorMapping = new Dictionary<Type, Func<Exception, Error>>
+            {
+                {typeof(TaskCanceledException), e => new RequestTimedOutError(e)},
+                {typeof(TimeoutRejectedException), e => new RequestTimedOutError(e)},
+                {typeof(BrokenCircuitException), e => new RequestTimedOutError(e)}
+            };
+
+        builder.Services.AddSingleton(errorMapping);
+
+        DelegatingHandler QosDelegatingHandlerDelegate(DownstreamRoute route, IOcelotLoggerFactory logger)
+        {
+            return new ExtendedPollyCircuitBreakingDelegatingHandler(new PollyQoSProvider(route, logger), logger);
+        }
+
+        builder.Services.AddSingleton((QosDelegatingHandlerDelegate)QosDelegatingHandlerDelegate);
+        return builder;
+    }
 }

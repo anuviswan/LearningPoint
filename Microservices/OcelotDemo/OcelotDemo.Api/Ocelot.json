@@ -1,0 +1,22 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/services/raiseexception",
+      "DownstreamScheme": "https",
+      "DownstreamHttpMethod": "GET",
+      "RouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7038
+        }
+      ],
+      "UpstreamPathTemplate": "/api/circuitbreaker/raiseexception",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7247"
+  },
+  
+}

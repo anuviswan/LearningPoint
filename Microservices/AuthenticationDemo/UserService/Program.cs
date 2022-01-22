@@ -48,23 +48,23 @@ app.MapGet("/GetUsers", [Authorize]() =>
 app.MapGet("/RandomFail", () =>
 {
     var randomValue = new Random().Next(0,2);
-    if(randomValue == 1)
+    //if(randomValue == 1)
     {
         throw new HttpRequestException("Random Failure");
     }
 
-    return "SomeData";
+    //return "SomeData";
 }).WithName("RandomFail");
 
 app.MapGet("/RandomTimeout", async () =>
 {
     var randomValue = new Random().Next(0, 2);
-    if (randomValue == 1)
+    //if (randomValue == 1)
     {
         await Task.Delay(10000);
     }
 
-    return "SomeData";
+    //return "SomeData";
 }).WithName("RandomTimeout");
 
 app.UseAuthentication();
