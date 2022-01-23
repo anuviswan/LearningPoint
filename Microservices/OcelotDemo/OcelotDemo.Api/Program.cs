@@ -1,6 +1,7 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Polly;
+using OcelotDemo.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Configuration.AddJsonFile("ocelot.json");
 builder.Services.AddOcelot()
-                .AddPolly();
+                //.AddPolly()
+                .AddPollyWithInternalServerErrorHandling();
 
 var app = builder.Build();
 
@@ -26,3 +28,6 @@ app.UseHttpsRedirection();
 app.UseOcelot().Wait();
 
 app.Run();
+
+
+
