@@ -18,10 +18,28 @@
         "DurationOfBreak": 10000,
         "TimeoutValue": 2000
       }
+    },
+    {
+      "DownstreamPathTemplate": "/services/randomtimeout",
+      "DownstreamScheme": "https",
+      "DownstreamHttpMethod": "GET",
+      "RouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7038
+        }
+      ],
+      "UpstreamPathTemplate": "/api/circuitbreaker/randomtimeout",
+      "UpstreamHttpMethod": [ "Get" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 10000,
+        "TimeoutValue": 2000
+      }
     }
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:7247"
   },
-  
 }

@@ -22,4 +22,16 @@ app.MapGet("services/raiseexception", () =>
 })
 .WithName("raiseexception");
 
+app.MapGet("services/randomtimeout", async () =>
+{
+    var random = new Random();
+    var value = random.Next(0, 2);
+    if ( value== 0)
+    {
+        await Task.Delay(4000);
+    }
+    return value;
+})
+.WithName("randomtimeout");
+
 app.Run();
