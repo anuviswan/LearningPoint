@@ -2,6 +2,12 @@
 
 This contains sample code for the tutorials in www.bytelanguage.net.  This includes Code Samples on
 
+**Algorithms**
+ - [Longest Palindrome using ExpandingWithCorners](https://github.com/anuviswan/LearningPoint/blob/master/Algorithms/AlgorithmDemo/LongestPalindrome.cs): Find Longest Palindrome using Expanding With Corners algorithm
+ 
+**Async Await**
+ - [Awaitable Patterns](https://github.com/anuviswan/LearningPoint/tree/master/AsyncAwait/Awaitable) : Demonstrates how to implement Awaitable Pattern
+
 **Asp.Net Core**
 - [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/MyFirstApp) : A hello world illustrating controllers, middlewares and other services.
 - [Jwt Authentication](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/JwtExample) : Code illustrating how to use Jwt Authentication in .Net Core Web Api
