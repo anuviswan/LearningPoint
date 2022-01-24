@@ -24,7 +24,7 @@ namespace OcelotDemo.Api
 
             DelegatingHandler QosDelegatingHandlerDelegate(DownstreamRoute route, IOcelotLoggerFactory logger)
             {
-                return new PollyWithInternalServerErrorCircuitBreakingDelegratingHandler(route, logger);
+                return new PollyWithInternalServerErrorCircuitBreakingDelegatingHandler(route, logger);
             }
 
             builder.Services.AddSingleton((QosDelegatingHandlerDelegate)QosDelegatingHandlerDelegate);

@@ -11,7 +11,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Configuration.AddJsonFile("ocelot.json");
 builder.Services.AddOcelot()
-                //.AddPolly()
                 .AddPollyWithInternalServerErrorHandling();
 
 var app = builder.Build();

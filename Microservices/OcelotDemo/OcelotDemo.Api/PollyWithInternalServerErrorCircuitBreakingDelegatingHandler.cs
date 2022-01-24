@@ -7,23 +7,21 @@ using System.Net;
 
 namespace OcelotDemo.Api
 {
-    public class PollyWithInternalServerErrorCircuitBreakingDelegratingHandler:DelegatingHandler
+    public class PollyWithInternalServerErrorCircuitBreakingDelegatingHandler:DelegatingHandler
     {
-        private QoSOptions _options;
         private readonly IOcelotLogger _logger;
-        private readonly AsyncCircuitBreakerPolicy<HttpResponseMessage> _responsePolicy;
         private Polly.Wrap.AsyncPolicyWrap<HttpResponseMessage> _circuitBreakerPolicies;
-        public PollyWithInternalServerErrorCircuitBreakingDelegratingHandler(DownstreamRoute route, IOcelotLoggerFactory loggerFactory)
+        public PollyWithInternalServerErrorCircuitBreakingDelegatingHandler(DownstreamRoute route, IOcelotLoggerFactory loggerFactory)
         {
-            _options = route.QosOptions;
-            _logger = loggerFactory.CreateLogger<PollyWithInternalServerErrorCircuitBreakingDelegratingHandler>();
+            _logger = loggerFactory.CreateLogger<PollyWithInternalServerErrorCircuitBreakingDelegatingHandler>();
 
             var pollyQosProvider = new PollyQoSProvider(route,loggerFactory);
             
-            _responsePolicy = Policy.HandleResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.InternalServerError)
-                                      .CircuitBreakerAsync(_options.ExceptionsAllowedBeforeBreaking, TimeSpan.FromMilliseconds(_options.DurationOfBreak));
+            var responsePolicy = Policy.HandleResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.InternalServerError)
+                                      .CircuitBreakerAsync(route.QosOptions.ExceptionsAllowedBeforeBreaking, 
+                                                            TimeSpan.FromMilliseconds(route.QosOptions.DurationOfBreak));
             _circuitBreakerPolicies  = Policy.WrapAsync(pollyQosProvider.CircuitBreaker.Policies)
-                                             .WrapAsync(_responsePolicy);
+                                             .WrapAsync(responsePolicy);
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

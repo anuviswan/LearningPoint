@@ -36,13 +36,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 builder.Configuration.AddJsonFile("ocelot.json");
-builder.Services.AddOcelot().AddPollyExtended();
-//builder.Services.AddOcelot().AddPolly();
-
-//builder.Services.AddHttpClient("UserService", client =>
-//{
-//    client.BaseAddress = new Uri("https://localhost:7173/");
-//}).AddPolicyHandler(GetCircuitBreakerPolicy()); 
+builder.Services.AddOcelot();
 
 var app = builder.Build();
 
@@ -67,55 +61,3 @@ app.MapRazorPages();
 
 app.Run();
 
-
-public class ExtendedPollyCircuitBreakingDelegatingHandler : PollyCircuitBreakingDelegatingHandler
-{
-    private IOcelotLogger _logger;
-    public ExtendedPollyCircuitBreakingDelegatingHandler(PollyQoSProvider qoSProvider, IOcelotLoggerFactory loggerFactory) : base(qoSProvider, loggerFactory)
-    {
-        _logger =  loggerFactory.CreateLogger<ExtendedPollyCircuitBreakingDelegatingHandler>(); ;
-    }
-
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var policy = Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
-                                            .CircuitBreakerAsync(2, TimeSpan.FromSeconds(60));
-
-            var response = await policy.ExecuteAsync(() => base.SendAsync(request, cancellationToken));
-            Console.WriteLine($"Error Code {response.StatusCode}");
-            return response;
-        }
-        catch (Exception e)
-        {
-            throw;
-        }
-        
-    }
-}
-
-
-public static class OcelotBuilderExtensions
-{
-    public static IOcelotBuilder AddPollyExtended(this IOcelotBuilder builder)
-    {
-        //builder.AddPolly();
-        var errorMapping = new Dictionary<Type, Func<Exception, Error>>
-            {
-                {typeof(TaskCanceledException), e => new RequestTimedOutError(e)},
-                {typeof(TimeoutRejectedException), e => new RequestTimedOutError(e)},
-                {typeof(BrokenCircuitException), e => new RequestTimedOutError(e)}
-            };
-
-        builder.Services.AddSingleton(errorMapping);
-
-        DelegatingHandler QosDelegatingHandlerDelegate(DownstreamRoute route, IOcelotLoggerFactory logger)
-        {
-            return new ExtendedPollyCircuitBreakingDelegatingHandler(new PollyQoSProvider(route, logger), logger);
-        }
-
-        builder.Services.AddSingleton((QosDelegatingHandlerDelegate)QosDelegatingHandlerDelegate);
-        return builder;
-    }
-}
