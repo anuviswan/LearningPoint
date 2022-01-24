@@ -22,17 +22,11 @@ namespace OcelotDemo.Api
 
             builder.Services.AddSingleton(errorMapping);
 
-            DelegatingHandler InternalServerQosDelegatingHandlerDelegate(DownstreamRoute route, IOcelotLoggerFactory logger)
+            DelegatingHandler QosDelegatingHandlerDelegate(DownstreamRoute route, IOcelotLoggerFactory logger)
             {
                 return new PollyWithInternalServerErrorCircuitBreakingDelegratingHandler(route, logger);
             }
 
-            DelegatingHandler QosDelegatingHandlerDelegate(DownstreamRoute route, IOcelotLoggerFactory logger)
-            {
-                return new PollyCircuitBreakingDelegatingHandler(new PollyQoSProvider(route,logger), logger);
-            }
-
-            builder.Services.AddSingleton((QosDelegatingHandlerDelegate)InternalServerQosDelegatingHandlerDelegate);
             builder.Services.AddSingleton((QosDelegatingHandlerDelegate)QosDelegatingHandlerDelegate);
 
             return builder;
