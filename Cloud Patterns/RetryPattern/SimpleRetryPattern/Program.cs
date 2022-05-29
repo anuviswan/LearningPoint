@@ -37,7 +37,7 @@ app.MapGet("/retrydemo", async (IHttpClientFactory clientFactory) =>
 }).WithName("RetryDemo");
 
 
-async Task<T> ExecuteOperation<T>(Func<Task<T>> action,int maxRetries = 5, int delay = 1000)
+async Task<T> ExecuteOperation<T>(Func<Task<T>> action,int maxRetries = 5, int delay = 5000)
 {
     int currentRetry = 0;
     while (true)
