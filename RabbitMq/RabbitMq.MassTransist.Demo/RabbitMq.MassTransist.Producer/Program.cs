@@ -1,21 +1,27 @@
 using MassTransit;
+using RabbitMq.MassTransist.Producer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var rabbitMqSettings = builder.Configuration.GetSection(nameof(RabbitMqSettings)).Get<RabbitMqSettings>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddMassTransit(o=>
-                        o.AddBus( 
-                            provider=> Bus.Factory.CreateUsingRabbitMq(
-                                config=> config.Host(new Uri("rabbitmq://localhost"), c =>
+builder.Services.AddMassTransit(mt =>
+                        mt.AddMassTransit(x =>
+                        {
+                            x.UsingRabbitMq((cntxt, cfg) =>
+                            {
+                                cfg.Host(new Uri(rabbitMqSettings.Uri), c =>
                                 {
-                                    c.Username("user");
-                                    c.Password("password");
-                                }))));
+                                    c.Username(rabbitMqSettings.UserName);
+                                    c.Password(rabbitMqSettings.Password);
+                                });
+                            });
+                        }));
 
-builder.Services.AddMassTransitHostedService();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
