@@ -1,9 +1,8 @@
 using MassTransit;
-using RabbitMq.MassTransist.Producer;
+using RabbitMq.MassTransit.Consumer;
 using RabbitMq.MassTransit.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var rabbitMqSettings = builder.Configuration.GetSection(nameof(RabbitMqSettings)).Get<RabbitMqSettings>();
 
 // Add services to the container.
@@ -18,6 +17,11 @@ builder.Services.AddMassTransit(mt =>
                                 c.Username(rabbitMqSettings.UserName);
                                 c.Password(rabbitMqSettings.Password);
                             });
+
+                            cfg.ReceiveEndpoint("samplequeue", (c) =>
+                            {
+                                c.Consumer<CommandMessageConsumer>();
+                            });
                         }));
 
 var app = builder.Build();
@@ -29,9 +33,30 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var random = new Random();
-app.MapPost("/sendmessage", (string message,IPublishEndpoint publishEndPoint) =>
+app.UseHttpsRedirection();
+
+var summaries = new[]
 {
-    publishEndPoint.Publish(new CommandMessage(random.Next(),message)); ;
-});
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+};
+
+app.MapGet("/weatherforecast", () =>
+{
+    var forecast = Enumerable.Range(1, 5).Select(index =>
+        new WeatherForecast
+        (
+            DateTime.Now.AddDays(index),
+            Random.Shared.Next(-20, 55),
+            summaries[Random.Shared.Next(summaries.Length)]
+        ))
+        .ToArray();
+    return forecast;
+})
+.WithName("GetWeatherForecast");
+
 app.Run();
+
+internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
+{
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}
