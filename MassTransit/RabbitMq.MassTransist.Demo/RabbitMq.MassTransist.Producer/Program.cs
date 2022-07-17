@@ -11,17 +11,12 @@ var rabbitMqSettings = builder.Configuration.GetSection(nameof(RabbitMqSettings)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMassTransit(mt =>
-                        mt.AddMassTransit(x =>
+                        mt.UsingRabbitMq((cntxt, cfg) =>
                         {
-                            x.UsingRabbitMq((cntxt, cfg) =>
+                            cfg.Host(rabbitMqSettings.Uri, "/", c =>
                             {
-                                cfg.Host("localhost","/", c =>
-                                {
-                                    c.Username(rabbitMqSettings.UserName);
-                                    c.Password(rabbitMqSettings.Password);
-                                });
-
-                                //cfg.ConfigureEndpoints(cntxt);
+                                c.Username(rabbitMqSettings.UserName);
+                                c.Password(rabbitMqSettings.Password);
                             });
                         }));
 
