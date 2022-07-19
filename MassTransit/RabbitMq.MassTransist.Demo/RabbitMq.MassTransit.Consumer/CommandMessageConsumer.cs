@@ -6,11 +6,10 @@ namespace RabbitMq.MassTransit.Consumer
 {
     public class CommandMessageConsumer : IConsumer<CommandMessage>
     {
-        public Task Consume(ConsumeContext<CommandMessage> context)
+        public async Task Consume(ConsumeContext<CommandMessage> context)
         {
             var message = context.Message;
-            // do something useful
-            return Task.CompletedTask;
+            await Console.Out.WriteLineAsync($"Message from Producer : {message.MessageString}");
         }
     }
 }

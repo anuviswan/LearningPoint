@@ -29,9 +29,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var random = new Random();
-app.MapPost("/sendmessage", (string message,IPublishEndpoint publishEndPoint) =>
+app.MapPost("/sendmessage", (long id,string message,IPublishEndpoint publishEndPoint) =>
 {
-    publishEndPoint.Publish(new CommandMessage(random.Next(),message)); ;
+    publishEndPoint.Publish(new CommandMessage(id,message)); ;
 });
 app.Run();
