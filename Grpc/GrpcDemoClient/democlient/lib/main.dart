@@ -56,10 +56,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> sendRequest() async {
     final channel = ClientChannel('localhost',
         port: 5280,
-        options: ChannelOptions(credentials: ChannelCredentials.insecure()));
+        options:
+            const ChannelOptions(credentials: ChannelCredentials.insecure()));
 
     stub = InstrumentClient(channel,
-        options: CallOptions(timeout: Duration(seconds: 30)));
+        options: CallOptions(timeout: const Duration(seconds: 30)));
 
     try {
       var readRequest = ReadStatusRequest(id: 1);
