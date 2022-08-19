@@ -51,6 +51,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  var _message = "";
   late InstrumentClient stub;
 
   Future<void> sendRequest() async {
@@ -65,21 +66,14 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       var readRequest = ReadStatusRequest(id: 1);
       var response = await stub.readStatus(readRequest);
-      print(response.status);
+      setState(() {
+        _message = response.status;
+      });
     } catch (e) {
-      print("error : $e");
+      setState(() {
+        _message = e.toString();
+      });
     }
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
   }
 
   @override
@@ -117,10 +111,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'Message from Server :',
             ),
             Text(
-              '$_counter',
+              '$_message',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
@@ -129,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: sendRequest,
         tooltip: 'Send Request',
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.arrow_forward),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

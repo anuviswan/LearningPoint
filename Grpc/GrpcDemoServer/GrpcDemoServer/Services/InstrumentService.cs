@@ -8,7 +8,7 @@ public class InstrumentService: Instrument.InstrumentBase
     {
         return Task.FromResult(new ReadStatusResponse
         {
-            Status = $"Connected : {TimeOnly.FromDateTime(DateTime.Now)}"
+            Status = $"Connected : {TimeOnly.FromDateTime(DateTime.Now).ToLongTimeString()}"
         }) ;
     }
 }
