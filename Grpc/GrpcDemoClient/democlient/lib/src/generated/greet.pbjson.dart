@@ -48,3 +48,24 @@ const ReadStatusResponse$json = const {
 
 /// Descriptor for `ReadStatusResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List readStatusResponseDescriptor = $convert.base64Decode('ChJSZWFkU3RhdHVzUmVzcG9uc2USFgoGc3RhdHVzGAEgASgJUgZzdGF0dXM=');
+@$core.Deprecated('Use rawDataRequestDescriptor instead')
+const RawDataRequest$json = const {
+  '1': 'RawDataRequest',
+  '2': const [
+    const {'1': 'maxItems', '3': 1, '4': 1, '5': 5, '10': 'maxItems'},
+  ],
+};
+
+/// Descriptor for `RawDataRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List rawDataRequestDescriptor = $convert.base64Decode('Cg5SYXdEYXRhUmVxdWVzdBIaCghtYXhJdGVtcxgBIAEoBVIIbWF4SXRlbXM=');
+@$core.Deprecated('Use rawDataResponseDescriptor instead')
+const RawDataResponse$json = const {
+  '1': 'RawDataResponse',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    const {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
+  ],
+};
+
+/// Descriptor for `RawDataResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List rawDataResponseDescriptor = $convert.base64Decode('Cg9SYXdEYXRhUmVzcG9uc2USDgoCaWQYASABKAVSAmlkEiAKC2Rlc2NyaXB0aW9uGAIgASgJUgtkZXNjcmlwdGlvbg==');

@@ -59,6 +59,12 @@ class InstrumentClient extends $grpc.Client {
           ($0.ReadStatusRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.ReadStatusResponse.fromBuffer(value));
+  static final _$subscribe =
+      $grpc.ClientMethod<$0.RawDataRequest, $0.RawDataResponse>(
+          '/greet.Instrument/Subscribe',
+          ($0.RawDataRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.RawDataResponse.fromBuffer(value));
 
   InstrumentClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -69,6 +75,13 @@ class InstrumentClient extends $grpc.Client {
       $0.ReadStatusRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$readStatus, request, options: options);
+  }
+
+  $grpc.ResponseStream<$0.RawDataResponse> subscribe($0.RawDataRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$subscribe, $async.Stream.fromIterable([request]),
+        options: options);
   }
 }
 
@@ -83,6 +96,13 @@ abstract class InstrumentServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ReadStatusRequest.fromBuffer(value),
         ($0.ReadStatusResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.RawDataRequest, $0.RawDataResponse>(
+        'Subscribe',
+        subscribe_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.RawDataRequest.fromBuffer(value),
+        ($0.RawDataResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ReadStatusResponse> readStatus_Pre($grpc.ServiceCall call,
@@ -90,6 +110,13 @@ abstract class InstrumentServiceBase extends $grpc.Service {
     return readStatus(call, await request);
   }
 
+  $async.Stream<$0.RawDataResponse> subscribe_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.RawDataRequest> request) async* {
+    yield* subscribe(call, await request);
+  }
+
   $async.Future<$0.ReadStatusResponse> readStatus(
       $grpc.ServiceCall call, $0.ReadStatusRequest request);
+  $async.Stream<$0.RawDataResponse> subscribe(
+      $grpc.ServiceCall call, $0.RawDataRequest request);
 }

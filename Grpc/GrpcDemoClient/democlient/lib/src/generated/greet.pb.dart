@@ -197,3 +197,111 @@ class ReadStatusResponse extends $pb.GeneratedMessage {
   void clearStatus() => clearField(1);
 }
 
+class RawDataRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RawDataRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'greet'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxItems', $pb.PbFieldType.O3, protoName: 'maxItems')
+    ..hasRequiredFields = false
+  ;
+
+  RawDataRequest._() : super();
+  factory RawDataRequest({
+    $core.int? maxItems,
+  }) {
+    final _result = create();
+    if (maxItems != null) {
+      _result.maxItems = maxItems;
+    }
+    return _result;
+  }
+  factory RawDataRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RawDataRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RawDataRequest clone() => RawDataRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RawDataRequest copyWith(void Function(RawDataRequest) updates) => super.copyWith((message) => updates(message as RawDataRequest)) as RawDataRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RawDataRequest create() => RawDataRequest._();
+  RawDataRequest createEmptyInstance() => create();
+  static $pb.PbList<RawDataRequest> createRepeated() => $pb.PbList<RawDataRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RawDataRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RawDataRequest>(create);
+  static RawDataRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get maxItems => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set maxItems($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMaxItems() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMaxItems() => clearField(1);
+}
+
+class RawDataResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RawDataResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'greet'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..hasRequiredFields = false
+  ;
+
+  RawDataResponse._() : super();
+  factory RawDataResponse({
+    $core.int? id,
+    $core.String? description,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (description != null) {
+      _result.description = description;
+    }
+    return _result;
+  }
+  factory RawDataResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RawDataResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RawDataResponse clone() => RawDataResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RawDataResponse copyWith(void Function(RawDataResponse) updates) => super.copyWith((message) => updates(message as RawDataResponse)) as RawDataResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RawDataResponse create() => RawDataResponse._();
+  RawDataResponse createEmptyInstance() => create();
+  static $pb.PbList<RawDataResponse> createRepeated() => $pb.PbList<RawDataResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RawDataResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RawDataResponse>(create);
+  static RawDataResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get description => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set description($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDescription() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDescription() => clearField(2);
+}
+

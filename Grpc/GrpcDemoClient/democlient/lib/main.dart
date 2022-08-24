@@ -51,7 +51,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  var _message = "";
+  var _message = "intial";
+  List<RawDataResponse> _streamData = <RawDataResponse>[
+    RawDataResponse(id: 1, description: 'This is description 1'),
+    RawDataResponse(id: 2, description: 'This is description 2'),
+  ];
   late InstrumentClient stub;
 
   Future<void> sendRequest() async {
@@ -76,55 +80,66 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> subscribeStream() async {
+    final channel = ClientChannel('localhost',
+        port: 5280,
+        options:
+            const ChannelOptions(credentials: ChannelCredentials.insecure()));
+
+    stub = InstrumentClient(channel,
+        options: CallOptions(timeout: const Duration(seconds: 30)));
+
+    try {
+      var subscribeRequest = RawDataRequest(maxItems: 10);
+      var response = stub.subscribe(subscribeRequest);
+
+      await for (var data in response) {
+        setState(() {
+          _streamData.add(data);
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'Message from Server :',
+              'Status from Server :',
             ),
             Text(
               '$_message',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Expanded(
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: _streamData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                        height: 50,
+                        margin: const EdgeInsets.all(2),
+                        child: Text(
+                            '[${_streamData[index].id}] : ${_streamData[index].description} '));
+                  }),
+            ),
+            TextButton(onPressed: sendRequest, child: const Text('Get Status')),
+            TextButton(
+                onPressed: subscribeStream, child: const Text('Subscribe'))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: sendRequest,
-        tooltip: 'Send Request',
-        child: const Icon(Icons.arrow_forward),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

@@ -23,6 +23,7 @@ message HelloReply {
 
 service Instrument{
 	rpc ReadStatus (ReadStatusRequest) returns (ReadStatusResponse);
+	rpc Subscribe (RawDataRequest) returns (stream RawDataResponse);
 }
 
 message ReadStatusRequest {
@@ -31,4 +32,14 @@ message ReadStatusRequest {
 
 message ReadStatusResponse{
 	string status = 1;
+}
+
+
+message RawDataRequest{
+	int32 maxItems = 1;
+}
+
+message RawDataResponse{
+	int32 id  = 1;
+	string description = 2;
 }
