@@ -1,6 +1,7 @@
 import 'package:democlient/src/generated/greet.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 void main() {
   runApp(const MyApp());
@@ -56,6 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
     RawDataResponse(id: 1, description: 'This is description 1'),
     RawDataResponse(id: 2, description: 'This is description 2'),
   ];
+  List<charts.Series<RawDataResponse, String>> series = [charts.Series(id="Values",
+  data = _streamData,
+  );
   late InstrumentClient stub;
 
   Future<void> sendRequest() async {
