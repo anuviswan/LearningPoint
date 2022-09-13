@@ -5,7 +5,7 @@ Console.WriteLine("Demo code for 'required' modifier");
 
 // var foo = new Foo(); // This would throw error
 var foo = new Foo() { Name = "John Doe" };
-//var bar = new Bar() { Name = "John Doe" };
+var bar = new Bar() { Name = "John Doe" };
 // var bar = new Bar();  // This will not throw error
 
 
