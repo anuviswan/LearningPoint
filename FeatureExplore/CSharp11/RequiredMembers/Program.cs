@@ -4,23 +4,18 @@ using System.Diagnostics.CodeAnalysis;
 Console.WriteLine("Demo code for 'required' modifier");
 
 // Will raise compile time errors
-// var foo = new Foo(); 
+ // var foo = new Foo(); 
 
 // Compiles
-var foo = new Foo() { Name = "John Doe" };  // This will NOT throw error
-
+var foo = new Foo() { Name = "John Doe" };  
 
 
 // Compiles
-var bar = new Bar() { Name = "John Doe" };
-
-// Will raise compile time errors
-// var bar = new Bar();  
-
+//var bar = new Bar();
 
 // This will throw error as initialization is done using a constructor 
 // which does not have the SetsRequiredMembers Attribute
-// var bar = new Bar("John Doe"); 
+ var bar = new Bar("John Doe"); 
 
 public class Foo
 {
