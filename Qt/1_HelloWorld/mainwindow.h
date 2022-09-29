@@ -14,8 +14,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void Display();
 
 private:
     Ui::MainWindow *ui;
+    void ShowMessageBox();
 };
 #endif // MAINWINDOW_H

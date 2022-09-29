@@ -19,9 +19,11 @@ int main(int argc, char *argv[])
         }
     }
     MainWindow w;
-    w.show();
+    w.Display();
+
     QPushButton button ("Hello world !", &w);
-     button.show();
+    button.setToolTip("Sample tooltip");
+    button.show();
 
     return a.exec();
 }
