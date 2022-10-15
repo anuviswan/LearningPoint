@@ -14,17 +14,17 @@ namespace GrpcWebClientWithDotNet.Controllers
         }
 
         [HttpGet]
-        [Route("SayHello")]
-        public async Task<IActionResult> SayHello()
+        [Route("GetInstrumentStatus")]
+        public async Task<IActionResult> GetInstrumentStatus(int instrumentId)
         {
             var channel = GrpcChannel.ForAddress("https://localhost:7280", new GrpcChannelOptions
             {
                 HttpHandler = new GrpcWebHandler(new HttpClientHandler())
             });
 
-            var client = new Greeter.GreeterClient(channel);
-            var response = await client.SayHelloAsync(new HelloRequest { Name = ".NET" });
-            return Ok(response.Message);
+            var client = new Instrument.InstrumentClient(channel);
+            var response = await client.ReadStatusAsync(new ReadStatusRequest { Id = instrumentId });
+            return Ok(response.Status);
         }
     }
 }
