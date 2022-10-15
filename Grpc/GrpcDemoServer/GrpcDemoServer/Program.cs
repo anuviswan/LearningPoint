@@ -1,5 +1,5 @@
 using GrpcDemoServer.Services;
-using Microsoft.AspNetCore.Builder;
+using Grpc.AspNetCore.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +10,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
 
+// Use CORS to access different domain
+builder.Services.AddCors(opt => opt.AddPolicy("AllowAll", builder =>
+{
+    builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+}));
+
 var app = builder.Build();
 
-app.MapGrpcService<GreeterService>();
-app.MapGrpcService<InstrumentService>();
+app.UseGrpcWeb();
+// To enable it as default
+// app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled =  true});
+
+
+app.MapGrpcService<GreeterService>()
+    .EnableGrpcWeb();
+app.MapGrpcService<InstrumentService>()
+    .EnableGrpcWeb(); ;
 app.MapGrpcReflectionService();
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 

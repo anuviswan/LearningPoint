@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
     <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.47.0" />
+    <PackageReference Include="Grpc.AspNetCore.Web" Version="2.49.0" />
   </ItemGroup>
 
 </Project>
