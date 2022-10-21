@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32901.213
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassTransit.MediatR", "MassTransit.MediatR.csproj", "{25111705-B9C0-4721-838B-38EDC4FC6FD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassTransit.Mediator", "MassTransit.Mediator.csproj", "{25111705-B9C0-4721-838B-38EDC4FC6FD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.MediatR.Contracts", "..\MassTransit.MediatR.Contracts\MassTransit.MediatR.Contracts.csproj", "{E61E9CD1-B4ED-41E1-ADCB-6FF8777F06BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Mediator.Contracts", "..\MassTransit.Mediator.Contracts\MassTransit.Mediator.Contracts.csproj", "{E61E9CD1-B4ED-41E1-ADCB-6FF8777F06BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
