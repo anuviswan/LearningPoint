@@ -7,15 +7,17 @@ namespace MassTransit.Mediator.Controllers;
 [Route("[controller]")]
 public class DemoController : ControllerBase
 {
-    private readonly IRequestClient<IOrderSubmit> _submitOrderRequestClient;
-    public DemoController(IRequestClient<IOrderSubmit> submitOrderRequestClient)
+    private readonly IMediator _mediator;
+    public DemoController(IMediator mediator)
     {
-        _submitOrderRequestClient = submitOrderRequestClient;
+        _mediator = mediator;
     }
     [HttpPost]
     public async Task<IActionResult> PlaceOrder(Guid id,Guid customerId)
     {
-        var (accepted,rejected) = await _submitOrderRequestClient.GetResponse<IOrderSubmitAccepted,IOrderSubmitRejected>(new
+        
+        var (accepted,rejected) = await _mediator.CreateRequestClient<IOrderSubmit>()
+            .GetResponse<IOrderSubmitAccepted,IOrderSubmitRejected>(new
         {
             Id = id,
             CustomerId = customerId,
