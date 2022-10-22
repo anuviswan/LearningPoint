@@ -15,3 +15,10 @@ public interface IOrderSubmitAccepted
 
     DateTime TimeStamp { get; set; }
 }
+
+public interface IOrderSubmitRejected
+{
+    Guid OrderId { get; set; }
+    DateTime TimeStamp { get; set; }
+    string Reason { get; set; }
+}

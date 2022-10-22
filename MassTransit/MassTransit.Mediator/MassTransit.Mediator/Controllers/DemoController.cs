@@ -15,12 +15,21 @@ public class DemoController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PlaceOrder(Guid id,Guid customerId)
     {
-        var response = await _submitOrderRequestClient.GetResponse<IOrderSubmitAccepted>(new
+        var (accepted,rejected) = await _submitOrderRequestClient.GetResponse<IOrderSubmitAccepted,IOrderSubmitRejected>(new
         {
             Id = id,
             CustomerId = customerId,
             TimeStamp = DateTime.UtcNow
         });
-        return Ok(response.Message);
+
+        if (accepted.IsCompletedSuccessfully)
+        {
+            var acceptResponse = await accepted;
+            return Ok(acceptResponse.Message);
+
+        }
+
+        var rejectResponse = await rejected;
+        return BadRequest(rejectResponse.Message);
     }
 }
