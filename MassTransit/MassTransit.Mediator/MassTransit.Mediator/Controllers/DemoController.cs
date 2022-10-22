@@ -16,22 +16,14 @@ public class DemoController : ControllerBase
     public async Task<IActionResult> PlaceOrder(Guid id,Guid customerId)
     {
         
-        var (accepted,rejected) = await _mediator.CreateRequestClient<IOrderSubmit>()
-            .GetResponse<IOrderSubmitAccepted,IOrderSubmitRejected>(new
+        var response = await _mediator.SendRequest(new OrderSubmitCommand
         {
             Id = id,
             CustomerId = customerId,
             TimeStamp = DateTime.UtcNow
         });
 
-        if (accepted.IsCompletedSuccessfully)
-        {
-            var acceptResponse = await accepted;
-            return Accepted(acceptResponse.Message);
 
-        }
-
-        var rejectResponse = await rejected;
-        return BadRequest(rejectResponse.Message);
+        return response.IsSuccess ? Ok(response) : BadRequest(response);
     }
 }
