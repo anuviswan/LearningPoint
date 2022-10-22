@@ -1,6 +1,16 @@
+using MassTransit;
+using MassTransit.Mediator.Services.Consumers;
+using MassTransit.MediatR.Contracts;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddMediator(cfg =>
+{
+    cfg.AddConsumer<OrderSubmitConsumer>();
+    cfg.AddRequestClient<IOrderSubmit>();
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
