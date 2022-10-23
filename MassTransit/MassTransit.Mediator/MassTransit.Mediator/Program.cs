@@ -9,7 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMediator(cfg =>
 {
     cfg.AddConsumersFromNamespaceContaining<OrderSubmitHandler>();
-    cfg.AddRequestClient<OrderSubmitCommand>();
 });
 
 builder.Services.AddControllers();
