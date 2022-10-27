@@ -15,8 +15,6 @@ public slots:
 
 signals:
 
-
-
 };
 
 #endif // DESTINATION_H

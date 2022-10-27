@@ -8,8 +8,10 @@ CONFIG -= app_bundle
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        channel.cpp \
         destination.cpp \
         main.cpp \
+        radio.cpp \
         source.cpp
 
 # Default rules for deployment.
@@ -18,5 +20,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    channel.h \
     destination.h \
+    radio.h \
     source.h
