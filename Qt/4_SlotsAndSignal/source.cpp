@@ -1,7 +1,20 @@
 #include "source.h"
 
+QString Source::Message()
+{
+    return _message;
+}
+
+void Source::setMessage(QString message)
+{
+    qInfo() << "Setting Property";
+    _message = message;
+    qInfo() << "Property Set";
+    emit messageChanged(message);
+}
+
 Source::Source(QObject *parent)
-    : QObject{parent}
+    : QObject(parent)
 {
 
 }
@@ -10,5 +23,5 @@ void Source::TriggerEvent()
 {
     QString message = "Say Hello !!!";
     qInfo() << "Emitting Signal with message "<<message;
-    emit setMessage(message);
+    emit messageChanged(message);
 }

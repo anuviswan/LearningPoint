@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include <QDebug>
+#include<QVariant>
 
 #include "source.h"
 #include "destination.h"
@@ -14,11 +15,22 @@ void SimpleDemo(QCoreApplication* app)
     Source sourceObj(app);
     Destination destinationObj(app);
 
-    QObject::connect(&sourceObj,&Source::setMessage,&destinationObj,&Destination::OnMessageRecieved);
+    QObject::connect(&sourceObj,&Source::messageChanged,&destinationObj,&Destination::OnMessageRecieved);
 
     sourceObj.TriggerEvent();
 }
 
+void QPropertyDemo(QCoreApplication* app)
+{
+    Source sourceObj(app);
+    Destination destinationObj(app);
+
+    QObject::connect(&sourceObj,&Source::messageChanged,&destinationObj,&Destination::OnMessageRecieved);
+
+
+    sourceObj.setProperty("message",  "HelloWorld");
+    //sourceObj.TriggerEvent();
+}
 
 void RadioDemo(QCoreApplication *app)
 {
@@ -93,7 +105,8 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     // SimpleDemo(&a);
-    RadioDemo(&a);
+    // RadioDemo(&a);
+    QPropertyDemo(&a);
     return a.exec();
 }
 
