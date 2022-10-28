@@ -1,6 +1,6 @@
 #include "source.h"
 
-QString Source::Message()
+QString Source::message()
 {
     return _message;
 }
@@ -10,6 +10,7 @@ void Source::setMessage(QString message)
     qInfo() << "Setting Property";
     _message = message;
     qInfo() << "Property Set";
+
     emit messageChanged(message);
 }
 
