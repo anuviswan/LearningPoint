@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,6 +18,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    void OnButtonClick();
+public slots:
+    void OnButtonClick(bool isClicked = false);
 };
 #endif // MAINWINDOW_H
