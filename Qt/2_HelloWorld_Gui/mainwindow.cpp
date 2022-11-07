@@ -22,7 +22,7 @@ void MainWindow::OnButtonClick(bool isClicked)
     qInfo() << "Button Clicked : #" << isClicked;
 
     QMessageBox msgBox;
-    msgBox.setText("Hey, button clicked");
+    msgBox.setText("Hello there !!!");
     msgBox.exec();
 }
 
