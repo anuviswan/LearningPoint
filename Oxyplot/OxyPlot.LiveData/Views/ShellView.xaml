@@ -1,0 +1,44 @@
+﻿<Window x:Class="OxyPlot.LiveData.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OxyPlot.LiveData.Views"
+        mc:Ignorable="d"
+        Title="Oxyplot Live Data Demo" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="5,5,5,5"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Start" x:Name="StartAcquisition"/>
+            <Button Content="Stop" x:Name="StopAcquisition"/>
+        </StackPanel>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Column="1" ItemsSource="{Binding SensorData}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="TimeStamp" Binding="{Binding TimeStamp, StringFormat=\{0:hh:mm:ss\}}"/>
+                    <DataGridTextColumn Width="*" Header="Data Value" Binding="{Binding Data, StringFormat=\{0:0.0000\}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        
+    </Grid>
+</Window>
