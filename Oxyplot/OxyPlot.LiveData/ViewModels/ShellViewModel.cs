@@ -88,9 +88,10 @@ public class ShellViewModel:Screen
             }
         }
 
-        
 
-        if (DateTimeAxis.ToDouble(DateTime.Now) > dateTimeAxis.Maximum)
+
+        // if (series.Points.Last().X > dateTimeAxis.Maximum)
+        if (DateTimeAxis.ToDateTime(series.Points.Last().X) > DateTimeAxis.ToDateTime(dateTimeAxis.Maximum))
         {
             dateTimeAxis.Minimum = DateTimeAxis.ToDouble(DateTime.Now.AddSeconds(-1 * MaxSecondsToShow));
             dateTimeAxis.Maximum = DateTimeAxis.ToDouble(DateTime.Now);
