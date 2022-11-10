@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OxyPlot.LiveData.Views"
         mc:Ignorable="d"
+        xmlns:oxy="http://oxyplot.org/wpf"
         Title="Oxyplot Live Data Demo" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="Button">
@@ -37,8 +38,11 @@
                     <DataGridTextColumn Width="*" Header="Data Value" Binding="{Binding Data, StringFormat=\{0:0.0000\}}"/>
                 </DataGrid.Columns>
             </DataGrid>
+
+            <oxy:PlotView Grid.Column="0" Model="{Binding SensorPlotModel}"></oxy:PlotView>
         </Grid>
 
+        
         
     </Grid>
 </Window>
