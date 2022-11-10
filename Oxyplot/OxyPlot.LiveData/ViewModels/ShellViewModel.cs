@@ -109,7 +109,7 @@ public class ShellViewModel:Screen
         {
             _timer = new DispatcherTimer
             {
-                Interval = new TimeSpan(0, 0, 3),
+                Interval = TimeSpan.FromMilliseconds(500),
             };
 
             _timer.Tick += MockSensorRecievedData;
