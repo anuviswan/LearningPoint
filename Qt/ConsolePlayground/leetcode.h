@@ -11,6 +11,8 @@ class LeetCode
 public:
     LeetCode();
     std::vector<int> twoSum(std::vector<int>& nums, int target);
+    bool isPalindrome(int x);
+
 };
 
 #endif // LEETCODE_H

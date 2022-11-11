@@ -18,13 +18,21 @@ int ExecuteProblem001(LeetCode &leet){
     return 0;
 }
 
+int ExecuteProblem009(LeetCode &leet)
+{
+    qInfo() << "Result (999) = " << leet.isPalindrome(999);
+    qInfo() << "Result (1212) = " << leet.isPalindrome(1212);
+    qInfo() << "Result (1221) = " << leet.isPalindrome(1221);
+    qInfo() << "Result (343) = " << leet.isPalindrome(343);
+    return 0;
+}
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
     LeetCode code;
-    ExecuteProblem001(code);
+    ExecuteProblem009(code);
 
     return a.exec();
 }
