@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32721.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService", "OrderService\OrderService.csproj", "{FC24868E-4220-4024-81A8-E1959B3222E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "OrderService\OrderService.csproj", "{FC24868E-4220-4024-81A8-E1959B3222E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService", "PaymentService\PaymentService.csproj", "{72351028-F84D-430D-A710-40273CF0784D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentService", "PaymentService\PaymentService.csproj", "{72351028-F84D-430D-A710-40273CF0784D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryService", "InventoryService\InventoryService.csproj", "{CE100441-A858-4198-9039-7702BF878D65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingService", "ShippingService\ShippingService.csproj", "{EFD0F537-5BA7-4D50-96CA-3690C2C8BC0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingService", "ShippingService\ShippingService.csproj", "{EFD0F537-5BA7-4D50-96CA-3690C2C8BC0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saga.Services.InventoryService", "InventoryService\Saga.Services.InventoryService.csproj", "{C0B0E409-85BA-43F0-888B-210603B73391}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{72351028-F84D-430D-A710-40273CF0784D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72351028-F84D-430D-A710-40273CF0784D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72351028-F84D-430D-A710-40273CF0784D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE100441-A858-4198-9039-7702BF878D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE100441-A858-4198-9039-7702BF878D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE100441-A858-4198-9039-7702BF878D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE100441-A858-4198-9039-7702BF878D65}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EFD0F537-5BA7-4D50-96CA-3690C2C8BC0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EFD0F537-5BA7-4D50-96CA-3690C2C8BC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFD0F537-5BA7-4D50-96CA-3690C2C8BC0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFD0F537-5BA7-4D50-96CA-3690C2C8BC0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0B0E409-85BA-43F0-888B-210603B73391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0B0E409-85BA-43F0-888B-210603B73391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0B0E409-85BA-43F0-888B-210603B73391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0B0E409-85BA-43F0-888B-210603B73391}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
