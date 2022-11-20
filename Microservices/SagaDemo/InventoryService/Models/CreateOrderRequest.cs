@@ -1,6 +1,5 @@
-﻿namespace Saga.Services.InventoryService.Models
+﻿namespace Saga.Services.InventoryService.Models;
+
+public record CreateOrderRequest()
 {
-    public class CreateOrderRequest
-    {
-    }
 }
