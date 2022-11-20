@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32721.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "OrderService\OrderService.csproj", "{FC24868E-4220-4024-81A8-E1959B3222E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saga.Services.OrderService", "OrderService\Saga.Services.OrderService.csproj", "{FC24868E-4220-4024-81A8-E1959B3222E9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentService", "PaymentService\PaymentService.csproj", "{72351028-F84D-430D-A710-40273CF0784D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saga.Services.PaymentService", "PaymentService\Saga.Services.PaymentService.csproj", "{72351028-F84D-430D-A710-40273CF0784D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingService", "ShippingService\ShippingService.csproj", "{EFD0F537-5BA7-4D50-96CA-3690C2C8BC0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saga.Services.ShippingService", "ShippingService\Saga.Services.ShippingService.csproj", "{EFD0F537-5BA7-4D50-96CA-3690C2C8BC0F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saga.Services.InventoryService", "InventoryService\Saga.Services.InventoryService.csproj", "{C0B0E409-85BA-43F0-888B-210603B73391}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A3ADEE35-4715-4C60-ADBB-30876EE87BD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saga.Shared.Contracts", "Saga.Shared.Contracts\Saga.Shared.Contracts.csproj", "{9739A144-6108-4C92-9648-3E32D853FF5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,19 @@ Global
 		{C0B0E409-85BA-43F0-888B-210603B73391}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0B0E409-85BA-43F0-888B-210603B73391}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0B0E409-85BA-43F0-888B-210603B73391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9739A144-6108-4C92-9648-3E32D853FF5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9739A144-6108-4C92-9648-3E32D853FF5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9739A144-6108-4C92-9648-3E32D853FF5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9739A144-6108-4C92-9648-3E32D853FF5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FC24868E-4220-4024-81A8-E1959B3222E9} = {A3ADEE35-4715-4C60-ADBB-30876EE87BD1}
+		{72351028-F84D-430D-A710-40273CF0784D} = {A3ADEE35-4715-4C60-ADBB-30876EE87BD1}
+		{EFD0F537-5BA7-4D50-96CA-3690C2C8BC0F} = {A3ADEE35-4715-4C60-ADBB-30876EE87BD1}
+		{C0B0E409-85BA-43F0-888B-210603B73391} = {A3ADEE35-4715-4C60-ADBB-30876EE87BD1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BACC38E3-33B9-4D41-AB95-36A9E60D942B}

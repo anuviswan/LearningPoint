@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.OpenApi;
+using Saga.Services.InventoryService.Models;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+
+app.MapPost("/createorder", (CreateOrderRequest orderRequest) =>
+{
+    
+});
 
 var summaries = new[]
 {
