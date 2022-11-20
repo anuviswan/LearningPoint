@@ -1,5 +1,8 @@
 
+using Microsoft.Extensions.Logging;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.AddConsole();
 builder.Services.AddSingleton<ITokenService>(new TokenService());
 builder.Services.AddSingleton<IUserRepositoryService>(new UserRepositoryService());
 builder.Services.AddAuthorization();
@@ -28,15 +31,20 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/", (Func<string>)(() => "This a demo for JWT Authentication using Minimalist Web API"));
 
-app.MapGet("/login", [AllowAnonymous] async (HttpContext http,ITokenService tokenService,IUserRepositoryService userRepositoryService) => {
+app.MapGet("/login", [AllowAnonymous] async (HttpContext http,ITokenService tokenService,
+    IUserRepositoryService userRepositoryService, ILogger<UserModel> logger) => {
+
+    logger.LogInformation("Entering login...");
     var userModel = await http.Request.ReadFromJsonAsync<UserModel>();
     var userDto = userRepositoryService.GetUser(userModel);
     if (userDto == null)
     {
+        logger.LogInformation("Authentication Failed !!!");
         http.Response.StatusCode = 401;
         return;
     }
 
+    logger.LogInformation("Authentication Succeeded !!!");
     var token = tokenService.BuildToken(builder.Configuration["Jwt:Key"], builder.Configuration["Jwt:Issuer"], userDto);
     await http.Response.WriteAsJsonAsync(new { token = token });
     return;
