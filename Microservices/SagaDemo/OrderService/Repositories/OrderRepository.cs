@@ -2,7 +2,12 @@
 
 namespace Saga.Services.OrderService.Repositories;
 
-public class OrderRepository : IRepository<Order>
+
+public interface IOrderRepository : IRepository<Order>
+{
+
+}
+public class OrderRepository : IOrderRepository
 {
     private ILogger<OrderRepository> _logger;   
     public OrderRepository(ILogger<OrderRepository> logger)
@@ -11,7 +16,7 @@ public class OrderRepository : IRepository<Order>
         SeedDatabase();
     }
 
-    private static Dictionary<Guid, Order> OrderPersistence { get; set; }
+    private static Dictionary<Guid, Order> OrderPersistence { get; set; } = null!;
     private void SeedDatabase()
     {
         OrderPersistence = new Dictionary<Guid, Order>()
@@ -36,7 +41,7 @@ public class OrderRepository : IRepository<Order>
         OrderPersistence.Remove(id);
     }
 
-    public Order Get(Guid id)
+    public Order? Get(Guid id)
     {
         _logger.LogInformation($"Retrieving Order #{id}");
         var order = OrderPersistence[id];
