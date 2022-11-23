@@ -21,7 +21,9 @@ app.UseHttpsRedirection();
 
 app.MapPost("/createorder", () =>
 {
-    Debug.WriteLine("Creating Order");
+    Debug.WriteLine("Creating Order...");
+
+    // Place Order (in pending state) and Raise OrderCreatedEvent
 }).WithName("CreateOrder")
   .WithOpenApi();
 
