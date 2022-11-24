@@ -4,9 +4,15 @@ public class Order
 {
     public Guid Id { get; set; }
     public Guid CustomerId { get; set; }
-    public IEnumerable<Guid> OrderItems { get; set; } = Enumerable.Empty<Guid>();
+    public IReadOnlyList<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     public OrderState State { get; set; }
 
+}
+
+public class OrderItem
+{
+    public Guid OrderItemId { get; set; }
+    public int Quantity { get; set; }
 }
 
 public enum OrderState

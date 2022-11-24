@@ -25,11 +25,11 @@ public class OrderRepository : IOrderRepository
             {
                 Id = Guid.Parse("d5694807-094a-40cb-8e37-8658d040d6af"),
                 CustomerId = Guid.Parse("58f37ff1-277c-4c6e-91b6-de08f024f598"),
-                OrderItems = new[]
+                OrderItems = new OrderItem[]
                 {
-                    Guid.Parse("d8e1c8fd-53bb-474d-bc63-2f59e46e58c1"),
-                    Guid.Parse("dd469fa8-44c4-44df-8b9c-7a13271707cf"),
-                    Guid.Parse("fee6fa44-bc29-488f-949f-fec5b75d899e"),
+                    new() { OrderItemId = Guid.Parse("d8e1c8fd-53bb-474d-bc63-2f59e46e58c1") , Quantity = 1 },
+                    new() { OrderItemId = Guid.Parse("dd469fa8-44c4-44df-8b9c-7a13271707cf"), Quantity = 2 },
+                    new() { OrderItemId = Guid.Parse("fee6fa44-bc29-488f-949f-fec5b75d899e") , Quantity = 3 }
                 },
                 State = OrderState.Completed
             }

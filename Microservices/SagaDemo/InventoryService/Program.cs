@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.OpenApi;
-using Saga.Services.InventoryService.Models;
-using System.Diagnostics;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddConsole();
@@ -24,10 +20,7 @@ app.UseHttpsRedirection();
 
 
 
-app.MapPost("/createorder", (CreateOrderRequest orderRequest, ILogger logger) =>
-{
-    logger.LogInformation($"OrderService.CreateOrder started with ");
-});
+
 
 var summaries = new[]
 {

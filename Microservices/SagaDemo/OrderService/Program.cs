@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.OpenApi;
+using Saga.Services.OrderService.Models;
 using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,12 +20,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/createorder", () =>
+app.MapPost("/createorder", (CreateOrderRequest orderRequest, ILogger logger) =>
 {
-    Debug.WriteLine("Creating Order...");
-
+    logger.LogInformation($"OrderService.CreateOrder started with ");
     // Place Order (in pending state) and Raise OrderCreatedEvent
-}).WithName("CreateOrder")
-  .WithOpenApi();
+});
+
+
+
 
 app.Run();
