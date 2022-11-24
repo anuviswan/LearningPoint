@@ -41,6 +41,7 @@ public class OrderService : IOrderService
     public Order CreateOrder(Order order)
     {
         _logger.LogInformation("Inserting new Order");
+        order.State = OrderState.Pending;
         return _orderRepository.Insert(order);
     }
 

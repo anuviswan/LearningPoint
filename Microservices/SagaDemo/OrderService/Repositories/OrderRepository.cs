@@ -63,7 +63,6 @@ public class OrderRepository : IOrderRepository
         _logger.LogInformation($"Adding new Order with State {OrderState.Pending}");
         var id = Guid.NewGuid();
         entity.Id = id;
-        entity.State = OrderState.Pending;
         OrderPersistence[id] = entity;
         return entity;
     }

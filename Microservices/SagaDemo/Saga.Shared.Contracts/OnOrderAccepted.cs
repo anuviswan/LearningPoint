@@ -1,6 +1,6 @@
 ﻿namespace Saga.Shared.Contracts;
 
-public class OrderAccepted
+public class OnOrderAccepted
 {
     public required Guid OrderId { get; init; }
 }

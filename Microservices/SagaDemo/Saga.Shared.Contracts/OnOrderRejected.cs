@@ -1,6 +1,6 @@
 ﻿namespace Saga.Shared.Contracts;
 
-public class OrderRejected
+public class OnOrderRejected
 {
     public required Guid OrderId { get; set; }
 
