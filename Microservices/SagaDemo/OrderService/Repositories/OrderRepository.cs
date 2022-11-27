@@ -16,10 +16,10 @@ public class OrderRepository : IOrderRepository
         SeedDatabase();
     }
 
-    private static Dictionary<Guid, Order> OrderPersistence { get; set; } = null!;
+    private static Dictionary<Guid, Order> OrderDatabase { get; set; } = null!;
     private void SeedDatabase()
     {
-        OrderPersistence = new Dictionary<Guid, Order>()
+        OrderDatabase = new Dictionary<Guid, Order>()
         {
             [Guid.Parse("d5694807-094a-40cb-8e37-8658d040d6af")] = new Order()
             {
@@ -38,13 +38,13 @@ public class OrderRepository : IOrderRepository
     public void Delete(Guid id)
     {
         _logger.LogInformation($"Deleting Order #{id}");
-        OrderPersistence.Remove(id);
+        OrderDatabase.Remove(id);
     }
 
     public Order? Get(Guid id)
     {
         _logger.LogInformation($"Retrieving Order #{id}");
-        var order = OrderPersistence[id];
+        var order = OrderDatabase[id];
 
         if(order is null)
         {
@@ -63,14 +63,14 @@ public class OrderRepository : IOrderRepository
         _logger.LogInformation($"Adding new Order with State {OrderState.Pending}");
         var id = Guid.NewGuid();
         entity.Id = id;
-        OrderPersistence[id] = entity;
+        OrderDatabase[id] = entity;
         return entity;
     }
 
     public Order? Update(Order entity)
     {
         _logger.LogInformation($"Updating Order #{entity.Id}");
-        if(OrderPersistence.TryGetValue(entity.Id, out var order))
+        if(OrderDatabase.TryGetValue(entity.Id, out var order))
         {
             order.State = entity.State;
             order.CustomerId = entity.CustomerId;
