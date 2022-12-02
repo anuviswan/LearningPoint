@@ -16,12 +16,12 @@ public class OrderItemRepository : IOrderItemRepository
         SeedDatabase();
     }
 
-    private Dictionary<Guid,OrderItem> OrderItemDatabase { get; set; }
+    private Dictionary<Guid,OrderItem> Database { get; set; }
 
     private void SeedDatabase()
     {
         _logger.LogInformation($"Seeding {nameof(OrderItemRepository)}....");
-        OrderItemDatabase = new Dictionary<Guid, OrderItem>
+        Database = new Dictionary<Guid, OrderItem>
         {
 
         };
@@ -29,9 +29,9 @@ public class OrderItemRepository : IOrderItemRepository
     public void Delete(Guid id)
     {
         _logger.LogInformation($"Deleting OrderItem #{id}");
-        if(OrderItemDatabase.ContainsKey(id))
+        if(Database.ContainsKey(id))
         {
-            OrderItemDatabase.Remove(id);
+            Database.Remove(id);
         }
     }
 
@@ -39,7 +39,7 @@ public class OrderItemRepository : IOrderItemRepository
     {
         _logger.LogInformation($"Retrieving OrderItem #{id}");
 
-        if(OrderItemDatabase.TryGetValue(id, out var item))
+        if(Database.TryGetValue(id, out var item))
         {
             return item;
         }
@@ -47,7 +47,7 @@ public class OrderItemRepository : IOrderItemRepository
         {
             _logger.LogError($"Item not found. OrderItem #{id}");
         }
-        return OrderItemDatabase[id];
+        return Database[id];
     }
 
     public OrderItem Insert(OrderItem entity)
@@ -56,12 +56,22 @@ public class OrderItemRepository : IOrderItemRepository
 
         var id = Guid.NewGuid();
         entity.Id = id;
-        OrderItemDatabase.Add(id, entity);
+        Database.Add(id, entity);
         return entity;
     }
 
     public OrderItem Update(OrderItem entity)
     {
-        throw new NotImplementedException();
+        _logger.LogInformation($"Updating OrderItem #{entity.Id}....");
+
+        if (Database.TryGetValue(entity.Id, out var order))
+        {
+            order.State = entity.State;
+            order.Quantity = entity.Quantity;
+
+            _logger.LogInformation($"Current State for OrderItem #{order.Id} : {order.State}");
+        }
+
+        return order;
     }
 }
