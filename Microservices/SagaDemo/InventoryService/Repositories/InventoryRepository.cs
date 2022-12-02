@@ -83,10 +83,9 @@ public class InventoryRepository : IInventoryRepository
 
         if (Database.TryGetValue(entity.Id, out var order))
         {
-            order.State = entity.State;
             order.Quantity = entity.Quantity;
 
-            _logger.LogInformation($"Current State for Inventory #{order.Id} : {order.State}");
+            _logger.LogInformation($"Current State for Inventory #{order.Id}");
         }
 
         return order;
