@@ -7,16 +7,18 @@ public interface IInventoryRepository : IRepository<Inventory>
 }
 public class InventoryRepository : IInventoryRepository
 {
-    public InventoryRepository()
+    private readonly ILogger<InventoryRepository> _logger;
+    public InventoryRepository(ILogger<InventoryRepository> logger)
     {
+        _logger = logger;
         SeedDatabase();
     }
 
-    private Dictionary<Guid, Inventory> InventoryDatabase { get; set; } = null!;
+    private Dictionary<Guid, Inventory> Database { get; set; } = null!;
 
     private void SeedDatabase()
     {
-        InventoryDatabase = new Dictionary<Guid, Inventory>()
+        Database = new Dictionary<Guid, Inventory>()
         {
             [Guid.Parse("71dff6b9-2592-468b-85f1-3acfe4e67daf")] = new Inventory() 
             {
@@ -47,22 +49,46 @@ public class InventoryRepository : IInventoryRepository
 
     public void Delete(Guid id)
     {
-        throw new NotImplementedException();
+       throw new NotImplementedException("Deleting Entity from Inventory not allowed");
     }
 
     public Inventory Get(Guid id)
     {
-        return InventoryDatabase[id];
+        _logger.LogInformation($"Retrieving Inventory #{id}");
+
+        if (Database.TryGetValue(id, out var item))
+        {
+            return item;
+        }
+        else
+        {
+            _logger.LogError($"Item not found. Inventory #{id}");
+        }
+        return Database[id];
     }
 
     public Inventory Insert(Inventory entity)
     {
-        throw new NotImplementedException();
+        _logger.LogInformation($"Adding new Inventory..");
+
+        var id = Guid.NewGuid();
+        entity.Id = id;
+        Database.Add(id, entity);
+        return entity;
     }
 
     public Inventory Update(Inventory entity)
     {
-        InventoryDatabase[entity.Id] = entity;
-        return InventoryDatabase[entity.Id];
+        _logger.LogInformation($"Updating Inventory #{entity.Id}....");
+
+        if (Database.TryGetValue(entity.Id, out var order))
+        {
+            order.State = entity.State;
+            order.Quantity = entity.Quantity;
+
+            _logger.LogInformation($"Current State for Inventory #{order.Id} : {order.State}");
+        }
+
+        return order;
     }
 }
