@@ -4,6 +4,7 @@ namespace Saga.Services.InventoryService.Repositories;
 
 public interface IOrderItemRepository : IRepository<OrderItem>
 {
+    IEnumerable<OrderItem> BulkInsert(IEnumerable<OrderItem> items);
 }
 
 
@@ -16,7 +17,7 @@ public class OrderItemRepository : IOrderItemRepository
         SeedDatabase();
     }
 
-    private Dictionary<Guid,OrderItem> Database { get; set; }
+    private Dictionary<Guid, OrderItem> Database { get; set; } = null!;
 
     private void SeedDatabase()
     {
@@ -73,5 +74,13 @@ public class OrderItemRepository : IOrderItemRepository
         }
 
         return order;
+    }
+
+    public IEnumerable<OrderItem> BulkInsert(IEnumerable<OrderItem> items)
+    {
+        foreach(var item in items)
+        {
+            yield return Insert(item);
+        }
     }
 }

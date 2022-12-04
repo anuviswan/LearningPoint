@@ -2,7 +2,7 @@
 
 public class OrderItem
 {
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
     public required Guid OrderId {get;set;}
 
     public required Guid ItemId { get;set;}

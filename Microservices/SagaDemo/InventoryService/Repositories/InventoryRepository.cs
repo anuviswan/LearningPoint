@@ -77,7 +77,7 @@ public class InventoryRepository : IInventoryRepository
         return entity;
     }
 
-    public Inventory Update(Inventory entity)
+    public Inventory? Update(Inventory entity)
     {
         _logger.LogInformation($"Updating Inventory #{entity.Id}....");
 
