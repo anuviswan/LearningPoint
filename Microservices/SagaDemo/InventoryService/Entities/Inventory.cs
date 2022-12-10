@@ -1,6 +1,6 @@
 ﻿namespace Saga.Services.InventoryService.Entities;
 
-public class Inventory
+public record Inventory
 {
     public required Guid Id { get; set; }
     public required string Name { get; set; }

@@ -7,6 +7,8 @@ namespace Saga.Services.InventoryService.Services;
 public interface IInventoryService
 {
     void ReserveStock(OrderDto orderDto);
+
+    void CancelOrder(Guid OrderId);
 }
 public class InventoryService : IInventoryService
 {
@@ -68,6 +70,21 @@ public class InventoryService : IInventoryService
             var current = stock[item.ItemId];
             current.Quantity -= item.TotalQty;
             _inventoryRepository.Update(current);
+        }
+    }
+
+    public void CancelOrder(Guid orderId)
+    {
+        _logger.LogInformation($"Cancelling Order #{orderId}");
+        var items = _orderItemRepository.DeleteForOrder(orderId);
+        
+        foreach(var item in items)
+        {
+            var inventoryItem = _inventoryRepository.Get(item.ItemId);
+            var updatedQty = inventoryItem.Quantity + item.Quantity;
+
+            _logger.LogInformation($"Updating Stock #{item.ItemId}");
+            _inventoryRepository.Update(inventoryItem with { Quantity = updatedQty });
         }
     }
 }

@@ -16,5 +16,6 @@ public class OrderItem
 public enum OrderItemState
 {
     Pending,
-    Accepted
+    Accepted,
+    Rejected
 }

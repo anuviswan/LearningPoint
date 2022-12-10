@@ -1,10 +1,13 @@
 ﻿using Saga.Services.InventoryService.Entities;
+using System.Data.Common;
 
 namespace Saga.Services.InventoryService.Repositories;
 
 public interface IOrderItemRepository : IRepository<OrderItem>
 {
     IEnumerable<OrderItem> BulkInsert(IEnumerable<OrderItem> items);
+
+    IEnumerable<OrderItem>  DeleteForOrder(Guid orderId);
 }
 
 
@@ -30,9 +33,23 @@ public class OrderItemRepository : IOrderItemRepository
     public void Delete(Guid id)
     {
         _logger.LogInformation($"Deleting OrderItem #{id}");
-        if(Database.ContainsKey(id))
+        if(Database.TryGetValue(id,out var orderItem))
         {
             Database.Remove(id);
+        }
+    }
+
+    public IEnumerable<OrderItem> DeleteForOrder(Guid orderId)
+    {
+        _logger.LogInformation($"Deleting Order Items for #{orderId}");
+
+        var orderItems = Database.Values.Where(x=>x.OrderId == orderId);
+
+        foreach(var item in orderItems)
+        {
+            item.State = OrderItemState.Rejected;
+            Delete(item.Id);
+            yield return item;
         }
     }
 

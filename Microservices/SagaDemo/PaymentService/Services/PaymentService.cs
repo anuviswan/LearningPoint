@@ -1,5 +1,7 @@
-﻿using Saga.Services.PaymentService.Entities;
+﻿using MassTransit;
+using Saga.Services.PaymentService.Entities;
 using Saga.Services.PaymentService.Repositories;
+using Saga.Shared.Contracts.Events;
 
 namespace Saga.Services.PaymentService.Services;
 
@@ -15,10 +17,14 @@ public class PaymentService : IPaymentService
 {
     private readonly ILogger<PaymentService> _logger;
     private readonly ICustomerPaymentRepository _customerPaymentRepository;
-    public PaymentService(ICustomerPaymentRepository customerPaymentRepository, ILogger<PaymentService> logger)
+    private readonly IPublishEndpoint _publishEndpoint;
+    public PaymentService(ICustomerPaymentRepository customerPaymentRepository,
+        IPublishEndpoint publishEndpoint,
+        ILogger<PaymentService> logger)
     {
         _logger = logger;
         _customerPaymentRepository = customerPaymentRepository;
+        _publishEndpoint = publishEndpoint;
     }
     public void MakePayment(CustomerPayment customerPayment)
     {
@@ -50,8 +56,18 @@ public class PaymentService : IPaymentService
         {
             var payment = _customerPaymentRepository.GetForOrderId(orderId);
             var updatedPayment = payment with { State = PaymentState.Rejected };
-            _customerPaymentRepository.Update(updatedPayment);
-            _logger.LogInformation($"Cancelling payment for OrderId #{orderId}");
+            var result = _customerPaymentRepository.Update(updatedPayment);
+
+            if(result is { State : PaymentState.Failed or PaymentState.Rejected}) 
+            {
+                _publishEndpoint.Publish(new PaymentFailed
+                {
+                    OrderId = orderId,
+                    Reason = "Payment Cancelled"
+                });
+            }
+
+            _logger.LogInformation($"Cancelled payment for OrderId #{orderId}");
         }
         catch
         {
