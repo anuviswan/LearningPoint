@@ -1,6 +1,4 @@
-﻿using MassTransit;
-
-namespace Saga.Services.PaymentService.Entities;
+﻿namespace Saga.Services.PaymentService.Entities;
 
 public class CustomerPayment
 {
