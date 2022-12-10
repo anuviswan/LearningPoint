@@ -20,5 +20,6 @@ public enum OrderState
     Pending,
     Accepted,
     Rejected,
-    Completed
+    Completed,
+    Failed
 }

@@ -8,7 +8,7 @@ public interface IOrderService
 {
     Order CreateOrder(Order order);
     Order AcceptOrder(Guid id);
-    Order RejectOrdeR(Guid id);
+    Order RejectOrder(Guid id);
 }
 public class OrderService : IOrderService
 {
@@ -45,9 +45,9 @@ public class OrderService : IOrderService
         return _orderRepository.Insert(order);
     }
 
-    public Order RejectOrdeR(Guid id)
+    public Order RejectOrder(Guid id)
     {
         _logger.LogInformation($"Preparing to reject Order #{id}");
-        return UpdateOrder(id, OrderState.Accepted);
+        return UpdateOrder(id, OrderState.Rejected);
     }
 }
