@@ -4,6 +4,7 @@ namespace Saga.Services.InventoryService.Repositories;
 
 public interface IInventoryRepository : IRepository<Inventory>
 {
+    IDictionary<Guid, Inventory> RetrieveStock(IEnumerable<Guid> itemIds);
 }
 public class InventoryRepository : IInventoryRepository
 {
@@ -65,6 +66,11 @@ public class InventoryRepository : IInventoryRepository
             _logger.LogError($"Item not found. Inventory #{id}");
         }
         return Database[id];
+    }
+
+    public IDictionary<Guid, Inventory> RetrieveStock(IEnumerable<Guid> itemIds)
+    {
+        return itemIds.Select(x => Get(x)).ToDictionary(x=>x.Id, y=> y);
     }
 
     public Inventory Insert(Inventory entity)
