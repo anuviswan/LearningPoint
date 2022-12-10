@@ -2,7 +2,7 @@
 
 public record CustomerPayment
 {
-    public required Guid Id { get; init; }
+    public Guid Id { get; init; }
     public required Guid OrderId { get; init; }
 
     public required Guid CustomerId { get; init; }

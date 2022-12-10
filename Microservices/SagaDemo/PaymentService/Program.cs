@@ -1,6 +1,9 @@
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Saga.Services.PaymentService.Entities;
 using Saga.Services.PaymentService.Models;
+using Saga.Services.PaymentService.Repositories;
+using Saga.Services.PaymentService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +29,11 @@ builder.Services.AddMassTransit(mt => mt.AddMassTransit(x =>
 }));
 
 
+// Setup Services
+builder.Services.AddSingleton<IPaymentService, PaymentService>();
+builder.Services.AddSingleton<ICustomerPaymentRepository, CustomerPaymentRepository>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,11 +47,20 @@ app.UseHttpsRedirection();
 
 app.MapPost("/makepayment", (MakePaymentRequest paymentRequest,
     [FromServices] ILogger<Program> logger,
+    [FromServices] IPaymentService paymentService,
     [FromServices] IPublishEndpoint publishEndPoint) =>
 {
     logger.LogInformation($"PaymentService.MakePayment started with ");
 
+    var payment = new CustomerPayment
+    {
+        CustomerId = paymentRequest.CustomerId,
+        Amount = paymentRequest.Amount,
+        OrderId = paymentRequest.OrderId,
+        State = PaymentState.Pending,
+    };
 
+    paymentService.MakePayment(payment);
 });
 
 

@@ -2,7 +2,11 @@
 
 namespace Saga.Services.PaymentService.Repositories;
 
-public class CustomerPaymentRepository : IRepository<CustomerPayment>
+public interface ICustomerPaymentRepository : IRepository<CustomerPayment>
+{
+
+}
+public class CustomerPaymentRepository : ICustomerPaymentRepository
 {
     private readonly ILogger<CustomerPaymentRepository> _logger;
     public CustomerPaymentRepository(ILogger<CustomerPaymentRepository> logger)
