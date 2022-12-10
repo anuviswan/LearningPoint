@@ -1,6 +1,6 @@
 ﻿namespace Saga.Services.PaymentService.Entities;
 
-public class CustomerPayment
+public record CustomerPayment
 {
     public required Guid Id { get; init; }
     public required Guid OrderId { get; init; }

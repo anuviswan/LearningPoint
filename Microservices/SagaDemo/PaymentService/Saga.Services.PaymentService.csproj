@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Consumers\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
