@@ -1,4 +1,6 @@
 using MassTransit;
+using Microsoft.AspNetCore.Mvc;
+using Saga.Services.PaymentService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +36,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapPost("/makepayment", (MakePaymentRequest paymentRequest,
+    [FromServices] ILogger<Program> logger,
+    [FromServices] IPublishEndpoint publishEndPoint) =>
+{
+    logger.LogInformation($"PaymentService.MakePayment started with ");
+
+
+});
+
 
 app.Run();
 
