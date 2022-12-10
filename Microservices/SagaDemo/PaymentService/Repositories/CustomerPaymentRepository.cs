@@ -1,10 +1,11 @@
 ﻿using Saga.Services.PaymentService.Entities;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Saga.Services.PaymentService.Repositories;
 
 public interface ICustomerPaymentRepository : IRepository<CustomerPayment>
 {
-
+    CustomerPayment GetForOrderId(Guid orderId);
 }
 public class CustomerPaymentRepository : ICustomerPaymentRepository
 {
@@ -29,6 +30,16 @@ public class CustomerPaymentRepository : ICustomerPaymentRepository
     {
         _logger.LogInformation($"Retrieving Payment Information #{id}");
         return Database[id];
+    }
+
+    public CustomerPayment GetForOrderId(Guid orderId)
+    {
+        _logger.LogInformation($"Retrieving Payment Information for OrderId ${orderId}");
+        var payment = Database.Values.SingleOrDefault(x => x.OrderId == orderId);
+
+        if (payment is null) throw new ArgumentException($"Unable to find Payment for Order #{orderId}");
+
+        return payment;
     }
 
     public CustomerPayment Insert(CustomerPayment entity)
