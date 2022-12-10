@@ -14,6 +14,9 @@ builder.Services.AddSwaggerGen();
 
 //set up RabbitMq
 var rabbitMqSettings = builder.Configuration.GetSection(nameof(RabbitMqSettings)).Get<RabbitMqSettings>();
+
+if (rabbitMqSettings is null) throw new Exception("Unable to find RabbitMq Settings");
+
 builder.Services.AddMassTransit(mt => mt.AddMassTransit(x => 
 {
     x.UsingRabbitMq((cntxt, cfg) => {

@@ -9,9 +9,12 @@ namespace Saga.Services.InventoryService.Consumers;
 public class OrderCreationInitiatedConsumer : IConsumer<OrderCreationInitiated>
 {
     private readonly IInventoryService _inventoryService;
-    public OrderCreationInitiatedConsumer([FromServices]IInventoryService inventoryService)
+    private readonly IPublishEndpoint _publishEndPoint;
+    public OrderCreationInitiatedConsumer([FromServices]IInventoryService inventoryService,
+                                          [FromServices] IPublishEndpoint publishEndPoint)
     {
         _inventoryService = inventoryService;
+        _publishEndPoint = publishEndPoint;
     }
     public Task Consume(ConsumeContext<OrderCreationInitiated> context)
     {
@@ -27,8 +30,12 @@ public class OrderCreationInitiatedConsumer : IConsumer<OrderCreationInitiated>
         }
         catch(Exception ex)
         {
-
+            _publishEndPoint.Publish(new OrderCreationFailed
+            {
+                OrderId = context.Message.OrderId
+            });
         }
-        throw new NotImplementedException();
+
+        return Task.CompletedTask;
     }
 }

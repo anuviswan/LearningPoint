@@ -2,15 +2,15 @@
 
 public record OrderCreationInitiated
 {
-    public Guid OrderId { get; set; }
+    public Guid OrderId { get; init; }
 
-    public Guid CustomerId { get; set; }
-    public IReadOnlyList<OrderItemEntry> OrderItems { get; set; } = null!;
+    public Guid CustomerId { get; init; }
+    public IReadOnlyList<OrderItemEntry> OrderItems { get; init; } = null!;
 }
 
 
 public record OrderItemEntry
 {
-    public Guid ItemId { get; set; }
-    public int Qty { get; set; }
+    public Guid ItemId { get; init; }
+    public int Qty { get; init; }
 }
