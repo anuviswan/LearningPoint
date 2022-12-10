@@ -1,4 +1,5 @@
-﻿using Saga.Services.InventoryService.Entities;
+﻿using Saga.Services.InventoryService.Dtos;
+using Saga.Services.InventoryService.Entities;
 
 namespace Saga.Services.InventoryService.Repositories;
 
@@ -70,6 +71,7 @@ public class InventoryRepository : IInventoryRepository
 
     public IDictionary<Guid, Inventory> RetrieveStock(IEnumerable<Guid> itemIds)
     {
+        _logger.LogInformation($"Retrieve Stock....");
         return itemIds.Select(x => Get(x)).ToDictionary(x=>x.Id, y=> y);
     }
 
@@ -83,7 +85,7 @@ public class InventoryRepository : IInventoryRepository
         return entity;
     }
 
-    public Inventory? Update(Inventory entity)
+    public Inventory Update(Inventory entity)
     {
         _logger.LogInformation($"Updating Inventory #{entity.Id}....");
 

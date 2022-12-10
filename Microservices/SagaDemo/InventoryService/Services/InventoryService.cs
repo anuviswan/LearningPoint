@@ -13,13 +13,17 @@ public class InventoryService : IInventoryService
     private readonly IInventoryRepository _inventoryRepository;
     private readonly IOrderItemRepository _orderItemRepository;
     private readonly ILogger<InventoryService> _logger;
-    public InventoryService(IInventoryRepository inventoryRepository, IOrderItemRepository orderItemRepository,ILogger<InventoryService> logger)
+    public InventoryService(IInventoryRepository inventoryRepository, 
+        IOrderItemRepository orderItemRepository,
+        ILogger<InventoryService> logger)
     {
         (_inventoryRepository,_orderItemRepository) = (inventoryRepository, orderItemRepository);   
         _logger = logger;
     }
     public void ReserveStock(OrderDto orderDto)
     {
+        _logger.LogInformation($"Reserve stocks for Order #{orderDto.OrderId}");
+
         ArgumentNullException.ThrowIfNull(orderDto, nameof(orderDto));
         ArgumentNullException.ThrowIfNull(orderDto.Items, nameof(orderDto.Items));
 
