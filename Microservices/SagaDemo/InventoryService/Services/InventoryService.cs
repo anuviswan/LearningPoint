@@ -29,7 +29,7 @@ public class InventoryService : IInventoryService
         {
             orderItemList.Add(new()
             {
-                OrderId = orderDto.Id,
+                OrderId = orderDto.OrderId,
                 ItemId = item.Key,
                 Quantity = item.Value,
                 State = OrderItemState.Pending

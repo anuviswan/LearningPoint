@@ -2,7 +2,7 @@
 
 public record OrderDto
 {
-    public Guid Id { get; set; }
+    public Guid OrderId { get; set; }
     public Dictionary<Guid, int> Items { get; set; } = new Dictionary<Guid, int>();
 
 }
