@@ -9,6 +9,8 @@ public interface IOrderService
     Order CreateOrder(Order order);
     Order AcceptOrder(Guid id);
     Order RejectOrder(Guid id);
+
+    Order SetOrderAsFailed(Guid id);
 }
 public class OrderService : IOrderService
 {
@@ -49,5 +51,11 @@ public class OrderService : IOrderService
     {
         _logger.LogInformation($"Preparing to reject Order #{id}");
         return UpdateOrder(id, OrderState.Rejected);
+    }
+
+    public Order SetOrderAsFailed(Guid id)
+    {
+        _logger.LogInformation($"Order (#{id}) Creation Failed.");
+        return UpdateOrder(id, OrderState.Failed);
     }
 }

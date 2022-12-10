@@ -9,7 +9,9 @@ builder.Logging.AddConsole();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var rabbitMqSettings = builder.Configuration.GetSection(nameof(RabbitMqSettings)).Get<RabbitMqSettings>();
+var rabbitMqSettings = builder.Configuration
+                              .GetSection(nameof(RabbitMqSettings))
+                              .Get<RabbitMqSettings>();
 
 if (rabbitMqSettings is null) throw new Exception("Unable to find RabbitMq Settings");
 
