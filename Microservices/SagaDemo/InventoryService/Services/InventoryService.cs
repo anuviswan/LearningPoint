@@ -9,6 +9,10 @@ public interface IInventoryService
     void ReserveStock(OrderDto orderDto);
 
     void CancelOrder(Guid OrderId);
+
+    IEnumerable<Inventory> GetStock();
+
+    IEnumerable<OrderItem> GetReservedStock();
 }
 public class InventoryService : IInventoryService
 {
@@ -86,5 +90,17 @@ public class InventoryService : IInventoryService
             _logger.LogInformation($"Updating Stock #{item.ItemId}");
             _inventoryRepository.Update(inventoryItem with { Quantity = updatedQty });
         }
+    }
+
+    public IEnumerable<Inventory> GetStock()
+    {
+        _logger.LogInformation($"Retrieving Current Stock");
+        return _inventoryRepository.GetStockStatus();
+    }
+
+    public IEnumerable<OrderItem> GetReservedStock()
+    {
+        _logger.LogInformation($"Retrieving Reserved Stock");
+        return _orderItemRepository.GetReservedStock();
     }
 }

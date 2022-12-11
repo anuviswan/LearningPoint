@@ -1,4 +1,5 @@
-﻿using Saga.Services.InventoryService.Dtos;
+﻿using MassTransit.Testing;
+using Saga.Services.InventoryService.Dtos;
 using Saga.Services.InventoryService.Entities;
 
 namespace Saga.Services.InventoryService.Repositories;
@@ -6,6 +7,7 @@ namespace Saga.Services.InventoryService.Repositories;
 public interface IInventoryRepository : IRepository<Inventory>
 {
     IDictionary<Guid, Inventory> RetrieveStock(IEnumerable<Guid> itemIds);
+    IEnumerable<Inventory> GetStockStatus();
 }
 public class InventoryRepository : IInventoryRepository
 {
@@ -69,6 +71,10 @@ public class InventoryRepository : IInventoryRepository
         return Database[id];
     }
 
+    public IEnumerable<Inventory> GetStockStatus()
+    {
+        return Database.Values;
+    }
     public IDictionary<Guid, Inventory> RetrieveStock(IEnumerable<Guid> itemIds)
     {
         _logger.LogInformation($"Retrieve Stock....");

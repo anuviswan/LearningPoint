@@ -8,6 +8,8 @@ public interface IOrderItemRepository : IRepository<OrderItem>
     IEnumerable<OrderItem> BulkInsert(IEnumerable<OrderItem> items);
 
     IEnumerable<OrderItem>  DeleteForOrder(Guid orderId);
+
+    IEnumerable<OrderItem> GetReservedStock();
 }
 
 
@@ -95,9 +97,18 @@ public class OrderItemRepository : IOrderItemRepository
 
     public IEnumerable<OrderItem> BulkInsert(IEnumerable<OrderItem> items)
     {
+        _logger.LogInformation($"Updating Stock for Order #{string.Join(",", items.Select(c=>c.OrderId).Distinct())}");
         foreach(var item in items)
         {
+            _logger.LogInformation($"Updating stock for #{item.ItemId} in Order #{item.OrderId}");
             yield return Insert(item);
         }
+    }
+
+    public IEnumerable<OrderItem> GetReservedStock()
+    {
+        _logger.LogInformation($"Retrieving all reserved stock");
+
+        return Database.Values;
     }
 }

@@ -1,4 +1,8 @@
 using MassTransit;
+using Microsoft.AspNetCore.Mvc;
+using Saga.Services.InventoryService.Models;
+using Saga.Services.InventoryService.Repositories;
+using Saga.Services.InventoryService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +29,13 @@ builder.Services.AddMassTransit(mt => mt.AddMassTransit(x =>
     });
 }));
 
+
+//set up Services
+builder.Services.AddSingleton<IInventoryService, InventoryService>();
+builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
+builder.Services.AddSingleton<IOrderItemRepository, OrderItemRepository>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,6 +46,42 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+
+app.MapGet("/getstock", ([FromServices] IInventoryService inventoryService,
+    [FromServices]ILogger<Program> logger) =>{
+
+        logger.LogInformation($"Retrieving current stock status");
+        var stock = inventoryService.GetStock();
+        return Results.Ok(stock.Select(x => new GetStockStatusResponse
+        {
+            ItemId = x.Id,
+            Name = x.Name,
+            Quantity = x.Quantity
+        }));
+});
+
+
+app.MapGet("/getreservedstock", ([FromServices] IInventoryService inventory,
+    [FromServices]ILogger<Program> logger) =>
+{
+    logger.LogInformation($"Retrieving reserved stock status");
+
+    var stock = inventory.GetReservedStock();
+
+    return Results.Ok(stock.GroupBy(x => x.OrderId).Select(x =>
+    new GetReservedStockStatusResponse
+    {
+        OrderId = x.Key,
+        ReservedStockItems = x.Select(c=> new ReservedStockItemResponse
+        {
+            ItemId= c.Id,
+            Quantity= c.Quantity,
+            State  = c.State
+        })
+    }));
+});
+
 app.Run();
 
 
