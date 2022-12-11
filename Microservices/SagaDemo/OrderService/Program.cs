@@ -70,10 +70,52 @@ app.MapPost("/createorder", (CreateOrderRequest orderRequest,
             }).ToList().AsReadOnly()
         });
     }
+
+    return Results.Ok(new CreateOrderResponse
+    {
+        OrderId = currentOrder.Id,
+        CustomerId = currentOrder.CustomerId,
+        State = currentOrder.State,
+    });
     
 });
 
 
+app.MapGet("/getall", ([FromServices]IOrderService orderService, [FromServices]ILogger<Program> logger) =>
+{
+    logger.LogInformation($"Retrieving all order items");
+
+    var result = orderService.GetAll();
+    var response = result.Select(x => new GetAllOrderResponse
+    {
+        OrderId = x.Id,
+        CustomerId = x.CustomerId,
+        State = x.State
+    });
+
+    return response;
+});
+
+
+app.MapGet("/getbyid", (Guid orderId, [FromServices] IOrderService orderService, [FromServices] ILogger<Program> logger) =>
+{
+    logger.LogInformation($"Retrieving order info for #{orderId}");
+    try
+    {
+        var result = orderService.GetById(orderId);
+        return Results.Ok(new GetOrderByIdResponse
+        {
+            OrderdId = result.Id,
+            CustomerId = result.CustomerId,
+            State = result.State
+        });
+    }
+    catch(Exception ex) 
+    {
+        logger.LogError($"Error Retrieving Order #{orderId} - [{ex.Message}]");
+        return Results.NotFound("OrderId not found !!");
+    }
+});
 
 
 app.Run();

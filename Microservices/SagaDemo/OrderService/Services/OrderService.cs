@@ -6,11 +6,12 @@ namespace Saga.Services.OrderService.Services;
 
 public interface IOrderService
 {
+    Order GetById(Guid orderId);
     Order CreateOrder(Order order);
     Order AcceptOrder(Guid id);
     Order RejectOrder(Guid id);
-
     Order SetOrderAsFailed(Guid id);
+    IEnumerable<Order> GetAll();
 }
 public class OrderService : IOrderService
 {
@@ -22,6 +23,24 @@ public class OrderService : IOrderService
         _logger = logger;
     }
 
+    public Order GetById(Guid orderId)
+    {
+        _logger.LogInformation($"Retrieve order information for #{orderId}");
+        var result = _orderRepository.Get(orderId);
+
+        if (result is null)
+        {
+            _logger.LogInformation($"OrderId #{orderId} not found");
+            throw new Exception($"OrderId #{orderId} not found");
+        }
+
+        return result;
+    }
+    public IEnumerable<Order> GetAll()
+    {
+        _logger.LogInformation($"Retrieving all orders");
+        return _orderRepository.GetAll();
+    }
     public Order AcceptOrder(Guid id)
     {
         _logger.LogInformation($"Preparing to accept Order #{id}");

@@ -35,6 +35,11 @@ public class OrderRepository : IOrderRepository
             }
         };
     }
+
+    public IEnumerable<Order> GetAll()
+    {
+        return Database.Values;
+    }
     public void Delete(Guid id)
     {
         _logger.LogInformation($"Deleting Order #{id}");
