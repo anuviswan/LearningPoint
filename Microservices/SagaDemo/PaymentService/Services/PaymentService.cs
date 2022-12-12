@@ -8,10 +8,9 @@ namespace Saga.Services.PaymentService.Services;
 public interface IPaymentService
 {
     void MakePayment(CustomerPayment customerPayment);
-
     void ConfirmPayment(Guid orderId);
-
     void CancelPayment(Guid orderId);
+    IEnumerable<CustomerPayment> GetAll();
 }
 public class PaymentService : IPaymentService
 {
@@ -73,6 +72,11 @@ public class PaymentService : IPaymentService
         {
             throw new Exception($"Unable to cancel payment for OrderId #{orderId}");
         }
+    }
 
+    public IEnumerable<CustomerPayment> GetAll()
+    {
+        _logger.LogInformation($"Retrieving all payment information");
+        return _customerPaymentRepository.GetAll();
     }
 }

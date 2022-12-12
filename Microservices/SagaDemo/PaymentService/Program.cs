@@ -64,21 +64,28 @@ app.MapPost("/makepayment", (MakePaymentRequest paymentRequest,
 
 
 app.MapPost("/confirmpayment", (ConfirmPaymentRequest paymentRequest,
-    [FromServices] ILogger<Program> Logger,
+    [FromServices] ILogger<Program> logger,
     [FromServices] IPaymentService paymentService) => 
 {
-    Logger.LogInformation($"Confirm Payment for OrderId #{paymentRequest.OrderId}");
+    logger.LogInformation($"Confirm Payment for OrderId #{paymentRequest.OrderId}");
     paymentService.ConfirmPayment(paymentRequest.OrderId);
 });
 
 app.MapPost("/cancelpayment", (CancelPaymentRequest paymentRequest,
-    [FromServices] ILogger<Program> Logger,
+    [FromServices] ILogger<Program> logger,
     [FromServices] IPaymentService paymentService) =>
 {
-    Logger.LogInformation($"Cancel Payment for OrderId #{paymentRequest.OrderId}");
+    logger.LogInformation($"Cancel Payment for OrderId #{paymentRequest.OrderId}");
     paymentService.CancelPayment(paymentRequest.OrderId);
 });
 
+
+app.MapGet("/getallpayment", ([FromServices] IPaymentService paymentService,
+    [FromServices] ILogger<Program> logger) =>
+{
+    logger.LogInformation($"Retrieving all payment information");
+    return Results.Ok(paymentService.GetAll());
+});
 
 app.Run();
 

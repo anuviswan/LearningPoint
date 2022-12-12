@@ -5,6 +5,7 @@ namespace Saga.Services.PaymentService.Repositories;
 
 public interface ICustomerPaymentRepository : IRepository<CustomerPayment>
 {
+    IEnumerable<CustomerPayment> GetAll();
     CustomerPayment GetForOrderId(Guid orderId);
 }
 public class CustomerPaymentRepository : ICustomerPaymentRepository
@@ -30,6 +31,12 @@ public class CustomerPaymentRepository : ICustomerPaymentRepository
     {
         _logger.LogInformation($"Retrieving Payment Information #{id}");
         return Database[id];
+    }
+
+    public IEnumerable<CustomerPayment> GetAll()
+    {
+        _logger.LogInformation($"Retrieving all payment information");
+        return Database.Values;
     }
 
     public CustomerPayment GetForOrderId(Guid orderId)
