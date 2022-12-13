@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  saga.services.inventoryservice:
+    image: ${DOCKER_REGISTRY-}sagaservicesinventoryservice
+    build:
+      context: .
+      dockerfile: InventoryService/Dockerfile
+
+  saga.services.orderservice:
+    image: ${DOCKER_REGISTRY-}sagaservicesorderservice
+    build:
+      context: .
+      dockerfile: OrderService/Dockerfile
+
+
+  saga.services.paymentservice:
+    image: ${DOCKER_REGISTRY-}sagaservicespaymentservice
+    build:
+      context: .
+      dockerfile: PaymentService/Dockerfile
+
+  saga.demo.rabbitmq:
+    image: "rabbitmq:3.10.6-management-alpine"
+    hostname: "sagademo"
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+    environment:
+        RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-admin}
+        RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-admin}
+
