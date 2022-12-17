@@ -10,10 +10,10 @@ Console.WriteLine($"{nameof(Kiwi)}: Can Fly - {Kiwi.CanFly()}");
 //    Console.WriteLine(valGen++);
 
 
-var fibGenOne = new FibGen { Previous = 0, Current = 1 };
+var fibGenOne = new FibGen();
 
 for(var i = 0; i < 10;i++)
-    Console.WriteLine(fibGenOne ++);
+    Console.Write($"{fibGenOne++}, ");
 
 
 

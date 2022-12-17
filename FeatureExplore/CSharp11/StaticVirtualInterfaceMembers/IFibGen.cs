@@ -32,11 +32,14 @@ namespace StaticVirtualInterfaceMembers
 
     public struct FibGen : IGen<FibGen>
     {
-        public int Previous { get; set; }
+        public int Previous { get; init; }
+        public int Current { get; init; }
 
-        public int Current { get; set; }
-
-
+        public FibGen()
+        {
+            Previous = 0;
+            Current = 0;
+        }
         public override string ToString()
         {
             return Current.ToString();
@@ -44,20 +47,18 @@ namespace StaticVirtualInterfaceMembers
 
         public static FibGen operator ++(FibGen val)
         {
-            return val with 
-            { 
-                Previous = val.Current,
-                Current = val.Previous + val.Current 
-            };
+            if (val.Previous == 0 && val.Current == 0)
+                return val with
+                {
+                    Previous = 0,
+                    Current = 1
+                };
+            else
+                return val with 
+                { 
+                    Previous = val.Current,
+                    Current = val.Previous + val.Current
+                };
         }
     }
-
-    //public class Fibonacii : IFibGen<Fibonacii>
-    //{
-    //    public int Value { get; set; }
-    //    public static Fibonacii operator ++(Fibonacii first, Fibonacii second) 
-    //    { 
-    //        return default; 
-    //    }
-    //}
 }
