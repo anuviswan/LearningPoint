@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StaticVirtualInterfaceMembers
 {
-    public interface IGen<T>  where T : IGen<T>
+    public interface ISequenceGenerator<T>  where T : ISequenceGenerator<T>
     {
         static abstract T operator ++(T val);
     }
@@ -15,7 +15,7 @@ namespace StaticVirtualInterfaceMembers
 
    
 
-    public struct ValGen : IGen<ValGen>
+    public struct ValGen : ISequenceGenerator<ValGen>
     {
         public int Value { get; set; }
         public static ValGen operator ++(ValGen val)
@@ -30,29 +30,16 @@ namespace StaticVirtualInterfaceMembers
     }
 
 
-    public struct FibGen : IGen<FibGen>
+    public struct FibonacciGenerator : ISequenceGenerator<FibonacciGenerator>
     {
         public int Previous { get; init; }
         public int Current { get; init; }
+        public override string ToString() => Current.ToString();
 
-        public FibGen()
+        public static FibonacciGenerator operator ++(FibonacciGenerator val)
         {
-            Previous = 0;
-            Current = 0;
-        }
-        public override string ToString()
-        {
-            return Current.ToString();
-        }
-
-        public static FibGen operator ++(FibGen val)
-        {
-            if (val.Previous == 0 && val.Current == 0)
-                return val with
-                {
-                    Previous = 0,
-                    Current = 1
-                };
+            if (val is { Previous: 0, Current: 0})
+                return val with { Current = 1 };
             else
                 return val with 
                 { 

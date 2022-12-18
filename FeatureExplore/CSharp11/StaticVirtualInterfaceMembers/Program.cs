@@ -10,7 +10,7 @@ Console.WriteLine($"{nameof(Kiwi)}: Can Fly - {Kiwi.CanFly()}");
 //    Console.WriteLine(valGen++);
 
 
-var fibGenOne = new FibGen();
+var fibGenOne = new FibonacciGenerator();
 
 for(var i = 0; i < 10;i++)
     Console.Write($"{fibGenOne++}, ");
