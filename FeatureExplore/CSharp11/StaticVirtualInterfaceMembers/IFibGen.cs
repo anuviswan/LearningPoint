@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StaticVirtualInterfaceMembers
+﻿namespace StaticVirtualInterfaceMembers
 {
     public interface ISequenceGenerator<T>  where T : ISequenceGenerator<T>
     {
