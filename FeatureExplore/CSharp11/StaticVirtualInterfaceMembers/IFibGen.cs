@@ -2,7 +2,7 @@
 {
     public interface ISequenceGenerator<T>  where T : ISequenceGenerator<T>
     {
-        static abstract T operator ++(T val);
+       static abstract T operator ++(T val);
     }
 
 
