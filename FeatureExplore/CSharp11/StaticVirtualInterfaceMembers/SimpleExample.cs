@@ -1,16 +1,15 @@
 ﻿namespace StaticVirtualInterfaceMembers
 {
-    public interface INumeric<T> where T : INumeric<T>  
+    public interface INumeric<TDerieved> where TDerieved : INumeric<TDerieved>  
     {
-        static abstract T Zero { get; }
-        static abstract T One { get; }
+        static abstract TDerieved Zero { get; }
+        static abstract TDerieved One { get; }
 
-        static T Average(T a, T b) => (a + b)/ (T.One + T.One); 
-        static abstract T operator +(T a, T b);
+        static TDerieved Average(TDerieved a, TDerieved b) => (a + b)/ (TDerieved.One + TDerieved.One); 
+        static abstract TDerieved operator +(TDerieved a, TDerieved b);
 
-        static abstract T operator /(T a, T b);
+        static abstract TDerieved operator /(TDerieved a, TDerieved b);
     }
-
 
     public record CustomNumber : INumeric<CustomNumber>
     {
