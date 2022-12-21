@@ -5,6 +5,12 @@ Console.WriteLine($"{nameof(Parrot)}: Can Fly - {Parrot.CanFly()}");
 Console.WriteLine($"{nameof(Kiwi)}: Can Fly - {Kiwi.CanFly()}");
 
 
+CustomNumber customNumber1 = new() { Value = 1 };
+CustomNumber customNumber2 = new() { Value = 3 };
+
+Console.WriteLine($"Average : {INumeric<CustomNumber>.Average(customNumber1, customNumber2)}");
+
+
 
 //var valGen = new ValGen { Value = 2 };
 //for (var i = 0; i < 10; i++)
