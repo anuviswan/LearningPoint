@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StaticVirtualInterfaceMembers
 {
-    internal interface IFruit<TDerieved>
+    internal interface IFruit<TDerieved> where TDerieved : IFruit<TDerieved>
     {
         static abstract TDerieved CreateInstance();
     }
@@ -18,8 +18,10 @@ namespace StaticVirtualInterfaceMembers
         public void SayHello() => Console.WriteLine("Hello");
     }
 
-    internal class Orange : IFruit<int>
-    {
-        public static int CreateInstance() => 0;
-    }
+    //internal class Orange : IFruit<int>
+    //{
+    //    public static int CreateInstance() => 0;
+
+    //    public void SayHello() => Console.WriteLine("Hello");
+    //}
 }
