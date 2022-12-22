@@ -3,9 +3,11 @@
 Console.WriteLine("Demo code for exploring Static Virtual Members in Interface");
 Console.WriteLine($"{nameof(Parrot)}: Can Fly - {Parrot.CanFly()}");
 Console.WriteLine($"{nameof(Kiwi)}: Can Fly - {Kiwi.CanFly()}");
-
 var parrot = new Parrot();
-var parrotClone = parrot.Clone();
+
+
+var fooBar = Apple.CreateInstance();
+fooBar.SayHello();
 
 CustomNumber customNumber1 = new() { Value = 1 };
 CustomNumber customNumber2 = new() { Value = 3 };
