@@ -10,7 +10,7 @@ var fooBar = Apple.CreateInstance();
 fooBar.SayHello();
 
 CustomNumber customNumber1 = new() { Value = 1 };
-CustomNumber customNumber2 = new() { Value = 3 };
+CustomNumber customNumber2 = new() { Value = 5 };
 
 Console.WriteLine($"Average : {INumeric<CustomNumber>.Average(customNumber1, customNumber2)}");
 
