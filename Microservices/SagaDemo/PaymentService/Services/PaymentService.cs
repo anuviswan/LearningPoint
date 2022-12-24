@@ -16,14 +16,14 @@ public class PaymentService : IPaymentService
 {
     private readonly ILogger<PaymentService> _logger;
     private readonly ICustomerPaymentRepository _customerPaymentRepository;
-    private readonly IPublishEndpoint _publishEndpoint;
+    private readonly IBus _bus;
     public PaymentService(ICustomerPaymentRepository customerPaymentRepository,
-        IPublishEndpoint publishEndpoint,
+        IBus bus,
         ILogger<PaymentService> logger)
     {
         _logger = logger;
         _customerPaymentRepository = customerPaymentRepository;
-        _publishEndpoint = publishEndpoint;
+        _bus = bus;
     }
     public void MakePayment(CustomerPayment customerPayment)
     {
@@ -59,7 +59,7 @@ public class PaymentService : IPaymentService
 
             if(result is { State : PaymentState.Failed or PaymentState.Rejected}) 
             {
-                _publishEndpoint.Publish(new PaymentFailed
+                _bus.Publish(new PaymentFailed
                 {
                     OrderId = orderId,
                     Reason = "Payment Cancelled"

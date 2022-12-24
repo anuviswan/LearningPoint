@@ -18,10 +18,6 @@ var rabbitMqSettings = builder.Configuration
 
 if (rabbitMqSettings is null) throw new Exception("Unable to find RabbitMq Settings");
 
-// Setup Services
-builder.Services.AddSingleton<IPaymentService, PaymentService>();
-builder.Services.AddSingleton<ICustomerPaymentRepository, CustomerPaymentRepository>();
-
 builder.Services.AddMassTransit(mt => mt.AddMassTransit(x =>
 {
     x.UsingRabbitMq((cntxt, cfg) => {
@@ -33,7 +29,9 @@ builder.Services.AddMassTransit(mt => mt.AddMassTransit(x =>
 }));
 
 
-
+// Setup Services
+builder.Services.AddSingleton<IPaymentService, PaymentService>();
+builder.Services.AddSingleton<ICustomerPaymentRepository, CustomerPaymentRepository>();
 
 
 var app = builder.Build();
