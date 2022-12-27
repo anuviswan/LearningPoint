@@ -6,12 +6,16 @@ services:
     build:
       context: .
       dockerfile: InventoryService/Dockerfile
+    ports:
+      - "8080:80"
 
   saga.services.orderservice:
     image: ${DOCKER_REGISTRY-}sagaservicesorderservice
     build:
       context: .
       dockerfile: OrderService/Dockerfile
+    ports:
+      - "8081:80"
 
 
   saga.services.paymentservice:
@@ -19,6 +23,8 @@ services:
     build:
       context: .
       dockerfile: PaymentService/Dockerfile
+    ports:
+      - "8082:80"
 
   saga.demo.rabbitmq:
     image: "rabbitmq:3.10.6-management-alpine"
