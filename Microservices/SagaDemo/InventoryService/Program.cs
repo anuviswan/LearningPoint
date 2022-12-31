@@ -1,8 +1,10 @@
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Saga.Services.InventoryService.Consumers;
 using Saga.Services.InventoryService.Models;
 using Saga.Services.InventoryService.Repositories;
 using Saga.Services.InventoryService.Services;
+using Saga.Shared.Contracts.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,12 @@ builder.Services.AddMassTransit(mt => mt.AddMassTransit(x =>
             c.Password(rabbitMqSettings.Password);
         });
     });
+
+    x.AddConsumer<OrderCreationInitiatedConsumer>().Endpoint(c =>
+    {
+        c.Name =  IBaseEvent<OrderCreationInitiated>.QueueName;
+    });
+
 }));
 
 

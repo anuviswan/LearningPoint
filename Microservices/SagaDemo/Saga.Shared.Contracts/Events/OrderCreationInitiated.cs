@@ -1,7 +1,11 @@
-﻿namespace Saga.Shared.Contracts.Events;
+﻿using Saga.Shared.Contracts.Attributes;
 
-public record OrderCreationInitiated
+namespace Saga.Shared.Contracts.Events;
+
+[RabbitQueue("order-creation-initiated")]
+public record OrderCreationInitiated : IBaseEvent<OrderCreationInitiated>
 {
+    public Guid EventId { get; init; }
     public Guid OrderId { get; init; }
 
     public Guid CustomerId { get; init; }
