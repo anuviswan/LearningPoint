@@ -26,6 +26,8 @@ builder.Services.AddMassTransit(mt => mt.AddMassTransit(x =>
             c.Username(rabbitMqSettings.UserName);
             c.Password(rabbitMqSettings.Password);
         });
+
+        cfg.ConfigureEndpoints(cntxt);
     });
 }));
 
