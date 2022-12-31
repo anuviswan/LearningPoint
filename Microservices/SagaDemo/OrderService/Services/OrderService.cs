@@ -1,5 +1,7 @@
-﻿using Saga.Services.OrderService.Entities;
+﻿using MassTransit;
+using Saga.Services.OrderService.Entities;
 using Saga.Services.OrderService.Repositories;
+using Saga.Shared.Contracts.Events;
 
 namespace Saga.Services.OrderService.Services;
 
@@ -17,10 +19,12 @@ public class OrderService : IOrderService
 {
     private readonly IOrderRepository _orderRepository;
     private readonly ILogger<OrderService> _logger;
-    public OrderService(IOrderRepository orderRepository,ILogger<OrderService> logger)
+    private readonly IBus _bus;
+    public OrderService(IOrderRepository orderRepository,ILogger<OrderService> logger,IBus bus)
     {
         _orderRepository = orderRepository;
         _logger = logger;
+        _bus = bus;
     }
 
     public Order GetById(Guid orderId)
@@ -63,7 +67,22 @@ public class OrderService : IOrderService
     {
         _logger.LogInformation("Inserting new Order");
         order.State = OrderState.Pending;
-        return _orderRepository.Insert(order);
+        var currentOrder = _orderRepository.Insert(order);
+        if (currentOrder.Id != default)
+        {
+            _bus.Publish(new OrderCreationInitiated
+            {
+                OrderId = currentOrder.Id,
+                CustomerId = currentOrder.CustomerId,
+                OrderItems = currentOrder.OrderItems.Select(x => new OrderItemEntry()
+                {
+                    ItemId = x.OrderItemId,
+                    Qty = x.Quantity
+                }).ToList().AsReadOnly()
+            });
+        }
+
+        return currentOrder;
     }
 
     public Order RejectOrder(Guid id)

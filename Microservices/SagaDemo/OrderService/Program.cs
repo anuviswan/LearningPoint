@@ -57,19 +57,7 @@ app.MapPost("/createorder", (CreateOrderRequest orderRequest,
         OrderItems = orderRequest.Items,
     });
 
-    if(currentOrder.Id != default)
-    {
-        publishEndPoint.Publish(new OrderCreationInitiated()
-        {
-            OrderId = currentOrder.Id,
-            CustomerId = currentOrder.CustomerId,
-            OrderItems = currentOrder.OrderItems.Select(x => new OrderItemEntry()
-            {
-                ItemId = x.OrderItemId,
-                Qty = x.Quantity
-            }).ToList().AsReadOnly()
-        });
-    }
+    
 
     return Results.Ok(new CreateOrderResponse
     {
