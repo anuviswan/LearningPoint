@@ -1,9 +1,9 @@
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Saga.Services.OrderService.Consumers;
 using Saga.Services.OrderService.Models;
 using Saga.Services.OrderService.Repositories;
 using Saga.Services.OrderService.Services;
-using Saga.Shared.Contracts.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +19,8 @@ if (rabbitMqSettings is null) throw new Exception("Unable to find RabbitMq Setti
 
 builder.Services.AddMassTransit(mt => mt.AddMassTransit(x => 
 {
+    x.AddConsumer<OrderCreationFailedConsumer>(typeof(OrderCreationFailedConsumerDefinition));
+
     x.UsingRabbitMq((cntxt, cfg) => {
         cfg.Host(rabbitMqSettings.Uri, "/", c => {
             c.Username(rabbitMqSettings.UserName);

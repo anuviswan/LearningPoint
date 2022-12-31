@@ -18,3 +18,11 @@ public class OrderCreationFailedConsumer : IConsumer<OrderCreationFailed>
         return Task.CompletedTask;
     }
 }
+
+public class OrderCreationFailedConsumerDefinition : ConsumerDefinition<OrderCreationFailedConsumer>
+{
+    public OrderCreationFailedConsumerDefinition()
+    {
+        EndpointName = IBaseEvent<OrderCreationFailed>.QueueName;
+    }
+}

@@ -1,6 +1,7 @@
 ﻿using Saga.Services.InventoryService.Dtos;
 using Saga.Services.InventoryService.Entities;
 using Saga.Services.InventoryService.Repositories;
+using System.ComponentModel;
 
 namespace Saga.Services.InventoryService.Services;
 
@@ -32,6 +33,11 @@ public class InventoryService : IInventoryService
 
         ArgumentNullException.ThrowIfNull(orderDto, nameof(orderDto));
         ArgumentNullException.ThrowIfNull(orderDto.Items, nameof(orderDto.Items));
+
+
+        // Adding a special case to fail intensionally
+        if (orderDto.Items.Any(x => x.Key == Guid.Parse("559865ce-1572-4a76-b35f-fbc86b114754")))
+            throw new Exception("This item is not served any longer");
 
         var orderItemList = new List<OrderItem>();
         
@@ -67,7 +73,7 @@ public class InventoryService : IInventoryService
             }
         }
 
-        var orderedItems = _orderItemRepository.BulkInsert(orderItemList);
+        var orderedItems = _orderItemRepository.BulkInsert(orderItemList).ToList();
 
         foreach(var item in orderedItemGroups)
         {
