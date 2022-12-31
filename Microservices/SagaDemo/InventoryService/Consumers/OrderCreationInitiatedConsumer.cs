@@ -42,4 +42,14 @@ public class OrderCreationInitiatedConsumer : IConsumer<OrderCreationInitiated>
 
         return Task.CompletedTask;
     }
+
+
+}
+
+public class OrderCreationInitiatedConsumerDefinition : ConsumerDefinition<OrderCreationInitiatedConsumer>
+{
+    public OrderCreationInitiatedConsumerDefinition()
+    {
+        EndpointName = IBaseEvent<OrderCreationInitiated>.QueueName;
+    }
 }

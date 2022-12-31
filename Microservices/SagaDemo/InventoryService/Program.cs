@@ -23,17 +23,17 @@ if (rabbitMqSettings is null) throw new Exception("Unable to find RabbitMq Setti
 
 builder.Services.AddMassTransit(mt => mt.AddMassTransit(x =>
 {
+    x.AddConsumer<OrderCreationInitiatedConsumer>(typeof(OrderCreationInitiatedConsumerDefinition));
+
     x.UsingRabbitMq((cntxt, cfg) => {
         cfg.Host(rabbitMqSettings.Uri, "/", c => {
             c.Username(rabbitMqSettings.UserName);
             c.Password(rabbitMqSettings.Password);
         });
+        cfg.ConfigureEndpoints(cntxt);
     });
 
-    x.AddConsumer<OrderCreationInitiatedConsumer>().Endpoint(c =>
-    {
-        c.Name =  IBaseEvent<OrderCreationInitiated>.QueueName;
-    });
+    
 
 }));
 
