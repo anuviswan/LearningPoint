@@ -21,3 +21,11 @@ public class PaymentFailedConsumer : IConsumer<PaymentFailed>
         return Task.CompletedTask;
     }
 }
+
+public class PaymentFailedConsumerDefinition : ConsumerDefinition<PaymentFailedConsumer>
+{
+    public PaymentFailedConsumerDefinition()
+    {
+        EndpointName = IBaseEvent<PaymentFailed>.QueueName;
+    }
+}

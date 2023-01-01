@@ -14,4 +14,5 @@ public class ReservedStockItemResponse
     public int Quantity { get; set; }
 
     public OrderItemState State { get; set; }
+    public string StateDescription => State.ToString();
 }

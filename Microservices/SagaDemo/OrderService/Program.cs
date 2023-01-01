@@ -20,6 +20,7 @@ if (rabbitMqSettings is null) throw new Exception("Unable to find RabbitMq Setti
 builder.Services.AddMassTransit(mt => mt.AddMassTransit(x => 
 {
     x.AddConsumer<OrderCreationFailedConsumer>(typeof(OrderCreationFailedConsumerDefinition));
+    x.AddConsumer<PaymentFailedConsumer>(typeof(PaymentFailedConsumerDefinition));
 
     x.UsingRabbitMq((cntxt, cfg) => {
         cfg.Host(rabbitMqSettings.Uri, "/", c => {
