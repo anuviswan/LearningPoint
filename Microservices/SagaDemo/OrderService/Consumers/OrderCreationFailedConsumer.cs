@@ -26,6 +26,6 @@ public class OrderCreationFailedConsumerDefinition : ConsumerDefinition<OrderCre
 {
     public OrderCreationFailedConsumerDefinition()
     {
-        EndpointName = IBaseEvent<OrderCreationFailed>.QueueName;
+        EndpointName = $"{IBaseEvent<OrderCreationFailed>.QueueName}-order-service";
     }
 }

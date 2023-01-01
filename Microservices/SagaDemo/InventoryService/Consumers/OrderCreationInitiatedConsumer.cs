@@ -50,6 +50,6 @@ public class OrderCreationInitiatedConsumerDefinition : ConsumerDefinition<Order
 {
     public OrderCreationInitiatedConsumerDefinition()
     {
-        EndpointName = IBaseEvent<OrderCreationInitiated>.QueueName;
+        EndpointName = $"{IBaseEvent<OrderCreationInitiated>.QueueName}-inventory-service";
     }
 }

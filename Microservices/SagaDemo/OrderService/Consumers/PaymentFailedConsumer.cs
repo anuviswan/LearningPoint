@@ -26,6 +26,6 @@ public class PaymentFailedConsumerDefinition : ConsumerDefinition<PaymentFailedC
 {
     public PaymentFailedConsumerDefinition()
     {
-        EndpointName = IBaseEvent<PaymentFailed>.QueueName;
+        EndpointName = $"{IBaseEvent<PaymentFailed>.QueueName}-order-service";
     }
 }

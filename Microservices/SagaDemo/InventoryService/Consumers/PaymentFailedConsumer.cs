@@ -18,6 +18,7 @@ public class PaymentFailedConsumer : IConsumer<PaymentFailed>
         var orderId = context.Message.OrderId;
         _logger.LogInformation($"Cancelling Ordering [#{orderId}]");
 
+        _inventoryService.CancelOrder(orderId);
         return Task.CompletedTask;
     }
 }
@@ -26,6 +27,6 @@ public class PaymentFailedConsumerDefinition : ConsumerDefinition<PaymentFailedC
 {
     public PaymentFailedConsumerDefinition()
     {
-        EndpointName = IBaseEvent<PaymentFailed>.QueueName;
+        EndpointName = $"{IBaseEvent<PaymentFailed>.QueueName}-inventory-service";
     }
 }

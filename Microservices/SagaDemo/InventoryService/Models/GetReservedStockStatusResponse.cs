@@ -1,4 +1,5 @@
 ﻿using Saga.Services.InventoryService.Entities;
+using System.Text.Json.Serialization;
 
 namespace Saga.Services.InventoryService.Models;
 
@@ -13,6 +14,6 @@ public class ReservedStockItemResponse
     public Guid ItemId { get; set; }
     public int Quantity { get; set; }
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public OrderItemState State { get; set; }
-    public string StateDescription => State.ToString();
 }

@@ -84,7 +84,15 @@ app.MapGet("/getallpayment", ([FromServices] IPaymentService paymentService,
     [FromServices] ILogger<Program> logger) =>
 {
     logger.LogInformation($"Retrieving all payment information");
-    return Results.Ok(paymentService.GetAll());
+    var payments = paymentService.GetAll();
+    return Results.Ok(payments.Select(x=> new GetAllPaymentResponse
+    {
+        Amount = x.Amount,
+        OrderId = x.OrderId,
+        State = x.State,
+        CustomerId = x.CustomerId,
+        Id = x.Id
+    }));
 });
 
 app.Run();
