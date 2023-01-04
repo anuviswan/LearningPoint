@@ -33,9 +33,6 @@ builder.Services.AddMassTransit(mt => mt.AddMassTransit(x =>
         });
         cfg.ConfigureEndpoints(cntxt);
     });
-
-    
-
 }));
 
 
