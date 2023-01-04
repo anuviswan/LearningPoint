@@ -92,7 +92,7 @@ public class OrderItemRepository : IOrderItemRepository
             _logger.LogInformation($"Current State for OrderItem #{order.Id} : {order.State}");
         }
 
-        return order;
+        return order!;
     }
 
     public IEnumerable<OrderItem> BulkInsert(IEnumerable<OrderItem> items)

@@ -1,11 +1,11 @@
 ﻿namespace Saga.Services.InventoryService.Models;
 
-public class GetStockStatusResponse
+public record GetStockStatusResponse
 {
-    public Guid ItemId { get; set; }
+    public Guid ItemId { get; init; }
 
-    public string Name { get; set; }
+    public string Name { get; init; } = null!;  
 
-    public int Quantity { get; set; }
+    public int Quantity { get; init; }
 
 }

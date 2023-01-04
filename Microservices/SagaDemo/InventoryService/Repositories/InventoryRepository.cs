@@ -102,6 +102,6 @@ public class InventoryRepository : IInventoryRepository
             _logger.LogInformation($"Current State for Inventory #{order.Id}");
         }
 
-        return order;
+        return order!;
     }
 }
