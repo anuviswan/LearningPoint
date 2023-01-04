@@ -17,9 +17,10 @@ public class OrderItem
 
 public enum OrderState
 {
+    Initiated,
     Pending,
-    Accepted,
+    Confirmed,
     Rejected,
-    Completed,
-    Failed
+    Failed,
+    Completed
 }

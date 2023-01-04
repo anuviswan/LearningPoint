@@ -65,7 +65,7 @@ public class OrderRepository : IOrderRepository
 
     public Order Insert(Order entity)
     {
-        _logger.LogInformation($"Adding new Order with State {OrderState.Pending}");
+        _logger.LogInformation($"Adding new Order with State {OrderState.Initiated}");
         var id = Guid.NewGuid();
         entity.Id = id;
         Database[id] = entity;

@@ -17,7 +17,7 @@ public class PaymentFailedConsumer : IConsumer<PaymentFailed>
     {
         var orderId = context.Message.OrderId;
         _logger.LogInformation($"Initiating Order [#{orderId}] Cancellation due to failed Payment");
-        _orderService.RejectOrder(orderId);
+        _orderService.SetOrderAsFailed(orderId);
         return Task.CompletedTask;
     }
 }

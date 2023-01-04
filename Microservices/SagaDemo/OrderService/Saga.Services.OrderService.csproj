@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Consumers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Saga.Shared.Contracts\Saga.Shared.Contracts.csproj" />
   </ItemGroup>
 

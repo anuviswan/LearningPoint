@@ -10,8 +10,9 @@ public interface IOrderService
 {
     Order GetById(Guid orderId);
     Order CreateOrder(Order order);
-    Order AcceptOrder(Guid id);
-    Order RejectOrder(Guid id);
+    Order ConfirmOrder(Guid id);
+
+    Order SetOrderAsPending(Guid id);
     Order SetOrderAsFailed(Guid id);
     IEnumerable<Order> GetAll();
 }
@@ -45,10 +46,16 @@ public class OrderService : IOrderService
         _logger.LogInformation($"Retrieving all orders");
         return _orderRepository.GetAll();
     }
-    public Order AcceptOrder(Guid id)
+
+    public Order SetOrderAsPending(Guid id) 
     {
-        _logger.LogInformation($"Preparing to accept Order #{id}");
-        return UpdateOrder(id, OrderState.Accepted);
+        _logger.LogInformation($"Set Order #{id} as pending");
+        return UpdateOrder(id, OrderState.Pending);
+    }
+    public Order ConfirmOrder(Guid id)
+    {
+        _logger.LogInformation($"Preparing to confirm Order #{id}");
+        return UpdateOrder(id, OrderState.Confirmed);
     }
 
     private Order UpdateOrder(Guid id, OrderState state)
@@ -66,7 +73,7 @@ public class OrderService : IOrderService
     public Order CreateOrder(Order order)
     {
         _logger.LogInformation("Inserting new Order");
-        order.State = OrderState.Pending;
+        order.State = OrderState.Initiated;
         var currentOrder = _orderRepository.Insert(order);
         if (currentOrder.Id != default)
         {
@@ -83,12 +90,6 @@ public class OrderService : IOrderService
         }
 
         return currentOrder;
-    }
-
-    public Order RejectOrder(Guid id)
-    {
-        _logger.LogInformation($"Preparing to reject Order #{id}");
-        return UpdateOrder(id, OrderState.Rejected);
     }
 
     public Order SetOrderAsFailed(Guid id)
