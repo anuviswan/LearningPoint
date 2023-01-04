@@ -30,6 +30,11 @@ public class OrderCreationInitiatedConsumer : IConsumer<OrderCreationInitiated>
         try
         {
             _inventoryService.ReserveStock(orderInfo);
+
+            _publishEndPoint.Publish(new OrderCreationSucceeded
+            {
+                OrderId = context.Message.OrderId,
+            });
         }
         catch(Exception ex)
         {
