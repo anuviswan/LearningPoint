@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  fluentmigrator.seed.postgres:
+    image: ${DOCKER_REGISTRY-}fluentmigratorseedpostgres
+    build:
+      context: .
+      dockerfile: FluentMigrator.Seed.Postgres/Dockerfile
+
+  # Database
+  nt.authservice.db:
+    image: postgres:14.1-alpine
+    hostname: "nt.authservice.db"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Admin123
+      - POSTGRES_DB=ntuserauth
+    ports:
+      - '5432:5432'
+    volumes:
+      - nt.authservice.db.volume:/var/lib/postgresql/data
+    networks:
+      nt.authservice.network:
+
+volumes:
+  nt.authservice.db.volume:
+    name: "nt.authservice.db.volume"
