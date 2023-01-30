@@ -9,7 +9,9 @@
 
             Delete.FromTable("User")
                 .Row(new { FirstName = "Jia", LastName = "Anu" })
-                .Row(new { FirstName = "Naina", LastName = "Anu" });
+                .Row(new { FirstName = "Naina", LastName = "Anu" })
+                .Row(new { FirstName = "Sreena", LastName = "Anu" })
+                .Row(new { FirstName = "Anu", LastName = "Viswan" });
         }
 
         public override void Up()
@@ -21,7 +23,9 @@
 
             Insert.IntoTable("User")
                 .Row(new { FirstName = "Jia", LastName = "Anu" })
-                .Row(new { FirstName = "Naina", LastName = "Anu"});
+                .Row(new { FirstName = "Naina", LastName = "Anu"})
+                .Row(new { FirstName = "Sreena", LastName = "Anu"})
+                .Row(new { FirstName = "Anu", LastName = "Viswan"});
         }
     }
 }

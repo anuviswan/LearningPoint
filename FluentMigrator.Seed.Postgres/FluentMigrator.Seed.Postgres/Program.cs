@@ -8,10 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+var connectionString = builder.Configuration.GetConnectionString("DemoServer");
 builder.Services.AddLogging(x => x.AddFluentMigratorConsole())
     .AddFluentMigratorCore()
     .ConfigureRunner(c => c.AddPostgres()
-                        .WithGlobalConnectionString("User ID=postgres;Password=Admin123;Host=fluentmigrator.seed.postgres.db;Port=5432;Database=fmdemo;Pooling=true;Connection Lifetime=0;")
+                        .WithGlobalConnectionString(connectionString)
                         .ScanIn((Assembly.GetExecutingAssembly())).For.Migrations());
 
 var app = builder.Build();
