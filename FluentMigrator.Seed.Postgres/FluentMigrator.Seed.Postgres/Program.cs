@@ -1,4 +1,5 @@
 using FluentMigrator.Runner;
+using FluentMigrator.Seed.Postgres.Migrations;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddLogging(x => x.AddFluentMigratorConsole())
     .AddFluentMigratorCore()
     .ConfigureRunner(c => c.AddPostgres()
-                        .WithGlobalConnectionString("User ID=postgres;Password=Admin123;Host=fluentmigrator.seed.postgres.db;Port=5432;Database=fmdemo;Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Lifetime=0;")
+                        .WithGlobalConnectionString("User ID=postgres;Password=Admin123;Host=fluentmigrator.seed.postgres.db;Port=5432;Database=fmdemo;Pooling=true;Connection Lifetime=0;")
                         .ScanIn((Assembly.GetExecutingAssembly())).For.Migrations());
 
 var app = builder.Build();
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.Migrate();
 
 var summaries = new[]
 {
@@ -43,6 +45,7 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
 
 app.Run();
 
