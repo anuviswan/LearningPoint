@@ -13,7 +13,7 @@ builder.Services.AddLogging(x => x.AddFluentMigratorConsole())
                         .WithGlobalConnectionString("User ID=postgres;Password=Admin123;Host=fluentmigrator.seed.postgres.db;Port=5432;Database=fmdemo;Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Lifetime=0;")
                         .ScanIn((Assembly.GetExecutingAssembly())).For.Migrations());
 
-
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
