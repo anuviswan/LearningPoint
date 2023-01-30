@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33209.295
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentMigrator.Seed.Postgres", "FluentMigrator.Seed.Postgres\FluentMigrator.Seed.Postgres.csproj", "{84EE1AF7-FA15-4BF5-A061-40856DD373CA}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{44EBE931-38ED-4832-8795-75F6D3155FEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84EE1AF7-FA15-4BF5-A061-40856DD373CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84EE1AF7-FA15-4BF5-A061-40856DD373CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84EE1AF7-FA15-4BF5-A061-40856DD373CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84EE1AF7-FA15-4BF5-A061-40856DD373CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44EBE931-38ED-4832-8795-75F6D3155FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44EBE931-38ED-4832-8795-75F6D3155FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44EBE931-38ED-4832-8795-75F6D3155FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44EBE931-38ED-4832-8795-75F6D3155FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8752D252-4781-47F4-AD37-C7190E791AC2}
+	EndGlobalSection
+EndGlobal

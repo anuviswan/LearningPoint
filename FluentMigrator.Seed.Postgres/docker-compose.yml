@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  fluentmigrator.seed.postgres:
+    image: ${DOCKER_REGISTRY-}fluentmigratorseedpostgres
+    build:
+      context: .
+      dockerfile: FluentMigrator.Seed.Postgres/Dockerfile
+    networks:
+      fluentmigrator.seed.postgres.network.common:
+
+  # Database
+  fluentmigrator.seed.postgres.db:
+    image: postgres:14.1-alpine
+    hostname: "fluentmigrator.seed.postgres.db"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Admin123
+      - POSTGRES_DB=fmdemo
+    ports:
+      - '5432:5432'
+    volumes:
+      - fluentmigrator.seed.postgres.db.volume:/var/lib/postgresql/data
+    networks:
+      fluentmigrator.seed.postgres.network.common:
+
+
+      # PgAdmin to manage Postgres
+  fluentmigrator.seed.postgres.db.manage:
+    image: dpage/pgadmin4:latest
+    hostname: fluentmigrator.seed.postgres.db.manage
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=anu.viswan@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=Admin123
+    ports:
+      - '5050:80'
+    networks:
+      fluentmigrator.seed.postgres.network.common:
+
+volumes:
+  fluentmigrator.seed.postgres.db.volume:
+    name: "fluentmigrator.seed.postgres.db.volume"
+
+networks:
+  fluentmigrator.seed.postgres.network.common:
+    driver: bridge
+  nt.common.network:
+    driver: bridge
