@@ -1,0 +1,75 @@
+version: '3.8'
+
+services: 
+  mongo.primary:
+    container_name: mongo.primary
+    image: mongo:latest
+    networks:
+      common.network:
+    ports:
+      - 20000:27017
+    volumes:
+      - mongo.primary.volume:/data/db
+      - ./rs-init.sh:/scripts/rs-init.sh
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+
+  mongo.replica.one:
+    container_name: mongo.replica.one
+    image: mongo:latest
+    networks:
+      common.network:
+    ports:
+      - 20001:27017
+    depends_on:
+      - mongo.primary
+    volumes:
+      - mongo.replica.one.volume:/data/db
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+
+  mongo.replica.two:
+    container_name: mongo.replica.two
+    image: mongo:latest
+    networks:
+      common.network:
+    ports:
+      - 20002:27017
+    depends_on:
+      - mongo.primary      
+    volumes:
+      - mongo.replica.two.volume:/data/db
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+
+  # # Mongo Express to manage MongoDb
+  # demo.mongoexpress:
+  #   image: mongo-express
+  #   hostname: demo.mongoexpress
+  #   container_name: demo.mongoexpress
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   depends_on:
+  #     - mongo.primary
+  #     - mongo.replica.one
+  #     - mongo.replica.two      
+  #   environment:
+  #     ME_CONFIG_MONGODB_URL: "mongodb://mongo.primary:20000, mongo.replica.one:20001, mongo.replica.two:20002/?replicaSet=dbrs"
+  #   networks:
+  #     common.network:
+
+networks:
+  common.network:
+    driver: bridge
+
+volumes:
+  mongo.primary.volume:
+    name: "mongo.primary.volume"
+
+  mongo.replica.one.volume:
+    name: "mongo.replica.one.volume"
+
+  mongo.replica.two.volume:
+    name: "mongo.replica.two.volume"
+
