@@ -42,22 +42,22 @@ services:
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
 
-  # # Mongo Express to manage MongoDb
-  # demo.mongoexpress:
-  #   image: mongo-express
-  #   hostname: demo.mongoexpress
-  #   container_name: demo.mongoexpress
-  #   restart: always
-  #   ports:
-  #     - 8081:8081
-  #   depends_on:
-  #     - mongo.primary
-  #     - mongo.replica.one
-  #     - mongo.replica.two      
-  #   environment:
-  #     ME_CONFIG_MONGODB_URL: "mongodb://mongo.primary:20000, mongo.replica.one:20001, mongo.replica.two:20002/?replicaSet=dbrs"
-  #   networks:
-  #     common.network:
+  # Mongo Express to manage MongoDb
+  demo.mongoexpress:
+    image: mongo-express
+    hostname: demo.mongoexpress
+    container_name: demo.mongoexpress
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo.primary
+      - mongo.replica.one
+      - mongo.replica.two      
+    environment:
+      ME_CONFIG_MONGODB_URL: "mongodb://mongo.primary:27017, mongo.replica.one:27017, mongo.replica.two:27017/?replicaSet=dbrs"
+    networks:
+      common.network:
 
 networks:
   common.network:
