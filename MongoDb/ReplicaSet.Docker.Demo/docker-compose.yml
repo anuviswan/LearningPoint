@@ -1,5 +1,19 @@
 version: '3.8'
 
+networks:
+  common.network:
+    driver: bridge
+
+volumes:
+  mongo.one.vol:
+    name: "mongo.one.vol"
+
+  mongo.two.vol:
+    name: "mongo.two.vol"
+
+  mongo.three.vol:
+    name: "mongo.three.vol"
+
 services: 
   mongo.one.db:
     container_name: mongo.one.db
@@ -59,17 +73,5 @@ services:
     networks:
       common.network:
 
-networks:
-  common.network:
-    driver: bridge
 
-volumes:
-  mongo.one.vol:
-    name: "mongo.one.vol"
-
-  mongo.two.vol:
-    name: "mongo.two.vol"
-
-  mongo.three.vol:
-    name: "mongo.three.vol"
 

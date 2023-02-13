@@ -1,5 +1,3 @@
-#!/bin/bash
-
 docker-compose up -d
 
 timeout  /t 10 /nobreak
