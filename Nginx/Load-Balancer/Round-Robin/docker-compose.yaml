@@ -1,0 +1,6 @@
+version : '3.9'
+services: 
+  web-app:
+    image: yeasy/simple-web:latest
+    ports:
+      - "8080-8085:80"
