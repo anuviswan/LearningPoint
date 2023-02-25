@@ -1,0 +1,21 @@
+version : '3.9'
+services: 
+  webapp:
+    image: yeasy/simple-web:latest
+    ports:
+      - "8080-8085:80"
+    networks:
+      - mynetwork
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - webapp
+    ports:
+        - "8090:80"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
