@@ -10,7 +10,7 @@ namespace PolymorphicParameterBinding.Controllers
     public class TestController : ControllerBase
     {
         [HttpPost]
-        public bool Create(/*[ModelBinder(typeof(PersonModelBinder))]*/Person person)
+        public bool Create(Person person)
         {
             return true;
         }
