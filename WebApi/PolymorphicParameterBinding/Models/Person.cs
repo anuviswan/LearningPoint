@@ -1,6 +1,6 @@
 ﻿namespace PolymorphicParameterBinding.Models
 {
-    public class Person
+    public abstract class Person
     {
         public string Name { get; set; }
         public int Age { get; set; }
