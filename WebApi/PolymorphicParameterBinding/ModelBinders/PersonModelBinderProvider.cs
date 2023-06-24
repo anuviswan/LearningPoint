@@ -34,25 +34,38 @@ namespace PolymorphicParameterBinding.ModelBinders
                 resultBinders[type] = (modelMetadata, context.CreateBinder(modelMetadata));
             }
 
-            return default;
-           // return new PersonModelBinder(resultBinders);
+            return new PersonModelBinder(resultBinders);
         }
     }
 
     public class PersonModelBinder : IModelBinder
     {
-        //private Dictionary<Type, (ModelMetadata, IModelBinder)> resultBinders;
+        private Dictionary<Type, (ModelMetadata, IModelBinder)> resultBinders;
 
-        //public PersonModelBinder(Dictionary<Type, (ModelMetadata, IModelBinder)> resultBinders)
-        //{
-        //    this.resultBinders = resultBinders;
-        //}
-
-        public Task BindModelAsync(ModelBindingContext bindingContext)
+        public PersonModelBinder(Dictionary<Type, (ModelMetadata, IModelBinder)> resultBinders)
         {
-            //var modelKindName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, nameof(Device.Kind));
-            //var modelTypeValue = bindingContext.ValueProvider.GetValue(modelKindName).FirstValue;
-            return default;
+            this.resultBinders = resultBinders;
+        }
+
+        public async Task BindModelAsync(ModelBindingContext bindingContext)
+        {
+            var modelKindName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, nameof(Person.EntityType));
+            var modelTypeValue = bindingContext.ValueProvider.GetValue(modelKindName).FirstValue;
+
+            var json = await new
+        StreamReader(bindingContext.HttpContext.Request.Body).
+        ReadToEndAsync();
+
+            var modelMetaData = modelTypeValue switch
+            {
+                nameof(Employee) => resultBinders[typeof(Employee)],
+                nameof(Student) => resultBinders[typeof(Student)],
+                _ => throw new Exception()
+            };
+
+            
+            bindingContext.ModelMetadata = modelMetaData.Item1;
+
         }
     }
 }
