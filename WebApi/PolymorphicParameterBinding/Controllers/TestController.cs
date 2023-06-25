@@ -10,7 +10,17 @@ namespace PolymorphicParameterBinding.Controllers
     public class TestController : ControllerBase
     {
         [HttpPost]
-        public bool Create(Person person)
+        [Route("createanimal")]
+        public string CreateAnimal(Person person)
+        {
+            return person.GetType().Name;
+        }
+
+
+        // an attempt using IParsable<T>
+        [HttpPost]
+        [Route("createshape")]
+        public bool CreateShape(Shape shape)
         {
             return true;
         }
