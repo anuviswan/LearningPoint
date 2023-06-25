@@ -1,10 +1,23 @@
 <template>
   <form  @submit.prevent="onManualSubmit">
     <label for="name">Name</label>
-    <input id="name" type="text" v-model="name"/>
+    <!-- <input id="name" type="text" v-model="name"/> -->
 
-    <label for="name">Caption</label>
-    <input id="name" type="text" v-model="caption"/>
+
+  <input v-model="name">
+  <div v-if="v$.name.$error">Name field has an error.</div>
+
+
+<p
+  v-for="error of v$.name.$errors"
+  :key="error.$uid"
+>
+<span v-if="v$.name.required" class="error">Name is a Required field.</span>
+</p>
+
+
+    <!-- <label for="name">Caption</label>
+    <input id="name" type="text" v-model="caption"/> -->
 
     <button>Click</button>
   </form>
@@ -15,24 +28,30 @@ import  useVuelidate  from '@vuelidate/core';
 import { required} from '@vuelidate/validators';
 export default {
   name: 'HelloWorld',
-
-  data(){
+  setup(){
     return {
       v$: useVuelidate() ,
+    }
+  },
+  data(){
+    return {
+     
       name : '',
-      caption : '',
     }
   },
     validations () {
     return{
-      name : {required},
-      caption : {required}
+      name : {required, $autoDirty: true},
     }
   },
   methods:{
-    onManualSubmit(){
-      console.log("Name='"+this.name+"',Caption='"+this.caption+"'");
-      console.log(this.v$)
+     async onManualSubmit(){
+      var result = await this.v$.$validate();
+      console.log(result);
+      //console.log("Name='"+this.name+"'");
+      console.log(this.v$.name.$error);
+      console.log(this.v$);
+     // this.v$.$reset();
     }
   },
 
