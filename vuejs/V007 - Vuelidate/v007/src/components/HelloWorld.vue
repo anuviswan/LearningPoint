@@ -1,23 +1,16 @@
 <template>
   <form  @submit.prevent="onManualSubmit">
     <label for="name">Name</label>
-    <!-- <input id="name" type="text" v-model="name"/> -->
+    <input id="name" type="text" v-model="name"/>
+    <p v-if="v$.name.$error">
+      <span v-if="v$.name.required" class="error">Name is a Required field.</span>
+    </p>
 
-
-  <input v-model="name">
-  <div v-if="v$.name.$error">Name field has an error.</div>
-
-
-<p
-  v-for="error of v$.name.$errors"
-  :key="error.$uid"
->
-<span v-if="v$.name.required" class="error">Name is a Required field.</span>
-</p>
-
-
-    <!-- <label for="name">Caption</label>
-    <input id="name" type="text" v-model="caption"/> -->
+    <label for="name">Caption</label>
+    <input id="name" type="text" v-model="caption"/>
+    <p v-if="v$.caption.$error">
+      <span v-if="v$.caption.required" class="error">Caption is a Required field.</span>
+    </p>
 
     <button>Click</button>
   </form>
@@ -35,22 +28,19 @@ export default {
   },
   data(){
     return {
-     
       name : '',
+      caption:''
     }
   },
     validations () {
     return{
-      name : {required, $autoDirty: true},
+      name : {required},
+      caption : {required},
     }
   },
   methods:{
      async onManualSubmit(){
-      var result = await this.v$.$validate();
-      console.log(result);
-      //console.log("Name='"+this.name+"'");
-      console.log(this.v$.name.$error);
-      console.log(this.v$);
+      await this.v$.$validate();
      // this.v$.$reset();
     }
   },
