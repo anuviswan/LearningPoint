@@ -6,11 +6,14 @@
       <span v-if="v$.name.required" class="error">Name is a Required field.</span>
     </p>
 
-    <label for="name">Caption</label>
-    <input id="name" type="text" v-model="caption"/>
+    <label for="caption">Caption</label>
+    <input id="caption" type="text" v-model="caption"/>
     <p v-if="v$.caption.$error">
       <span v-if="v$.caption.required" class="error">Caption is a Required field.</span>
     </p>
+
+    <label for="description">Description</label>
+    <ChildComponent v-model="description"/>
 
     <button>Click</button>
   </form>
@@ -19,6 +22,7 @@
 <script>
 import  useVuelidate  from '@vuelidate/core';
 import { required} from '@vuelidate/validators';
+import ChildComponent from "./ChildComponent.vue"
 export default {
   name: 'HelloWorld',
   setup(){
@@ -26,16 +30,19 @@ export default {
       v$: useVuelidate() ,
     }
   },
+  components:{ ChildComponent},
   data(){
     return {
       name : '',
-      caption:''
+      caption:'',
+      description:''
     }
   },
     validations () {
     return{
       name : {required},
       caption : {required},
+      description:{required}
     }
   },
   methods:{
