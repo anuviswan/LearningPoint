@@ -2,9 +2,15 @@
   <form  @submit.prevent="onManualSubmit">
     <label for="name">Name</label>
     <input id="name" type="text" v-model="name"/>
+    <p v-if="v$.name.$error">
+      <span v-if="v$.name.required" class="error">Name is a Required field.</span>
+    </p>
 
     <label for="name">Caption</label>
     <input id="name" type="text" v-model="caption"/>
+    <p v-if="v$.caption.$error">
+      <span v-if="v$.caption.required" class="error">Caption is a Required field.</span>
+    </p>
 
     <button>Click</button>
   </form>
@@ -15,24 +21,27 @@ import  useVuelidate  from '@vuelidate/core';
 import { required} from '@vuelidate/validators';
 export default {
   name: 'HelloWorld',
-
-  data(){
+  setup(){
     return {
       v$: useVuelidate() ,
+    }
+  },
+  data(){
+    return {
       name : '',
-      caption : '',
+      caption:''
     }
   },
     validations () {
     return{
       name : {required},
-      caption : {required}
+      caption : {required},
     }
   },
   methods:{
-    onManualSubmit(){
-      console.log("Name='"+this.name+"',Caption='"+this.caption+"'");
-      console.log(this.v$)
+     async onManualSubmit(){
+      await this.v$.$validate();
+     // this.v$.$reset();
     }
   },
 

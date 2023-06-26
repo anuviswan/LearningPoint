@@ -1,4 +1,6 @@
 
+using PolymorphicParameterBinding.ModelBinders;
+
 namespace PolymorphicParameterBinding
 {
     public class Program
@@ -10,6 +12,8 @@ namespace PolymorphicParameterBinding
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            builder.Services.AddMvc(o=> o.ModelBinderProviders.Insert(0, new PersonModelBinderProvider()));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
