@@ -13,7 +13,7 @@ namespace PolymorphicParameterBinding
 
             builder.Services.AddControllers();
 
-            builder.Services.AddMvc(o=> o.ModelBinderProviders.Insert(0, new PersonModelBinderProvider()));
+           // builder.Services.AddMvc(o=> o.ModelBinderProviders.Insert(0, new PersonModelBinderProvider()));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

@@ -23,8 +23,8 @@ namespace PolymorphicParameterBinding.ModelBinders
     {
         public async Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            var modelKindName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, nameof(Person.EntityType));
-            var modelTypeValue = bindingContext.ValueProvider.GetValue(modelKindName).FirstValue;
+            //var modelKindName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, nameof(Person.EntityType));
+            //var modelTypeValue = bindingContext.ValueProvider.GetValue(modelKindName).FirstValue;
 
             using var sr = new StreamReader(bindingContext.HttpContext.Request.Body);
             var json = await sr.ReadToEndAsync();
