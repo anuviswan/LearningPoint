@@ -1,58 +1,69 @@
 <template>
-  <form  @submit.prevent="onManualSubmit">
+  <form @submit.prevent="onManualSubmit">
     <label for="name">Name</label>
-    <input id="name" type="text" v-model="name"/>
+    <input id="name" type="text" v-model="name" />
     <p v-if="v$.name.$error">
-      <span v-if="v$.name.required" class="error">Name is a Required field.</span>
+      <span v-if="v$.name.required" class="error"
+        >Name is a Required field.</span
+      >
     </p>
 
     <label for="caption">Caption</label>
-    <input id="caption" type="text" v-model="caption"/>
+    <input id="caption" type="text" v-model="caption" />
     <p v-if="v$.caption.$error">
-      <span v-if="v$.caption.required" class="error">Caption is a Required field.</span>
+      <span v-if="v$.caption.required" class="error"
+        >Caption is a Required field.</span
+      >
     </p>
 
     <label for="description">Description</label>
-    <ChildComponent v-model="description"/>
+    <ChildComponent v-model="description" />
 
     <button>Click</button>
   </form>
 </template>
 
 <script>
-import  useVuelidate  from '@vuelidate/core';
-import { required} from '@vuelidate/validators';
-import ChildComponent from "./ChildComponent.vue"
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+import ChildComponent from "./ChildComponent.vue";
 export default {
-  name: 'HelloWorld',
-  setup(){
+  name: "HelloWorld",
+  setup() {
     return {
-      v$: useVuelidate() ,
-    }
+      v$: useVuelidate(),
+    };
   },
-  components:{ ChildComponent},
-  data(){
+  components: { ChildComponent },
+  data() {
     return {
-      name : '',
-      caption:'',
-      description:''
-    }
+      name: "",
+      caption: "",
+      description: "",
+    };
   },
-    validations () {
-    return{
-      name : {required},
-      caption : {required},
-      description:{required}
-    }
+  validations() {
+    return {
+      name: { required },
+      caption: { required },
+      description: { required },
+    };
   },
-  methods:{
-     async onManualSubmit(){
-      await this.v$.$validate();
-     // this.v$.$reset();
-    }
-  },
+  methods: {
+    async onManualSubmit() {
+      var validationResult = await this.v$.$validate();
 
-}
+      if (!validationResult) {
+        console.log("Validation failed");
+        return;
+      }
+
+      // Validation Successful, can submit the form now.
+      console.log("Validation successful");
+      // submit();
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
