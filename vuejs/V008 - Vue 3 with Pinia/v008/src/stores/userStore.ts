@@ -11,11 +11,14 @@ const user = ref<User>({
 //getters
 const IsSeniorCitizen = computed(()=> user.value.age >= 60);
 //methods
-function SetUser(newUser:User){
-    user.value =  newUser;
+const Reset = ()=> {
+    user.value = {
+        userName : 'John Doe',
+        age : 35,
+    };
 }
 
 return {
-    user, IsSeniorCitizen, SetUser
+    user, IsSeniorCitizen, Reset
 };
 })

@@ -29,6 +29,10 @@
                     <tr>
                         <td colspan="2"><router-link class="styled-router-link" to="/edit">Edit Store</router-link></td>
                     </tr>
+
+                    <tr>
+                        <td colspan="2"><button v-on:click="resetUserStore">Reset Store</button></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -44,6 +48,10 @@ const counter = ref(1);
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 const { IsSeniorCitizen } = userStore;
+
+const resetUserStore = () => {
+    userStore.Reset();
+}
 </script>
 
 <style scoped>
