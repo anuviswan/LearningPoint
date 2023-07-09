@@ -17,5 +17,5 @@ function SetUser(newUser:User){
 
 return {
     user, IsSeniorCitizen, SetUser
-}
+};
 })

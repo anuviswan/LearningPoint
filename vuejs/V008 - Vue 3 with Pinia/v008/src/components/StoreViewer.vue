@@ -1,49 +1,58 @@
-
-
 <template>
     <div>
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <td>Key</td>
-                    <td>Value</td>
-                </tr>
-            </thead>
-            <tbody>
+        <div>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <td>Key</td>
+                        <td>Value</td>
+                    </tr>
+                </thead>
+                <tbody>
 
-                <tr>
-                    <td>User Name</td>
-                    <td>{{ user.userName }}</td>
-                </tr>
-                <tr>
-                    <td>Age</td>
-                    <td>{{ user.age }}</td>
-                </tr>
-                <tr>
-                    <td>Senior Citizen</td>
-                    <td>{{ IsSeniorCitizen ? 'Yes' : ' No'}}</td>
-                </tr>
-                <tr>
-                    <td>Counter</td>
-                    <td>{{ counter }}</td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <td>User Name</td>
+                        <td>{{ user.userName }}</td>
+                    </tr>
+                    <tr>
+                        <td>Age</td>
+                        <td>{{ user.age }}</td>
+                    </tr>
+                    <tr>
+                        <td>Senior Citizen</td>
+                        <td>{{ IsSeniorCitizen ? 'Yes' : ' No' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Counter</td>
+                        <td>{{ counter }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <router-link class="styled-router-link" to="/edit">Edit Store</router-link>
     </div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import User from "@/types/user"
 import { useUserStore } from "@/stores/userStore";
 import { storeToRefs } from "pinia";
 
 const counter = ref(1);
 const userStore = useUserStore();
-const {user} = storeToRefs(userStore);
-const {IsSeniorCitizen} = userStore;
+const { user } = storeToRefs(userStore);
+const { IsSeniorCitizen } = userStore;
 </script>
 
 <style scoped>
+.styled-router-link{
+    min-width: 300;
+    text-align: left;
+    align-content: start;
+    align-self: flex-start;
+    background: red;
+}
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
