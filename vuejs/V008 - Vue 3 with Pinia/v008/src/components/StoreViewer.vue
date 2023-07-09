@@ -16,8 +16,12 @@
                     <td>{{ user.userName }}</td>
                 </tr>
                 <tr>
-                    <td>Address</td>
-                    <td>{{ user.address }}</td>
+                    <td>Age</td>
+                    <td>{{ user.age }}</td>
+                </tr>
+                <tr>
+                    <td>Senior Citizen</td>
+                    <td>{{ IsSeniorCitizen ? 'Yes' : ' No'}}</td>
                 </tr>
                 <tr>
                     <td>Counter</td>
@@ -30,10 +34,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import User from "@/types/user"
+import { useUserStore } from "@/stores/userStore";
+import { storeToRefs } from "pinia";
 
-const user = ref<User>({userName : '', address : ''});
 const counter = ref(1);
-
+const userStore = useUserStore();
+const {user} = storeToRefs(userStore);
+const {IsSeniorCitizen} = userStore;
 </script>
 
 <style scoped>

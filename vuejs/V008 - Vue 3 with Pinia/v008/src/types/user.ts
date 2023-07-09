@@ -1,4 +1,4 @@
 export default interface User{
     userName : string,
-    address : string
+    age : number,
 }
