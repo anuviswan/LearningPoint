@@ -5,8 +5,8 @@ import { computed, ref } from "vue"
 export const useUserStore = defineStore('UserStore',()=>{
 //state
 const user = ref<User>({
-    userName : 'Jia And Naina',
-    age : 1,
+    userName : 'John Doe',
+    age : 35,
 })
 //getters
 const IsSeniorCitizen = computed(()=> user.value.age >= 60);
