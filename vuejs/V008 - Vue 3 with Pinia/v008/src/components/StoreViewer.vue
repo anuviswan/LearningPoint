@@ -26,13 +26,14 @@
                         <td>Counter</td>
                         <td>{{ counter }}</td>
                     </tr>
+                    <tr>
+                        <td colspan="2"><router-link class="styled-router-link" to="/edit">Edit Store</router-link></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <div>
-        <router-link class="styled-router-link" to="/edit">Edit Store</router-link>
-    </div>
+
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
@@ -46,13 +47,7 @@ const { IsSeniorCitizen } = userStore;
 </script>
 
 <style scoped>
-.styled-router-link{
-    min-width: 300;
-    text-align: left;
-    align-content: start;
-    align-self: flex-start;
-    background: red;
-}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
