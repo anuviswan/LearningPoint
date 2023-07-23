@@ -1,6 +1,5 @@
+using GraphqlUsingHotChocolate.GraphQl.Queries;
 using HelloWorldApi.Database;
-using HotChocolate.AspNetCore;
-using HotChocolate.AspNetCore.Playground;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,26 +15,29 @@ builder.Services.AddDbContext<TimeGraphContext>(context =>
     context.UseInMemoryDatabase("TimeGraphServer");
 });
 
-var app = builder.Build();
+builder.Services.AddGraphQLServer().AddQueryType<ProjectQuery>();
 
+var app = builder.Build();
+app.MapGraphQL();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
-    app.UsePlayground(new PlaygroundOptions
-    {
-        QueryPath = "/api",
-        Path = "/playground"
-    });
+    //app.UsePlayground(new PlaygroundOptions
+    //{
+    //    QueryPath = "/api",
+    //    Path = "/playground"
+    //});
 }
 
-app.UseGraphQL("/api");
+//app.UseGraphQL("/api");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
