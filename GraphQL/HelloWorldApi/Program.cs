@@ -1,6 +1,4 @@
 using HelloWorldApi.Database;
-using HotChocolate.AspNetCore;
-using HotChocolate.AspNetCore.Playground;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,14 +22,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
-    app.UsePlayground(new PlaygroundOptions
-    {
-        QueryPath = "/api",
-        Path = "/playground"
-    });
+    //app.UsePlayground(new PlaygroundOptions
+    //{
+    //    QueryPath = "/api",
+    //    Path = "/playground"
+    //});
 }
 
-app.UseGraphQL("/api");
+//app.UseGraphQL("/api");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
