@@ -1,3 +1,4 @@
+using GraphqlUsingHotChocolate.GraphQl.Queries;
 using HelloWorldApi.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,8 +15,10 @@ builder.Services.AddDbContext<TimeGraphContext>(context =>
     context.UseInMemoryDatabase("TimeGraphServer");
 });
 
-var app = builder.Build();
+builder.Services.AddGraphQLServer().AddQueryType<ProjectQuery>();
 
+var app = builder.Build();
+app.MapGraphQL();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -35,5 +38,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
