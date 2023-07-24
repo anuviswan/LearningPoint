@@ -6,15 +6,16 @@ This contains sample code for the tutorials in www.bytelanguage.net.  This inclu
 
 - **Algorithms**
    - [Longest Palindrome using ExpandingWithCorners](https://github.com/anuviswan/LearningPoint/blob/master/Algorithms/AlgorithmDemo/LongestPalindrome.cs): Find Longest Palindrome using Expanding With Corners algorithm
- 
-- **Async Await**
-  - [Awaitable Patterns](https://github.com/anuviswan/LearningPoint/tree/master/AsyncAwait/Awaitable) : Demonstrates how to implement Awaitable Pattern
 
 - **Asp.Net Core**
   - [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/MyFirstApp) : A hello world illustrating controllers, middlewares and other services.
   - [Jwt Authentication](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/JwtExample) : Code illustrating how to use Jwt Authentication in .Net Core Web Api
   - [Jwt Authentication Minimal Web Api](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/MinimalWebAPi): Code demo for JWT Authentication using Minimalist Web API.
-  - [Google OAuth](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/WebAppOAuthDemo) : Authentication using Google OAuth
+  - [Google OAuth](https://github.com/anuviswan/LearningPoint/tree/master/AspNetCore/WebAppOAuthDemo) : Authentication using Google OAuth   
+ 
+- **Async Await**
+  - [Awaitable Patterns](https://github.com/anuviswan/LearningPoint/tree/master/AsyncAwait/Awaitable) : Demonstrates how to implement Awaitable Pattern
+
 
 - **Azure Functions**
   - [Hello World](https://github.com/anuviswan/LearningPoint/tree/master/AzureFunctions/AzureFunctions/HelloWorld) : Customary Hello World
@@ -63,6 +64,9 @@ This contains sample code for the tutorials in www.bytelanguage.net.  This inclu
   - [Switch Expression](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/SwitchExpression) - Explore Switch Expressions
   - [Stream Serialization](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/StreamSerialization) - Explore and Benchmark the performance benefits of Streaming Serialiazation 
   - [Unit Testing Asynchornous Code](https://github.com/anuviswan/LearningPoint/tree/master/FeatureExplore/UnitTestingAsyncCode) - How to  unit test asynchronous code
+
+- **GraphQL**
+  - [Getting Started with HotChocolate](https://github.com/anuviswan/LearningPoint/tree/master/GraphQL/HotChocolate/Day%20001)
 
 - **Microservices**
   - [JWT Authentication](https://github.com/anuviswan/LearningPoint/tree/master/Microservices/AuthenticationDemo) : Code Illustrating Jwt Authentication in Microservices. The demo code uses [Ocelot](https://github.com/ThreeMammals/Ocelot) for building the Api Gateway and [Polly](https://github.com/App-vNext/Polly) for resilience features
