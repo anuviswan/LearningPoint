@@ -15,7 +15,7 @@ builder.Services.AddDbContext<TimeGraphContext>(context =>
     context.UseInMemoryDatabase("TimeGraphServer");
 });
 
-builder.Services.AddGraphQLServer().AddQueryType<ProjectQuery>();
+builder.Services.AddGraphQLServer().AddQueryType<QueryResolver>();
 
 var app = builder.Build();
 app.MapGraphQL();
