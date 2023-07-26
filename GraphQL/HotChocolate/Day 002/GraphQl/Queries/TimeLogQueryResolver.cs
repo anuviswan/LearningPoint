@@ -1,7 +1,7 @@
 ﻿using HelloWorldApi.Database;
 using HelloWorldApi.Models;
 
-namespace Day001.GraphQl.Queries;
+namespace GraphqlUsingHotChocolate.GraphQl.Queries;
 
 public class TimeLogQueryResolver
 {

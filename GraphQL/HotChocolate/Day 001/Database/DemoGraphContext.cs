@@ -1,7 +1,7 @@
-﻿using HelloWorldApi.Models;
+﻿using GraphQLDemo.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace HelloWorldApi.Database;
+namespace GraphQLDemo.Database;
 
 public class DemoGraphContext : DbContext
 {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace HelloWorldApi.Controllers;
+namespace GraphQLDemo.Controllers;
 
 [ApiController]
 [Route("[controller]")]
