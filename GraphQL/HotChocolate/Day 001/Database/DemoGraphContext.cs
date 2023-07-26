@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HelloWorldApi.Database;
 
-public class TimeGraphContext : DbContext
+public class DemoGraphContext : DbContext
 {
-    public TimeGraphContext(DbContextOptions<TimeGraphContext> options) : base(options)
+    public DemoGraphContext(DbContextOptions<DemoGraphContext> options) : base(options)
     {
         Database.EnsureCreated();
     }
