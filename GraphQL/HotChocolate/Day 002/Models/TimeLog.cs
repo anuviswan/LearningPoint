@@ -1,4 +1,4 @@
-﻿namespace HelloWorldApi.Models;
+﻿namespace GraphQLDemo.Models;
 
 public class TimeLog
 {

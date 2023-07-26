@@ -1,5 +1,5 @@
-using GraphqlUsingHotChocolate.GraphQl.Queries;
-using HelloWorldApi.Database;
+using GraphQLDemo.GraphQl.Queries;
+using GraphQLDemo.Database;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

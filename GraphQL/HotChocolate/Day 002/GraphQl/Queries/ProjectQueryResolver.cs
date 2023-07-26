@@ -1,8 +1,8 @@
-﻿using HelloWorldApi.Database;
-using HelloWorldApi.Models;
+﻿using GraphQLDemo.Database;
+using GraphQLDemo.Models;
 using System.Data;
 
-namespace GraphqlUsingHotChocolate.GraphQl.Queries;
+namespace GraphQLDemo.GraphQl.Queries;
 
 public class ProjectQueryResolver
 {
