@@ -1,3 +1,4 @@
+using Day001.GraphQl.Queries;
 using GraphqlUsingHotChocolate.GraphQl.Queries;
 using HelloWorldApi.Database;
 using Microsoft.EntityFrameworkCore;
