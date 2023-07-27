@@ -31,21 +31,18 @@ public class DemoGraphContext : DbContext
             Id = 1,
             From = new DateTime(2020, 7, 24, 12, 0, 0),
             To = new DateTime(2020, 7, 24, 14, 0, 0),
-            ProjectId = 1,
             User = "Giorgi"
         }, new TimeLog
         {
             Id = 2,
             From = new DateTime(2020, 7, 24, 16, 0, 0),
             To = new DateTime(2020, 7, 24, 18, 0, 0),
-            ProjectId = 1,
             User = "Giorgi"
         }, new TimeLog
         {
             Id = 3,
             From = new DateTime(2020, 7, 24, 20, 0, 0),
             To = new DateTime(2020, 7, 24, 22, 0, 0),
-            ProjectId = 2,
             User = "Giorgi"
         });
     }

@@ -1,0 +1,1 @@
+This folder demonstrates the various GroupBy techniques that can be applied in XSLT 1.1.
