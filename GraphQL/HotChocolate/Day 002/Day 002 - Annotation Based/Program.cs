@@ -16,9 +16,7 @@ builder.Services.AddDbContext<DemoGraphContext>(context =>
 });
 
 builder.Services.AddGraphQLServer()
-                .AddQueryType<Query>() 
-                .AddTypeExtension<TimeLogQueryResolver>()
-                .AddTypeExtension<ProjectQueryResolver>();
+                .AddQueryType<Query>();
 
 var app = builder.Build();
 app.MapGraphQL();
