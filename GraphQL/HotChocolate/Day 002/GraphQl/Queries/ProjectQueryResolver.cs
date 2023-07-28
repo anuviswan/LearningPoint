@@ -1,10 +1,9 @@
 ﻿using GraphQLDemo.Database;
 using GraphQLDemo.Models;
-using System.Data;
 
 namespace GraphQLDemo.GraphQl.Queries;
 
-[ExtendObjectType("Query")]
+[ExtendObjectType(typeof(Query))]
 public class ProjectQueryResolver
 {
     public IEnumerable<Project> FetchAllProjects([Service(ServiceKind.Synchronized)]DemoGraphContext dbContext)
