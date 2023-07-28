@@ -1,11 +1,14 @@
 ﻿namespace GraphQLDemo.Models;
 
+[GraphQLDescription("Describes a Project information")]
 public class Project
 {
+    [GraphQLDescription("Unique Identifier of the Project")]
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string CreatedBy { get; set; }
 
-    public int TimeLogId { get; set; }
-    public TimeLog Log{ get; set; }
+    [GraphQLDescription("Name of the Project")]
+    public string Name { get; set; }
+
+    [GraphQLDescription("Describes who created the project")]
+    public string CreatedBy { get; set; }
 }
