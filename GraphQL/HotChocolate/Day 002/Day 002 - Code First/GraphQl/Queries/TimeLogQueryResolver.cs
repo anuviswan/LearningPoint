@@ -3,8 +3,7 @@ using GraphQLDemo.Models;
 
 namespace GraphQLDemo.GraphQl.Queries;
 
-[ExtendObjectType(typeof(Query))]
-public class TimeLogQueryResolver
+public class TimeLogQueryResolver : ObjectTypeExtension<Query>
 {
     [GraphQLDescription("Fetch all timelog")]
     public IEnumerable<TimeLog> FetchAllTimeLog([Service(ServiceKind.Synchronized)] DemoGraphContext dbContext)

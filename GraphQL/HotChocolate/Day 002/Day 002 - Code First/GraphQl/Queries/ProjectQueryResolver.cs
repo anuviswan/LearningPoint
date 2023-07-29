@@ -3,8 +3,7 @@ using GraphQLDemo.Models;
 
 namespace GraphQLDemo.GraphQl.Queries;
 
-[ExtendObjectType(typeof(Query))]
-public class ProjectQueryResolver
+public class ProjectQueryResolver : ObjectTypeExtension<Query>
 {
     [GraphQLDescription("Fetch all projects")]
     public IEnumerable<Project> FetchAllProjects([Service(ServiceKind.Synchronized)]DemoGraphContext dbContext)
