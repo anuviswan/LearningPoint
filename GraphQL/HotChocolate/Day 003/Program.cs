@@ -15,6 +15,8 @@ builder.Services.AddDbContext<DemoGraphContext>(context =>
 });
 
 builder.Services.AddGraphQLServer()
+                .AddDefaultTransactionScopeHandler()
+                .AddMutationConventions()
                 .AddQueryType<QueryType>();
 
 var app = builder.Build();
