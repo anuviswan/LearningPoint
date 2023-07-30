@@ -4,9 +4,20 @@ using GraphQLDemo.Models;
 [ExtendObjectType(typeof(Mutation))]
 public class ProjectMutation
 {
-    public async Task<Project> AddProject([Service(ServiceKind.Synchronized)] DemoGraphContext dbContext,Project project)
+    [UseMutationConvention]
+    [GraphQLDescription("Add Project")]
+    public async Task<Project> AddProject([Service(ServiceKind.Synchronized)] DemoGraphContext dbContext,
+        [ID] Guid id, string name, string createdBy )
     {
-        await dbContext.AddAsync(project);
-        return project;
+        var project = new Project
+        {
+            //Id = id,
+            Name = name,
+            CreatedBy = createdBy
+        };
+        var result  = await dbContext.AddAsync(project); 
+        
+        await dbContext.SaveChangesAsync();
+        return result.Entity;
     } 
 }

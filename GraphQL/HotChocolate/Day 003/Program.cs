@@ -1,4 +1,5 @@
 using GraphQLDemo.Database;
+using GraphQLDemo.GraphQl.Queries;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +18,8 @@ builder.Services.AddDbContext<DemoGraphContext>(context =>
 builder.Services.AddGraphQLServer()
                 .AddDefaultTransactionScopeHandler()
                 .AddMutationConventions()
-                .AddQueryType<QueryType>();
+                .AddQueryType<Query>()
+                .AddMutationType<Mutation>();
 
 var app = builder.Build();
 app.MapGraphQL();
