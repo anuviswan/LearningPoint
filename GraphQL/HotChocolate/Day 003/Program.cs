@@ -17,7 +17,7 @@ builder.Services.AddDbContext<DemoGraphContext>(context =>
 
 builder.Services.AddGraphQLServer()
                 .AddDefaultTransactionScopeHandler()
-                .AddMutationConventions()
+                .AddMutationConventions(applyToAllMutations:false)
                 .AddQueryType<Query>()
                 .AddTypeExtension<ProjectQueryResolver>()
                 .AddTypeExtension<TimeLogQueryResolver>()
