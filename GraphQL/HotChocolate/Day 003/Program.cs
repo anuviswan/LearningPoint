@@ -19,7 +19,10 @@ builder.Services.AddGraphQLServer()
                 .AddDefaultTransactionScopeHandler()
                 .AddMutationConventions()
                 .AddQueryType<Query>()
-                .AddMutationType<Mutation>();
+                .AddTypeExtension<ProjectQueryResolver>()
+                .AddTypeExtension<TimeLogQueryResolver>()
+                .AddMutationType<Mutation>()
+                .AddTypeExtension<ProjectMutation>();
 
 var app = builder.Build();
 app.MapGraphQL();

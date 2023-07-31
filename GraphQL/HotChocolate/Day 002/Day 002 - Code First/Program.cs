@@ -1,4 +1,5 @@
 using GraphQLDemo.Database;
+using GraphQLDemo.GraphQl.Queries;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,9 @@ builder.Services.AddDbContext<DemoGraphContext>(context =>
 });
 
 builder.Services.AddGraphQLServer()
-                .AddQueryType<QueryType>();
+                .AddQueryType<QueryType>()
+                .AddTypeExtension<ProjectQueryResolver>()
+                .AddTypeExtension<TimeLogQueryResolver>();
 
 var app = builder.Build();
 app.MapGraphQL();
