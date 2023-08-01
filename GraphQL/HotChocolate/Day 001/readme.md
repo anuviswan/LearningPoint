@@ -1,3 +1,5 @@
+# Creating your first GraphQL Server
+
 In the earlier part of the series, we familiarized ourselves with the different building blocks of GraphQL. We also understood the need of GraphQL and how it fares compared to REST endpoints. 
 
 In this post, we will create our first GraphQL server. For sake of this example, we will be using the [`HotChocolate`](https://chillicream.com/docs/hotchocolate/v13) library for building our GraphQL server.

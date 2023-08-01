@@ -1,3 +1,5 @@
+# Defining Mutations
+
 Until now, we dealt with, what we could call a readonly system. In other words, we defined queries which does not alter the system. But what if we intent to alter the system, for example, we want to add a new record. This is where `mutation` comes into the play.
 
 The mutation type in GraphQL is used to alter data. Let us go ahead and create our first mutation.

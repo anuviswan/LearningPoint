@@ -1,3 +1,5 @@
+# Type Definition Basics
+
 [Earlier in this series](https://bytelanguage.com/2023/07/26/graphql-day-001-creating-your-first-graphql-server-with-hotchocolate/), we will created our first GraphQL Server. If you had noticed we defined our data types as plain C# classes. This was a simple example of Annotation based approach, though actually we did not use any annotation. However, things can change when one needs to expose another query resolver. 
 
 ### Annotation Based Type Definition
