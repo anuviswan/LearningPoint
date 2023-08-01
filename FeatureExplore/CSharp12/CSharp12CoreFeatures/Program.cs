@@ -1,5 +1,7 @@
 ﻿
 
+using CSharp12CoreFeatures;
+
 var personPrimaryConstructor = new Person("John Doe", 50);
 var personExplicitConstructor = new Person("John Doe", "India", 50);
 
@@ -16,8 +18,6 @@ void Print(string message)
     Console.WriteLine(message);
 }
 
-
-// Primary Constructor Examples
 void PrintPerson(Person person)
 {
     Print("{");
@@ -26,16 +26,4 @@ void PrintPerson(Person person)
     Print($"{nameof(person.Age)} : {person.Age}");
     Print("}");
 }
-
-public class Person(string name,int age)
-{
-    public Person(string name,string country, int age) : this(name,100)
-    {
-        Country = country;
-    }
-    public string Name => name;
-    public int Age => age;
-    public string Country { get; set; }
-}
-
 
