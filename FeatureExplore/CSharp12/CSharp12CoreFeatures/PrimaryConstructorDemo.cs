@@ -9,9 +9,15 @@ public class Person(string name, int age)
     public string Name => name;
     public int Age => age;
     public string Country { get; set; }
+
+    public void AssignNameAndAge(string newName,int newAge)
+    {
+        name = newName;
+        age = newAge;
+    }
 }
 
-public class Employee(string firstName,string lastName,int age):Person($"{firstName} {lastName}",age)
+public class Employee(string firstName, string lastName, int age) : Person($"{firstName} {lastName}", age)
 {
     public string Department { get; set; }
 }

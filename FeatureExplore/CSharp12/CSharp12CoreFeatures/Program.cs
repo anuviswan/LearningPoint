@@ -9,6 +9,9 @@ Print("Printing Primary Constructor Demo");
 PrintPerson(personPrimaryConstructor);
 PrintPerson(personExplicitConstructor);
 
+personPrimaryConstructor.AssignNameAndAge("Jane Doe",100);
+PrintPerson(personPrimaryConstructor);
+
 
 
 
