@@ -1,9 +1,18 @@
+using DemoGraphQLServer.GraphQL;
+using DemoGraphQLServer.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient<EmployeeService>();
+builder.Services.AddHttpClient<InventoryService>();
+builder.Services.AddGraphQLServer()
+                .AddQueryType<Query>()
+                .AddTypeExtension<EmployeeServiceQuery>();
+
 
 var app = builder.Build();
 
