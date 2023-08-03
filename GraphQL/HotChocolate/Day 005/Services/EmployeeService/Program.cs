@@ -16,29 +16,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+var employees = new List<Employee>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+   new Employee(101,"John Doe",50,"India"),
+   new Employee(102,"Jane Doe",45,"UK"),
+   new Employee(103,"Jason doe",30,"USA"),
 };
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/getallemployees", () =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    return employees;
 })
-.WithName("GetWeatherForecast")
+.WithName("GetAllEmployees")
+.WithOpenApi();
+
+app.MapPost("/addemployee", (Employee employee) =>
+{
+    employees.Add(employee);
+}).WithName("AddEmployee")
 .WithOpenApi();
 
 app.Run();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+
+internal record Employee(int Id,string Name, int Age, string Country);
