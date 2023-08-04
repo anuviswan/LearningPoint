@@ -23,9 +23,10 @@ public class ProjectMutation
             CreatedBy = createdBy
         };
         var result = await dbContext.AddAsync(project);
+        await dbContext.SaveChangesAsync();
 
         await topicSender.SendAsync(nameof(AddProject), project);
-        await dbContext.SaveChangesAsync();
+        
         return result.Entity;
     }
 
