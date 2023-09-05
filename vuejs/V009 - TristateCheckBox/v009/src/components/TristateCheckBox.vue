@@ -4,24 +4,45 @@
         v-bind:checked="isChecked" 
         v-bind:indeterminate="isIndeterminate"
         @input="$emit('update:modelValue', isChecked)"
+        @click="toggleState"
         />
 
 
 </template>
 <script setup>
-import { onMounted, ref, defineProps } from 'vue';
+import { onMounted, ref, defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
     modelValue: { type: Boolean, default: undefined }
 })
+defineEmits(['update:modelValue']);
 
-const isChecked = ref<Boolean | undefined>(false)
-const isIndeterminate = ref(false)
+const isIndeterminate = ref(false);
+const isChecked = ref(false);
+
 
 onMounted(() => {
-  if (props.modelValue == undefined) isIndeterminate.value = true
+  if (props.modelValue == undefined) {
+    isIndeterminate.value = true;
+  }
   else isChecked.value = props.modelValue
 })
+
+const toggleState = () => {
+
+  if(isIndeterminate.value){
+    isChecked.value = true;
+    isIndeterminate.value = false;
+  }
+  else if(isChecked.value){
+    isChecked.value = false;
+    isIndeterminate.value = false;
+  }
+  else{
+    isChecked.value = undefined;
+    isIndeterminate.value = true;
+  }
+}
 
 </script>
 <style scoped>

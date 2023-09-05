@@ -6,7 +6,7 @@
     </p>
     <ul>
       <li>
-        <TristateCheckBoxVue v-model="ModelValue" /> <label>{{ CaptionText }}</label>
+        <TristateCheckBoxVue v-model="ModelValue"  /> <label>{{ CaptionText }}</label>
       </li>
     </ul>
     <ul>
@@ -21,10 +21,10 @@
 import TristateCheckBoxVue from "./TristateCheckBox.vue";
 import {ref} from "vue"
 
-const ModelValue = ref(undefined); 
+const ModelValue = ref(false)
 const CaptionText = ref("Change state of checkbox");
-
 console.log(ModelValue.value)
+
 
 </script>
 
