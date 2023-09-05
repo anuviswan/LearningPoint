@@ -3,8 +3,8 @@
         v-bind:model="modelValue" 
         v-bind:checked="isChecked" 
         v-bind:indeterminate="isIndeterminate"
-        @input="$emit('update:modelValue', isChecked)"
-        @click="toggleState"
+        v-on:input="$emit('update:modelValue', isChecked)"
+        v-on:click="toggleState"
         />
 
 
