@@ -1,5 +1,5 @@
-﻿for(int i=0;i<30;i++)
+﻿for(int i=0;i<40;i++)
 {
     await Task.Delay(500);
-    Console.Write($"{i} ");
+    Console.Write($"i ");
 }
