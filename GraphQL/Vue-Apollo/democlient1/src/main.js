@@ -7,7 +7,7 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: 'http://localhost:3020/graphql',
+  uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
 })
 
 // Cache implementation
