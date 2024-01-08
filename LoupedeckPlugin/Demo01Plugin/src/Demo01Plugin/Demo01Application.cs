@@ -11,7 +11,7 @@ namespace Loupedeck.Demo01Plugin
         }
 
         // This method can be used to link the plugin to a Windows application.
-        protected override String GetProcessName() => "";
+        protected override String GetProcessName() => "Notepad";
 
         // This method can be used to link the plugin to a macOS application.
         protected override String GetBundleName() => "";
