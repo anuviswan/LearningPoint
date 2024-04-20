@@ -1,6 +1,7 @@
 ﻿
 using CSharp12CoreFeatures;
 
+Print("Primary Constructor Demo");
 var personPrimaryConstructor = new Person("John Doe", 50);
 var personExplicitConstructor = new Person("John Doe", "India", 50);
 
@@ -13,7 +14,22 @@ personPrimaryConstructor.AssignNameAndAge("Jane Doe",100);
 PrintPerson(personPrimaryConstructor);
 
 
-void Print(string message) => Console.WriteLine(message);
+Print("Collection Expression Dmeo");
+var collectionExpressionDemo = new CollectionExpressionsDemo();
+collectionExpressionDemo.PrintEmployeeCount();
+
+Print("Printing Directors WorldWide");
+foreach(var director in collectionExpressionDemo.DirectorsWorldWide)
+{
+    Print(director);
+}
+
+
+
+void Print(string message)
+{
+    Console.WriteLine(message);
+}
 
 void PrintPerson(Person person)
 {
