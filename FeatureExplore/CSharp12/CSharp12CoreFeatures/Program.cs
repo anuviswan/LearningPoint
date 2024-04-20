@@ -1,5 +1,4 @@
 ﻿
-
 using CSharp12CoreFeatures;
 
 Print("Primary Constructor Demo");
@@ -10,6 +9,7 @@ Print("Printing Primary Constructor Demo");
 PrintPerson(personPrimaryConstructor);
 PrintPerson(personExplicitConstructor);
 
+Print("Mutating Primary Constructor parameters");
 personPrimaryConstructor.AssignNameAndAge("Jane Doe",100);
 PrintPerson(personPrimaryConstructor);
 
