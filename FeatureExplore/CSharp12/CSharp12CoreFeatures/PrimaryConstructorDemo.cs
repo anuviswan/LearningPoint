@@ -41,7 +41,7 @@ public class Person(string name, int age)
     }
     public string Name => name;
     public int Age => age;
-    public string Country { get; set; }
+    public string? Country { get; set; }
 
     // Mutating Primary Constructor Variables
     public void AssignNameAndAge(string newName,int newAge)
@@ -53,6 +53,6 @@ public class Person(string name, int age)
 
 public class Employee(string firstName, string lastName, int age) : Person($"{firstName} {lastName}", age)
 {
-    public string Department { get; set; }
+    public string? Department { get; set; }
 }
 
