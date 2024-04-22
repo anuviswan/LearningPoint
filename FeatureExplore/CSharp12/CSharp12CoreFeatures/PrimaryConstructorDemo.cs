@@ -1,4 +1,12 @@
-﻿namespace CSharp12CoreFeatures;
+﻿/*
+ * This file demonstrates the usage of Primary constructor in C# 12. Primary Constructor was introduced 
+ * in C# 12, .Net 8. Introduced earlier for records, Primary Constructor allows need for explicit constructors
+ * previous introduced solely for assigning values to private fields/properties. Unlike records, parameters
+ * of the struct/class does not become a property of the class.
+ * */
+
+
+namespace CSharp12CoreFeatures;
 
 
 public class FooWithoutPrimaryConstructor

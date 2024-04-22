@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * This file demonstrates the usage of Collection Expression in C# 12. Collection Expression was introduced 
+ * in C# 12, .Net 8 and is used to create inline collections.
+ * */
 
 namespace CSharp12CoreFeatures;
 
