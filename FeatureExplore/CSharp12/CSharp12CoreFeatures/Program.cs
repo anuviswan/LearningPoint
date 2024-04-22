@@ -30,7 +30,10 @@ var inlineArrayDemo = new InlineArrayDemo();
 inlineArrayDemo.Create([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 inlineArrayDemo.Print();
 
-
+Print("Optional Lambda Parameters");
+var lambdaParametersDemo = new OptionalLamdaParametersDemo();
+Print($".Increment(3,2) = {lambdaParametersDemo.Increment(3,2)}");
+Print($".Increment(3) = {lambdaParametersDemo.Increment(3)}");
 
 void Print(string message)
 {
