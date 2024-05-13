@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33402.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReturnTypeExplore", "ReturnTypeExplore\ReturnTypeExplore.csproj", "{3D7986E6-AC2D-4F82-9D49-3AAC428430A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolymorphicParameterBinding", "PolymorphicParameterBinding\PolymorphicParameterBinding.csproj", "{2944E817-0423-4BD8-8769-DDC7A6E6920E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolymorphicParameterBinding", "PolymorphicParameterBinding\PolymorphicParameterBinding.csproj", "{2944E817-0423-4BD8-8769-DDC7A6E6920E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadEndPoint", "FileUploadEndPoint\FileUploadEndPoint.csproj", "{14E98120-A820-44A7-81FE-5CC0F16D73A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2944E817-0423-4BD8-8769-DDC7A6E6920E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2944E817-0423-4BD8-8769-DDC7A6E6920E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2944E817-0423-4BD8-8769-DDC7A6E6920E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14E98120-A820-44A7-81FE-5CC0F16D73A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14E98120-A820-44A7-81FE-5CC0F16D73A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14E98120-A820-44A7-81FE-5CC0F16D73A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14E98120-A820-44A7-81FE-5CC0F16D73A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
