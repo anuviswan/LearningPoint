@@ -4,7 +4,7 @@ namespace FileUploadEndPoint.Services;
 
 public interface IBlobService
 {
-    Task UploadFile(IFormFile file);
+    Task<Azure.Response<Azure.Storage.Blobs.Models.BlobContentInfo>> UploadFile(IFormFile file, CancellationToken cancellationToken);
 }
 
 public class BlobService : IBlobService
@@ -14,15 +14,20 @@ public class BlobService : IBlobService
     private const string ContainerName = "";
 
     private readonly BlobServiceClient _blobServiceClient;
-    private readonly BlobContainerClient _bloblContainerClient;
+    private readonly BlobContainerClient _blobContainerClient;
 
     public BlobService()
     {
         _blobServiceClient = new BlobServiceClient(ConnectionString);
-        _bloblContainerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
+        _blobContainerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
     }
-    public Task UploadFile(IFormFile file)
+    public async Task<Azure.Response<Azure.Storage.Blobs.Models.BlobContentInfo>> UploadFile(IFormFile file, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        using var memoryStream = new MemoryStream();
+        file.CopyTo(memoryStream);
+
+        var response = await _blobContainerClient.UploadBlobAsync(file.FileName, memoryStream, cancellationToken);
+
+        return response;
     }
 }
