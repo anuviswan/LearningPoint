@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace FileUploadEndPoint.Controllers
+namespace FileUploadEndPoint.Controllers;
+
+public class DemoController : Controller
 {
-    public class DemoController : Controller
+    public async Task UploadFile(IFormFile file)
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        // TODO : Read file and upload to blob
     }
 }

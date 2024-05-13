@@ -1,4 +1,6 @@
 
+using FileUploadEndPoint.Services;
+
 namespace FileUploadEndPoint
 {
     public class Program
@@ -13,6 +15,7 @@ namespace FileUploadEndPoint
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<IBlobService, BlobService>();
 
             var app = builder.Build();
 
