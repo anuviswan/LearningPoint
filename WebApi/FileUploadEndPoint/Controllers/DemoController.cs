@@ -12,6 +12,6 @@ public class DemoController : Controller
     }
     public async Task UploadFile(IFormFile file)
     {
-        await _blobService.UploadFile(file,null).ConfigureAwait(false);   
+        await _blobService.UploadFile(file,default).ConfigureAwait(false);   
     }
 }
