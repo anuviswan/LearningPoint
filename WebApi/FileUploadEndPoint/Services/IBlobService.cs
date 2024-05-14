@@ -1,34 +1,8 @@
-﻿using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
+﻿using Azure.Storage.Blobs.Models;
 
 namespace FileUploadEndPoint.Services;
 
 public interface IBlobService
 {
-    Task<Azure.Response<BlobContentInfo>> UploadFile(IFormFile file, CancellationToken cancellationToken = default);
-}
-
-public class BlobService : IBlobService
-{
-    // TODO: Read from configuration file
-    private const string ConnectionString = "";
-    private const string ContainerName = "";
-
-    private readonly BlobServiceClient _blobServiceClient;
-    private readonly BlobContainerClient _blobContainerClient;
-
-    public BlobService()
-    {
-        _blobServiceClient = new BlobServiceClient(ConnectionString);
-        _blobContainerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
-    }
-    public async Task<Azure.Response<BlobContentInfo>> UploadFile(IFormFile file, CancellationToken cancellationToken = default)
-    {
-        using var memoryStream = new MemoryStream();
-        file.CopyTo(memoryStream);
-
-        var response = await _blobContainerClient.UploadBlobAsync(file.FileName, memoryStream, cancellationToken);
-
-        return response;
-    }
+    Task<Azure.Response<BlobContentInfo>> UploadFile(IFormFile file, string blobFileName, CancellationToken cancellationToken = default);
 }
