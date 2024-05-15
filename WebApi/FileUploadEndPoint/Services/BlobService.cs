@@ -27,4 +27,12 @@ public class BlobService : IBlobService
         var response = await _blobContainerClient.UploadBlobAsync(blobFileName, memoryStream, cancellationToken);
         return response;
     }
+
+
+    public async Task<byte[]> GetFile(string blobFileName,CancellationToken cancellationToken = default)
+    {
+        var blobClient = _blobContainerClient.GetBlobClient(blobFileName);
+        var response = await blobClient.DownloadContentAsync();
+        return response.Value.Content.ToArray();
+    }
 }

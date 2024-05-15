@@ -32,4 +32,14 @@ public class FileHandlingController : ControllerBase
         
         return Ok("File uploaded successfully");
     }
+
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Route("get")]
+    public async Task<ActionResult> Get(string fileName)
+    {
+        var response = await _blobService.GetFile(fileName).ConfigureAwait(false);
+        return File(response, "application/jpg",fileName);
+    }
 }
