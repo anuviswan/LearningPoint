@@ -11,8 +11,8 @@ services:
 
   nt.userservice.blobstorage:
     image: mcr.microsoft.com/azure-storage/azurite
-    container_name: nt.userservice.blobstorage
-    hostname: nt.userservice.blobstorage
+    container_name: blobstorage
+    hostname: blobstorage
     volumes:
       - ./localstorage/data:/data
     command: "azurite-blob --blobHost 0.0.0.0 -l /data"
