@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReturnTypeExplore", "Return
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolymorphicParameterBinding", "PolymorphicParameterBinding\PolymorphicParameterBinding.csproj", "{2944E817-0423-4BD8-8769-DDC7A6E6920E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadEndPoint", "FileUploadEndPoint\FileUploadEndPoint.csproj", "{14E98120-A820-44A7-81FE-5CC0F16D73A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileUploadEndPoint", "FileUploadEndPoint\FileUploadEndPoint.csproj", "{14E98120-A820-44A7-81FE-5CC0F16D73A4}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{15E049B6-868F-4A20-9858-897D9CF93970}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{14E98120-A820-44A7-81FE-5CC0F16D73A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14E98120-A820-44A7-81FE-5CC0F16D73A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14E98120-A820-44A7-81FE-5CC0F16D73A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E049B6-868F-4A20-9858-897D9CF93970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E049B6-868F-4A20-9858-897D9CF93970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E049B6-868F-4A20-9858-897D9CF93970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E049B6-868F-4A20-9858-897D9CF93970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  fileuploadendpoint:
+    image: ${DOCKER_REGISTRY-}fileuploadendpoint
+    build:
+      context: .
+      dockerfile: FileUploadEndPoint/Dockerfile
+    networks:
+      nt.userservice.network: 
+
+  nt.userservice.blobstorage:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: nt.userservice.blobstorage
+    hostname: nt.userservice.blobstorage
+    volumes:
+      - ./localstorage/data:/data
+    command: "azurite-blob --blobHost 0.0.0.0 -l /data"
+    ports:
+      - "10000:10000"
+      - "10001:10001"    
+    networks:
+      nt.userservice.network: 
+
+
+networks:
+  nt.authservice.network:
+   driver: bridge
+  nt.userservice.network:
+   driver: bridge
+  nt.common.network:
+   driver: bridge
+

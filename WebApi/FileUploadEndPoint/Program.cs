@@ -1,5 +1,6 @@
 
 using FileUploadEndPoint.Services;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace FileUploadEndPoint
 {
@@ -10,6 +11,15 @@ namespace FileUploadEndPoint
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddCors(option => {
+                option.AddPolicy(name: "webdemo",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyHeader();
+                    });
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
