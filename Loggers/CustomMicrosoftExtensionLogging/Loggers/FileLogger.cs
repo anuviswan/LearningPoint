@@ -3,10 +3,7 @@ namespace CustomMicrosoftExtensionLogging.Loggers;
 
 public class FileLogger : ILogger
 {
-    public IDisposable? BeginScope<TState>(TState state) where TState : notnull
-    {
-        throw new NotImplementedException();
-    }
+    public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
 
     public bool IsEnabled(LogLevel logLevel)
     {

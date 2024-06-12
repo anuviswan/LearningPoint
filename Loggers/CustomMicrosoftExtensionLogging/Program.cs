@@ -1,4 +1,9 @@
+using CustomMicrosoftExtensionLogging.Settings;
+
 var builder = WebApplication.CreateBuilder(args);
+var loggerConfiguration = builder.Configuration
+                              .GetSection(nameof(FileLoggerConfiguration))
+                              .Get<FileLoggerConfiguration>();
 
 // Add services to the container.
 
