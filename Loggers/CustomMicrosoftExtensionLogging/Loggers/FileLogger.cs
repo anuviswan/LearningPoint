@@ -1,11 +1,14 @@
 ﻿
 using CustomMicrosoftExtensionLogging.Settings;
+using System.Globalization;
 
 namespace CustomMicrosoftExtensionLogging.Loggers;
 
 public class FileLogger : ILogger
 {
     private readonly FileLoggerConfiguration _configuration;
+    private object _lock = new object();
+    private readonly CultureInfo _ci = CultureInfo.InvariantCulture;
     public FileLogger(FileLoggerConfiguration loggerConfiguration)
     {
         _configuration = loggerConfiguration;
@@ -17,8 +20,16 @@ public class FileLogger : ILogger
 
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
+        ArgumentNullException.ThrowIfNull(nameof(formatter));
+        
         if (!IsEnabled(logLevel)) return;
 
-        throw new NotImplementedException();
+        var message = formatter(state,exception);
+        var logMessage = $"{DateTime.Now.ToString("dd/mm/yyyy hh:mm:ss.ff", _ci)}: [{logLevel.ToString()} : {message}]";
+        lock (_lock)
+        {
+            File.AppendAllText(_configuration.FileName!, logMessage);
+        }
+
     }
 }
