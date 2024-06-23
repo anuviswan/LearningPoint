@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NewtonsoftJson.ViewModels;
 
 namespace NewtonsoftJson.Controllers
 {
@@ -15,7 +16,7 @@ namespace NewtonsoftJson.Controllers
         }
 
         [HttpPost(Name = "CreateUser")]
-        public Task<IActionResult> CreateUser()
+        public Task<IActionResult> CreateUser(CreateUserRequest request)
         {
             throw new NotImplementedException();
         }
