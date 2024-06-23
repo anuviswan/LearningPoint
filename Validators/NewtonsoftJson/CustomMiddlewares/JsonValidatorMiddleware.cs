@@ -4,11 +4,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NewtonsoftJson.CustomMiddlewares
 {
-    public class JsonValidator
+    public class JsonValidatorMiddleware
     {
         private readonly RequestDelegate _nextRequestDelegate;
         private readonly JSchema _schema;
-        public JsonValidator(RequestDelegate next, string schemaPath)
+        public JsonValidatorMiddleware(RequestDelegate next, string schemaPath)
         {
             (_nextRequestDelegate, _schema) = (next, JSchema.Parse(File.ReadAllText(schemaPath)));
         }
