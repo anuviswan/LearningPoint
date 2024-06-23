@@ -1,0 +1,6 @@
+@NewtonsoftJson_HostAddress = http://localhost:5166
+
+GET {{NewtonsoftJson_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
