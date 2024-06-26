@@ -19,19 +19,23 @@ namespace NewtonsoftJson.CustomMiddlewares
             {
                 context.Request.EnableBuffering();
 
-                using var reader = new StreamReader(context.Request.Body);
-
-                var body = await reader.ReadToEndAsync();
-                context.Request.Body.Position = 0;
-
-                var jsonBody = JObject.Parse(body);
-
-                if(jsonBody.IsValid(_schema, out IList<string> errors) is false)
+                using (var reader = new StreamReader(context.Request.Body))
                 {
-                    context.Response.StatusCode = 400;
-                    await context.Response.WriteAsync("Invalid request: " + string.Join(", ", errors));
-                    return;
+                    var body = await reader.ReadToEndAsync();
+                    
+
+                    var jsonBody = JObject.Parse(body);
+
+                    if (jsonBody.IsValid(_schema, out IList<string> errors) is false)
+                    {
+                        context.Response.StatusCode = 400;
+                        await context.Response.WriteAsync("Invalid request: " + string.Join(", ", errors));
+                        return;
+                    }
+                    context.Request.Body.Seek(0, SeekOrigin.Begin);
                 }
+
+                
             }
 
             await _nextRequestDelegate(context);
