@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace NewtonsoftJson.CustomMiddlewares
 {
@@ -23,17 +23,39 @@ namespace NewtonsoftJson.CustomMiddlewares
                 using (var reader = new StreamReader(context.Request.Body, leaveOpen:true))
                 {
                     var body = await reader.ReadToEndAsync();
-                    
-
                     var jsonBody = JObject.Parse(body);
 
-                    if (jsonBody.IsValid(_schema, out IList<ValidationError> errors) is false)
-                    {
-                        context.Response.StatusCode = 400;
-                        await context.Response.WriteAsync("Invalid request: " + FormatErrors(errors));
-                        return;
+                    // Get the 'anyOf' schemas from the root schema
+                    var anyOfSchemas = _schema.AnyOf.ToList();
+                    var errors = new List<ValidationError>();
+                    bool isValid = false;
 
+                    foreach (var schema in anyOfSchemas)
+                    {
+                        // Resolve $ref to actual schema
+
+                        // Validate the JSON payload against the resolved schema
+                        if (jsonBody.IsValid(schema, out IList<ValidationError> schemaErrors))
+                        {
+                            isValid = true;
+                            break; // If any schema is valid, exit the loop
+                        }
+                        errors.AddRange(schemaErrors); // Collect errors from failed schemas
                     }
+
+                    if (!isValid)
+                    {
+                        // Collect and format detailed errors
+                        var errorMessages = errors
+                            .Select(e => $"{e.Path}: {e.Message} (Schema Path: {e.Schema?.ToString() ?? "N/A"})")
+                            .ToList();
+
+                        // Output the errors
+                        context.Response.StatusCode = 400;
+                        await context.Response.WriteAsync("Invalid request: " + string.Join(", ", errorMessages));
+                        return;
+                    }
+
                     context.Request.Body.Position = 0;
                 }
 
