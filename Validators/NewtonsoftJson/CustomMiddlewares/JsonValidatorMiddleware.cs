@@ -32,9 +32,7 @@ namespace NewtonsoftJson.CustomMiddlewares
 
                     foreach (var schema in anyOfSchemas)
                     {
-                        // Resolve $ref to actual schema
-
-                        // Validate the JSON payload against the resolved schema
+                        // Validate the JSON payload against the schema
                         if (jsonBody.IsValid(schema, out IList<ValidationError> schemaErrors))
                         {
                             isValid = true;
@@ -53,6 +51,8 @@ namespace NewtonsoftJson.CustomMiddlewares
                         // Output the errors
                         context.Response.StatusCode = 400;
                         await context.Response.WriteAsync("Invalid request: " + string.Join(", ", errorMessages));
+                        await context.Response.Body.FlushAsync();
+                        //await context.Response.CompleteAsync();
                         return;
                     }
 
