@@ -14,12 +14,24 @@ namespace NewtonsoftJson.Controllers
             _logger = logger;
         }
 
-        [HttpPost(Name = "CreateUser")]
+        [HttpPost]
+        [Route("CreateUser")]
         public IActionResult CreateUser(CreateUserRequest request)
         {
 
-            _logger.LogInformation("Validation Model Successfully");
+            _logger.LogInformation("Validated Model Successfully");
             return Ok("User created successfully");
         }
+
+        //[HttpPost]
+        //[Route("CreateProduct")]
+        //public IActionResult CreateProduct(CreateProductRequest request)
+        //{
+        //    _logger.LogInformation("Validated Model Successfully");
+        //    return Ok("Product Created Successfuly");
+        //}
     }
+
+
+    
 }

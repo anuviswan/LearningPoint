@@ -1,37 +1,26 @@
 ﻿{
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "anyOf": [
+    {
+      "$ref": "#/definitions/CreateUserRequest"
+    }
+  ],
+  
   "definitions": {
     "CreateUserRequest": {
       "type": "object",
       "properties": {
-        "UserName": {
+        "userName": {
           "type": "string",
           "minLength": 5
         },
-        "DisplayName": {
+        "displayName": {
           "type": "string",
           "minLength": 5
         }
       },
-      "required": [ "UserName", "DisplayName" ]
-    },
-    "CreateProductRequest": {
-      "type": "object",
-      "properties": {
-        "ProductId": {
-          "type": "string",
-          "minLength": 1
-        },
-        "ProductName": {
-          "type": "string",
-          "minLength": 1
-        },
-        "Price": {
-          "type": "number",
-          "minimum": 0
-        }
-      },
-      "required": [ "ProductId", "ProductName", "Price" ]
+      "required": [ "userName", "displayName" ]
     }
   }
+
 }

@@ -10,6 +10,7 @@ namespace NewtonsoftJson.CustomMiddlewares
         private readonly JSchema _schema;
         public JsonValidatorMiddleware(RequestDelegate next, string schemaPath)
         {
+           
             (_nextRequestDelegate, _schema) = (next, JSchema.Parse(File.ReadAllText(schemaPath)));
         }
 
@@ -19,20 +20,21 @@ namespace NewtonsoftJson.CustomMiddlewares
             {
                 context.Request.EnableBuffering();
 
-                using (var reader = new StreamReader(context.Request.Body))
+                using (var reader = new StreamReader(context.Request.Body, leaveOpen:true))
                 {
                     var body = await reader.ReadToEndAsync();
                     
 
                     var jsonBody = JObject.Parse(body);
 
-                    if (jsonBody.IsValid(_schema, out IList<string> errors) is false)
+                    if (jsonBody.IsValid(_schema, out IList<ValidationError> errors) is false)
                     {
                         context.Response.StatusCode = 400;
-                        await context.Response.WriteAsync("Invalid request: " + string.Join(", ", errors));
+                        await context.Response.WriteAsync("Invalid request: " + FormatErrors(errors));
                         return;
+
                     }
-                    context.Request.Body.Seek(0, SeekOrigin.Begin);
+                    context.Request.Body.Position = 0;
                 }
 
                 
@@ -40,6 +42,16 @@ namespace NewtonsoftJson.CustomMiddlewares
 
             await _nextRequestDelegate(context);
         }
-        
+
+        private string FormatErrors(IList<ValidationError> errors)
+        {
+            List<string> errorMessages = new List<string>();
+            foreach (var error in errors)
+            {
+                errorMessages.Add($"{error.Path}: {error.Message}");
+            }
+            return string.Join(", ", errorMessages);
+        }
+
     }
 }
