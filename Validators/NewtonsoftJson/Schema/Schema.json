@@ -3,9 +3,12 @@
   "anyOf": [
     {
       "$ref": "#/definitions/CreateUserRequest"
+    },
+    {
+      "$ref": "#/definitions/CreateProductRequest"
     }
   ],
-  
+
   "definitions": {
     "CreateUserRequest": {
       "type": "object",
@@ -20,6 +23,24 @@
         }
       },
       "required": [ "userName", "displayName" ]
+    },
+    "CreateProductRequest": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "minLength": 5
+        },
+        "productName": {
+          "type": "string",
+          "minLength": 5
+        },
+        "price": {
+          "type": "number",
+          "minimum": 1
+        }
+      },
+      "required": [ "productId", "productName" ]
     }
   }
 

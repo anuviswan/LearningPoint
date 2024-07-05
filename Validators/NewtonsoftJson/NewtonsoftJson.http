@@ -1,3 +1,4 @@
+@NewtonsoftJson_HostAddress = https://localhost:7293
 @root = https://localhost:7293
 
 # Create a User - Valid Input
@@ -21,3 +22,29 @@ Content-Type: application/json
   "userName": "",
   "displayName" : ""
 }
+
+###
+
+# Create Product - Valid Inputs
+POST {{NewtonsoftJson_HostAddress}}/demo/CreateProduct
+Content-Type: application/json
+
+{
+  "productId" : "123",
+  "productName" : "Sample",
+  "price" : 23
+}
+
+###
+
+# Create Product - Invalid Inputs
+POST {{NewtonsoftJson_HostAddress}}/demo/CreateProduct
+Content-Type: application/json
+
+{
+  "productId" : "123456",
+  "productName" : "Sample",
+  "price" : 0
+}
+
+###
