@@ -45,7 +45,7 @@ namespace NewtonsoftJson.CustomMiddlewares
                     {
                         // Collect and format detailed errors
                         var errorMessages = errors
-                            .Select(e => $"{e.Path}: {e.Message})")
+                            .Select(e => $"{e.Path}: {e.Message}")
                             .ToList();
 
                         // Output the errors

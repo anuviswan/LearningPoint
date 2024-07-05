@@ -1,6 +1,23 @@
-@NewtonsoftJson_HostAddress = http://localhost:5166
+@root = https://localhost:7293
 
-GET {{NewtonsoftJson_HostAddress}}/weatherforecast/
-Accept: application/json
+# Create a User - Valid Input
+
+POST {{root}}/demo/CreateUser
+Content-Type: application/json
+
+{
+  "userName" : "Sample",
+  "displayName" : "Sample"
+}
 
 ###
+
+# Create a User - Invalid User
+
+POST {{root}}/demo/CreateUser
+Content-Type: application/json
+
+{
+  "userName": "",
+  "displayName" : ""
+}
