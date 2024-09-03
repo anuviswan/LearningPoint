@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reactive.Disposables;
+using System.Reactive.Subjects;
 namespace RxDemo001;
 public class HelloWorldObservable : IObservable<string>
 {
@@ -47,5 +48,18 @@ public static class ObservableDemo
         helloWorldObservable.Subscribe(observer);
 
         Console.WriteLine();
+    }
+
+    public static void RunDemo()
+    {
+        Console.WriteLine($"Demo Execution");
+
+        ISubject<int> S = new Subject<int>();
+        S.Subscribe(x=> Console.WriteLine(x));
+
+        S.OnNext(1);
+        S.OnNext(2);
+        S.OnNext(3);
+        S.OnNext(4);
     }
 }

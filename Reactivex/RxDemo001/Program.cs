@@ -7,6 +7,7 @@ namespace RxDemo001
         static void Main(string[] args)
         {
             ObservableDemo.Run();
+            ObservableDemo.RunDemo();
             SubjectDemo.Run();
             SubjectWithDelayedSubscribeDemo.Run();
             ReplaySubjectWithDelayedSubscribeDemo.Run();

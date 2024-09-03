@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <LangVersion>preview</LangVersion>
     <TargetFramework>net6.0</TargetFramework>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
   </PropertyGroup>
 
   <ItemGroup>
