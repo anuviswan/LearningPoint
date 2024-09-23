@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Day 006/MovieApiService/Dockerfile
+    networks:
+      movieservice.network:
 
   # MovieService: Database
   movieservice.db:
