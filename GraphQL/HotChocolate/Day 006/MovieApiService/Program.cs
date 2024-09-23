@@ -1,5 +1,6 @@
 
 using Microsoft.Extensions.DependencyInjection;
+using MovieApiService.GraphQl;
 
 namespace MovieApiService
 {
@@ -17,6 +18,7 @@ namespace MovieApiService
             builder.Services.AddSwaggerGen();
             builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("MovieDatabase"));
             builder.Services.AddSingleton<DatabaseInitializer>();
+            builder.Services.AddGraphQLServer().AddQueryType<Query>(); ;
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,7 +32,7 @@ namespace MovieApiService
 
             app.UseAuthorization();
 
-
+            app.MapGraphQL();
             app.MapControllers();
             var serviceProvider = app.Services;
             var moduleInitializer = serviceProvider.GetService<DatabaseInitializer>();
