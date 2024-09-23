@@ -17,7 +17,7 @@ public class Query
     }
     
 
-    public async IAsyncEnumerable<Movie> GetMovies(string searchTerm)
+    public async IAsyncEnumerable<Movie> Search(string searchTerm)
     {
         var cursor = await DB.Find<Movie>().Match(x => x.Regex(c => c.Title, new BsonRegularExpression(searchTerm, "i")))
                                    .ExecuteCursorAsync();
