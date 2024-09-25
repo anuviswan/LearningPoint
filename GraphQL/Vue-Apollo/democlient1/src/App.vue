@@ -15,10 +15,14 @@
 
       </div>
       <div class="column">
-        <div>
-
-          <input class="result" type="text" :value="result">
-        </div> 
+        <div v-if="loading">Loading...</div>
+        <div v-else>
+          <div v-for="(film,index) in data.result.value.allFilms.films" :key="index">
+            <h2>{{film.title}}</h2>
+            <div>{{film.director}}</div>
+            <pre>{{film.releaseDate}}</pre>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -40,7 +44,7 @@ const MOVIE_QUERY = gql`query movies {
   }
 }`;
 
-const result = useQuery(MOVIE_QUERY);
+const data= useQuery(MOVIE_QUERY);
 
 </script>
 
