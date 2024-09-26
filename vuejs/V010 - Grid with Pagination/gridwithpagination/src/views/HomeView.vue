@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { ref,reactive } from "vue";
 import axios from "axios";
 
 // Interface for each Pokémon result
@@ -16,6 +16,8 @@ interface PokemonResponse {
   results: PokemonResult[];     // Array of Pokémon results
 }
 const gridItems = reactive<Array<PokemonResult>>([]);
+const currentPage = ref<Number>(1);
+const totalPages = ref<Number>(10);
 
 async function getData(){
   console.log('loading')
@@ -25,19 +27,46 @@ async function getData(){
 </script>
 
 <template>
-  <div class="container">
-    <header class="header">
-      <h1>My Vue App</h1>
+  <div class="container mt-4">
+    <header class="mb-4">
+      <h1>Pokémon Data Grid</h1>
     </header>
-    <div class="button-container">
-      <button @click="getData()">Load Data</button>
-      <button >Button 2</button>
-      {{ gridItems.count }}
+    <div class="mb-3">
+      <button class="btn btn-primary" @click="getData">Load Data</button>
     </div>
-    <div class="grid">
-      <div class="grid-item" v-for="item in gridItems.value" :key="item.id">
-        Name = {{ item.name }}
-      </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in gridItems.value" :key="index">
+            <td>{{ item.name }}</td>
+            <td><a :href="item.url" target="_blank">{{ item.url }}</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <nav>
+      <ul class="pagination justify-content-center">
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <a class="page-link" @click="goToPage(currentPage - 1)">Previous</a>
+        </li>
+        <li
+          class="page-item"
+          v-for="page in totalPages"
+          :key="page"
+          :class="{ active: currentPage === page }"
+        >
+          <a class="page-link" @click="goToPage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+          <a class="page-link" @click="goToPage(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
   </div>
-  </template>
+</template>
