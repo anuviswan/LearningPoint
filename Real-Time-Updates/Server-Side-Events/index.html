@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSE Test</title>
+</head>
+<body>
+  <h1>Server-Sent Events Test</h1>
+  <div id="events"></div>
+
+  <script>
+    const eventSource = new EventSource('https://localhost:7226/demo/stream');
+
+    eventSource.onmessage = function(event) {
+      const eventDiv = document.createElement('div');
+      eventDiv.textContent = `Received event: ${event.data}`;
+      document.getElementById('events').appendChild(eventDiv);
+    };
+
+    eventSource.onerror = function() {
+      const errorDiv = document.createElement('div');
+      errorDiv.textContent = 'Connection error occurred';
+      document.getElementById('events').appendChild(errorDiv);
+    };
+  </script>
+</body>
+</html>
