@@ -7,9 +7,11 @@ namespace Server.Controllers;
 [Route("[controller]")]
 public class DemoController(ILogger<DemoController> logger) : ControllerBase
 {
+    
     [HttpGet("stream")]
     public async Task GetStream(CancellationToken cts)
     {
+        var LINE_END = $"{Environment.NewLine}{Environment.NewLine}";
         // Set response headers for SSE
         HttpContext.Response.ContentType = "text/event-stream";
         HttpContext.Response.Headers.Append("Cache-Control", "no-cache");
@@ -19,7 +21,7 @@ public class DemoController(ILogger<DemoController> logger) : ControllerBase
         {
             await Task.Delay(1000);
             // Construct the SSE message format
-            var message = $"data: Message at {DateTime.Now}\n\n";
+            var message = $"data: Message at {DateTime.Now}{LINE_END}";
 
             // Write the message to the response body
             await HttpContext.Response.WriteAsync(message);
