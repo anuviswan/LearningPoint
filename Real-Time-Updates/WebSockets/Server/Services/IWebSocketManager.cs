@@ -2,7 +2,7 @@
 
 public interface IWebSocketManager
 {
-    void AddSocket(Guid taskId, WebSocket socket);
-    Task SendResponse(Guid taskId, string message);
-    Task CloseConnection(Guid taskId);
+    void AddSocket(WebSocket socket);
+    Task SendResponse(string message);
+    Task CloseConnection(WebSocket socket);
 }

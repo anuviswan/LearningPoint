@@ -3,27 +3,27 @@ using System.Text;
 
 public class WebSocketManager: IWebSocketManager
 {
-    private IDictionary<Guid,WebSocket> _sockets = new Dictionary<Guid, WebSocket>();
-    public void AddSocket(Guid taskId, WebSocket socket)
+    private List<WebSocket> _sockets = new List<WebSocket>();
+    public void AddSocket(WebSocket socket)
     {
-        _sockets.Add(taskId, socket);
+        _sockets.Add(socket);
     }
 
-    public async Task SendResponse(Guid taskId, string message)
+    public async Task SendResponse(string message)
     {
-        if (_sockets.TryGetValue(taskId, out var socket) && socket.State == WebSocketState.Open)
-        { 
-            var messageBytes = Encoding.UTF8.GetBytes(message);
-            await socket.SendAsync(messageBytes, WebSocketMessageType.Text, true, CancellationToken.None);
-        }
-    }
-
-    public async Task CloseConnection(Guid taskId)
-    {
-        if( _sockets.TryGetValue(taskId,out var socket) && socket.State == WebSocketState.Open)
+        foreach(var socket in _sockets)
         {
-            _sockets.Remove(taskId);
-            await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing Connection", CancellationToken.None);
+            if(socket.State == WebSocketState.Open)
+            {
+                var messageBytes = Encoding.UTF8.GetBytes(message);
+                await socket.SendAsync(messageBytes, WebSocketMessageType.Text, true, CancellationToken.None);
+            }
         }
+    }
+
+    public async Task CloseConnection(WebSocket socket)
+    {
+        _sockets.Remove(socket);
+        await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing Connection", CancellationToken.None);
     }
 }

@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR.Protocol;
-using System.Collections;
 
 namespace Server.Controllers;
 
@@ -10,20 +8,37 @@ public class DemoController(IWebSocketManager webSocketManager) : ControllerBase
 {
     [HttpPost]
     [Route("StartTask")]
-    public ActionResult<Guid> StartTask()
+    public ActionResult StartTask()
     {
-        var taskId = Guid.NewGuid();
-        Task.Run(()=> LongRunningTask(taskId));
-        return Ok(taskId);
+        Task.Run(()=> LongRunningTask());
+        return Ok();
     }
 
-    private async Task LongRunningTask(Guid taskId)
+    [HttpPost]
+    [Route("Trigger")]
+    public ActionResult TriggerTask()
+    {
+        Task.Run(() => AnotherLongRunningTask());
+        return Ok();
+    }
+
+    private async Task LongRunningTask()
     {
         for(int i = 0; i < 100; i++)
         {
             await Task.Delay(1000);
         }
 
-        await webSocketManager.SendResponse(taskId, "Completed Task");
+        await webSocketManager.SendResponse("Completed Task");
+    }
+
+    private async Task AnotherLongRunningTask()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            await Task.Delay(1000);
+        }
+
+        await webSocketManager.SendResponse("Completed Task");
     }
 }

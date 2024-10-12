@@ -4,7 +4,7 @@ import { ref } from 'vue';
 interface Props {
     type?: string,
     canClose?: boolean,
-    message: string
+    message?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

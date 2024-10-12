@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
-import NotificationWindow from './components/NotificationWindow.vue';
+import ProcessWindowA from './components/ProcessWindowA.vue';
+import WebSocketConnection from './components/WebSocketConnection.vue';
 </script>
 
 <template>
@@ -9,11 +10,12 @@ import NotificationWindow from './components/NotificationWindow.vue';
 
     <div class="wrapper">
       <HelloWorld />
+      <WebSocketConnection />
     </div>
   </header>
 
   <main>
-    <NotificationWindow />
+    <ProcessWindowA />
   </main>
 </template>
 
