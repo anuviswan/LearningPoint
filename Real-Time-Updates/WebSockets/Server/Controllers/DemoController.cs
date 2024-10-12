@@ -8,10 +8,11 @@ namespace Server.Controllers;
 [Route("[controller]")]
 public class DemoController(IWebSocketManager webSocketManager) : ControllerBase
 {
-    [HttpPost(Name = "StartTask")]
+    [HttpPost]
+    [Route("StartTask")]
     public ActionResult<Guid> StartTask()
     {
-        var taskId = new Guid();
+        var taskId = Guid.NewGuid();
         Task.Run(()=> LongRunningTask(taskId));
         return Ok(taskId);
     }
