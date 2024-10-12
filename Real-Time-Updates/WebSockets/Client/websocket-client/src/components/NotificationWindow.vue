@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import axios from 'axios';
+import { ref } from 'vue';
+import Alert from '@/components/Alert.vue'
+const showAlert = ref<boolean>();
+
+
 async function Start() {
     console.log("starting api call")
     const response = await axios.post('https://localhost:7259/demo/StartTask');
@@ -10,6 +15,7 @@ async function Start() {
     console.log("start listening to web socket, taskId = " + taskId)
     const socket = new WebSocket(`wss://localhost:7259/WebSocket/ws?taskId=${taskId}`);
     socket.onopen = () => {
+        showAlert.value = true;
         console.log('WebSocket connection established.');
     };
 
@@ -30,8 +36,15 @@ async function Start() {
                 <tr>
                     <td><button @click="Start()">Start</button></td>
                 </tr>
-
             </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <Alert v-if="showAlert" type="success" dismissible message="This is a success alert!"
+                            @close="showAlert = false" />
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </main>
 </template>
