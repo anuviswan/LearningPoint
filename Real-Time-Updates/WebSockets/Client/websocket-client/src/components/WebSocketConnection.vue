@@ -11,7 +11,9 @@ onMounted(() => {
 
     socket.value.onmessage = (event) => {
         console.log('Message from server:', event.data);
-        eventBus.emit('componentAMessage', event.data);
+        var message = JSON.parse(event.data);
+        console.log('Deserialized Message from server:', message);
+        eventBus.emit('componentAMessage', message.Data);
     };
 
     socket.value.onclose = () => {

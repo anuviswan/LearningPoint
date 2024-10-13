@@ -3,6 +3,6 @@
 public interface IWebSocketManager
 {
     void AddSocket(WebSocket socket);
-    Task SendResponse(string message);
+    Task SendResponse<T>(T message);
     Task CloseConnection(WebSocket socket);
 }

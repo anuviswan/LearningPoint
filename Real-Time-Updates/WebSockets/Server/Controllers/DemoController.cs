@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Server.Controllers;
 
@@ -29,7 +30,7 @@ public class DemoController(IWebSocketManager webSocketManager) : ControllerBase
             await Task.Delay(1000);
         }
 
-        await webSocketManager.SendResponse("Completed Task");
+        await webSocketManager.SendResponse(new ApplicationMessageType(new ApplicationData("Job Completed","Information")));
     }
 
     private async Task AnotherLongRunningTask()
@@ -42,3 +43,8 @@ public class DemoController(IWebSocketManager webSocketManager) : ControllerBase
         await webSocketManager.SendResponse("Completed Task");
     }
 }
+
+public record MessageType<T>(T Data, string Type);
+
+public record ApplicationData(string Message, string AlertType);
+public record ApplicationMessageType(ApplicationData Data, string Type = "ApplicationType"):MessageType<ApplicationData>(Data,"ApplicationType");

@@ -1,5 +1,6 @@
 ﻿using System.Net.WebSockets;
 using System.Text;
+using System.Text.Json;
 
 public class WebSocketManager: IWebSocketManager
 {
@@ -9,13 +10,14 @@ public class WebSocketManager: IWebSocketManager
         _sockets.Add(socket);
     }
 
-    public async Task SendResponse(string message)
+    public async Task SendResponse<T>(T message)
     {
         foreach(var socket in _sockets)
         {
             if(socket.State == WebSocketState.Open)
             {
-                var messageBytes = Encoding.UTF8.GetBytes(message);
+                var jsonMessage = JsonSerializer.Serialize(message);
+                var messageBytes = Encoding.UTF8.GetBytes(jsonMessage);
                 await socket.SendAsync(messageBytes, WebSocketMessageType.Text, true, CancellationToken.None);
             }
         }
