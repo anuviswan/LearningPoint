@@ -12,7 +12,7 @@ public class DemoController(IWebSocketManager webSocketManager) : ControllerBase
     public ActionResult StartTask()
     {
         Task.Run(()=> LongRunningTask());
-        return Ok();
+        return Accepted();
     }
 
     [HttpPost]
