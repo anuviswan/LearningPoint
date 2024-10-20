@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import {ref} from 'vue'
+import { emitter } from '@/types/emitter'
 const data = ref<string>('');
+emitter.on('foo', (e) => 
+{
+    console.log('recieved ' + e); 
+    data.value += e
+}); // 'e' has inferred type 'string'
 </script>
 <template>
     <main>
