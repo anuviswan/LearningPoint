@@ -6,7 +6,7 @@ import ComponentB from './components/ComponentB.vue';
 
 <template>
 <main>
-  <div class="container">
+  <div class="h-container">
     <ComponentA/>
     <ComponentB/>
   </div>
@@ -14,8 +14,5 @@ import ComponentB from './components/ComponentB.vue';
 </template>
 
 <style scoped>
-.container{
-  display:flex;
-  flex-direction: row;
-}
+
 </style>

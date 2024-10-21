@@ -9,7 +9,7 @@ emitter.on('foo', (e) =>
 }); // 'e' has inferred type 'string'
 </script>
 <template>
-    <main>
+    <main class="v-container">
         <div>
             <h1>Component B</h1>
             <div>{{ data }}</div>

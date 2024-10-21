@@ -6,6 +6,15 @@
   padding: 2rem;
   font-weight: normal;
 }
+.v-container{
+  display:grid;
+  height: 300px;
+}
+
+.h-container{
+  display:flex;
+  flex-direction: row;
+}
 
 a,
 .green {
