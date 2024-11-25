@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Server.Controllers;
 
@@ -11,7 +11,8 @@ public class DemoController(IWebSocketManager webSocketManager) : ControllerBase
     [Route("StartTask")]
     public ActionResult StartTask()
     {
-        Task.Run(()=> LongRunningTask());
+        Hangfire.BackgroundJob.Enqueue<DemoController>(x => x.LongRunningTask());
+        //Task.Run(()=> LongRunningTask());
         return Ok();
     }
 
@@ -23,7 +24,9 @@ public class DemoController(IWebSocketManager webSocketManager) : ControllerBase
         return Ok();
     }
 
-    private async Task LongRunningTask()
+
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public  async Task LongRunningTask()
     {
         for(int i = 0; i < 100; i++)
         {

@@ -1,4 +1,4 @@
-
+using Hangfire;
 namespace Server
 {
     public class Program
@@ -22,6 +22,9 @@ namespace Server
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
+            builder.Services.AddHangfire(options => {  options.UseInMemoryStorage(); });
+            builder.Services.AddHangfireServer();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -38,7 +41,7 @@ namespace Server
 
             app.UseWebSockets();
             app.MapControllers();
-
+            app.UseHangfireDashboard();
             app.Run();
         }
     }

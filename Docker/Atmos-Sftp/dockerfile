@@ -1,0 +1,33 @@
+FROM atmoz/sftp:latest
+
+# Define the SFTP user and UID
+ENV SFTP_USER=sftpuser
+ENV SFTP_UID=1001
+ENV SFTP_PASSWORD=my_password
+
+# Create the .ssh directory and set proper permissions
+RUN mkdir -p /home/$SFTP_USER/.ssh && \
+    chmod 700 /home/$SFTP_USER/.ssh
+
+# Add the public keys for the SFTP user
+COPY ssh-keys/authorized_keys /home/$SFTP_USER/.ssh/authorized_keys
+
+# Set the proper file permissions for the .ssh directory and authorized_keys
+RUN chmod 600 /home/$SFTP_USER/.ssh/authorized_keys && \
+    chown -R $SFTP_UID:$SFTP_UID /home/$SFTP_USER/.ssh
+
+# Add the user via the SFTP_USERS environment variable
+# Format: user:password:uid:gid:home_directory
+# In this case, using authorized keys and setting a home directory
+ENV SFTP_USERS="$SFTP_USER:$SFTP_PASSWORD:$SFTP_UID:1001:/home/$SFTP_USER"
+
+# Ensure the home directory has correct ownership
+RUN chown -R $SFTP_UID:$SFTP_UID /home/$SFTP_USER
+
+# Optionally create a directory for file uploads and set ownership and permissions
+RUN mkdir -p /home/$SFTP_USER/upload && \
+    chown -R $SFTP_UID:$SFTP_UID /home/$SFTP_USER/upload && \
+    chmod 755 /home/$SFTP_USER/upload
+
+# Expose the SSH port for SFTP (default: 22)
+EXPOSE 22
