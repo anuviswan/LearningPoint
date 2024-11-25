@@ -13,7 +13,7 @@ public class DemoController(IWebSocketManager webSocketManager) : ControllerBase
     {
         Hangfire.BackgroundJob.Enqueue<DemoController>(x => x.LongRunningTask());
         //Task.Run(()=> LongRunningTask());
-        return Ok();
+        return Accepted();
     }
 
     [HttpPost]
