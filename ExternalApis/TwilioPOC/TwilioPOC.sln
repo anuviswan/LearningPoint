@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwilioPOC", "TwilioPOC\TwilioPOC.csproj", "{FADC6DAE-69FE-4DEC-87E6-BBBC98037179}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FADC6DAE-69FE-4DEC-87E6-BBBC98037179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADC6DAE-69FE-4DEC-87E6-BBBC98037179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADC6DAE-69FE-4DEC-87E6-BBBC98037179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADC6DAE-69FE-4DEC-87E6-BBBC98037179}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB6388EB-74B3-4355-A9E1-A704A3A5D37F}
+	EndGlobalSection
+EndGlobal
