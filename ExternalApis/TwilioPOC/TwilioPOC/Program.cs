@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using System.Web;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -48,8 +48,12 @@ app.MapGet("/create", (TwilioOptions settings, ILogger<Program> logger, string r
         }
         else
         {
-            roomResource = RoomResource.Create(uniqueName: roomName, type: RoomResource.RoomTypeEnum.Group,
-                recordParticipantsOnConnect: true);
+            // with postback url
+            roomResource = RoomResource.Create(uniqueName: roomName, 
+                type: RoomResource.RoomTypeEnum.Group,
+                recordParticipantsOnConnect: true,
+                statusCallback: new Uri("https://twiliopoc20250409080904-bqa0g9d8e8ejd0dy.canadacentral-01.azurewebsites.net/events"), // 👈 This is key!
+    statusCallbackMethod: Twilio.Http.HttpMethod.Post);
         }
 
         logger.LogInformation(
