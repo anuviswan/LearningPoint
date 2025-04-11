@@ -6,6 +6,7 @@ using Twilio;
 using Twilio.Base;
 using Twilio.Jwt.AccessToken;
 using Twilio.Rest.Video.V1;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,17 +20,15 @@ builder.Services.AddSwaggerGen();
 //    .Bind(builder.Configuration.GetSection(nameof(TwilioOptions)));
 
 // For Singleton
-builder.Services.AddSingleton(builder.Configuration.GetSection(nameof(TwilioOptions)).Get<TwilioOptions>()!);
-
+var twilioConfig = builder.Configuration.GetSection(nameof(TwilioOptions)).Get<TwilioOptions>();
+if (twilioConfig is null)
+    throw new InvalidOperationException("Twilio configuration is missing");
+builder.Services.AddSingleton(twilioConfig);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
@@ -90,6 +89,7 @@ app.MapPost("/events", async (ILogger<Program> logger,  HttpContext context) =>
     .WithName("Events")
     .WithOpenApi();
 
+
 app.Run();
 
 
@@ -103,3 +103,4 @@ public record TwilioOptions
     public string RoomType { get; set; } = "group"; // Default if not set
     public string Identity { get; set; } = string.Empty;
 }
+
