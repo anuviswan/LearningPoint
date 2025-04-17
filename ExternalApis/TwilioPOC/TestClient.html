@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Twilio Video Manual Test</title>
+  <script src="https://media.twiliocdn.com/sdk/js/video/releases/2.24.0/twilio-video.min.js"></script>
+  <style>
+    video {
+      max-width: 300px;
+      border-radius: 12px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Join Twilio Video Room (Manual Token Test)</h2>
+  
+  <label>Access Token:</label><br>
+  <textarea id="token" rows="5" cols="80" placeholder="Paste your Twilio JWT token here"></textarea><br><br>
+
+  <label>Room Name:</label><br>
+  <input id="room" value="MyGroupRoom"><br><br>
+
+  <button onclick="joinRoom()">Join Room</button>
+
+  <h3>Local Video</h3>
+  <div id="local-media"></div>
+
+  <h3>Remote Participants</h3>
+  <div id="remote-media"></div>
+
+  <script>
+    async function joinRoom() {
+      const token = document.getElementById("token").value.trim();
+      const roomName = document.getElementById("room").value.trim();
+
+      if (!token || !roomName) {
+        alert("Token and Room Name are required");
+        return;
+      }
+
+      try {
+        const room = await Twilio.Video.connect(token, {
+          name: roomName,
+          audio: true,
+          video: true
+        });
+
+        const localMediaContainer = document.getElementById('local-media');
+        room.localParticipant.tracks.forEach(publication => {
+          if (publication.track) {
+            localMediaContainer.appendChild(publication.track.attach());
+          }
+        });
+
+        room.on('participantConnected', participant => {
+          console.log('Participant connected:', participant.identity);
+          participant.on('trackSubscribed', track => {
+            document.getElementById('remote-media').appendChild(track.attach());
+          });
+        });
+
+        alert("Connected to Room: " + room.name);
+      } catch (error) {
+        console.error("Connection failed:", error);
+        alert("Connection failed: " + error.message);
+      }
+    }
+  </script>
+</body>
+</html>
