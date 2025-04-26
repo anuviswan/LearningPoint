@@ -26,7 +26,7 @@ namespace BoilerPlate.Services
 
         }
 
-        private object GetViewForViewModel(Type type)
+        private object? GetViewForViewModel(Type type)
         {
             var viewName = type.Name[..^5];
             var view = type.Assembly.GetTypes().Where(x => string.Equals(x.Name, viewName));

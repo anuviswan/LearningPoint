@@ -1,30 +1,29 @@
 ﻿using System;
 using Unity;
 
-namespace BoilerPlate.Bootstrap
+namespace BoilerPlate.Bootstrap;
+
+public class Bootstrap
 {
-    public class Bootstrap
+    IUnityContainer _container = new UnityContainer();
+    public void Initialize()
     {
-        IUnityContainer _container = new UnityContainer();
-        public void Initialize()
-        {
-            PrepareApplication();
-        }
+        PrepareApplication();
+    }
 
-        private void PrepareApplication()
-        {
-            IoC.GetInstance = GetInstance;
+    private void PrepareApplication()
+    {
+        IoC.GetInstance = GetInstance;
 
-            RegisterServices();
-        }
+        RegisterServices();
+    }
 
-        private void RegisterServices()
-        {
-        }
+    private void RegisterServices()
+    {
+    }
 
-        public object GetInstance(Type type)
-        {
-            return _container.Resolve(type);
-        }
+    public object GetInstance(Type type)
+    {
+        return _container.Resolve(type);
     }
 }

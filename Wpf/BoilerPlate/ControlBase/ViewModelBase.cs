@@ -1,6 +1,5 @@
-﻿namespace BoilerPlate.ControlBase
+﻿namespace BoilerPlate.ControlBase;
+
+public class ViewModelBase
 {
-    public class ViewModelBase
-    {
-    }
 }
