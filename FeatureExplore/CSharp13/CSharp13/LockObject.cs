@@ -5,6 +5,8 @@ namespace CSharp13;
 
 internal class LockObject
 {
+
+
     private int counter = 0;
     private readonly object _traditionalLockObject = new();
     private ConcurrentQueue<int> _queue = new();
