@@ -1,28 +1,6 @@
-﻿//using System.ComponentModel;
-//using System.Runtime.CompilerServices;
-
-//namespace BoilerPlate.ControlBase
-//{
-//    public class ViewModelBase
-//    {
-//    }
-//}
-
-
-
-
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-namespace InGen.Client
+﻿namespace BoilerPlate.ControlBase
 {
-    public partial class AutoNotifyPropertyChangeDemo : System.ComponentModel.INotifyPropertyChanged
+    public class ViewModelBase
     {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
