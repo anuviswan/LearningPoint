@@ -25,6 +25,15 @@ internal static class ExtensionMembers
         public static bool IsEmpty(IEnumerable<T> source) => !source.Any();
     }
 
+    public static void InsertOne<T>(this SpecialList<T> source, int index, T item)
+    {
+                if (index < 0 || index > source.Items.Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range.");
+        }
+        source.Items.Insert(index, item);
+    }
+
 }
 
 internal sealed class SpecialList<T>

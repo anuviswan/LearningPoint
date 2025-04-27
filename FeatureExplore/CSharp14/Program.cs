@@ -13,6 +13,7 @@ specialList.Add(4);
 
 // extension members
 specialList.Insert(2,3);
+specialList.InsertOne(2,3);
 
 foreach(var items in specialList.Items)
 {
