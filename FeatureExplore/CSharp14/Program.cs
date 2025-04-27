@@ -25,4 +25,19 @@ Console.WriteLine($"IsEmpty: {SpecialList<int>.IsEmpty([1,2,3])}");
 
 // null conditional properties
 var nullConditionalAssignment = new NullConditionalAssignment();
+
+/*
+ * Before C# 14.0, you would have to check for null before assigning a value to a property.
+ * 
+ * if(nullConditionalAssignment is not null)
+ * {
+ *      nullConditionalAssignment.DemoProperty = 10;
+ *      nullConditionalAssignment.DemoEvent += (sender, e) => Console.WriteLine("Event triggered!");
+ * }
+ * 
+ */
+
+// With C# 14.0, you can use the null conditional assignment to simplify the code.
+
 nullConditionalAssignment.Assign(10);
+nullConditionalAssignment?.DemoEvent += (sender, e) => Console.WriteLine("Event triggered!");

@@ -2,6 +2,9 @@
 
 internal class NullConditionalAssignment
 {
+    public event EventHandler? DemoEvent;
+
+    public int DemoProperty { get; set; }
     public void Assign(int value)
     {
         var foo = new Foo();
