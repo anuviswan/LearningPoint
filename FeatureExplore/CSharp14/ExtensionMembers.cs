@@ -8,7 +8,7 @@ internal static class ExtensionMembers
 {
     extension<T>(SpecialList<T> source)
     {
-        public bool Count => source.Items.Count > 0;
+        public int Count => source.Items.Count;
 
         public void Insert(int index, T item)
         {
@@ -44,3 +44,14 @@ internal sealed class SpecialList<T>
         Items.Add(item);    
     }
 }
+
+
+/* Output
+1
+2
+3
+3
+4
+Count: 5
+IsEmpty: False
+ */
