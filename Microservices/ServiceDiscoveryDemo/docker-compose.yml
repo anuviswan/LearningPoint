@@ -1,33 +1,44 @@
 services:
   paymentservice:
     image: ${DOCKER_REGISTRY-}paymentservice
+    container_name: paymentservice
     build:
       context: .
       dockerfile: PaymentService/Dockerfile
     ports:
       - "8001:8080"
     networks:
-      - commonnetwork
+      commonnetwork:
+    depends_on:
+      - "servicediscovery"
 
   aggregatoryservice:
     image: ${DOCKER_REGISTRY-}aggregatoryservice
+    container_name: aggregatoryservice
     build:
       context: .
       dockerfile: AggregatoryService/Dockerfile
     ports:
       - "8002:8080"
     networks:
-      - commonnetwork
+      commonnetwork:
+    depends_on:
+      - "servicediscovery"
+      - "userservice"
+      - "paymentservice"
 
   userservice:
     image: ${DOCKER_REGISTRY-}userservice
+    container_name: userservice
     build:
       context: .
       dockerfile: UserService/Dockerfile
     ports:
       - "8003:8080"
     networks:
-      - commonnetwork
+      commonnetwork:
+    depends_on:
+      - "servicediscovery" 
  
   servicediscovery:
     image: hashicorp/consul

@@ -4,3 +4,6 @@ GET {{UserService_HostAddress}}/user/GetUserInfo?username=john.doe
 Accept: application/json
 
 ###
+
+GET {{UserService_HostAddress}}/heartbeat/health
+Accept: application/json
