@@ -1,0 +1,45 @@
+services:
+  paymentservice:
+    image: ${DOCKER_REGISTRY-}paymentservice
+    build:
+      context: .
+      dockerfile: PaymentService/Dockerfile
+    ports:
+      - "8001:8080"
+    networks:
+      - commonnetwork
+
+  aggregatoryservice:
+    image: ${DOCKER_REGISTRY-}aggregatoryservice
+    build:
+      context: .
+      dockerfile: AggregatoryService/Dockerfile
+    ports:
+      - "8002:8080"
+    networks:
+      - commonnetwork
+
+  userservice:
+    image: ${DOCKER_REGISTRY-}userservice
+    build:
+      context: .
+      dockerfile: UserService/Dockerfile
+    ports:
+      - "8003:8080"
+    networks:
+      - commonnetwork
+ 
+  servicediscovery:
+    image: hashicorp/consul
+    container_name: servicediscovery
+    ports:
+      - "9500:8500"    # HTTP UI/API
+      - "9600:8600/udp" # DNS
+    command: agent -dev -client=0.0.0.0
+    networks:
+        commonnetwork:
+
+networks:
+  commonnetwork:
+    driver: bridge
+
