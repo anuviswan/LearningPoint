@@ -19,10 +19,10 @@ if(consulConfig is not null)
         Port = consulConfig.ServicePort,
         Check = new AgentServiceCheck
         {
-            HTTP = $"http://{consulConfig.ServiceAddress}{consulConfig.HealthCheckUrl}",
+            HTTP = $"http://{consulConfig.ServiceAddress}:{consulConfig.ServicePort}{consulConfig.HealthCheckUrl}",
             Interval = TimeSpan.FromSeconds(10),
             Timeout = TimeSpan.FromSeconds(5),
-            DeregisterCriticalServiceAfter = TimeSpan.FromMicroseconds(consulConfig.DeregisterAfterMinutes),
+            DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(consulConfig.DeregisterAfterMinutes),
         }
     };
 
