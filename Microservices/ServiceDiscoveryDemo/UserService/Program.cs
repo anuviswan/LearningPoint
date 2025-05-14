@@ -2,6 +2,18 @@ using Consul;
 
 var builder = WebApplication.CreateBuilder(args);
 var consulConfig = builder.Configuration.GetSection(nameof(ConsulConfig)).Get<ConsulConfig>();
+
+var corsPolicy = "_ntClientAppsOrigins";
+
+builder.Services.AddCors(option => {
+    option.AddPolicy(name: corsPolicy,
+        builder =>
+        {
+            builder.AllowAnyOrigin();
+            builder.AllowAnyMethod();
+            builder.AllowAnyHeader();
+        });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -19,10 +31,11 @@ if(consulConfig is not null)
         Port = consulConfig.ServicePort,
         Check = new AgentServiceCheck
         {
-            HTTP = $"http://{consulConfig.ServiceAddress}:{consulConfig.ServicePort}{consulConfig.HealthCheckUrl}",
+            HTTP = $"https://{consulConfig.ServiceAddress}:{consulConfig.ServicePort}{consulConfig.HealthCheckUrl}",
             Interval = TimeSpan.FromSeconds(10),
             Timeout = TimeSpan.FromSeconds(5),
             DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(consulConfig.DeregisterAfterMinutes),
+            TLSSkipVerify = consulConfig.TLSSkipVerify,
         }
     };
 
@@ -39,6 +52,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors(corsPolicy);
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -56,4 +70,5 @@ public record ConsulConfig
     public int ServicePort { get; set; }
     public string HealthCheckUrl { get; set; } = null!;
     public int DeregisterAfterMinutes { get; set; }
+    public bool TLSSkipVerify { get; set; } = true;
 }
