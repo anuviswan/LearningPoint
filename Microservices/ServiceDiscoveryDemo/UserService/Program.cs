@@ -3,17 +3,6 @@ using Consul;
 var builder = WebApplication.CreateBuilder(args);
 var consulConfig = builder.Configuration.GetSection(nameof(ConsulConfig)).Get<ConsulConfig>();
 
-var corsPolicy = "_ntClientAppsOrigins";
-
-builder.Services.AddCors(option => {
-    option.AddPolicy(name: corsPolicy,
-        builder =>
-        {
-            builder.AllowAnyOrigin();
-            builder.AllowAnyMethod();
-            builder.AllowAnyHeader();
-        });
-});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -52,7 +41,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors(corsPolicy);
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
