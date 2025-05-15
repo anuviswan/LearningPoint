@@ -16,7 +16,8 @@ services:
       context: .
       dockerfile: PaymentService/Dockerfile
     ports:
-      - "8001:8080"
+      - "4000:8080"
+      - "4001:8081"
     networks:
       commonnetwork:
     depends_on:
@@ -29,7 +30,9 @@ services:
       context: .
       dockerfile: AggregatoryService/Dockerfile
     ports:
-      - "8002:8080"
+      - "6000:8080"
+      - "6001:8081"
+
     networks:
       commonnetwork:
     depends_on:
@@ -44,7 +47,8 @@ services:
       context: .
       dockerfile: UserService/Dockerfile
     ports:
-      - "8003:8080"
+      - "5000:8080"
+      - "5001:8081"
     networks:
       commonnetwork:
     depends_on:

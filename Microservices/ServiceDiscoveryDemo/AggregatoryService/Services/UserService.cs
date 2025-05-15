@@ -14,7 +14,7 @@ public class UserService : IUserService
 
     public async Task<UserDto?> GetUserByIdAsync(string userId)
     {
-        var response = await _httpClient.GetAsync($"/api/users/{userId}");
+        var response = await _httpClient.GetAsync($"/user/GetUserInfo?userName={userId}");
         if (response.IsSuccessStatusCode)
         {
             var responseJson = await response.Content.ReadAsStringAsync();
