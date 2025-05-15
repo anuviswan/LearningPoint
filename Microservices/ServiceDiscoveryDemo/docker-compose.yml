@@ -1,4 +1,14 @@
 services:
+  servicediscovery:
+    image: hashicorp/consul
+    container_name: servicediscovery
+    ports:
+      - "9500:8500"    # HTTP UI/API
+      - "9600:8600/udp" # DNS
+    command: agent -dev -client=0.0.0.0
+    networks:
+        commonnetwork:
+
   paymentservice:
     image: ${DOCKER_REGISTRY-}paymentservice
     container_name: paymentservice
@@ -40,15 +50,7 @@ services:
     depends_on:
       - "servicediscovery" 
  
-  servicediscovery:
-    image: hashicorp/consul
-    container_name: servicediscovery
-    ports:
-      - "9500:8500"    # HTTP UI/API
-      - "9600:8600/udp" # DNS
-    command: agent -dev -client=0.0.0.0
-    networks:
-        commonnetwork:
+
 
 networks:
   commonnetwork:
