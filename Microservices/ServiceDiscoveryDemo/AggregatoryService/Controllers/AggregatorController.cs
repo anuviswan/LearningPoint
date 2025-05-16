@@ -1,5 +1,6 @@
 using AggregatoryService.Services;
 using Microsoft.AspNetCore.Mvc;
+using static AggregatoryService.Services.UserService;
 
 namespace AggregatoryService.Controllers
 {
@@ -17,10 +18,10 @@ namespace AggregatoryService.Controllers
         }
 
         [HttpGet(Name = "GetUserOrders")]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<UserDto?> Get()
         {
             var userId = _userService.GetUserByIdAsync("123").Result;
-            return Ok(Enumerable.Empty<string>());
+            return Ok(userId);
         }
     }
 }

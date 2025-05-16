@@ -47,8 +47,8 @@ services:
       context: .
       dockerfile: UserService/Dockerfile
     ports:
-      - "5000:8080"
-      - "5001:8081"
+      - "7000:8080"
+      - "7001:8081"
     networks:
       commonnetwork:
     depends_on:

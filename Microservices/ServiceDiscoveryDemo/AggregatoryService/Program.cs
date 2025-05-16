@@ -26,6 +26,12 @@ var (address, port) = await resolver.ResolveServiceAsync("userservice");
 builder.Services.AddHttpClient<IUserService,UserService>(client =>
 {
     client.BaseAddress = new Uri($"https://{address}:{port}");
+}).ConfigurePrimaryHttpMessageHandler(() =>
+{
+    return new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
 });
 //builder.Services.AddTransient<IUserService, UserService>();
 

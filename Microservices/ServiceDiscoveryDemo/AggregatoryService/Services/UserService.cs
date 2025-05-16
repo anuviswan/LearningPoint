@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AggregatoryService.Services;
 
@@ -27,6 +28,6 @@ public class UserService : IUserService
         }
     }
 
-    public record UserDto(string Name, string Phone, string Email);
+    public record UserDto([property: JsonPropertyName("id")] string Name, [property: JsonPropertyName("name")] string Phone, [property: JsonPropertyName("email")] string Email);
 
 }

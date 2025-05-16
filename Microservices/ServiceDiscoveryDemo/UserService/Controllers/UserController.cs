@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 namespace UserService.Controllers;
 
@@ -21,4 +22,4 @@ public class UserController : ControllerBase
     }
 }
 
-public record UserInfo(string Name,string Phone,string Email);
+public record UserInfo([property: JsonPropertyName("id")] string Name, [property: JsonPropertyName("name")] string Phone, [property: JsonPropertyName("email")] string Email);
