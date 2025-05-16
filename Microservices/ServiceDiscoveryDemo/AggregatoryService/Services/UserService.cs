@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace AggregatoryService.Services;
 
@@ -27,7 +26,4 @@ public class UserService : IUserService
             throw new Exception($"Failed to get user with ID {userId}. Status code: {response.StatusCode}");
         }
     }
-
-    public record UserDto([property: JsonPropertyName("id")] string Name, [property: JsonPropertyName("name")] string Phone, [property: JsonPropertyName("email")] string Email);
-
 }

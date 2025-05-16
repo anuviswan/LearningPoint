@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 namespace PaymentService.Controllers
 {
@@ -23,5 +24,7 @@ namespace PaymentService.Controllers
             return Ok(result);
         }
     }
-    public record PaymentInfo(string UserName, string Amount, string Currency, string Status);
+    public record PaymentInfo(
+        [property: JsonPropertyName("userName")] string UserName, [property: JsonPropertyName("amount")] string Amount,
+        [property: JsonPropertyName("currency")] string Currency, [property: JsonPropertyName("status")] string Status);
 }
