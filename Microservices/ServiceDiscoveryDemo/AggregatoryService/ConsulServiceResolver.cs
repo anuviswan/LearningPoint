@@ -33,7 +33,6 @@ public class ConsulServiceResolver : IDisposable
         GC.SuppressFinalize(this);
     }
 
-    // Protected implementation of Dispose pattern.
     protected virtual void Dispose(bool disposing)
     {
         if (_disposed)

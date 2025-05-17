@@ -13,16 +13,17 @@ public class PaymentService : IPaymentService
     }
     public async Task<IEnumerable<PaymentInfo>?> GetPaymentInfo(string userName)
     {
-        var response = await _httpClient.GetAsync($"/payment/GetPaymentInfo?userName={userName}");
-        if (response.IsSuccessStatusCode)
-        {
-            var responseJson = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<IEnumerable<PaymentInfo>>(responseJson);
-        }
-        else
-        {
-            _logger.LogError($"Failed to get user with userName {userName}. Status code: {response.StatusCode}");
-            throw new Exception($"Failed to get user with userName {userName}. Status code: {response.StatusCode}");
-        }
+        return Enumerable.Empty<PaymentInfo>();
+        //var response = await _httpClient.GetAsync($"/payment/GetPaymentInfo?userName={userName}");
+        //if (response.IsSuccessStatusCode)
+        //{
+        //    var responseJson = await response.Content.ReadAsStringAsync();
+        //    return JsonSerializer.Deserialize<IEnumerable<PaymentInfo>>(responseJson);
+        //}
+        //else
+        //{
+        //    _logger.LogError($"Failed to get user with userName {userName}. Status code: {response.StatusCode}");
+        //    throw new Exception($"Failed to get user with userName {userName}. Status code: {response.StatusCode}");
+        //}
     }
 }
