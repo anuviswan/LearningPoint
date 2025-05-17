@@ -16,7 +16,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<ConsulServiceResolver>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
-builder.Services.AddSingleton<IHttpClientFactory>(sp => new MyCustomHttpClientFactory(sp));
+builder.Services.AddSingleton<IHttpClientFactory>(sp => new DevelopmentHttpClientFactory(sp));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,11 +33,11 @@ app.MapControllers();
 
 app.Run();
 
-public class MyCustomHttpClientFactory : IHttpClientFactory
+public class DevelopmentHttpClientFactory : IHttpClientFactory
 {
     private readonly IServiceProvider _serviceProvider;
 
-    public MyCustomHttpClientFactory(IServiceProvider serviceProvider)
+    public DevelopmentHttpClientFactory(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }
