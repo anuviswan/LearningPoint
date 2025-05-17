@@ -1,4 +1,5 @@
 using Consul;
+using Microsoft.Extensions.Options;
 
 namespace AggregatoryService;
 
@@ -6,9 +7,10 @@ public class ConsulServiceResolver : IDisposable
 {
     private readonly ConsulClient _client;
     private bool _disposed = false;
-    public ConsulServiceResolver(string consulAddress = "http://servicediscovery:8500")
+    public ConsulServiceResolver(IOptions<ServiceDiscoveryOptions> serviceDiscoveryOptions)
     {
-        _client = new ConsulClient(cfg => cfg.Address = new Uri(consulAddress));
+        var serviceDiscovery = serviceDiscoveryOptions.Value;
+        _client = new ConsulClient(cfg => cfg.Address = new Uri($"http://{serviceDiscovery.ResolverName}:{serviceDiscovery.ResolverPort}"));
     }
 
     /// <summary>

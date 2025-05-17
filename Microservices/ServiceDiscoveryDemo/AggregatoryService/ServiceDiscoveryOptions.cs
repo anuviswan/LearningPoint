@@ -1,8 +1,10 @@
 namespace AggregatoryService;
 
-public record ServiceDiscovery
+public record ServiceDiscoveryOptions
 {
-    public List<string> Services { get; set; } = [];
+    public List<Service> Services { get; set; } = [];
     public string ResolverName { get; set; } = null!;
     public string ResolverPort { get; set; } = null!;
 }
+
+public record Service(string Key, string Name);
