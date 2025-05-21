@@ -1,0 +1,57 @@
+﻿@page "/products"
+@using DataEntities
+@using Store.Services
+@inject ProductService ProductService
+@inject IConfiguration Configuration
+@attribute [StreamRendering(true)]
+
+<PageTitle>Products</PageTitle>
+
+<h1>Products</h1>
+
+<p>Here is the full list of our outdoor products and their prices that our customers can purchase.</p>
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (products.Count == 0) {
+    <p><em>There is a problem loading our products. Please try again later.</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td> <!-- Simulating images stored on a CDN -->
+                        <img height="80" width="80" alt="Product image for @product.Name." src="https://raw.githubusercontent.com/MicrosoftDocs/mslearn-aspire-starter/main/eShopAdmin/Products/wwwroot/images/@product.ImageUrl" />
+                    </td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Product>? products;
+    private string imagePrefix = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await ProductService.GetProducts();
+    }
+
+}

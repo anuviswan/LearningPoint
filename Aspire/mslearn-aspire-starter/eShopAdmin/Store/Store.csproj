@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataEntities\DataEntities.csproj" />
+    <ProjectReference Include="..\ExampleApp.ServiceDefaults\ExampleApp.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+</Project>
