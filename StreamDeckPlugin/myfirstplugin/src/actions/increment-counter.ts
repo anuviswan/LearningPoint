@@ -1,4 +1,4 @@
-import { action, KeyDownEvent, SingletonAction, WillAppearEvent } from "@elgato/streamdeck";
+import { action, KeyDownEvent, SingletonAction, WillAppearEvent, WillDisappearEvent } from "@elgato/streamdeck";
 
 /**
  * An example action class that displays a count that increments by one each time the button is pressed.
@@ -11,8 +11,10 @@ export class IncrementCounter extends SingletonAction<CounterSettings> {
 	 * we're setting the title to the "count" that is incremented in {@link IncrementCounter.onKeyDown}.
 	 */
 	override onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
+		console.log("🚀 Plugin script loaded at", new Date().toLocaleString());
 		return ev.action.setTitle(`${ev.payload.settings.count ?? 0}`);
 	}
+
 
 	/**
 	 * Listens for the {@link SingletonAction.onKeyDown} event which is emitted by Stream Deck when an action is pressed. Stream Deck provides various events for tracking interaction
@@ -21,14 +23,16 @@ export class IncrementCounter extends SingletonAction<CounterSettings> {
 	 * settings using `setSettings` and `getSettings`.
 	 */
 	override async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
+		console.log("🚀 Plugin script loaded at", new Date().toLocaleString());
 		// Update the count from the settings.
 		const { settings } = ev.payload;
-		settings.incrementBy ??= 1;
+		settings.incrementBy ??= 5;
 		settings.count = (settings.count ?? 0) + settings.incrementBy;
 
 		// Update the current count in the action's settings, and change the title.
 		await ev.action.setSettings(settings);
 		await ev.action.setTitle(`${settings.count}`);
+		
 	}
 }
 

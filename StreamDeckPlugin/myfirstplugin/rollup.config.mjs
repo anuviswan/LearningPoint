@@ -42,6 +42,20 @@ const config = {
 			generateBundle() {
 				this.emitFile({ fileName: "package.json", source: `{ "type": "module" }`, type: "asset" });
 			}
+		},
+		{
+			name: "restart-streamdeck-plugin",
+			writeBundle() {
+				import("node:child_process").then(({ exec }) => {
+					exec("streamdeck restart com.av.myfirstplugin", (err, stdout, stderr) => {
+						if (err) {
+							console.error("❌ Failed to restart plugin:", stderr);
+						} else {
+							console.log("✅ Stream Deck plugin restarted");
+						}
+					});
+				});
+			}
 		}
 	]
 };
