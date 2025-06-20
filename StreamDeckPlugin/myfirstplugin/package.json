@@ -1,11 +1,15 @@
 {
     "scripts": {
         "build": "rollup -c",
-        "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart com.av.myfirstplugin\""
+        "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart com.av.myfirstplugin\"",
+        "lint": "eslint --max-warnings 0"
     },
+    "prettier": "@elgato/prettier-config",
     "type": "module",
     "devDependencies": {
         "@elgato/cli": "^1.4.0",
+        "@elgato/eslint-config": "^0.1.0",
+        "@elgato/prettier-config": "^0.2.6",
         "@rollup/plugin-commonjs": "^28.0.0",
         "@rollup/plugin-node-resolve": "^15.2.2",
         "@rollup/plugin-terser": "^0.4.4",
