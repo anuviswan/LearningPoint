@@ -43,5 +43,16 @@
 		"Version": "20",
 		"Debug": "enabled"
 	},
-	"UUID": "com.av.myfirstplugin"
+	"UUID": "com.av.myfirstplugin",
+	"ApplicationsToMonitor": {
+		"windows": ["calc.exe"]
+	},
+	"Profiles": [
+        {
+            "Name": "CustomProfile",
+            "DeviceType": 0,
+            "Readonly": false,
+            "DontAutoSwitchWhenInstalled": false
+        }
+    ]
 }

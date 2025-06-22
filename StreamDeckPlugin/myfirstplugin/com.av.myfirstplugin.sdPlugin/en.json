@@ -1,0 +1,14 @@
+{
+	"Name": "MyFirstPlugin",
+    "Description": "This is my first plugin with streamdeck",
+    "com.av.myfirstplugin.increment":{
+        "Name": "Counterr",
+        "Tooltip": "Displays a count,, which increments by one on press.",
+        "States": [
+				{
+                    "Name":"Counter"
+				}
+			]
+    }
+	
+}

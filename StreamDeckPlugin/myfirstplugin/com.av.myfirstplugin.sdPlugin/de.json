@@ -1,0 +1,14 @@
+{
+	"Name": "MyFirstPlugin",
+    "Description": "Dies ist mein erstes Plugin mit Streamdeck",
+    "com.av.myfirstplugin.increment":{
+        "Name": "Schalter",
+        "Tooltip": "Zeigt einen Zähler an, der beim Drücken um eins erhöht wird.",
+        "States": [
+				{
+                    "Name":"Schalter"
+				}
+			]
+    }
+	
+}
