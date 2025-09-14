@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:LoginDemo.ViewModels"
+             x:DataType="viewModels:LoginViewModel"
+             x:Class="LoginDemo.Views.LoginView">
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Entry Placeholder="UserName" Grid.Row="0" Text="{Binding UserName}"/>
+            <Entry Placeholder="Password" Grid.Row="1" Text="{Binding Password}"/>
+
+            <Button Text="Login" Grid.Row="2"/>
+
+        </Grid>
+       
+    </VerticalStackLayout>
+</ContentPage>
