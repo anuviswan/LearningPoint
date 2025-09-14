@@ -29,6 +29,7 @@ namespace LoginDemo
 
 
             // ViewModels
+            builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransientWithShellRoute<HomePageView,HomePageViewModel>("HomePage");
             return builder.Build();
         }

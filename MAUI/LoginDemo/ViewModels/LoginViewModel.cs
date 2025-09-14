@@ -8,9 +8,12 @@ public partial class LoginViewModel(IUserService userService) :ObservableObject
 {
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ExecuteLoginCommand))]
     private string? userName;
 
+
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ExecuteLoginCommand))]
     private string? password;
 
 

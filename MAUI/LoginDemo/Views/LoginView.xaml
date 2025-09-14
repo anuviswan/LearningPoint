@@ -15,7 +15,7 @@
             <Entry Placeholder="UserName" Grid.Row="0" Text="{Binding UserName}"/>
             <Entry Placeholder="Password" Grid.Row="1" Text="{Binding Password}"/>
 
-            <Button Text="Login" Grid.Row="2"/>
+            <Button Text="Login" Grid.Row="2" Command="{Binding ExecuteLoginCommand}"/>
 
         </Grid>
        
