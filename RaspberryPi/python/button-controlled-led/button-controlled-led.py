@@ -9,12 +9,6 @@ GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(BTN_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 try:
-    print("Testing LED")
-    GPIO.output(LED_PIN, GPIO.HIGH)
-    time.sleep(1)
-    GPIO.output(LED_PIN, GPIO.LOW)
-    time.sleep(1)
-
     print("Press the button to toggle LED (CTRL+C to exit).")
     led_state = False
     while True:
@@ -25,7 +19,7 @@ try:
             time.sleep(0.25)
         time.sleep(0.1)
 except KeyboardInterrupt:
-    pass
+    print('Closing....')
 finally:
     print("cleaning up")
     GPIO.output(LED_PIN, False)
