@@ -1,3 +1,5 @@
+# Testing distance with HR S04 sensor
+
 import RPi.GPIO as GPIO
 import time
 
