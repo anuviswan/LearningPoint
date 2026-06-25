@@ -17,7 +17,7 @@ var result = response switch
     // Compiler guarantees all possibilities are covered 
 };
 
-
+Console.WriteLine(result);
 
 // Closed Hierarchy Usage Example
 
@@ -44,7 +44,7 @@ HashSet<string> set = [with(StringComparer.OrdinalIgnoreCase), "apple", "APPLE",
 // set contains only one element because all strings are equal with OrdinalIgnoreCase
 
 
-Console.WriteLine(result);
+
 
 // Union Type Definitions
 public record Customer();
