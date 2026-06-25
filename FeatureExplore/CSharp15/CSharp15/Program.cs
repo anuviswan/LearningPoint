@@ -32,6 +32,17 @@ var paymentType = payment switch
 };
 
 
+// Collection Expression Arguements
+
+string[] values = ["apple", "ball", "cat"];
+
+// Pass capacity argument to List<T> constructor
+List<string> names = [with(capacity: values.Length * 2), .. values];
+
+// Pass comparer argument to HashSet<T> constructor
+HashSet<string> set = [with(StringComparer.OrdinalIgnoreCase), "apple", "APPLE", "Apple"];
+// set contains only one element because all strings are equal with OrdinalIgnoreCase
+
 
 Console.WriteLine(result);
 
